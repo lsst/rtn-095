@@ -94,6 +94,7 @@
 %%
 
 % Package imports go here.
+\usepackage{glossaries}
 
 % Local commands go here.
 \newcommand{\docRef}{RTN-095}
@@ -107,6 +108,9 @@
 %% Command to document which AAS Journal the manuscript was submitted to.
 %% Adds "Submitted to " the argument.
 %\submitjournal{PSJ}
+
+\input{aglossary.tex}
+\makeglossaries
 
 
 \begin{document}
@@ -184,7 +188,8 @@ Additional Rubin Observatory funding comes from private donations, grants to uni
 %% command and will number appendix equations (A1), (A2), etc. The
 %% Figure and Table counter will not reset.
 
-%% \appendix
+\appendix
+\printglossaries
 
 
 % Include all the relevant bib files so that references can be found from
