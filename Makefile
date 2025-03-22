@@ -22,7 +22,7 @@ authors.tex:  authors.yaml
 	python3 $(TEXMFHOME)/../bin/db2authors.py -m aas > authors.tex
 
 aglossary.tex :$(tex) myacronyms.txt
-	python3 $(TEXMFHOME)/../bin/generateAcronyms.py  -g $(tex)
+	generateAcronyms.py  -g $(tex)
 
 
 .PHONY: clean
