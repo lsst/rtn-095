@@ -1,82 +1,53 @@
-%% Beginning of file 'sample631.tex'
+\documentclass[modern, trackchanges]{aastex7}
 %%
-%% Modified 2021 March
+%% This initial command takes arguments that can be used to easily modify 
+%% the output of the compiled manuscript. Any combination of arguments can be 
+%% invoked like this:
 %%
-%% This is a sample manuscript marked up using the
-%% AASTeX v6.31 LaTeX 2e macros.
+%% \documentclass[argument1,argument2,argument3,...]{aastex7}
 %%
-%% AASTeX is now based on Alexey Vikhlinin's emulateapj.cls
-%% (Copyright 2000-2015).  See the classfile for details.
-
-%% AASTeX requires revtex4-1.cls and other external packages such as
-%% latexsym, graphicx, amssymb, longtable, and epsf.  Note that as of
-%% Oct 2020, APS now uses revtex4.2e for its journals but remember that
-%% AASTeX v6+ still uses v4.1. All of these external packages should
-%% already be present in the modern TeX distributions but not always.
-%% For example, revtex4.1 seems to be missing in the linux version of
-%% TexLive 2020. One should be able to get all packages from www.ctan.org.
-%% In particular, revtex v4.1 can be found at
-%% https://www.ctan.org/pkg/revtex4-1.
-
-%% The first piece of markup in an AASTeX v6.x document is the \documentclass
-%% command. LaTeX will ignore any data that comes before this command. The
-%% documentclass can take an optional argument to modify the output style.
-%% The command below calls the preprint style which will produce a tightly
-%% typeset, one-column, single-spaced document.  It is the default and thus
-%% does not need to be explicitly stated.
-%%
-%% using aastex version 6.3
-\documentclass[modern]{aastex631}
-
-%% The default is a single spaced, 10 point font, single spaced article.
-%% There are 5 other style options available via an optional argument. They
-%% can be invoked like this:
-%%
-%% \documentclass[arguments]{aastex631}
-%%
-%% where the layout options are:
+%% Six of the arguments are typestting options. They are:
 %%
 %%  twocolumn   : two text columns, 10 point font, single spaced article.
 %%                This is the most compact and represent the final published
 %%                derived PDF copy of the accepted manuscript from the publisher
+%%  default     : one text column, 10 point font, single spaced (default).
 %%  manuscript  : one text column, 12 point font, double spaced article.
-%%  preprint    : one text column, 12 point font, single spaced article.
+%%  preprint    : one text column, 12 point font, single spaced article.  
 %%  preprint2   : two text columns, 12 point font, single spaced article.
 %%  modern      : a stylish, single text column, 12 point font, article with
-%%                wider left and right margins. This uses the Daniel
-%%                Foreman-Mackey and David Hogg design.
-%%  RNAAS       : Supresses an abstract. Originally for RNAAS manuscripts
-%%                but now that abstracts are required this is obsolete for
-%%                AAS Journals. Authors might need it for other reasons. DO NOT
-%%                use \begin{abstract} and \end{abstract} with this style.
+%% 		  wider left and right margins. This uses the Daniel
+%% 		  Foreman-Mackey and David Hogg design.
 %%
 %% Note that you can submit to the AAS Journals in any of these 6 styles.
 %%
 %% There are other optional arguments one can invoke to allow other stylistic
 %% actions. The available options are:
 %%
-%%   astrosymb    : Loads Astrosymb font and define \astrocommands.
-%%   tighten      : Makes baselineskip slightly smaller, only works with
+%%   astrosymb    : Loads Astrosymb font and define \astrocommands. 
+%%   tighten      : Makes baselineskip slightly smaller, only works with 
 %%                  the twocolumn substyle.
-%%   times        : uses times font instead of the default
-%%   linenumbers  : turn on lineno package.
-%%   trackchanges : required to see the revision mark up and print its output
-%%   longauthor   : Do not use the more compressed footnote style (default) for
+%%   times        : uses times font instead of the default.
+%%   linenumbers  : turn on linenumbering. Note this is mandatory for AAS
+%%                  Journal submissions and revisions.
+%%   trackchanges : Shows added text in bold.
+%%   longauthor   : Do not use the more compressed footnote style (default) for 
 %%                  the author/collaboration/affiliations. Instead print all
-%%                  affiliation information after each name. Creates a much
-%%                  longer author list but may be desirable for short
+%%                  affiliation information after each name. Creates a much 
+%%                  longer author list but may be desirable for short 
 %%                  author papers.
 %% twocolappendix : make 2 column appendix.
-%%   anonymous    : Do not show the authors, affiliations and acknowledgments
-%%                  for dual anonymous review.
+%%   anonymous    : Do not show the authors, affiliations, acknowledgments,
+%%                  and author contributions for dual anonymous review.
+%%  resetfootnote : Reset footnotes to 1 in the body of the manuscript.
+%%                  Useful when there are a lot of authors and affiliations
+%%		    in the front matter.
+%%   longbib      : Print article titles in the references. This option
+%% 		    is mandatory for PSJ manuscripts.
 %%
-%% these can be used in any combination, e.g.
-%%
-%% \documentclass[twocolumn,linenumbers,trackchanges]{aastex631}
-%%
-%% AASTeX v6.* now includes \hyperref support. While we have built in specific
-%% defaults into the classfile you can manually override them with the
-%% \hypersetup command. For example,
+%% Since v6, AASTeX has included \hyperref support. While we have built in 
+%% specific %% defaults into the classfile you can manually override them 
+%% with the \hypersetup command. For example,
 %%
 %% \hypersetup{linkcolor=red,citecolor=green,filecolor=cyan,urlcolor=magenta}
 %%
@@ -85,34 +56,33 @@
 %% magenta. Additional information on \hyperref options can be found here:
 %% https://www.tug.org/applications/hyperref/manual.html#x1-40003
 %%
-%% Note that in v6.3 "bookmarks" has been changed to "true" in hyperref
+%% The "bookmarks" has been changed to "true" in hyperref
 %% to improve the accessibility of the compiled pdf file.
-%%
-%% If you want to create your own macros, you can do so
-%% using \newcommand. Your macros should appear before
-%% the \begin{document} command.
-%%
 
 % Package imports go here.
+\usepackage{glossaries}  % Seems to be overriding \label
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{mathtools, nccmath}
+\usepackage{hyperref}
+\usepackage{nameref}  % To avoid warning about \label definition changed
+
 
 % Local commands go here.
 \newcommand{\docRef}{RTN-095}
 \newcommand{\docUpstreamLocation}{\url{https://github.com/lsst/rtn-095}}
 
-%% Reintroduced the \received and \accepted commands from AASTeX v5.2
-%\received{March 1, 2021}
-%\revised{April 1, 2021}
-%\accepted{\today}
 
-%% Command to document which AAS Journal the manuscript was submitted to.
-%% Adds "Submitted to " the argument.
-%\submitjournal{PSJ}
+\input{aglossary.tex}
+\makeglossaries
 
+% All figures here
+\graphicspath{{./}{figures/}}
 
 \begin{document}
-\input{authors}
 \date{\today}
 \title{The Vera C. Rubin Observatory Data Preview 1}
+\shorttitle{Rubin DP1}
 
 % This can write metadata into the PDF.
 % Update keywords and author information as necessary.
@@ -121,6 +91,8 @@
     pdfauthor={guylp},
     pdfkeywords={}
 }
+%\input{authors}
+\collaboration{0}{(The Vera C. Rubin Observatory)}
 
 \input{abstract}
 
@@ -130,7 +102,7 @@
 %% You will be asked to selected these concepts during the submission process
 %% but this old "keyword" functionality is maintained in case authors want
 %% to include these concepts in their preprints.
-\keywords{}
+\keywords{Rubin Observatory -- LSST}
 
 %% From the front matter, we move on to the body of the paper.
 %% Sections are demarcated by \section and \subsection, respectively.
@@ -146,7 +118,6 @@
 %% and \citet commands to identify citations.  The citations are
 %% tied to the reference list via symbolic KEYs. The KEY corresponds
 %% to the KEY in the \bibitem in the reference list below.
-
 \input{body}
 
 
@@ -154,6 +125,7 @@
 \begin{acknowledgments}
 This material is based upon work supported in part by the National Science Foundation through Cooperative Agreement AST-1258333 and Cooperative Support Agreement AST-1202910 managed by the Association of Universities for Research in Astronomy (AURA), and the Department of Energy under Contract No. DE-AC02-76SF00515 with the SLAC National Accelerator Laboratory managed by Stanford University.
 Additional Rubin Observatory funding comes from private donations, grants to universities, and in-kind support from LSSTC Institutional Members.
+This research has made use of NASA's Astrophysics Data System Bibliographic Services.
 \end{acknowledgments}
 
 %% To help institutions obtain information on the effectiveness of their
@@ -165,15 +137,16 @@ Additional Rubin Observatory funding comes from private donations, grants to uni
 %% in the research for the paper.  Each keyword is check against the master
 %% list during copy editing.  Individual instruments can be provided in
 %% parentheses, after the keyword, but they are not verified.
-
 \vspace{5mm}
-\facility{Rubin}
+\facility{Rubin Observatory, Rubin Hybrid US Data Access Center}
 
 %% Similar to \facility{}, there is the optional \software command to allow
 %% authors a place to specify which programs were used during the creation of
 %% the manuscript. Authors should list each code and include either a
 %% citation or url to the code inside ()s when available.
-\software{LSST Science Pipelines}
+\software{Rubin Data Butler \citep{2022SPIE12189E..11J},
+          LSST Science Pipelines \citep{2018PASJ...70S...5B, 2019ASPC..523..521B},
+          }
 
 %% Appendix material should be preceded with a single \appendix command.
 %% There should be a \section command for each appendix. Mark appendix
@@ -184,7 +157,8 @@ Additional Rubin Observatory funding comes from private donations, grants to uni
 %% command and will number appendix equations (A1), (A2), etc. The
 %% Figure and Table counter will not reset.
 
-%% \appendix
+\appendix
+\printglossaries
 
 
 % Include all the relevant bib files so that references can be found from
@@ -194,3 +168,4 @@ Additional Rubin Observatory funding comes from private donations, grants to uni
 \bibliography{local,lsst,lsst-dm,refs_ads,refs,books}
 
 \end{document}
+
