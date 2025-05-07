@@ -9,3 +9,5 @@
 *.dvi
 *.pdf
 authors.tex
+
+.ipynb_checkpoints/
