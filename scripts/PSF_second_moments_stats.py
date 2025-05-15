@@ -9,12 +9,9 @@
 from lsst.daf.butler import Butler
 import numpy as np
 from astropy.table import Table
-import treegp
-# treegp is part of rubin-env 
-# but need version 1.3.1 to
-# compute some stats later on.
-print(treegp.__version__)
+from treegp_meanify import treegp_meanify
 from tqdm import tqdm
+import os
 
 import matplotlib.pyplot as plt
 import matplotlib.patheffects as pathEffects
@@ -82,8 +79,10 @@ print(len(set(visit_ids)))
 
 # In[ ]:
 
-
-WRITE = False
+if os.path.isfile('master_dic.pkl'):
+    WRITE = False
+else: 
+    WRITE = True
 
 columns_name = [
     'slot_Shape_xx', 'slot_Shape_yy', 'slot_Shape_xy',
@@ -184,7 +183,7 @@ def get_fov_plot_distrib(
     meanify = {}
     
     for i in range(9):
-        meanify.update({i: treegp.meanify(bin_spacing=bin_spacing, statistics='median')})
+        meanify.update({i: treegp_meanify(bin_spacing=bin_spacing, statistics='median')})
     
     for visit in master_dic[PSF]['dic']:
         if master_dic[PSF]['dic'][visit] is not None:
@@ -268,7 +267,7 @@ def get_stat(
     bands = ['g', 'r', 'i', 'z', 'y']):
 
     
-    meanify = treegp.meanify(bin_spacing=100, statistics='median')
+    meanify = treegp_meanify(bin_spacing=100, statistics='median')
     
     for visit in master_dic[PSF]['dic']:
         if master_dic[PSF]['dic'][visit] is not None:

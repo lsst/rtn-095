@@ -12,6 +12,7 @@ from astropy.table import Table
 from smatch.matcher import Matcher
 from tqdm import tqdm
 import astropy.units as u
+import os
 
 import matplotlib.pyplot as plt
 from lsst.utils.plotting import publication_plots, stars_color, accent_color
@@ -227,7 +228,10 @@ print(len(set(visit_ids)))
 # In[ ]:
 
 
-WRITE = False
+if os.path.isfile('master_dic_color.pkl'):
+    WRITE = False
+else: 
+    WRITE = True
 
 if WRITE: 
 

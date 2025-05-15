@@ -5,11 +5,9 @@
 
 
 import numpy as np
-import treegp
-# treegp is part of rubin-env 
-# but need version 1.3.1 to
-# compute some stats later on.
-print(treegp.__version__)
+from treegp_comp_eb_treecorr import comp_eb_treecorr
+from treegp_meanify import treegp_meanify
+import os
 from tqdm import tqdm
 import pickle
 import matplotlib.pyplot as plt
@@ -171,7 +169,7 @@ def plot_currentID():
         dx = np.array(cat['xrespix'])[Filter]
         dy = np.array(cat['yrespix'])[Filter]
         #print(u)
-        xie, xib, logr = treegp.comp_eb_treecorr(u, v, du, dv, rmin=20/3600, rmax=0.6, dlogr=0.3)
+        xie, xib, logr = comp_eb_treecorr(u, v, du, dv, rmin=20/3600, rmax=0.6, dlogr=0.3)
         plot_residuals(u, v, du, dv, xie, xib, logr, visitID = currentID, tract= dataID[i]['tract'], band = dataID[i]['band'], fix=True)
         plt.savefig('Astrometry_'+currentID+'.pdf')
         plt.show()
@@ -191,70 +189,14 @@ def plot_currentID():
         dx = np.array(cat['xrespix'])[Filter]
         dy = np.array(cat['yrespix'])[Filter]
         #print(u)
-        xie, xib, logr = treegp.comp_eb_treecorr(u, v, du, dv, rmin=20/3600, rmax=0.6, dlogr=0.3)
+        xie, xib, logr = comp_eb_treecorr(u, v, du, dv, rmin=20/3600, rmax=0.6, dlogr=0.3)
         plot_residuals(u, v, du, dv, xie, xib, logr, visitID = currentID, tract= dataID[i]['tract'], band = dataID[i]['band'], fix=True)
         plt.savefig('Astrometry_'+currentID+'.pdf')
         plt.show()
 
-WRITE = False
-
-if WRITE: 
-
-    visitSet = set()
-    dicAll = {}
-    for i in tqdm(range(len(dataID))):
-        cat  = butler.get('gbdesAstrometricFit_fitStars', dataID[i]).to_pydict()
-        visits = np.array(cat['exposureName'])
-        visitID = set(visits)
-        I = 0
-        for visit in visitID:
-            currentID = visit
-            if currentID != 'REFERENCE' and currentID not in visitSet:
-                visitSet.update({currentID})
-                tract = dataID[i]['tract']
-                band = dataID[i]['band']
-                Filter = (visits == currentID)
-                u = np.array(cat['xworld'])[Filter]
-                v = np.array(cat['yworld'])[Filter]
-                x = np.array(cat['xpix'])[Filter]
-                y = np.array(cat['ypix'])[Filter]
-                ccdId = np.array(cat['deviceName'])[Filter]
-                du = np.array(cat['xresw'])[Filter]
-                dv = np.array(cat['yresw'])[Filter]
-                dx = np.array(cat['xrespix'])[Filter]
-                dy = np.array(cat['yrespix'])[Filter]
-                xie, xib, logr = treegp.comp_eb_treecorr(u, v, du, dv, rmin=20/3600, rmax=0.6, dlogr=0.3)
-
-                dicAll.update({
-                    currentID: {
-                        'u': u,
-                        'v': v,
-                        'x': x,
-                        'y': y,
-                        'du': du,
-                        'dv': dv,
-                        'dx': dx,
-                        'dy': dy,
-                        'ccdId': ccdId,
-                        'xie': xie,
-                        'xib': xib,
-                        'logr': logr,
-                        'band': band,
-                    }
-                })
-            I += 1
-
-    fileAstro = open('astroResidual.pkl', 'wb')
-    pickle.dump(dicAll, fileAstro)
-    fileAstro.close()
-    dic = dicAll
-
-else:
-    dic = pickle.load(open('astroResidual.pkl', 'rb'))
-
 # mean E/B mode
 
-def EB_mode_plot(tqdm):
+def EB_mode_plot(dic):
     E = []
     B = []
     logr = None
@@ -281,12 +223,12 @@ def EB_mode_plot(tqdm):
     plt.close()
 
 
-def fov_plot(tqdm):
+def fov_plot(dic):
     bin_spacing = 100
 
     meanify = {}
     for i in range(9):
-        meanify.update({i: treegp.meanify(bin_spacing=bin_spacing, statistics='median')})
+        meanify.update({i: treegp_meanify(bin_spacing=bin_spacing, statistics='median')})
 
     for visit in tqdm(dic):
         coord = np.array([dic[visit]['x'], dic[visit]['y']]).T
@@ -327,7 +269,7 @@ def fov_plot(tqdm):
 
     meanify = {}
     for i in range(9):
-        meanify.update({i: treegp.meanify(bin_spacing=bin_spacing, statistics='median')})
+        meanify.update({i: treegp_meanify(bin_spacing=bin_spacing, statistics='median')})
 
     for visit in tqdm(dic):
         coord = np.array([dic[visit]['x'], dic[visit]['y']]).T
@@ -364,12 +306,12 @@ def fov_plot(tqdm):
     plt.show()
 
 
-def CCD_plot(tqdm):
+def CCD_plot(dic):
 # dx
 
     bin_spacing = 50
 
-    meanify = treegp.meanify(bin_spacing=bin_spacing, statistics='median')
+    meanify = treegp_meanify(bin_spacing=bin_spacing, statistics='median')
 
     for visit in tqdm(dic):
         coord = np.array([dic[visit]['x'], dic[visit]['y']]).T
@@ -405,7 +347,7 @@ def CCD_plot(tqdm):
     ax.set_xlabel('x (mm)')
     ax.set_ylabel('y (mm)')
 
-    meanify = treegp.meanify(bin_spacing=bin_spacing, statistics='median')
+    meanify = treegp_meanify(bin_spacing=bin_spacing, statistics='median')
 
     for visit in tqdm(dic):
         coord = np.array([dic[visit]['x'], dic[visit]['y']]).T
@@ -484,8 +426,85 @@ def AM1_plot():
     plt.savefig('Astrometry_AM1.pdf')
     plt.close()
 
-#fov_plot(tqdm)
-#EB_mode_plot(tqdm)
-#plot_currentID()
+
+
+
+
+if os.path.isfile('astroResidual.pkl'):
+    WRITE = False
+else: 
+    WRITE = True
+
+if WRITE: 
+
+    repo = "/repo/main"
+    collection = "LSSTComCam/runs/DRP/DP1/v29_0_0_rc6/DM-50098"
+
+    butler = Butler(repo, collections=collection)
+
+    info = list(butler.registry.queryDatasets('gbdesAstrometricFit_fitStars'))
+
+    dataID = []
+
+    for run in info:
+        if run.dataId['skymap'] == 'lsst_cells_v1':
+            dataID.append(run.dataId)
+
+    visitSet = set()
+    dicAll = {}
+    for i in tqdm(range(len(dataID))):
+        cat  = butler.get('gbdesAstrometricFit_fitStars', dataID[i]).to_pydict()
+        visits = np.array(cat['exposureName'])
+        visitID = set(visits)
+        I = 0
+        for visit in visitID:
+            currentID = visit
+            if currentID != 'REFERENCE' and currentID not in visitSet:
+                visitSet.update({currentID})
+                tract = dataID[i]['tract']
+                band = dataID[i]['band']
+                Filter = (visits == currentID)
+                u = np.array(cat['xworld'])[Filter]
+                v = np.array(cat['yworld'])[Filter]
+                x = np.array(cat['xpix'])[Filter]
+                y = np.array(cat['ypix'])[Filter]
+                ccdId = np.array(cat['deviceName'])[Filter]
+                du = np.array(cat['xresw'])[Filter]
+                dv = np.array(cat['yresw'])[Filter]
+                dx = np.array(cat['xrespix'])[Filter]
+                dy = np.array(cat['yrespix'])[Filter]
+                xie, xib, logr = comp_eb_treecorr(u, v, du, dv, rmin=20/3600, rmax=0.6, dlogr=0.3)
+
+                dicAll.update({
+                    currentID: {
+                        'u': u,
+                        'v': v,
+                        'x': x,
+                        'y': y,
+                        'du': du,
+                        'dv': dv,
+                        'dx': dx,
+                        'dy': dy,
+                        'ccdId': ccdId,
+                        'xie': xie,
+                        'xib': xib,
+                        'logr': logr,
+                        'band': band,
+                    }
+                })
+            I += 1
+
+    fileAstro = open('astroResidual.pkl', 'wb')
+    pickle.dump(dicAll, fileAstro)
+    fileAstro.close()
+    dic = dicAll
+
+else:
+    dic = pickle.load(open('astroResidual.pkl', 'rb'))
+
+
+fov_plot(dic)
+EB_mode_plot(dic)
+plot_currentID()
 AM1_plot()
-#CCD_plot(tqdm)
+CCD_plot(dic)
