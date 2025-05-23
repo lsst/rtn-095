@@ -84,8 +84,6 @@ class DcrEffect:
         skymap="lsst_cells_v1",
         repo="/repo/dp1",
         collections=None,
-        *args,
-        **kwargs,
     ):
         if collections is None:
             collections = [
