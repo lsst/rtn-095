@@ -77,6 +77,11 @@ class DcrEffect:
     linear and logarithmic representations of the effect's parallel and
     perpendicular components. Note: The DCR effect is only visible in the
     parallel component.
+
+    Attributes
+    ----------
+    butler : `lsst.daf.butler.Butler`
+        Butler to retrieve images and catalogs.
     """
     def __init__(
         self,
@@ -164,20 +169,20 @@ class DcrEffect:
         """Calculate the expected differential chromatic refraction (DCR) value
         and associated visits from deep coadds using the DcrMetric class.
 
-            Parameters
-            ----------
-            datareferences : `list` of `lsst.daf.butler.DeferredDatasetHandle`
-                The data references to the deep coadd exposures.
+        Parameters
+        ----------
+        datareferences : `list` of `lsst.daf.butler.DeferredDatasetHandle`
+            The data references to the deep coadd exposures.
 
-            Returns
-            -------
-            dcrMetricComCam : `list`
-                Expected DCR metric values associated with each set of visits.
-            dcrVisits : `list`
-                List of sets of visits associated with deep coadd
-                exposures that contribute to the calculated expected DCR
-                metric.
-            """
+        Returns
+        -------
+        dcrMetricComCam : `list`
+            Expected DCR metric values associated with each set of visits.
+        dcrVisits : `list`
+            List of sets of visits associated with deep coadd
+            exposures that contribute to the calculated expected DCR
+            metric.
+        """
         dcrMetricComCam = []
         dcrVisitsSet = []
         for ref in datareferences:
@@ -209,19 +214,19 @@ class DcrEffect:
         return dcrMetricComCam, dcrVisits
 
     def retrievePsfStars(self, dataref):
-        """Retrieve the `single_visit_psf_star_footprints` catalog for a given
-        data reference.
+        """Retrieve the catalog of stars selected for calculationg the PSFfor a
+        given data reference.
 
-            Parameters
-            ----------
-            dataref : `lsst.daf.butler.DeferredDatasetHandle`
-                The data reference of exposures.
+        Parameters
+        ----------
+        dataref : `lsst.daf.butler.DeferredDatasetHandle`
+            The data reference of exposures.
 
-            Returns
-            -------
-            psfsources : `pandas.DataFrame`
-                DataFrame of `single_visit_psf_star_footprints` catalog.
-            """
+        Returns
+        -------
+        psfsources : `pandas.DataFrame`
+            DataFrame of `single_visit_psf_star_footprints` catalog.
+        """
         psfSourceTable = self.butler.get(
             "single_visit_psf_star_footprints", dataId=dataref.dataId
         )
@@ -229,40 +234,41 @@ class DcrEffect:
         return psfsources
 
     def retrieveStarFootprints(self, dataref):
-        """Retrieve the `single_visit_star_footprints` catalog for a given
+        """Retrieve the catalog of stars used in calibration for a given
         data reference.
 
-            Parameters
-            ----------
-            dataref : `lsst.daf.butler.DeferredDatasetHandle`
-                The data reference of exposures.
+        Parameters
+        ----------
+        dataref : `lsst.daf.butler.DeferredDatasetHandle`
+            The data reference of exposures.
 
-            Returns
-            -------
-            psfsources : `pandas.DataFrame`
-                DataFrame of `single_visit_star_footprints` catalog.
-            """
+        Returns
+        -------
+        psfsources : `pandas.DataFrame`
+            DataFrame of `single_visit_star_footprints` catalog.
+        """
         sourceTable = self.butler.get("single_visit_star_footprints", dataId=dataref.dataId)
         sources = sourceTable.asAstropy()
         return sources
 
     def retrieveAstrometry(self, dataref):
-        """Retrieve the `initial_astrometry_match_detector` catalog for the
-        specified data reference and compute the angular separation between
-        the reference and source coordinates for each object.
+        """Retrieve the catalog of matches from the astrometric reference
+        catalog for the specified data reference and compute the angular
+        separation between the reference and source coordinates for each
+        object.
 
-            Parameters
-            ----------
-            dataref : `lsst.daf.butler.DeferredDatasetHandle`
-                The data reference of exposures.
+        Parameters
+        ----------
+        dataref : `lsst.daf.butler.DeferredDatasetHandle`
+            The data reference of exposures.
 
-            Returns
-            -------
-            astrometry : `pandas.DataFrame`
-                DataFrame of `initial_astrometry_match_detector` catalog with
-                calculated angular separations between reference and source
-                coordinates for each object.
-            """
+        Returns
+        -------
+        astrometry : `pandas.DataFrame`
+            DataFrame of `initial_astrometry_match_detector` catalog with
+            calculated angular separations between reference and source
+            coordinates for each object.
+        """
         astrometryTable = self.butler.get(
             "initial_astrometry_match_detector", dataId=dataref.dataId
         )
@@ -328,27 +334,27 @@ class DcrEffect:
         return astrometry
 
     def retrievePhotometry(self, dataref, band1, band2):
-        """Retrieve the `initial_photometry_match_detector` catalog for a
-        specified data reference and compute the magnitudes associated with the
-        fluxes in the two selected photometric bands.
+        """Retrieve the catalog of matches from the astrometric reference
+        catalog for a specified data reference and compute the magnitudes
+        associated with the fluxes in the two selected photometric bands.
 
-            Parameters
-            ----------
-            dataref : `lsst.daf.butler.DeferredDatasetHandle`
-                The data reference of exposures.
-            band1: `string`
-                LSST band (ex. 'u', 'g', 'r', 'i', 'z').
-            band2: `string`
-                Comparison LSST band (ex. 'u', 'g', 'r', 'i', 'z'). This must
-                be different than band1.
+        Parameters
+        ----------
+        dataref : `lsst.daf.butler.DeferredDatasetHandle`
+            The data reference of exposures.
+        band1: `string`
+            LSST band (ex. 'u', 'g', 'r', 'i', 'z').
+        band2: `string`
+            Comparison LSST band (ex. 'u', 'g', 'r', 'i', 'z'). This must
+            be different than band1.
 
-            Returns
-            -------
-            photometry : `pandas.DataFrame`
-                DataFrame of `initial_photometry_match_detector` catalog with
-                magnitudes and difference in magnitudes of the fluxes
-                associated with the two chosen bands.
-            """
+        Returns
+        -------
+        photometry : `pandas.DataFrame`
+            DataFrame of `initial_photometry_match_detector` catalog with
+            magnitudes and difference in magnitudes of the fluxes
+            associated with the two chosen bands.
+        """
         photometryTable = self.butler.get(
             "initial_photometry_match_detector", dataId=dataref.dataId
         )
@@ -369,26 +375,27 @@ class DcrEffect:
         return photometry
 
     def matchSources(self, dataref, band1, band2):
-        """Retrieve the sources from the photometry and astrometry catalogs.
+        """Retrieve the matched sources from the photometry and astrometry
+        reference catalogs.
 
-            Parameters
-            ----------
-            dataref : `lsst.daf.butler.DeferredDatasetHandle`
-                The data reference of exposures.
-            band1: `string`
-                LSST band (ex. 'u', 'g', 'r', 'i', 'z').
-            band2: `string`
-                Comparison LSST band (ex. 'u', 'g', 'r', 'i', 'z'). This must
-                be different than band1.
+        Parameters
+        ----------
+        dataref : `lsst.daf.butler.DeferredDatasetHandle`
+            The data reference of exposures.
+        band1: `string`
+            LSST band (ex. 'u', 'g', 'r', 'i', 'z').
+        band2: `string`
+            Comparison LSST band (ex. 'u', 'g', 'r', 'i', 'z'). This must
+            be different than band1.
 
-            Returns
-            -------
-            matchAstrometryPhotometry : `pandas.DataFrame`
-                DataFrame of  matched astrometry and photometry results. This
-                dataFrame contains the angular separation (astrometry) along
-                with the magnitudes and difference in magnitudes of the fluxes
-                associated with the two chosen bands (photometry).
-            """
+        Returns
+        -------
+        matchAstrometryPhotometry : `pandas.DataFrame`
+            DataFrame of matched astrometry and photometry results. This
+            dataFrame contains the angular separation (astrometry) along
+            with the magnitudes and difference in magnitudes of the fluxes
+            associated with the two chosen bands (photometry).
+        """
         stars = self.retrieveStarFootprints(dataref)
         psf_stars = self.retrievePsfStars(dataref)
         astrometry = self.retrieveAstrometry(dataref)
@@ -416,8 +423,27 @@ class DcrEffect:
 
 class DcrMetric:
     """For a given set of visits, calculate a differential chromatic refraction
-    (dcr) metric to determine if it is possible to constrain a new observation
-    with the dcr algorithm.
+    (DCR) metric to determine if it is possible to constrain a new observation
+    with the DCR algorithm.
+
+    Attributes
+    ----------
+    base_nbins : `int`
+        TEXT
+    hist : `list` of `numpy.ndarray`
+        TEXT
+    hist_range : `list` of `float`
+        TEXT
+    kde : `list` of `scipy.stats.gaussian_kde`
+        TEXT
+    max_airmass : `flaot`
+        TEXT
+    nbin_multipliers : `list` of `float`
+        TEXT
+    table : `pandas.DataFrame`
+        TEXT
+    weight : `list` of `float`
+        TEXT
     """
     def __init__(self, max_airmass=1.8, base_nbins=6):
         self.max_airmass = max_airmass
@@ -446,7 +472,7 @@ class DcrMetric:
 
         Returns
         -------
-        metric : `TEXT`
+        metric : `float`
             Minimum metric necessary to contrain the DCR model.
         """
         metrics = [
@@ -458,6 +484,18 @@ class DcrMetric:
     def getBin(self, measure, h_ind):
         """Find the bin of the histogram for a given visit measure.
 
+        Parameters
+        ----------
+        measure : TYPE
+            TEXT
+        h_ind : TYPE
+            TEXT
+
+        Returns
+        -------
+        h_bin : TEXT
+            TEXT
+        
         """
         binsize = (self.hist_range[1] - self.hist_range[0]) / (
             self.base_nbins * self.nbin_multipliers[h_ind]
@@ -467,10 +505,12 @@ class DcrMetric:
 
     def _updateHist(self, visit_measure, delete=False):
         """Update histogram.
-
+        
         Parameters
         ----------
-        visit_measure: `TEXT`
+        visit_measure : `TEXT`
+            TEXT
+        delete : `bool`, optional
             TEXT
         """
         for h_ind, multiplier in enumerate(self.nbin_multipliers):
@@ -549,7 +589,7 @@ class DcrMetric:
 
         Parameters
         ----------
-        visit: `TEXT`
+        visit: `float`
             TEXT
 
         Raises
@@ -575,11 +615,13 @@ class DcrMetric:
 
         Parameters
         ----------
-        airmass: `np.ndarray`, (N,)
+        airmass : `np.ndarray`, (N,)
             A healpix map with the airmass value of each healpixel. (unitless)
             or airmass are updated.
-        hour_angle: `float`
+        hour_angle : `float`
             Hour angle coordinate of the current exposure.
+        threshold : `int`, optional
+            TEXT
 
         Returns
         -------
@@ -599,14 +641,16 @@ class DcrMetric:
                 )
         return improvement
 
-    def testDelVisit(self, visits, threshold=1):
+    def testDeleteVisit(self, visits, threshold=1):
         """Calculate the metric regression if an existing observation were
         excluded.
 
         Parameters
         ----------
-        visits: `list`
+        visits : `list`
             List of visits.
+        threshold : `int`, optional
+            TEXT
 
         Returns
         -------
@@ -636,12 +680,17 @@ class DcrMetric:
             )
         return improvement
 
-    def calculateMetric(self, exclude=None, threshold=1):
+    def calculateMetric(self, threshold=1):
         """Calculate the DCR metric for the observations in the database.
+
+        Parameters
+        ----------
+        threshold : `int`, optional
+            TEXT
 
         Returns
         -------
-        metric : `TEXT`
+        metric : `float`
             DCR metric for the observations in the dataset.
         """
         metrics = [
@@ -680,17 +729,21 @@ class DcrMetric:
 
         Parameters
         ----------
-        airmass: `np.ndarray`, (N,)
+        airmass : `np.ndarray`, (N,)
             A healpix map with the airmass value of each healpixel. (unitless)
             or airmass are updated.
-        hour_angle: `float`
+        hour_angle : `float`
             Hour angle coordinate of the current exposure.
+        doPlot : `bool`, optional
+            TEXT
+        fig_id : `int`, optional
+            TEXT
 
         Returns
         -------
-        TEXT : `TEXT`
-            TEXT
-
+        metric : `float`
+            Metric value representing how well constrained the given observing
+            conditions are by the DCR model.
         """
         if self.kde is None:
             self.calculateKde()
@@ -740,8 +793,9 @@ class DcrMetric:
 
         Returns
         -------
-        TEXT : `TEXT`
-            TEXT
+        metric : `float`
+            Metric value representing how well constrained the given observing
+            conditions are by the DCR model.
 
         """
         hour_angle = visitInfo.getBoresightHourAngle().asRadians()
@@ -753,20 +807,20 @@ def findBlackbodyTemp(dataset):
     """Calculate the blackbody temperature for each source by fitting the flux
     values in each band ('g', 'r', 'i', 'z').
 
-        Parameters
-        ----------
-        dataset: `pandas.DataFrame`
-            DataFrame of  matched astrometry and photometry results. This
-            dataFrame contains the angular separation (astrometry) along with
-            the magnitudes and difference in magnitudes of the fluxes
-            associated with the two chosen bands (photometry).
+    Parameters
+    ----------
+    dataset: `pandas.DataFrame`
+        DataFrame of  matched astrometry and photometry results. This
+        dataFrame contains the angular separation (astrometry) along with
+        the magnitudes and difference in magnitudes of the fluxes
+        associated with the two chosen bands (photometry).
 
-        Returns
-        -------
-        temperatures : `list`
-            List of blackbody temperatures, where each entry corresponds to a
-            specific source.
-        """
+    Returns
+    -------
+    temperatures : `list`
+        List of blackbody temperatures, where each entry corresponds to a
+        specific source.
+    """
 
     # Define the blackbody function.
     def bbFit(wavelength, temp, scale):
@@ -812,18 +866,18 @@ def computeEffectiveWavelength(blackbodyTemps):
     """Compute the effective wavelength corresponding to each specified
     blackbody temperature.
 
-        Parameters
-        ----------
-        blackbodyTemps: `list`
-            List of blackbody temperatures, where each entry corresponds to a
-            specific source.
+    Parameters
+    ----------
+    blackbodyTemps: `list` of `float`
+        List of blackbody temperatures, where each entry corresponds to a
+        specific source.
 
-        Returns
-        -------
-        effectiveWavelengths : `list` of `float`
-            List of effective temperatures derived from the blackbody
-            temperatures. Each entry corresponds to a specific source.
-        """
+    Returns
+    -------
+    effectiveWavelengths : `list` of `float`
+        List of effective temperatures derived from the blackbody
+        temperatures. Each entry corresponds to a specific source.
+    """
 
     # Define variable for effective wavelengths.
     effectiveWavelengths = []
@@ -862,23 +916,23 @@ def computeDifferentialRefraction(dataset, wavelengths, referenceWavelengths):
     refraction offset, for each source based on its effective and
     reference wavelengths.
 
-        Parameters
-        ----------
-        dataset: `pandas.DataFrame`
-            DataFrame of  matched astrometry and photometry results. This
-            dataFrame contains the angular separation (astrometry) along with
-            the magnitudes and difference in magnitudes of the fluxes
-            associated with the two chosen bands (photometry).
-        wavelength: `list`
-            List of effective wavelengths; each value corresponding to an
-            individual source.
-        refWavelength: `list`
-            List of reference wavelengths.
+    Parameters
+    ----------
+    dataset: `pandas.DataFrame`
+        DataFrame of  matched astrometry and photometry results. This
+        dataFrame contains the angular separation (astrometry) along with
+        the magnitudes and difference in magnitudes of the fluxes
+        associated with the two chosen bands (photometry).
+    wavelength: `list` of `float`
+        List of effective wavelengths; each value corresponding to an
+        individual source.
+    refWavelength: `list` of `float`
+        List of reference wavelengths.
 
-        Returns
-        -------
-        dRefraction : `numpy.array`
-            Array of differential refraction values for each source.
+    Returns
+    -------
+    dRefraction : `numpy.array`
+        Array of differential refraction values for each source.
     """
     elevation = dataset["elevation"][0]
     observatory = dataset["observatory"][0]
@@ -896,15 +950,15 @@ def hexbinDp1Paper(data):
     refraction (DCR) effect as seen in the input dataset. This visualization is
     intended specifically for the DP1 paper.
 
-        Parameters
-        ----------
-        data: `pandas.DataFrame`
-            DataFrame containing matched astrometric and photometric results.
-            Must include angular separation (astrometry), magnitudes and
-            magnitude differences between two specified bands (photometry), as
-            well as the blackbody temperature, effective wavelength, and
-            reference wavelength for each source.
-        """
+    Parameters
+    ----------
+    data: `pandas.DataFrame`
+        DataFrame containing matched astrometric and photometric results.
+        Must include angular separation (astrometry), magnitudes and
+        magnitude differences between two specified bands (photometry), as
+        well as the blackbody temperature, effective wavelength, and
+        reference wavelength for each source.
+    """
     fig, ax = plt.subplots(ncols=2, nrows=2, sharey=True)
     plt.subplots_adjust(hspace=0, wspace=0, left=0.12, bottom=0.15)
 
