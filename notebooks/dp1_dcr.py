@@ -311,32 +311,23 @@ class DcrEffect:
 
         dx = refX - srcX
         dy = refY - srcY
-        amplitude = [np.sqrt(x**2 + y**2) for (x, y) in zip(dx, dy)]
-        angleA = [lsst.geom.Angle(np.arctan2(y, x) + (np.pi / 2)) for (x, y) in zip(dx, dy)]
+        amplitude = [np.sqrt(x**2 + y**2)*wcs.getPixelScale() for (x, y) in zip(dx, dy)]  # as an Angle
+        angle = [lsst.geom.Angle(np.arctan2(y, x) + (np.pi / 2)) for (x, y) in zip(dx, dy)]
         perpendicular = [
-            amp * np.sin(float(anglA - parallacticAngle))
-            for (amp, anglA) in zip(amplitude, angleA)
+            amp * np.sin(float(ang - parallacticAngle))
+            for (amp, ang) in zip(amplitude, angle)
         ]
         parallel = [
-            amp * np.cos(float((anglA - parallacticAngle)))
-            for (amp, anglA) in zip(amplitude, angleA)
-        ]
-
-        # Convert perpendicular and parallel components into wcs.
-        arcsecPerpendicular = [
-            (lsst.geom.Angle(per) * wcs.getPixelScale()).asArcseconds()
-            for per in perpendicular
-        ]
-        arcsecParallel = [
-            (lsst.geom.Angle(par) * wcs.getPixelScale()).asArcseconds() for par in parallel
+            amp * np.cos(float((ang - parallacticAngle)))
+            for (amp, ang) in zip(amplitude, angle)
         ]
 
         astrometry["airmass"] = astrometryLen * [airmass,]
         astrometry["elevation"] = astrometryLen * [elevation,]
         astrometry["boresightParAngle"] = astrometryLen * [boresightParAngle,]
         astrometry["observatory"] = astrometryLen * [observatory,]
-        astrometry["perpendicular"] = arcsecPerpendicular
-        astrometry["parallel"] = arcsecParallel
+        astrometry["perpendicular"] = perpendicular
+        astrometry["parallel"] = parallel
 
         return astrometry
 
