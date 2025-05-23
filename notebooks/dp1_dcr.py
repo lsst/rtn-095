@@ -146,16 +146,14 @@ class DcrEffect:
         refTemp = np.mean(blackbodyTemperatures)
         refWavelength = computeEffectiveWavelength([refTemp])
 
-        floatEW = [float(i) for i in effWvl]
-        allData["effective wavelength"] = floatEW
+        allData["effective wavelength"] = effWvl
 
-        refEW = [float(i) for i in refWavelength]
         allData["reference effective wavelength"] = len(allData) * [
-            refEW,
+            refWavelength,
         ]
 
         # Calculate the differential refraction
-        differentialRefraction_blackbody = computeDifferentialRefraction(allData, floatEW, refEW[0])
+        differentialRefraction_blackbody = computeDifferentialRefraction(allData, effWvl, refWavelength[0])
         allData["differential refraction"] = differentialRefraction_blackbody
 
         if doHexbin:
@@ -824,7 +822,7 @@ def computeEffectiveWavelength(blackbodyTemps):
 
         Returns
         -------
-        effectiveWavelengths : `list`
+        effectiveWavelengths : `list` of `float`
             List of effective temperatures derived from the blackbody
             temperatures. Each entry corresponds to a specific source.
         """
@@ -855,7 +853,7 @@ def computeEffectiveWavelength(blackbodyTemps):
         # Determine the effective wavelength.
         effectiveWavelength = spectrumSum / spectrumTotal
 
-        effectiveWavelengths.append(effectiveWavelength)
+        effectiveWavelengths.append(float(effectiveWavelength))
 
     return effectiveWavelengths
 
