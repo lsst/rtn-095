@@ -137,33 +137,41 @@ class DcrEffect:
             singleVisitResult = self.matchSources(ref, "i", "g")
             resultTables.append(singleVisitResult)
 
-        testAllData = vstack(resultTables)
-        allData = testAllData.to_pandas()
+        stackedResults = vstack(resultTables)
+        # allData = stackedResults.to_pandas()
+        finalMatchedDf = stackedResults.to_pandas()
 
         # Calculate blackbody temperatures
-        blackbodyTemperatures = findBlackbodyTemp(allData)
-        allData["blackbody temperature"] = blackbodyTemperatures
+        blackbodyTemperatures = findBlackbodyTemp(finalMatchedDf)
+        self.blackbodyTemperatures = blackbodyTemperatures
 
         # Calculate the effective and reference wavelengths
         effWvl = computeEffectiveWavelength(blackbodyTemperatures)
+        self.effectiveWavelength = effWvl
+
         refTemp = np.mean(blackbodyTemperatures)
         refWavelength = computeEffectiveWavelength([refTemp])
-
-        allData["effective wavelength"] = effWvl
-
-        allData["reference effective wavelength"] = len(allData) * [
-            refWavelength,
-        ]
+        self.refEffectiveWavelength = refWavelength
 
         # Calculate the differential refraction
-        differentialRefraction_blackbody = computeDifferentialRefraction(allData, effWvl, refWavelength[0])
-        allData["differential refraction"] = differentialRefraction_blackbody
+        differentialRefraction_blackbody = computeDifferentialRefraction(finalMatchedDf, effWvl,
+                                                                         refWavelength[0])
+        self.differentialRefractionBlackbody = differentialRefraction_blackbody
+
+        # self.allData = allData
+        self.matchedSourcesDf(finalMatchedDf)
 
         if doHexbin:
-            # Generate a hexbin plot illustrating the differential chromatic
-            # refraction (DCR) effect as seen in the input dataset. This
-            # visualization is intended specifically for the DP1 paper.
-            self.hexbin(allData)
+            self.dcrHexbin()
+
+    @property
+    def matchedSourcesDf(self, dataframe):
+        dataframe["blackbody temperature"] = self.blackbodyTemperatures
+        dataframe["effective wavelength"] = self.effWvl
+
+        dataframe["reference effective wavelength"] = len(dataframe) * [self.refWavelength,]
+        dataframe["differential refraction"] = self.differentialRefraction_blackbody
+        return self.finalMatchedDf
 
     def calculateExpectedDcr(self, datareferences):
         """Calculate the expected differential chromatic refraction (DCR) value
@@ -420,6 +428,9 @@ class DcrEffect:
 
         return matchAstrometryPhotometry
 
+    def dcrHexbin(self):
+        hexbinDp1Paper(self.allData)
+
 
 class DcrMetric:
     """For a given set of visits, calculate a differential chromatic refraction
@@ -429,21 +440,21 @@ class DcrMetric:
     Attributes
     ----------
     base_nbins : `int`
-        TEXT
+        Base bin number for histogram.
     hist : `list` of `numpy.ndarray`
-        TEXT
+        Histogram.
     hist_range : `list` of `float`
-        TEXT
+        Histogram range determined from max airmass value.
     kde : `list` of `scipy.stats.gaussian_kde`
-        TEXT
-    max_airmass : `flaot`
-        TEXT
+        Kernel density estimate from gaussian distribution.
+    max_airmass : `float`
+        Maximum airmass value.
     nbin_multipliers : `list` of `float`
-        TEXT
+        Bin number multipliers.
     table : `pandas.DataFrame`
-        TEXT
+        DataFrame of airmass and hour angles.
     weight : `list` of `float`
-        TEXT
+        Histogram weights.
     """
     def __init__(self, max_airmass=1.8, base_nbins=6):
         self.max_airmass = max_airmass
@@ -481,37 +492,16 @@ class DcrMetric:
         metric = np.sum(metrics) / np.sum(self.weight)
         return metric
 
-    def getBin(self, measure, h_ind):
-        """Find the bin of the histogram for a given visit measure.
-
-        Parameters
-        ----------
-        measure : TYPE
-            TEXT
-        h_ind : TYPE
-            TEXT
-
-        Returns
-        -------
-        h_bin : TEXT
-            TEXT
-        
-        """
-        binsize = (self.hist_range[1] - self.hist_range[0]) / (
-            self.base_nbins * self.nbin_multipliers[h_ind]
-        )
-        h_bin = int(np.floor((measure - self.hist_range[0]) / binsize))
-        return h_bin
-
     def _updateHist(self, visit_measure, delete=False):
         """Update histogram.
-        
+
         Parameters
         ----------
-        visit_measure : `TEXT`
-            TEXT
+        visit_measure : `float`
+            Single value associated with each visit after linearlizing airmass
+            and hour angle. Output of `parameterizeVisit` method.
         delete : `bool`, optional
-            TEXT
+            Option to delete visit from histogram.
         """
         for h_ind, multiplier in enumerate(self.nbin_multipliers):
             hist = np.histogram(
@@ -535,8 +525,9 @@ class DcrMetric:
 
         Returns
         -------
-        visit_measure : `TEXT`
-            Converted airmass and hour angle to visit measure.
+        visit_measure : `float`
+            Single value associated with each visit after linearlizing airmass
+            and hour angle.
         """
         visit_measure = (airmass - 1.0) * np.sign(hour_angle)
         return visit_measure
@@ -546,8 +537,8 @@ class DcrMetric:
 
         Parameters
         ----------
-        visit: ``
-            TEXT
+        visit: `int`
+            VisitId of observation.
         airmass: `np.ndarray`, (N,)
             A healpix map with the airmass value of each healpixel. (unitless)
             or airmass are updated.
@@ -589,8 +580,8 @@ class DcrMetric:
 
         Parameters
         ----------
-        visit: `float`
-            TEXT
+        visit: `int`
+            VisitId of observation.
 
         Raises
         ------
@@ -621,11 +612,11 @@ class DcrMetric:
         hour_angle : `float`
             Hour angle coordinate of the current exposure.
         threshold : `int`, optional
-            TEXT
+            Optional threshold value for metric improvement.
 
         Returns
         -------
-        improvement : `TEXT`
+        improvement : `float`
             Metric improvement if a new observation is added.
         """
         visit_measure = self.parameterizeVisit(airmass, hour_angle)
@@ -650,11 +641,11 @@ class DcrMetric:
         visits : `list`
             List of visits.
         threshold : `int`, optional
-            TEXT
+            Optional threshold value for metric improvement.
 
         Returns
         -------
-        improvement : `TEXT`
+        improvement : `float`
             Metric regression if an existing observation were excluded.
         """
         visit_measures = []
@@ -686,7 +677,7 @@ class DcrMetric:
         Parameters
         ----------
         threshold : `int`, optional
-            TEXT
+            Optional threshold value for metric improvement.
 
         Returns
         -------
@@ -945,7 +936,7 @@ def computeDifferentialRefraction(dataset, wavelengths, referenceWavelengths):
     return dRefraction
 
 
-def hexbinDp1Paper(data):
+def hexbinDp1Paper(data, cmap=stars_cmap(), accentColor=accent_color()):
     """Generate a hexbin plot illustrating the differential chromatic
     refraction (DCR) effect as seen in the input dataset. This visualization is
     intended specifically for the DP1 paper.
@@ -965,11 +956,11 @@ def hexbinDp1Paper(data):
     xlim = data["differential refraction"].min(), data["differential refraction"].max()
     ylim = data["g-i mag"].min(), data["g-i mag"].max()
     hb = ax[0, 0].hexbin(
-        data["parallel"], data["g-i mag"], gridsize=50, cmap=stars_cmap(), mincnt=1
+        data["parallel"], data["g-i mag"], gridsize=50, cmap=cmap, mincnt=1
     )
     ax[0, 0].set(xlim=xlim, ylim=ylim)
     ax[0, 0].set_title("Parallel", fontsize=15)
-    ax[0, 0].axvline(x=0, color=accent_color(), linestyle="--")
+    ax[0, 0].axvline(x=0, color=accentColor, linestyle="--")
     ax[0, 0].tick_params("x", labelbottom=False)
 
     ax[0, 0].text(
@@ -981,12 +972,12 @@ def hexbinDp1Paper(data):
         data["perpendicular"],
         data["g-i mag"],
         gridsize=50,
-        cmap=stars_cmap(),
+        cmap=cmap,
         mincnt=1,
     )
     ax[0, 1].set(xlim=xlim, ylim=ylim)
     ax[0, 1].set_title("Perpendicular", fontsize=15)
-    ax[0, 1].axvline(x=0, color=accent_color(), linestyle="--")
+    ax[0, 1].axvline(x=0, color=accentColor, linestyle="--")
     ax[0, 1].tick_params("x", labelbottom=False)
 
     label = "Number of Sources"
@@ -1013,22 +1004,22 @@ def hexbinDp1Paper(data):
         data["g-i mag"],
         gridsize=50,
         bins="log",
-        cmap=stars_cmap(),
+        cmap=cmap,
         mincnt=1,
     )
     ax[1, 0].set(xlim=xlim, ylim=ylim)
-    ax[1, 0].axvline(x=0, color=accent_color(), linestyle="--")
+    ax[1, 0].axvline(x=0, color=accentColor, linestyle="--")
 
     hb = ax[1, 1].hexbin(
         data["perpendicular"],
         data["g-i mag"],
         gridsize=50,
         bins="log",
-        cmap=stars_cmap(),
+        cmap=cmap,
         mincnt=1,
     )
     ax[1, 1].set(xlim=xlim, ylim=ylim)
-    ax[1, 1].axvline(x=0, color=accent_color(), linestyle="--")
+    ax[1, 1].axvline(x=0, color=accentColor, linestyle="--")
     label2 = "Log(Number of Sources)"
     axBbox = ax[1, 1].get_position()
     cax = fig.add_axes([axBbox.x1, axBbox.y0, 0.04, axBbox.y1 - axBbox.y0])
