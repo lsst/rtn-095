@@ -80,8 +80,33 @@ class DcrEffect:
 
     Attributes
     ----------
+    blackbodyTemperatures : `list`
+        List of blackbody temperatures, where each entry corresponds to a
+        specific source.
     butler : `lsst.daf.butler.Butler`
         Butler to retrieve images and catalogs.
+    differentialRefractionBlackbody : `numpy.array`
+        Array of differential refraction values for each source.
+    effectiveWavelength : `list` of `float`
+        List of effective wavelengths derived from the blackbody
+        temperatures. Each entry corresponds to a specific source.
+    elevation : `float`
+        Elevation of each exposure.
+    magnitude : `list` of `float`
+        List of 'g-i' magnitude for each source.
+    observatory : `Observatory`
+        Location and elevation of Rubin Observatory.
+    parallel : `list` of `float`
+        List of angular separation values between the source and reference
+        locations for each object when considering the parallel component of
+        the parallactic angle; in radians.
+    perpendicular : `list` of `float`
+        List of angular separation values between the source and reference
+        locations for each object when considering the perpendicular component
+        of the parallactic angle; in radians.
+    refEffectiveWavelength : `float`
+        Reference wavelength derived from the average blackbody
+        temperatures.
     """
     def __init__(
         self,
@@ -90,6 +115,20 @@ class DcrEffect:
         repo="/repo/dp1",
         collections=None,
     ):
+        """Set butler configurations from specified input or if no input is
+        provided, use default values.
+
+        Parameters
+        ----------
+        instrument : `str`, optional
+            Instrument.
+        skymap : `str`, optional
+            Skymap.
+        repo : `str`, optional
+            Data repository containing collection.
+        collections : `str`, optional
+            Data collection.
+        """
         if collections is None:
             collections = [
                 "LSSTComCam/DP1/defaults",
@@ -137,33 +176,30 @@ class DcrEffect:
             singleVisitResult = self.matchSources(ref, "i", "g")
             resultTables.append(singleVisitResult)
 
-        testAllData = vstack(resultTables)
-        allData = testAllData.to_pandas()
+        stackedResults = vstack(resultTables)
+        finalMatchedDf = stackedResults.to_pandas()
+
+        self.parallel = finalMatchedDf['parallel']
+        self.perpendicular = finalMatchedDf['perpendicular']
+        self.magnitude = finalMatchedDf['g-i mag']
 
         # Calculate blackbody temperatures
-        blackbodyTemperatures = findBlackbodyTemp(allData)
-        allData["blackbody temperature"] = blackbodyTemperatures
+        blackbodyTemperatures = findBlackbodyTemp(finalMatchedDf)
+        self.blackbodyTemperatures = blackbodyTemperatures
 
         # Calculate the effective and reference wavelengths
-        effWvl = computeEffectiveWavelength(blackbodyTemperatures)
+        self.effectiveWavelength = computeEffectiveWavelength(blackbodyTemperatures)
+
         refTemp = np.mean(blackbodyTemperatures)
         refWavelength = computeEffectiveWavelength([refTemp])
-
-        allData["effective wavelength"] = effWvl
-
-        allData["reference effective wavelength"] = len(allData) * [
-            refWavelength,
-        ]
+        self.refEffectiveWavelength = refWavelength
 
         # Calculate the differential refraction
-        differentialRefraction_blackbody = computeDifferentialRefraction(allData, effWvl, refWavelength[0])
-        allData["differential refraction"] = differentialRefraction_blackbody
+        self.differentialRefractionBlackbody = self.computeDifferentialRefraction(self.effectiveWavelength,
+                                                                                  refWavelength[0])
 
         if doHexbin:
-            # Generate a hexbin plot illustrating the differential chromatic
-            # refraction (DCR) effect as seen in the input dataset. This
-            # visualization is intended specifically for the DP1 paper.
-            self.hexbin(allData)
+            self.dcrHexbin()
 
     def calculateExpectedDcr(self, datareferences):
         """Calculate the expected differential chromatic refraction (DCR) value
@@ -277,9 +313,7 @@ class DcrEffect:
         astrometryLen = len(astrometry)
         visitInfo = self.butler.get("preliminary_visit_image.visitInfo", dataId=dataref.dataId)
         wcs = self.butler.get("preliminary_visit_image.wcs", dataId=dataref.dataId)
-        airmass = visitInfo.boresightAirmass
         elevation = visitInfo.getBoresightAzAlt().getLatitude()
-        boresightParAngle = visitInfo.boresightParAngle
         observatory = visitInfo.getObservatory()
 
         # Calculate the difference in reference and source coordinates in terms
@@ -324,10 +358,9 @@ class DcrEffect:
             for (amp, ang) in zip(amplitude, angle)
         ]
 
-        astrometry["airmass"] = astrometryLen * [airmass,]
-        astrometry["elevation"] = astrometryLen * [elevation,]
-        astrometry["boresightParAngle"] = astrometryLen * [boresightParAngle,]
-        astrometry["observatory"] = astrometryLen * [observatory,]
+        self.elevation = elevation
+        self.observatory = observatory
+
         astrometry["perpendicular"] = perpendicular
         astrometry["parallel"] = parallel
 
@@ -342,9 +375,9 @@ class DcrEffect:
         ----------
         dataref : `lsst.daf.butler.DeferredDatasetHandle`
             The data reference of exposures.
-        band1: `string`
+        band1 : `string`
             LSST band (ex. 'u', 'g', 'r', 'i', 'z').
-        band2: `string`
+        band2 : `string`
             Comparison LSST band (ex. 'u', 'g', 'r', 'i', 'z'). This must
             be different than band1.
 
@@ -382,9 +415,9 @@ class DcrEffect:
         ----------
         dataref : `lsst.daf.butler.DeferredDatasetHandle`
             The data reference of exposures.
-        band1: `string`
+        band1 : `string`
             LSST band (ex. 'u', 'g', 'r', 'i', 'z').
-        band2: `string`
+        band2 : `string`
             Comparison LSST band (ex. 'u', 'g', 'r', 'i', 'z'). This must
             be different than band1.
 
@@ -420,6 +453,40 @@ class DcrEffect:
 
         return matchAstrometryPhotometry
 
+    def computeDifferentialRefraction(self, wavelengths, referenceWavelength):
+        """Compute the expected shift in apparent position due to
+        wavelength-dependent atmospheric refraction, the differential chromatic
+        refraction offset, for each source based on its effective and
+        reference wavelengths.
+
+        Parameters
+        ----------
+        wavelengths : `list` of `float`
+            List of effective wavelengths derived from the blackbody
+            temperatures. Each entry corresponds to a specific source.
+        referenceWavelength : `float`
+            Reference wavelength derived from the average blackbody
+            temperatures.
+
+        Returns
+        -------
+        dRefraction : `numpy.array`
+            Array of differential refraction values for each source.
+        """
+        dRefraction = []
+        for w in wavelengths:
+            refraction = differentialRefraction(w, referenceWavelength, self.elevation, self.observatory)
+            refractionInArcsec = refraction.asArcseconds()
+            dRefraction.append(refractionInArcsec)
+        dRefraction = np.array(dRefraction)
+        return dRefraction
+
+    def dcrHexbin(self):
+        """Summary
+        """
+        hexbinDp1Paper(self.differentialRefractionBlackbody, self.parallel, self.perpendicular,
+                       self.magnitude)
+
 
 class DcrMetric:
     """For a given set of visits, calculate a differential chromatic refraction
@@ -429,23 +496,32 @@ class DcrMetric:
     Attributes
     ----------
     base_nbins : `int`
-        TEXT
+        Base bin number for histogram.
     hist : `list` of `numpy.ndarray`
-        TEXT
+        Histogram.
     hist_range : `list` of `float`
-        TEXT
+        Histogram range determined from max airmass value.
     kde : `list` of `scipy.stats.gaussian_kde`
-        TEXT
-    max_airmass : `flaot`
-        TEXT
+        Kernel density estimate from gaussian distribution.
+    max_airmass : `float`
+        Maximum airmass value.
     nbin_multipliers : `list` of `float`
-        TEXT
+        Bin number multipliers.
     table : `pandas.DataFrame`
-        TEXT
+        DataFrame of airmass and hour angles.
     weight : `list` of `float`
-        TEXT
+        Histogram weights.
     """
     def __init__(self, max_airmass=1.8, base_nbins=6):
+        """Summary
+
+        Parameters
+        ----------
+        max_airmass : `float`, optional
+            Maximum airmass value.
+        base_nbins : `int`, optional
+            Base number of histogram bins.
+        """
         self.max_airmass = max_airmass
         self.hist_range = [1 - max_airmass, max_airmass - 1]
         self.base_nbins = 6
@@ -481,37 +557,16 @@ class DcrMetric:
         metric = np.sum(metrics) / np.sum(self.weight)
         return metric
 
-    def getBin(self, measure, h_ind):
-        """Find the bin of the histogram for a given visit measure.
-
-        Parameters
-        ----------
-        measure : TYPE
-            TEXT
-        h_ind : TYPE
-            TEXT
-
-        Returns
-        -------
-        h_bin : TEXT
-            TEXT
-        
-        """
-        binsize = (self.hist_range[1] - self.hist_range[0]) / (
-            self.base_nbins * self.nbin_multipliers[h_ind]
-        )
-        h_bin = int(np.floor((measure - self.hist_range[0]) / binsize))
-        return h_bin
-
     def _updateHist(self, visit_measure, delete=False):
         """Update histogram.
-        
+
         Parameters
         ----------
-        visit_measure : `TEXT`
-            TEXT
+        visit_measure : `float`
+            Single value associated with each visit after linearlizing airmass
+            and hour angle. Output of `parameterizeVisit` method.
         delete : `bool`, optional
-            TEXT
+            Option to delete visit from histogram.
         """
         for h_ind, multiplier in enumerate(self.nbin_multipliers):
             hist = np.histogram(
@@ -527,16 +582,17 @@ class DcrMetric:
 
         Parameters
         ----------
-        airmass: `np.ndarray`, (N,)
+        airmass : `np.ndarray`, (N,)
             A healpix map with the airmass value of each healpixel. (unitless)
             or airmass are updated.
-        hour_angle: `float`
+        hour_angle : `float`
             Hour angle coordinate of the current exposure.
 
         Returns
         -------
-        visit_measure : `TEXT`
-            Converted airmass and hour angle to visit measure.
+        visit_measure : `float`
+            Single value associated with each visit after linearlizing airmass
+            and hour angle.
         """
         visit_measure = (airmass - 1.0) * np.sign(hour_angle)
         return visit_measure
@@ -546,12 +602,12 @@ class DcrMetric:
 
         Parameters
         ----------
-        visit: ``
-            TEXT
-        airmass: `np.ndarray`, (N,)
+        visit : `int`
+            VisitId of observation.
+        airmass : `np.ndarray`, (N,)
             A healpix map with the airmass value of each healpixel. (unitless)
             or airmass are updated.
-        hour_angle: `float`
+        hour_angle : `float`
             Hour angle coordinate of the current exposure.
 
         Raises
@@ -576,7 +632,7 @@ class DcrMetric:
 
         Parameters
         ----------
-        visitInfo: `lsst.afw.image.VisitInfo`
+        visitInfo : `lsst.afw.image.VisitInfo`
             Metadata for the exposure.
         """
         visit = visitInfo.getId()  # //100
@@ -589,8 +645,8 @@ class DcrMetric:
 
         Parameters
         ----------
-        visit: `float`
-            TEXT
+        visit : `int`
+            VisitId of observation.
 
         Raises
         ------
@@ -621,11 +677,11 @@ class DcrMetric:
         hour_angle : `float`
             Hour angle coordinate of the current exposure.
         threshold : `int`, optional
-            TEXT
+            Optional threshold value for metric improvement.
 
         Returns
         -------
-        improvement : `TEXT`
+        improvement : `float`
             Metric improvement if a new observation is added.
         """
         visit_measure = self.parameterizeVisit(airmass, hour_angle)
@@ -650,11 +706,11 @@ class DcrMetric:
         visits : `list`
             List of visits.
         threshold : `int`, optional
-            TEXT
+            Optional threshold value for metric improvement.
 
         Returns
         -------
-        improvement : `TEXT`
+        improvement : `float`
             Metric regression if an existing observation were excluded.
         """
         visit_measures = []
@@ -686,7 +742,7 @@ class DcrMetric:
         Parameters
         ----------
         threshold : `int`, optional
-            TEXT
+            Optional threshold value for metric improvement.
 
         Returns
         -------
@@ -735,9 +791,9 @@ class DcrMetric:
         hour_angle : `float`
             Hour angle coordinate of the current exposure.
         doPlot : `bool`, optional
-            TEXT
+            Option to plot histogram.
         fig_id : `int`, optional
-            TEXT
+            Figure ID.
 
         Returns
         -------
@@ -788,7 +844,7 @@ class DcrMetric:
 
         Parameters
         ----------
-        visitInfo: `lsst.afw.image.VisitInfo`
+        visitInfo : `lsst.afw.image.VisitInfo`
             Metadata for the exposure.
 
         Returns
@@ -809,7 +865,7 @@ def findBlackbodyTemp(dataset):
 
     Parameters
     ----------
-    dataset: `pandas.DataFrame`
+    dataset : `pandas.DataFrame`
         DataFrame of  matched astrometry and photometry results. This
         dataFrame contains the angular separation (astrometry) along with
         the magnitudes and difference in magnitudes of the fluxes
@@ -824,6 +880,24 @@ def findBlackbodyTemp(dataset):
 
     # Define the blackbody function.
     def bbFit(wavelength, temp, scale):
+        """Blackbody fit.
+
+        Parameters
+        ----------
+        wavelength : `list` of `float`
+            Wavelength values (in nm) associated with 'g', 'r', 'i', and 'z'
+            bands.
+        temp : `float`
+            Blackbody temperature in Kelvin.
+        scale : `float`
+            Scaling factor.
+
+        Returns
+        -------
+        flux: `list` of `float`
+            Blackbody flux values associated with each band ('g', 'r', 'i', and
+            'z').
+        """
         tempK = temp * u.K
         blackbody = models.BlackBody(temperature=tempK)
         flux = (
@@ -868,14 +942,14 @@ def computeEffectiveWavelength(blackbodyTemps):
 
     Parameters
     ----------
-    blackbodyTemps: `list` of `float`
+    blackbodyTemps : `list` of `float`
         List of blackbody temperatures, where each entry corresponds to a
         specific source.
 
     Returns
     -------
     effectiveWavelengths : `list` of `float`
-        List of effective temperatures derived from the blackbody
+        List of effective wavelengths derived from the blackbody
         temperatures. Each entry corresponds to a specific source.
     """
 
@@ -910,66 +984,42 @@ def computeEffectiveWavelength(blackbodyTemps):
     return effectiveWavelengths
 
 
-def computeDifferentialRefraction(dataset, wavelengths, referenceWavelengths):
-    """Compute the expected shift in apparent position due to
-    wavelength-dependent atmospheric refraction, the differential chromatic
-    refraction offset, for each source based on its effective and
-    reference wavelengths.
-
-    Parameters
-    ----------
-    dataset: `pandas.DataFrame`
-        DataFrame of  matched astrometry and photometry results. This
-        dataFrame contains the angular separation (astrometry) along with
-        the magnitudes and difference in magnitudes of the fluxes
-        associated with the two chosen bands (photometry).
-    wavelength: `list` of `float`
-        List of effective wavelengths; each value corresponding to an
-        individual source.
-    refWavelength: `list` of `float`
-        List of reference wavelengths.
-
-    Returns
-    -------
-    dRefraction : `numpy.array`
-        Array of differential refraction values for each source.
-    """
-    elevation = dataset["elevation"][0]
-    observatory = dataset["observatory"][0]
-    dRefraction = []
-    for w in wavelengths:
-        refraction = differentialRefraction(w, referenceWavelengths, elevation, observatory)
-        refractionInArcsec = refraction.asArcseconds()
-        dRefraction.append(refractionInArcsec)
-    dRefraction = np.array(dRefraction)
-    return dRefraction
-
-
-def hexbinDp1Paper(data):
+def hexbinDp1Paper(differential_refraction, parallel, perpendicular, magnitude, cmap=stars_cmap(),
+                   accentColor=accent_color()):
     """Generate a hexbin plot illustrating the differential chromatic
     refraction (DCR) effect as seen in the input dataset. This visualization is
     intended specifically for the DP1 paper.
 
     Parameters
     ----------
-    data: `pandas.DataFrame`
-        DataFrame containing matched astrometric and photometric results.
-        Must include angular separation (astrometry), magnitudes and
-        magnitude differences between two specified bands (photometry), as
-        well as the blackbody temperature, effective wavelength, and
-        reference wavelength for each source.
+    differential_refraction : `numpy.array`
+        Array of differential refraction values for each source.
+    parallel : `list` of `float`
+        List of angular separation values between the source and reference
+        locations for each object when considering the parallel component of
+        the parallactic angle; in radians.
+    perpendicular : `list` of `float`
+        List of angular separation values between the source and reference
+        locations for each object when considering the perpendicular component
+        of the parallactic angle; in radians.
+    magnitude : `list` of `float`
+        'g-i' magnitude difference for each source.
+    cmap : `string`, optional
+        Plot color map.
+    accentColor : `string`, optional
+        Accent color used for zero angular offset comparison line in plot.
     """
     fig, ax = plt.subplots(ncols=2, nrows=2, sharey=True)
     plt.subplots_adjust(hspace=0, wspace=0, left=0.12, bottom=0.15)
 
-    xlim = data["differential refraction"].min(), data["differential refraction"].max()
-    ylim = data["g-i mag"].min(), data["g-i mag"].max()
+    xlim = differential_refraction.min(), differential_refraction.max()
+    ylim = magnitude.min(), magnitude.max()
     hb = ax[0, 0].hexbin(
-        data["parallel"], data["g-i mag"], gridsize=50, cmap=stars_cmap(), mincnt=1
+        parallel, magnitude, gridsize=50, cmap=cmap, mincnt=1
     )
     ax[0, 0].set(xlim=xlim, ylim=ylim)
     ax[0, 0].set_title("Parallel", fontsize=15)
-    ax[0, 0].axvline(x=0, color=accent_color(), linestyle="--")
+    ax[0, 0].axvline(x=0, color=accentColor, linestyle="--")
     ax[0, 0].tick_params("x", labelbottom=False)
 
     ax[0, 0].text(
@@ -978,15 +1028,15 @@ def hexbinDp1Paper(data):
     ax[0, 0].text(0.35, 0.05, r"Angular Offset (arcsec)", transform=fig.transFigure)
 
     hb = ax[0, 1].hexbin(
-        data["perpendicular"],
-        data["g-i mag"],
+        perpendicular,
+        magnitude,
         gridsize=50,
-        cmap=stars_cmap(),
+        cmap=cmap,
         mincnt=1,
     )
     ax[0, 1].set(xlim=xlim, ylim=ylim)
     ax[0, 1].set_title("Perpendicular", fontsize=15)
-    ax[0, 1].axvline(x=0, color=accent_color(), linestyle="--")
+    ax[0, 1].axvline(x=0, color=accentColor, linestyle="--")
     ax[0, 1].tick_params("x", labelbottom=False)
 
     label = "Number of Sources"
@@ -1009,26 +1059,26 @@ def hexbinDp1Paper(data):
     )
 
     hb = ax[1, 0].hexbin(
-        data["parallel"],
-        data["g-i mag"],
+        parallel,
+        magnitude,
         gridsize=50,
         bins="log",
-        cmap=stars_cmap(),
+        cmap=cmap,
         mincnt=1,
     )
     ax[1, 0].set(xlim=xlim, ylim=ylim)
-    ax[1, 0].axvline(x=0, color=accent_color(), linestyle="--")
+    ax[1, 0].axvline(x=0, color=accentColor, linestyle="--")
 
     hb = ax[1, 1].hexbin(
-        data["perpendicular"],
-        data["g-i mag"],
+        perpendicular,
+        magnitude,
         gridsize=50,
         bins="log",
-        cmap=stars_cmap(),
+        cmap=cmap,
         mincnt=1,
     )
     ax[1, 1].set(xlim=xlim, ylim=ylim)
-    ax[1, 1].axvline(x=0, color=accent_color(), linestyle="--")
+    ax[1, 1].axvline(x=0, color=accentColor, linestyle="--")
     label2 = "Log(Number of Sources)"
     axBbox = ax[1, 1].get_position()
     cax = fig.add_axes([axBbox.x1, axBbox.y0, 0.04, axBbox.y1 - axBbox.y0])
