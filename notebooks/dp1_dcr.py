@@ -140,6 +140,7 @@ class DcrEffect:
         stackedResults = vstack(resultTables)
         # allData = stackedResults.to_pandas()
         finalMatchedDf = stackedResults.to_pandas()
+        self.finalMatchedDf = finalMatchedDf
 
         # Calculate blackbody temperatures
         blackbodyTemperatures = findBlackbodyTemp(finalMatchedDf)
@@ -165,12 +166,12 @@ class DcrEffect:
             self.dcrHexbin()
 
     @property
-    def matchedSourcesDf(self, dataframe):
-        dataframe["blackbody temperature"] = self.blackbodyTemperatures
-        dataframe["effective wavelength"] = self.effWvl
-
-        dataframe["reference effective wavelength"] = len(dataframe) * [self.refWavelength,]
-        dataframe["differential refraction"] = self.differentialRefraction_blackbody
+    def matchedSourcesDf(self):
+        self.finalMatchedDf["blackbody temperature"] = self.blackbodyTemperatures
+        self.finalMatchedDf["effective wavelength"] = self.effWvl
+        self.finalMatchedDf["reference effective wavelength"] = len(self.finalMatchedDf) * \
+            [self.refWavelength,]
+        self.finalMatchedDf["differential refraction"] = self.differentialRefraction_blackbody
         return self.finalMatchedDf
 
     def calculateExpectedDcr(self, datareferences):
