@@ -44,13 +44,13 @@ import scipy
 
 from astropy import units as u
 from astropy.coordinates import SkyCoord
-from astropy.modeling import models
 from astropy.table import vstack, hstack
-from lsst.afw.coord import differentialRefraction
+from lsst.afw.coord import refraction
 from lsst.daf.butler import Butler
 from lsst.ip.diffim import calculateImageParallacticAngle
 from lsst.utils.plotting import stars_cmap, accent_color
 import matplotlib.patheffects as pathEffects
+from scipy.constants import h, c, k
 from scipy.optimize import curve_fit
 
 
@@ -94,8 +94,9 @@ class DcrEffect:
         Elevation of each exposure.
     magnitude : `list` of `float`
         List of 'g-i' magnitude for each source.
-    observatory : `Observatory`
-        Location and elevation of Rubin Observatory.
+    observatory : `lsst.afw.coord.Observatory`
+            Class containing the longitude, latitude,
+            and altitude of the observatory.
     parallel : `list` of `float`
         List of angular separation values between the source and reference
         locations for each object when considering the parallel component of
@@ -222,10 +223,9 @@ class DcrEffect:
         dcrMetricComCam = []
         dcrVisitsSet = []
         for ref in datareferences:
-            templateCoadds = self.butler.get("deep_coadd", dataId=ref.dataId)
-            templateInputs = templateCoadds.getInfo().getCoaddInputs()
-            visits = templateInputs.ccds["visit"]
-            ccds = templateInputs.ccds["ccd"]
+            templateCoadds = self.butler.get("deep_coadd.coaddInputs", dataId=ref.dataId).ccds
+            visits = templateCoadds["visit"]
+            ccds = templateCoadds["ccd"]
             data = {"visit": visits, "ccd": ccds}
             dataDF = pd.DataFrame(data=data)
             dataDF.drop_duplicates(
@@ -453,6 +453,38 @@ class DcrEffect:
 
         return matchAstrometryPhotometry
 
+    def diffRefraction(self, wavelength, elevation, observatory, weather=None, refractionRef=None):
+        """Calculate differential refraction between two wavelengths.
+
+        Parameters
+        ----------
+        wavelength : `float`
+            wavelength is in nm (valid for 230.2 < wavelength < 2058.6)
+        elevation : `lsst.geom.Angle`
+            Elevation of the observation, as an Angle.
+        observatory : `lsst.afw.coord.Observatory`
+            Class containing the longitude, latitude,
+            and altitude of the observatory.
+        weather : `lsst.afw.coord.Weather`, optional
+            Class containing the measured temperature, pressure, and humidity
+            at the observatory during an observation
+            If omitted, typical conditions for the observatory's elevation will
+            be calculated.
+
+        Returns
+        -------
+        differentialRefraction : `lsst.geom.Angle`
+            The refraction at `wavelength` minus the refraction at
+            `wavelengthRef`.
+        """
+        refStart = refraction(wavelength, elevation, observatory, weather=weather)
+
+        if refractionRef is None:
+            raise ValueError("Reference refraction is None. It must be precomputed and provided \
+                             for calculation.")
+
+        return refStart - refractionRef
+
     def computeDifferentialRefraction(self, wavelengths, referenceWavelength):
         """Compute the expected shift in apparent position due to
         wavelength-dependent atmospheric refraction, the differential chromatic
@@ -473,16 +505,18 @@ class DcrEffect:
         dRefraction : `numpy.array`
             Array of differential refraction values for each source.
         """
-        dRefraction = []
-        for w in wavelengths:
-            refraction = differentialRefraction(w, referenceWavelength, self.elevation, self.observatory)
-            refractionInArcsec = refraction.asArcseconds()
-            dRefraction.append(refractionInArcsec)
-        dRefraction = np.array(dRefraction)
+        refractionRef = refraction(referenceWavelength, self.elevation, self.observatory)
+
+        dRefraction = np.array([
+            self.diffRefraction(w, self.elevation, self.observatory,
+                                refractionRef=refractionRef).asArcseconds()
+            for w in wavelengths
+        ])
         return dRefraction
 
     def dcrHexbin(self):
-        """Summary
+        """Generate hexbin plot (in the DP1 format) to visualize the DCR
+        effect.
         """
         hexbinDp1Paper(self.differentialRefractionBlackbody, self.parallel, self.perpendicular,
                        self.magnitude)
@@ -635,7 +669,7 @@ class DcrMetric:
         visitInfo : `lsst.afw.image.VisitInfo`
             Metadata for the exposure.
         """
-        visit = visitInfo.getId()  # //100
+        visit = visitInfo.getId()
         hour_angle = visitInfo.getBoresightHourAngle().asRadians()
         airmass = visitInfo.getBoresightAirmass()
         self.addVisit(visit, airmass, hour_angle)
@@ -859,6 +893,56 @@ class DcrMetric:
         return self.evaluateVisit(airmass, hour_angle)
 
 
+def plancks_law(wavelength_m, temp_K):
+    """Planck's law for spectral radiance as a function of wavelength (in
+    meters) and temperature (in K). Returns spectral radiance in W·sr⁻¹·m⁻³.
+
+    Parameters
+    ----------
+    wavelength_m : `list` of `float`
+        List of wavelengths in meters.
+    temp_K: `float`
+        Temperature in Kelvin.
+
+    Returns
+    -------
+    intensity : `float`
+        Spectral radiance in W·sr⁻¹·m⁻³.
+    """
+    exponent = h * c / (wavelength_m * k * temp_K)
+    intensity = (2 * h * c**2) / (wavelength_m**5 * (np.exp(exponent) - 1))
+    return intensity
+
+
+def blackbodyFit(wavelength_nm, temp_K, scale):
+    """Determine blackbody flux (in nJy) using Plankc's law (wavelength
+    format).
+
+    Parameters
+    ----------
+    wavelength_nm : `list` of `float`
+        List of wavelengths in nanometers.
+    temp_K: `float`
+        Temperature in Kelvin.
+    scale: `float`
+        Scaling factor for blackbody fit.
+
+    Returns
+    -------
+    flux : `list` of `float`
+        List of blackbody fluxes in nJy.
+    """
+    wavelength_m = wavelength_nm * 1e-9
+    intensity_lambda = plancks_law(wavelength_m, temp_K)
+
+    # Convert spectral radiance per unit wavelength to per unit frequency
+    intensity_nu = intensity_lambda * wavelength_m**2 / c
+
+    # Convert to nJy (1 nJy = 1e-35 W/m²/Hz)
+    flux_nJy = scale * intensity_nu / 1e-35
+    return flux_nJy
+
+
 def findBlackbodyTemp(dataset):
     """Calculate the blackbody temperature for each source by fitting the flux
     values in each band ('g', 'r', 'i', 'z').
@@ -877,67 +961,47 @@ def findBlackbodyTemp(dataset):
         List of blackbody temperatures, where each entry corresponds to a
         specific source.
     """
+    band_wavelengths = {
+        "g": 478.5,
+        "r": 650.0,
+        "i": 754.6,
+        "z": 910.0
+    }
 
-    # Define the blackbody function.
-    def bbFit(wavelength, temp, scale):
-        """Blackbody fit.
-
-        Parameters
-        ----------
-        wavelength : `list` of `float`
-            Wavelength values (in nm) associated with 'g', 'r', 'i', and 'z'
-            bands.
-        temp : `float`
-            Blackbody temperature in Kelvin.
-        scale : `float`
-            Scaling factor.
-
-        Returns
-        -------
-        flux: `list` of `float`
-            Blackbody flux values associated with each band ('g', 'r', 'i', and
-            'z').
-        """
-        tempK = temp * u.K
-        blackbody = models.BlackBody(temperature=tempK)
-        flux = (
-            scale
-            * blackbody(wavelength * u.nm)
-            .to(u.nJy / u.sr, equivalencies=u.spectral())
-            .value
-        )
-        return flux
+    band_cols = {
+        "g": "ref_monster_ComCam_g_flux_1",
+        "r": "ref_monster_ComCam_r_flux_1",
+        "i": "ref_monster_ComCam_i_flux_1",
+        "z": "ref_monster_ComCam_z_flux_1"
+    }
 
     temperatures = []
 
-    # Individually iterate through each of the objects in the catalog.
-    for i in range(len(dataset)):
-        gpoint = (478.5, dataset["ref_monster_ComCam_g_flux_1"][i])
-        rpoint = (650.0, dataset["ref_monster_ComCam_r_flux_1"][i])
-        ipoint = (754.6, dataset["ref_monster_ComCam_i_flux_1"][i])
-        zpoint = (910.0, dataset["ref_monster_ComCam_z_flux_1"][i])
+    for _, row in dataset.iterrows():
+        data = [(band_wavelengths[band], row[col]) for band, col in band_cols.items()]
+        cleaned_data = [(x, y) for x, y in data if not math.isnan(y)]
 
-        data = (gpoint, rpoint, ipoint, zpoint)
+        if len(cleaned_data) < 2:
+            temperatures.append(np.nan)
+            continue
 
-        # Only keep points that are not `nan.`
-        cleaned_data = [(x, y) for x, y in data if not (math.isnan(y))]
+        xdata, ydata = zip(*cleaned_data)
 
-        xdata = [x for x, y in cleaned_data]
-        ydata = [y for x, y in cleaned_data]
-
-        bounds = ([1000, 0], [10000, 1e-18])
-        initial_guess = [4000, 5 * 10e-22]
-
-        # Perform the fit with bounds
-        popt, pcov = curve_fit(bbFit, xdata, ydata, p0=initial_guess, bounds=bounds)
-
+        popt, _ = curve_fit(
+            blackbodyFit,
+            xdata,
+            ydata,
+            p0=[4000, 5e-21],
+            bounds=([1000, 0], [10000, 1e-18]),
+            maxfev=10000
+        )
         temperatures.append(popt[0])
 
     return temperatures
 
 
 def computeEffectiveWavelength(blackbodyTemps):
-    """Compute the effective wavelength corresponding to each specified
+    """Compute the effective wavelength (in nm) corresponding to each specified
     blackbody temperature.
 
     Parameters
@@ -952,34 +1016,18 @@ def computeEffectiveWavelength(blackbodyTemps):
         List of effective wavelengths derived from the blackbody
         temperatures. Each entry corresponds to a specific source.
     """
+    wavelengths_nm = np.linspace(400, 550, 151)
+    wavelengths_m = wavelengths_nm * 1e-9
 
     # Define variable for effective wavelengths.
     effectiveWavelengths = []
 
-    # Iterate through the temperatures of all the objects individually.
-    for temp in blackbodyTemps:
-        # Define the blackbody spectrum from the temperature.
-        spectrum = []
-        for wavelength in range(400, 551):
-            bbModel = models.BlackBody(temperature=temp * u.K)
-            bbSpectrum = (
-                bbModel(wavelength * u.nm)
-                .to(u.nJy / u.sr, equivalencies=u.spectral())
-                .value
-            )
-            spectrum.append(bbSpectrum)
-
-        # Find the spectrum sum.
-        spectrumSum = 0
-        spectrumTotal = 0
-        for wavelengthIndex, wavelength in enumerate(np.linspace(400, 550, 151)):
-            spectrumSum += wavelength * spectrum[wavelengthIndex]
-            spectrumTotal += spectrum[wavelengthIndex]
-
-        # Determine the effective wavelength.
-        effectiveWavelength = spectrumSum / spectrumTotal
-
-        effectiveWavelengths.append(float(effectiveWavelength))
+    for T in blackbodyTemps:
+        intensity = plancks_law(wavelengths_m, T)
+        weighted_sum = np.sum(wavelengths_nm * intensity)
+        total_intensity = np.sum(intensity)
+        eff_lambda = weighted_sum / total_intensity
+        effectiveWavelengths.append(eff_lambda)
 
     return effectiveWavelengths
 
