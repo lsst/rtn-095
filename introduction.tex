@@ -4,9 +4,9 @@
 \label{sec:intro}}
 The \gls{NSF}–\gls{DOE} Vera C. Rubin Observatory is a ground-based, wide-field optical/near-infrared facility located on Cerro Pach\'on in northern Chile.
 Named in honor of Vera C. Rubin, a pioneering astronomer whose groundbreaking work in the 20th century provided the first convincing evidence for the existence of dark matter \citep{1970ApJ...159..379R, 1980ApJ...238..471R}, the observatory’s prime mission is to carry out the \gls{LSST} \citep{2019ApJ...873..111I}.
-This 10-year survey is designed to obtain rapid-cadence, multi-band imaging of the entire visible southern sky approximately every 3–4 nights, mapping it to a depth of $\sim$ 27.5 magnitude in the r-band with $\sim$0.7 arcsecond \gls{seeing}, with a total of $\sim$800 visits per pointing.
+This 10-year survey is designed to obtain rapid-\gls{cadence}, multi-band imaging of the entire visible southern sky approximately every 3–4 nights, mapping it to a depth of $\sim$ 27.5 magnitude in the r-band with $\sim$0.7 arcsecond \gls{seeing}, with a total of $\sim$800 visits per pointing.
 
-The Rubin Observatory system consists of four main components: the Simonyi Survey Telescope, featuring an 8.4 m diameter (6.5 m effective aperture) primary mirror that delivers a wide field of view; a 3.2-gigapixel Camera, capable of imaging 9.6 square degrees per exposure with seeing-limited quality in six broadband filters, \textit{ugrizy} (320–1050 nm); an automated \gls{Data Management System} that processes and archives tens of terabytes of data per night, generating science-ready data products within minutes for a global community of scientists; and an Education and Public Outreach (\gls{EPO}) program that provides real-time data access, interactive tools, and educational content to engage the public.
+The Rubin Observatory system consists of four main components: the \gls{Simonyi Survey Telescope}, featuring an 8.4 m diameter (6.5 m effective aperture) primary mirror that delivers a wide field of view; a 3.2-gigapixel Camera, capable of imaging 9.6 square degrees per exposure with seeing-limited quality in six broadband filters, \textit{ugrizy} (320–1050 nm); an automated \gls{Data Management System} that processes and archives tens of terabytes of data per night, generating science-ready data products within minutes for a global community of scientists; and an \gls{EPO} program that provides real-time data access, interactive tools, and educational content to engage the public.
 The integrated system's \'etendue\footnote{The product of the primary mirror area and the angular area of its field of view for a given set of observing conditions.} of 319 $\text{m}^2 \,\text{deg}^2$, is over an order of magnitude larger than that of any existing facility, enabling a fast, large-scale survey with exceptional depth in a fraction of the time compared to other observatories.
 
 The observatory's design is driven by four key science themes: probing dark energy and dark matter; taking an inventory of the solar system; exploring the \gls{transient} optical sky; and mapping the Milky Way \citep{2019ApJ...873..111I}.
@@ -22,10 +22,10 @@ One key component of this program is a series of Data Previews; early versions o
 These previews include preliminary data products derived from both simulated and commissioning data, which, together with early versions of the data access services, are intended to support high-impact early science, facilitate community readiness, and inform the development of Rubin’s operational capabilities ahead of the start of full survey operations.
 All data and services provided through the Rubin Early Science Program are offered on a shared-risk basis\footnote{Shared risk means early access with caveats: the community benefits from getting a head start on science, preparing analyses, and providing feedback, while also accepting that the experience may not be as polished or reliable as it will be during full operations.}.
 
-This paper describes Rubin's second of three planned Data Previews: Data Preview 1 (\gls{DP1}).
-The first, Data Preview 0 (\gls{DP0})\footnote{See \url{https://dp0.lsst.io}}, contained data products produced from the processing of simulated LSST-like data sets, together with a very early version of the Rubin \gls{Science Platform} \citep{LSE-319}.
-DP1 contains data products derived from the reprocessing of science-grade exposures acquired by the Rubin Commissioning \gls{Camera}, \gls{LSSTComCam}, in late 2024.
-The third and final Data Preview,  Data Preview 2 (\gls{DP2}), is planned to be based on a reprocessing of all science-grade data taken with the Rubin's full-scale science \gls{camera}, LSSTCam, during commissioning, and is expected to be released around mid-2026.
+This paper describes Rubin's second of three planned Data Previews: \gls{DP1}.
+The first, \gls{DP0}\footnote{See \url{https://dp0.lsst.io}}, contained data products produced from the processing of simulated \gls{LSST}-like data sets, together with a very early version of the Rubin \gls{Science Platform} \citep{LSE-319}.
+\gls{DP1} contains data products derived from the reprocessing of science-grade exposures acquired by the \gls{LSSTComCam}, in late 2024.
+The third and final Data Preview,  Data Preview 2 (\gls{DP2}), is planned to be based on a reprocessing of all science-grade data taken with the Rubin's full-scale science \gls{camera}, \gls{LSSTCam}, during commissioning, and is expected to be released around mid-2026.
 
 % Data rights
 % Rewiewed by Bob Blum
@@ -37,10 +37,10 @@ After the two-year proprietary period, \gls{DP1} will be made public.
 
 %%% Key summary
 In this paper, we present the contents and validation of, and the data access and community support services for, Rubin \gls{DP1}, the first Data Preview to deliver data derived from observations conducted by the Vera C. Rubin Observatory.
-DP1 is based on the reprocessing of a subset of \nexposures science-grade exposures acquired over \nnightscomcam nights during the first on-sky commissioning campaign using the Rubin Commissioning \gls{Camera}, \gls{LSSTComCam}, between \dponestartdate and \dponeenddate.
+\gls{DP1} is based on the reprocessing of a subset of \nexposures science-grade exposures acquired over \nnightscomcam nights during the first on-sky commissioning campaign using the Rubin Commissioning \gls{Camera}, \gls{LSSTComCam}, between \dponestartdate and \dponeenddate.
 It covers a  total area of approximately \totalarea distributed across \nfields distinct non-contiguous fields.
-The data products include raw and calibrated single-epoch images, coadded images, difference images, detection catalogs, and other derived data products.
-DP1 is about \sizeinbytes in size and contains around \nobjects distinct astronomical objects, detected in \ndeepcoadds coadded images.
+The data products include raw and calibrated single-\gls{epoch} images, coadded images, difference images, detection catalogs, and other derived data products.
+\gls{DP1} is about \sizeinbytes in size and contains around \nobjects distinct astronomical objects, detected in \ndeepcoadds coadded images.
 Full \gls{DP1} release documentation is available at \url{https://dp1.lsst.io}.
 Despite Rubin Observatory still being in commissioning and not yet complete, Rubin \gls{DP1} provides an important first look at the data, showcasing its characteristics and capabilities.
 
@@ -49,9 +49,10 @@ The structure of this paper is as follows.
 In Section \ref{sec:on_sky_campaign} we describe the observatory system and overall construction completion status at the time of data acquisition, the \nfields fields included in \gls{DP1} and the observing strategy used.
 Section \ref{sec:data_products} summarizes the contents of \gls{DP1} and the different types of data products contained in the release.
 The data processing pipelines are described in Section \ref{sec:drp}, followed by a description of the data validation and performance assessment in Section \ref{sec:performance}.
-Section \ref{sec:data_services} describes the Rubin \gls{Science Platform} (RSP), a \gls{cloud}-based data science infrastructure that provides tools and services to Rubin data rights holders to access, visualize and analyze peta-scale data generated by the LSST.
+Section \ref{sec:data_services} describes the Rubin \gls{Science Platform} (RSP), a \gls{cloud}-based data science infrastructure that provides tools and services to Rubin data rights holders to access, visualize and analyze peta-scale data generated by the \gls{LSST}.
 Section \ref{sec:community_science} presents Rubin’s model for community support, which emphasizes self-help via documentation and tutorials, and employs an open platform for asynchronous issue reporting that enables crowd-sourced solutions.
 Finally, a summary of the \gls{DP1} release and information on expected future releases of data is given in Section \ref{sec:summary}.
+The appendix contains a useful glossary of terms and the bibliography.
 
 All magnitudes quoted are in
 in the AB system \citep{1983ApJ...266..713O}, unless otherwise specified.
