@@ -18,18 +18,18 @@ Although the signal chain is designed to be stable and linear, the presence of n
   \label{fig:isr_signal_chain}
 \end{figure}
 
-The ISR processing pipeline for DP1 performs, in the following order: ADU dithering to reduce quantization effects, serial overscan subtraction, saturation masking, gain normalization, crosstalk correction, parallel overscan subtraction, linearity correction, serial charge transfer inefficiency (CTI) correction, image assembly, bias subtraction, dark subtraction, brighter-fatter correction, defect masking and interpolation, variance plane construction, flat fielding, and amplifier offset (amp-offset) correction\footnote{Amp-offset corrections are designed to address systematic discontinuities in background sky levels across amplifier boundaries. The implementation in the LSST Science Pipelines is based on the \texttt{PanSTARRS} Pattern Continuity algorithm \citep{2020ApJS..251....4W}}. 
-Flat fielding for DP1 was performed using combined flats produced from twilight flats acquired with sufficient rotational dithering to mitigate artifacts from print-through stars, as described in \secref{ssec:flat_field_system}. 
+The ISR processing pipeline for DP1 performs, in the following order: ADU dithering to reduce quantization effects, serial overscan subtraction, saturation masking, gain normalization, crosstalk correction, parallel overscan subtraction, linearity correction, serial charge transfer inefficiency (CTI) correction, image assembly, bias subtraction, dark subtraction, brighter-fatter correction, defect masking and interpolation, variance plane construction, flat fielding, and amplifier offset (amp-offset) correction\footnote{Amp-offset corrections are designed to address systematic discontinuities in background sky levels across amplifier boundaries. The implementation in the LSST Science Pipelines is based on the \texttt{Pan-STARRS} Pattern Continuity algorithm \citep{2020ApJS..251....4W}}.
+Flat fielding for DP1 was performed using combined flats produced from twilight flats acquired with sufficient rotational dithering to mitigate artifacts from print-through stars, as described in \secref{ssec:flat_field_system}.
 
 % % Very detailed
-% The following summarizes the ISR processing steps for DP1, in order of application. 
-% More details and a description of the full ISR processing envisaged for LSSTCam can be found at \citet{SITCOMTN-086}. 
+% The following summarizes the ISR processing steps for DP1, in order of application.
+% More details and a description of the full ISR processing envisaged for LSSTCam can be found at \citet{SITCOMTN-086}.
 % \begin{description}
-% \item[Dithering] Raw images are recorded in digitized ADU units, however the true input signal lies within a narrow range around the ADU value. 
-% Adding a random dither in the range [-0.5, 0.5) to each pixel reduces quantization-induced correlations in later corrections. 
+% \item[Dithering] Raw images are recorded in digitized ADU units, however the true input signal lies within a narrow range around the ADU value.
+% Adding a random dither in the range [-0.5, 0.5) to each pixel reduces quantization-induced correlations in later corrections.
 % This process introduces ~1/12 ADU to the image noise, which is negligible compared to other noise sources.
 
-% \item[Serial Overscan Subtraction] After each row of pixels is read out, extra "overscan" pixels are recorded as the serial register continues clocking. 
+% \item[Serial Overscan Subtraction] After each row of pixels is read out, extra "overscan" pixels are recorded as the serial register continues clocking.
 % We subtract the median value of each overscan row (excluding the first and last 3 columns) from the corresponding image row. This removes most of the electronic bias from the image.
 
 % \item[Saturation Masking] Pixels with values above some threshold are excluded from further study, as they start to bleed charge into neighboring pixels.
@@ -64,15 +64,15 @@ Flat fielding for DP1 was performed using combined flats produced from twilight 
 %     The correction for this attempts to restore the flux to where it should be, using a convolution process and the measured brighter-fatter kernel.
 %     As this correction is non-local, it is sensitive to defects and detector edges, requiring the image to have defect pixels interpolated.
 %     Correcting at the edge of the detector is not well defined, and so we mask pixels within one kernel size as ``EDGE''.
-    
+
 % \item[Defect Masking and Interpolation] A final cosmetic interpolation is done over all BAD and SAT pixel masks to ensure that visualizations and image scaling do not need to handle extreme values.
 % As mentioned above, pixels with high dark current are part of our defect masks, and we also set pixels that are below 95\% of the median flat value as defects, as these pixels likely have poor quantum efficiency relative to their neighbors.
-    
+
 % \item[Variance Plane Construction] As we have converted the image back to units of electrons, we can set the variance plane as the sum in quadrature of the image itself (representing the Poissonian component) and the per-amplifier read noise values.
 
 % After the above series of steps, we have an unflattened, gain normalized image with sensor
 % effects removed.
 
-% \item[Flat Fielding] Flat fielding for DP1 was performed using combined flats produced from twilight flats acquired with sufficient rotational dithering to mitigate artifacts from print-through stars, as described in \secref{ssec:flat_field_system}. 
+% \item[Flat Fielding] Flat fielding for DP1 was performed using combined flats produced from twilight flats acquired with sufficient rotational dithering to mitigate artifacts from print-through stars, as described in \secref{ssec:flat_field_system}.
 
 %\end{description}
