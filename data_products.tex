@@ -218,7 +218,7 @@ Each type of catalog contains measurements for either sources or objects detecte
 
 % Do we need to explain what a catalog is?
 % Catalogs have a table-like layout, with one row per source/object, and one column per property (whether that be identification number, position, flux, flag, etc.).
-While the \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each differ in terms of their specific columns, in general they each contain: one or more unique identification number, positional information, one or more types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags (indicating, for example, whether the source/object is affected by saturated pixels, cosmic rays, etc.) for each source/object.
+While the \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each differ in terms of their specific columns, in general they each contain: one or more unique identification number, positional information, one or more types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags (indicating, for example, whether the source/object is affected by saturated pixels, cosmic rays, etc.) for each source/object.
 The Solar System catalogs \texttt{SSObject} and \texttt{SSSource} deviate from this general structure in that they instead contain orbital parameters for all known asteroids.
 Where applicable, all measured properties are reported with their associated 1$\sigma$ uncertainties.
 
@@ -382,7 +382,7 @@ Because full consolidated maps cover widely separated tracts, we use clipped per
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.31\textwidth}
   \includegraphics[width=\linewidth, height=5.8cm]{deepCoadd_psf_maglim_map_weighted_mean_tract5063_zband.pdf}
-  \caption{5$\sigma$ \gls{PSF} magnitude limit weighted mean map for \texttt{deep\_coadd} \gls{tract} 5063, band z in ield ECDFS}
+  \caption{5$\sigma$ \gls{PSF} magnitude limit weighted mean map for \texttt{deep\_coadd} \gls{tract} 5063, band z in field ECDFS}
   \end{subfigure}\hfill
     \begin{subfigure}[t]{0.31\textwidth}
   \includegraphics[width=\linewidth, height=5.8cm]{deepCoadd_sky_noise_map_weighted_mean_tract5063_gband.pdf}
