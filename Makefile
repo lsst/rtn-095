@@ -14,17 +14,21 @@ endif
 export TEXMFHOME ?= lsst-texmf/texmf
 
 $(DOCNAME).pdf: $(tex) local.bib authors.tex aglossary.tex
+	mv $(DOCNAME).tex orig.tex
+	sed s/twocolumn,//1 orig.tex > $(DOCNAME).tex 
+	latexmk -bibtex -xelatex -f $(DOCNAME)
+	makeglossaries $(DOCNAME)
+	mv orig.tex $(DOCNAME).tex
 	latexmk -bibtex -xelatex -f $(DOCNAME)
 	# dont like it much ut this removes the error 
-	echo "\@istfilename{main.ist}" >> RTN-095.aux
-	makeglossaries $(DOCNAME)
+	echo "\@istfilename{RTN-095.ist}" >> RTN-095.aux
 	xelatex $(DOCNAME)
 
 authors.tex:  authors.yaml
 	python3 $(TEXMFHOME)/../bin/db2authors.py -m aas > authors.tex
 
 aglossary.tex :$(tex) myacronyms.txt
-	generateAcronyms.py  -g $(tex)
+	generateAcronyms.py -t"Sci DM" -g $(tex)
 
 
 .PHONY: clean
