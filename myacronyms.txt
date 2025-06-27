@@ -1,2 +1,0 @@
-HSM:Half-Second Moment
-Adam:Adaptive Moment Estimation
