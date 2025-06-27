@@ -16,7 +16,7 @@ export TEXMFHOME ?= lsst-texmf/texmf
 $(DOCNAME).pdf: $(tex) local.bib authors.tex aglossary.tex
 	latexmk -bibtex -xelatex -f $(DOCNAME)
 	# dont like it much ut this removes the error 
-	echo "\@istfilename{RTN-095.ist}" >> RTN-095.aux
+	echo "\@istfilename{main.ist}" >> RTN-095.aux
 	makeglossaries $(DOCNAME)
 	xelatex $(DOCNAME)
 
