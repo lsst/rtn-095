@@ -72,7 +72,7 @@ e^{(4)}_2 &= 2\left(M_{\text{31}} - M_{\text{13}}\right),
 where $M_{\text{pq}}$ are the standardized higher moments as defined in \cite{2023MNRAS.520.2328Z} measured on stars and PSF models.
 Figure \ref{fig:psf_residuals_whisker_ECDFS} shows
 the whisker plots of $e$, $e^{(4)}$ (top rows), and $\delta e$, $\delta e^{(4)}$
-in the ECDFS field. The direction of the whiskers represents the orientation of the \gls{shape}, while the length, modulated by the red bar, represents the amplitude $|e|$ or $|e^{(4)}|$.
+in the \gls{ECDFS} field. The direction of the whiskers represents the orientation of the \gls{shape}, while the length, modulated by the red bar, represents the amplitude $|e|$ or $|e^{(4)}|$.
 We observe coherent patterns in both the \gls{PSF} moments and the residuals, the latter of which warrants further investigation if it persists in future data releases.
 \begin{figure}[htb!]
     \centering
@@ -189,7 +189,7 @@ Figure~\ref{fig:Astrometry_FoV} shows the median residuals in x and y directions
 Spatial structures are evident at the \gls{CCD} level, along with the mid-line break in the y-direction residuals.
 
 Further stacking all the detectors makes certain effects particularly clear.
-Figure~\ref{fig:Astrometry_CCD} shows distortions very similar to those measured for an LSSTCam ITL sensor in a laboratory setting in \citet{2023PASP..135k5003E}.
+Figure~\ref{fig:Astrometry_CCD} shows distortions very similar to those measured for an \gls{LSSTCam} \gls{ITL} sensor in a laboratory setting in \citet{2023PASP..135k5003E}.
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=1.0\linewidth]{Astrometry_CCD.pdf}
@@ -217,16 +217,16 @@ Repeatability on calibration star is ....  and on psf \gls{flux} stars is ....
 \subsection{Detection Completeness on Coadds}
 \label{ssec:detection_completeness}
 We characterize completeness by injecting synthetic sources into coadded images, and by comparing to external catalogs.
-In both cases, we use a greedy, probabilistic matching \gls{algorithm}, whereby reference objects are matched in order of descending brightness to the most likely target within a $0.''5$ radius.
+In both cases, we use a greedy, probabilistic matching \gls{algorithm}, whereby reference objects are matched in order of descending brightness to the most likely target within a $0.5''$ radius.
 
 We inject sources in 12 of the patches of the \gls{ECDFS} region with the deepest coverage.
-The input catalog contains stars and galaxies from part of the DC2 simulations \citep{2021ApJS..253...31L}, where the galaxies consist of an exponential disk and de Vaucouleurs \citep{1948AnAp...11..247D,1953MNRAS.113..134D} bulge.
+The input catalog contains stars and galaxies from part of the \gls{DC2} simulations \citep{2021ApJS..253...31L}, where the galaxies consist of an exponential disk and de Vaucouleurs \citep{1948AnAp...11..247D,1953MNRAS.113..134D} bulge.
 To avoid deblender failures from excessive increases in object density, stars whose total \gls{flux} (i.e., summed across all six bands) is brighter than 17.5~${\rm mag_{\rm AB}}$ are excluded, as are galaxies whose total \gls{flux} is brighter than 15~${\rm mag_{AB}}$ or fainter than 26.5~${\rm mag_{AB}}$. Half of the remaining objects are selected for injection.
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_i_completeness_any.pdf}
-\caption{Completeness as a function of $i$-band CModel magnitude for \gls{DC2}-based injections into a portion of the ECDFS field.}
+\caption{Completeness as a function of $i$-band CModel magnitude for \gls{DC2}-based injections into a portion of the \gls{ECDFS} field.}
 \label{fig:injected_lsst_cells_v1_5063_i_completeness_any}
 \vspace{0.1cm}
 \end{figure}
@@ -270,7 +270,7 @@ Aperture fluxes - including Kron and \gls{GAaP} - are not shown as they are not 
 \end{figure}
 
 \figref{fig:injected_lsst_cells_v1_5063_i_mag} shows $g-i$ color residuals versus $r$-band magnitude for the same sample of galaxies as \figref{fig:injected_lsst_cells_v1_5063_i_mag}.
-For this and most other colors, \gls{GAaP} (with a 1" aperture) and Sersic colors both yield lower scatter; however, the CModel colors have the smallest bias.
+For this and most other colors, \gls{GAaP} (with a $1''$ aperture) and Sersic colors both yield lower scatter; however, the CModel colors have the smallest bias.
 Curiously, the \gls{GAaP} bias appears to be magnitude-dependent, whereas the Sersic bias remains stable from $19<r<26$.
 Any of these color measurements are suitable for use for deriving quantities like photometric redshifts, stellar masses, etc.
 
@@ -287,7 +287,7 @@ One caveat is that for faint objects and/or in crowded regions with unreliable d
 %% Think we'll need to correct for this in templates  to some degree to prevent dipoles appearing as extrems color sources at hight airmass.
 %% Science -- Fed -- measure stellar flar temperatures, AGN uise the effect to identiyf quasar lines - bight emmision lines in quasars as they transiotion.
 \label{sec:differential_chromatic_refraction}
-\gls{Differential Chromatic Refraction} (DCR) occurs when light passes through Earth’s atmosphere, refracting more for shorter wavelengths, which causes blue light to appear shifted closer to the zenith. This wavelength-dependent effect results in the smearing of point sources along the zenith direction, specifically parallel to the parallactic angle. The DCR effect is observable in LSSTComCam data, particularly in the angular offset versus g-i band magnitude difference plots (\figref{fig:dcr}). \figref{fig:dcr} contains all direct sources with \gls{SNR} $>10$ from 41 visits from November 26, 2024. When looking at data perpendicular to the parallactic angle, sources show no DCR effect (as expected), forming a clear vertical distribution on the hexbin plots.
+\gls{Differential Chromatic Refraction} (DCR) occurs when light passes through Earth’s atmosphere, refracting more for shorter wavelengths, which causes blue light to appear shifted closer to the zenith. This wavelength-dependent effect results in the smearing of point sources along the zenith direction, specifically parallel to the parallactic angle. The DCR effect is observable in LSSTComCam data, particularly in the angular offset versus g-i band magnitude difference plots \figref{fig:dcr} which contains all direct sources with \gls{SNR} $>10$ from 41 visits from November 26, 2024. When looking at data perpendicular to the parallactic angle, sources show no DCR effect (as expected), forming a clear vertical distribution on the hexbin plots.
 
 In contrast, sources aligned with the parallactic angle exhibit a tilted, linear distribution, clearly demonstrating the relationship between angular offset and the $g-i$ band magnitude difference, thereby providing a visual indication of the \gls{DCR} effect.
 
