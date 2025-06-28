@@ -70,8 +70,8 @@ The following \gls{IVOA} services are available at the time of the DP1 release:
 \item \textbf{Table Access Protocol (TAP) Service}: A TAP service \citep{2019ivoa.spec.0927D} enables queries of catalog data via the IVOA-standard \gls{ADQL}, a dialect of SQL92 with spherical geometry extensions.
 The main \gls{TAP} service for \gls{DP1} runs on the Rubin-developed \gls{Qserv} database (\S~\ref{ssec:databases}), which hosts the core science tables described in \secref{ssec:catalogs}, as well as the Visit database.
 It also provides image metadata in the IVOA ObsCore format via the standard \texttt{ivoa.ObsCore} table, making it an ``ObsTAP'' service \citep[ObsTAP;][]{2017ivoa.spec.0509L}.
-The TAP service is based on the \gls{CADC}'s open-source Java TAP implementation, modified for the exact query language accepted by Qserv.
-It currently supports a large subset of ADQL, with limitations documented in the data release materials (see \secref{ssec:documentation}) and exposed via the TAP \textbf{capabilities} endpoint where possible. \gregory{Get reference for \gls{CADC} TAP}
+The TAP service is based on the \gls{CADC}'s open-source Java TAP implementation\footnote{https://github.com/opencadc/tap}, modified for the exact query language accepted by Qserv.
+It currently supports a large subset of ADQL, with limitations documented in the data release materials (see \secref{ssec:documentation}) and exposed via the TAP \textbf{capabilities} endpoint where possible. \
 
 The TAP service provides metadata annotations consistent with the standard, including table and column descriptions, indications of foreign-key relationships between tables, and column metadata such as units and \gls{IVOA} Unified Content Descriptors (UCDs).
 
