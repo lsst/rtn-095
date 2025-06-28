@@ -1,0 +1,19 @@
+%%%%% This table is auto generated from data, DO NOT EDIT
+\begin{deluxetable}{lp{3.5cm}p{8cm}}
+\caption{Descriptions of and valid values for the key data dimensions in DP1. YYYYMMDD signifies date and \# signifies a single 0-9 digit.
+\label{tab:dp1_dimensions} }
+\tablehead{
+  \colhead{\textbf{Dimension}} & \colhead{\textbf{Format/Valid values}} & \colhead{\textbf{Description}}\\ 
+}
+\startdata
+\texttt{day\_obs}&YYYYMMDD&A day and night of observations that rolls over during daylight hours.\\
+\texttt{visit}&YYYYMMDD\#\#\#\#\#&A sequence of observations processed together; synonymous with ``exposure'' in DP1.\\
+\texttt{exposure}&YYYYMMDD\#\#\#\#\#&A single exposure of all nine ComCam detectors.\\
+\texttt{instrument}&LSSTComCam&The instrument name.\\
+\texttt{detector}&0 - 8&A ComCam detector.\\
+\texttt{skymap}&\texttt{lsst\_cells\_v1}&A set of tracts and patches that subdivide the sky into rectangular regions with simple projections and intentional overlaps.\\
+\texttt{tract}&See Table \ref{tab:dp1_tracts}&A large rectangular region of the sky.\\
+\texttt{patch}&0 - 99&A rectangular region within a tract.\\
+\texttt{band}&u, g, r, i, z, y&An astronomical filter.\\
+\enddata
+\end{deluxetable}
