@@ -38,3 +38,8 @@ clean:
 	rm -f authors.tex
 
 .FORCE:
+
+.FORCE:
+authors.yaml:
+	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py 1yMRqNdPVoAtjBMEPve2WEyt3V_73o4uIv-ZuHvzpeJM "A2:L1000"
+	
