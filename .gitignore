@@ -9,5 +9,9 @@
 *.dvi
 *.pdf
 authors.tex
-
+RTN-095.glg
+RTN-095.glo
+RTN-095.gls
+RTN-095.ist
+aglossary.tex
 .ipynb_checkpoints/
