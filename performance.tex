@@ -197,20 +197,35 @@ Figure~\ref{fig:Astrometry_CCD} shows distortions very similar to those measured
 \label{fig:Astrometry_CCD}
 \end{figure}
 
-% Eli
-%\subsection{Photometry}
-%\eli{Photometry subsection is still needed}
-% Repeatability on calibration star is ....  and on psf \gls{flux} stars is ....
+\subsection{Photometry}
 
-% Put one of the fields in that shows a nice stellar locus. tract 5603 16.5 mmgs gri for the stellar locus
-% gri (wperp) and  riz (yperp)
-% \figref{fig:stellar_locus} shows the stellar locus for $gri$ tract 5603 showing 16.5 mmags.
-% \begin{figure}[htb!]
-% \centering
-% \includegraphics[width=\columnwidth]{figures/stellar_locus.pdf}
-% \caption{The stellar locus in tract 5603}
-% \label{fig:stellar_locus}
-% \end{figure}
+The photometric repeatability for isolated bright stars after the FGCM fits was excellent.
+Across a broad range of colors, including chromatic corrections, the repeatability for the 10\% of stars reserved from the fit (signal-to-noise $> 100$) was $7.1/5.4/5.4/5.1/5.9/6.5\,mmag$ for $ugrizy$ respectively across all the fields.
+Taking into account the photometric noise, the intrinsic repeatability was approximately
+$4.8/2.7/1.7/1.0/2.0/1.1\,mmag$ for $ugrizy$ stars.
+Our pipeline does not yet include chromatic corrections in the final photometry.
+In this case the delivered photometric repeatability was $3-8\,mmag$ for grizy.
+
+In \figref{fig:stellarloci}, we show the stellar loci for $ugriz$ from the full DP1 object table.
+The narrow widths of these stellar loci show that our photometric performance is where we expect it to be given the nature of the LSSTComCam system.
+
+\begin{figure*}[hbt!]
+  \centering
+  \begin{subfigure}[t]{0.31\textwidth}
+  \includegraphics[width=\linewidth, height=5.8cm]{dp1_stellar_locus_ugr.pdf}
+  \caption{$ugr$ stellar locus containing 12779 stars with signal-to-noise greater than 50 in the $u$ band.}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+  \includegraphics[width=\linewidth, height=5.8cm]{dp1_stellar_locus_gri.pdf}
+  \caption{$gri$ stellar locus containing 63236 stars with signal-to-noise greater than 200 in the $i$ band.}
+  \end{subfigure}\hfill
+    \begin{subfigure}[t]{0.31\textwidth}
+  \includegraphics[width=\linewidth, height=5.8cm]{dp1_stellar_locus_riz.pdf}
+  \caption{$riz$ stellar locus containing 46760 stars with signal-to-noise greater than 200 in the $i$ band.}
+  \end{subfigure}\hfill
+\caption{Examples of stellar loci from the full DP1 data set.}
+  \label{fig:stellarloci}
+\end{figure*}
 
 %%
 \subsection{Detection Completeness on Coadds}
