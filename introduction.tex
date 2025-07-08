@@ -7,17 +7,17 @@ Named in honor of Vera C. Rubin, a pioneering astronomer whose groundbreaking wo
 This 10-year survey is designed to obtain rapid-\gls{cadence}, multi-band imaging of the entire visible southern sky approximately every 3–4 nights, mapping it to a depth of $\sim$ 27.5 magnitude in the r-band with $\sim$0.7 arcsecond \gls{seeing}, with a total of $\sim$800 visits per pointing.
 
 The Rubin Observatory system consists of four main components: the \gls{Simonyi Survey Telescope}, featuring an 8.4 m diameter (6.5 m effective aperture) primary mirror that delivers a wide field of view; a 3.2-gigapixel Camera, capable of imaging 9.6 square degrees per exposure with seeing-limited quality in six broadband filters, \textit{ugrizy} (320–1050 nm); an automated \gls{Data Management System} that processes and archives tens of terabytes of data per night, generating science-ready data products within minutes for a global community of scientists; and an \gls{EPO} program that provides real-time data access, interactive tools, and educational content to engage the public.
-The integrated system's \'etendue\footnote{The product of the primary mirror area and the angular area of its field of view for a given set of observing conditions.} of 319 $\text{m}^2 \,\text{deg}^2$, is over an order of magnitude larger than that of any existing facility, enabling a fast, large-scale survey with exceptional depth in a fraction of the time compared to other observatories.
+The integrated system's \'etendue\footnote{The product of the primary mirror area and the angular area of its field of view for a given set of observing conditions.} of 319 $\text{m}^2 \,\text{deg}^2$, is over an order of magnitude larger than that of any  previous optical observatory, enabling a fast, large-scale survey with exceptional depth in a fraction of the time compared to other observatories.
 
 The observatory's design is driven by four key science themes: probing dark energy and dark matter; taking an inventory of the solar system; exploring the \gls{transient} optical sky; and mapping the Milky Way \citep{2019ApJ...873..111I}.
 These themes inform the optimization of a range of system parameters, including image quality, photometric and astrometric accuracy, the depth of a single visit and the co-added survey depth, the filter complement, the total number of visits per pointing as well as the distribution of visits on the sky, and  total sky coverage.
 Additionally, they inform the design of the data processing and access systems.
-By optimizing the system parameters to support a wide range of scientific goals, we maximize the observatory's scientific output across all areas, transforming Rubin into a powerful discovery machine capable of addressing a broad range of astrophysical questions.
+By optimizing the system parameters to support a wide range of scientific goals, we maximize the observatory's scientific output across all areas, to produce a powerful discovery machine capable of addressing a broad range of astrophysical questions.
 
 % ES program
-Throughout its operational lifetime,  Rubin Observatory will issue a series of Data Releases, each representing a complete reprocessing of all \gls{LSST} data collected up to that point.
+Throughout the duration of the \gls{LSST},  Rubin Observatory will issue a series of Data Releases, each representing a complete reprocessing of all \gls{LSST} data collected up to that point.
 Prior to the start of the \gls{LSST} survey, commissioning activities will generate a significant volume of science-grade data.
-To make this early data available to the community, the Rubin Early Science Program, \citep{RTN-011}, was established.
+To make this early data available to the community the Rubin Early Science Program, \citep{RTN-011}, was established.
 One key component of this program is a series of Data Previews; early versions of the \gls{LSST} Data Releases.
 These previews include preliminary data products derived from both simulated and commissioning data, which, together with early versions of the data access services, are intended to support high-impact early science, facilitate community readiness, and inform the development of Rubin’s operational capabilities ahead of the start of full survey operations.
 All data and services provided through the Rubin Early Science Program are offered on a shared-risk basis\footnote{Shared risk means early access with caveats: the community benefits from getting a head start on science, preparing analyses, and providing feedback, while also accepting that the experience may not be as polished or reliable as it will be during full operations.}.
@@ -25,34 +25,37 @@ All data and services provided through the Rubin Early Science Program are offer
 This paper describes Rubin's second of three planned Data Previews: \gls{DP1} \citep{10.71929/rubin/2570308}.
 The first, \gls{DP0}\footnote{See \url{https://dp0.lsst.io}}, contained data products produced from the processing of simulated \gls{LSST}-like data sets, together with a very early version of the Rubin \gls{Science Platform} \citep{LSE-319}.
 \gls{DP1} contains data products derived from the reprocessing of science-grade exposures acquired by the \gls{LSSTComCam}, in late 2024.
-The third and final Data Preview, \gls{DP2}), is planned to be based on a reprocessing of all science-grade data taken with the Rubin's \gls{LSSTCam}, during commissioning, and is expected to be released around mid-2026.
+The third and final Data Preview, \gls{DP2}, is planned to be based on a reprocessing of all science-grade data taken with the Rubin's \gls{LSSTCam}, during commissioning, and is expected to be released around mid-2026.
 
 % Data rights
 % Rewiewed by Bob Blum
-All Rubin Data Releases and Previews are subject to a two-year proprietary period, with immediate access granted exclusively to data rights holders \citep{rdo-013}.
-Data rights holders are individuals or institutions with formal authorization to access proprietary data collected by the Vera C. Rubin Observatory.
-This includes all scientists in the United States, Chile, and designated individuals or groups from other countries\footnote{See \url{https://www.lsst.org/scientists/international-drh-list}}.
+All Rubin Data Releases and Previews are subject to a two-year proprietary period, with immediate access granted exclusively to LSST data rights holders \citep{rdo-013}.
+Data rights holders\footnote{See \url{https://www.lsst.org/scientists/international-drh-list}} are individuals or institutions with formal authorization to access proprietary data collected by the Vera C. Rubin Observatory.
+
 After the two-year proprietary period, \gls{DP1} will be made public.
 % ; however, it will not be accessible through the Rubin Observatory Data Access Centers (DACs) in the US and Chile for non-data rights holders, with the anticipation that this data will be served by one or more external facilities.
 
 %%% Key summary
 In this paper, we present the contents and validation of, and the data access and community support services for, Rubin \gls{DP1}, the first Data Preview to deliver data derived from observations conducted by the Vera C. Rubin Observatory.
-\gls{DP1} is based on the reprocessing of a subset of \nexposures science-grade exposures acquired over \nnightscomcam nights during the first on-sky commissioning campaign using the Rubin Commissioning \gls{Camera}, \gls{LSSTComCam}, between \dponestartdate and \dponeenddate.
+\gls{DP1} is based on the reprocessing of \nexposures science-grade exposures acquired 
+%over \nnightscomcam nights 
+during the first on-sky commissioning campaign conducted in late 2024.
+%  using the Rubin Commissioning \gls{Camera}, \gls{LSSTComCam} between \dponestartdate and \dponeenddate.
 It covers a  total area of approximately \totalarea distributed across \nfields distinct non-contiguous fields.
 The data products include raw and calibrated single-\gls{epoch} images, coadded images, difference images, detection catalogs, and other derived data products.
 \gls{DP1} is about \sizeinbytes in size and contains around \nobjects distinct astronomical objects, detected in \ndeepcoadds coadded images.
 Full \gls{DP1} release documentation is available at \url{https://dp1.lsst.io}.
-Despite Rubin Observatory still being in commissioning and not yet complete, Rubin \gls{DP1} provides an important first look at the data, showcasing its characteristics and capabilities.
+Despite Rubin Observatory still being in commissioning and not yet complete at the time the observations were acquired, Rubin \gls{DP1} provides an important first look at the data, showcasing its characteristics and capabilities.
 
 % Paper structure
 The structure of this paper is as follows.
 In \secref{sec:on_sky_campaign} we describe the observatory system and overall construction completion status at the time of data acquisition, the \nfields fields included in \gls{DP1} and the observing strategy used.
-\secref{sec:data_products} summarizes the contents of \gls{DP1} and the different types of data products contained in the release.
+\secref{sec:data_products} summarizes the contents of \gls{DP1} and the data products contained in the release.
 The data processing pipelines are described in \secref{sec:drp}, followed by a description of the data validation and performance assessment in \secref{sec:performance}.
 \secref{sec:data_services} describes the Rubin \gls{Science Platform} (RSP), a \gls{cloud}-based data science infrastructure that provides tools and services to Rubin data rights holders to access, visualize and analyze peta-scale data generated by the \gls{LSST}.
-\secref{sec:community_science} presents Rubin’s model for community support, which emphasizes self-help via documentation and tutorials, and employs an open platform for asynchronous issue reporting that enables crowd-sourced solutions.
+\secref{sec:community_science} presents the Rubin observatory model for community support, which emphasizes self-help via documentation and tutorials, and employs an open platform for  issue reporting that enables crowd-sourced solutions.
 Finally, a summary of the \gls{DP1} release and information on expected future releases of data is given in \secref{sec:summary}.
-The appendix contains a useful glossary of terms and the bibliography.
+The appendix contains a useful glossary of terms.
 
 All magnitudes quoted are in
 in the AB system \citep{1983ApJ...266..713O}, unless otherwise specified.
