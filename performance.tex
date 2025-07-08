@@ -268,7 +268,7 @@ There are several caveats for this analysis. The selection of objects for matchi
 
 \figref{fig:injected_lsst_cells_v1_5063_i_mag} shows $i$-band magnitude residuals for CModel and Sersic measurements using the matched injected galaxies described in \ref{ssec:detection_completeness}.
 Similar behavior is seen in other bands.
-Sersic fluxes show reduced scatter and are more accurate on average for galaxies brighter than 22.5\,${\rm mag_{i}}$, though CModel's are less biased, median residuals are slightly closer to zero.
+Sersic fluxes show reduced scatter and are more accurate on average for galaxies brighter than 22.5\,${\rm mag_{i}}$, though CModel's are less biased, with median residuals are slightly closer to zero.
 For fainter objects, Sersic fluxes are more biased and less accurate.
 The magnitude of this bias is considerably larger than previously seen in simulated data and is being investigated.
 Aperture fluxes - including Kron and \gls{GAaP} - are not shown as they are not corrected to yield total fluxes and thus are not recommended for use as total galaxy magnitudes.
@@ -301,7 +301,10 @@ One caveat is that for faint objects and/or in crowded regions with unreliable d
 %% Think we'll need to correct for this in templates  to some degree to prevent dipoles appearing as extrems color sources at hight airmass.
 %% Science -- Fed -- measure stellar flar temperatures, AGN uise the effect to identiyf quasar lines - bight emmision lines in quasars as they transiotion.
 \label{sec:differential_chromatic_refraction}
-\gls{Differential Chromatic Refraction} (DCR) occurs when light passes through Earth’s atmosphere, refracting more for shorter wavelengths, which causes blue light to appear shifted closer to the zenith. This wavelength-dependent effect results in the smearing of point sources along the zenith direction, specifically parallel to the parallactic angle. The DCR effect is observable in LSSTComCam data, particularly in the angular offset versus g-i band magnitude difference plots \figref{fig:dcr} which contains all direct sources with \gls{SNR} $>10$ from 41 visits from November 26, 2024. When looking at data perpendicular to the parallactic angle, sources show no DCR effect (as expected), forming a clear vertical distribution on the hexbin plots.
+\gls{Differential Chromatic Refraction} (DCR) occurs when light passes through Earth’s atmosphere, refracting more for shorter wavelengths, which causes blue light to appear shifted closer to the zenith. 
+This wavelength-dependent effect results in the smearing of point sources along the zenith direction, specifically parallel to the parallactic angle. 
+The DCR effect is observable in LSSTComCam data, particularly in the angular offset versus g-i band magnitude difference plots (\figref{fig:dcr}), which contains all direct sources with \gls{SNR} $>10$ from 41 visits from November 26, 2024. 
+When looking at data perpendicular to the parallactic angle, sources show no DCR effect (as expected), forming a clear vertical distribution on the hexbin plots.
 
 In contrast, sources aligned with the parallactic angle exhibit a tilted, linear distribution, clearly demonstrating the relationship between angular offset and the $g-i$ band magnitude difference, thereby providing a visual indication of the \gls{DCR} effect.
 
@@ -340,8 +343,8 @@ The solar system discovery \gls{pipeline} produced 269,581 tracklets, 5,691 link
 We performed a conservative manual investigation of these 281 candidates, producing a curated list of \nnewasteroiddiscoveries probable new asteroid discoveries.
 As described in Section~\ref{sec:drp:solsys}, post processing of the {\tt heliolinc} output with {\tt link\_purify} produced a final set of 281 candidate linkages, ranked with the most promising candidates first.
 Using {\tt find\_orb} \citep{findorb}, we derived orbit fits for each candidate, sorting the resulting list by $\chi_{\rm dof}^2$, the quality of the fit.
-Manual inspection of the linkages indicated that those ranked 0--137 corresponded to unique real asteroids; ranks 138--200 contained additional real objects intermixed with some spurious linkages; and ranks higher than 200 were essentially all spurious.
-This analysis indicates that it will be possible to identify cuts on quality metrics like $\chi^2$ to derive discovery candidate samples with high purity; determining the exact quantitative cut values require more data with \gls{LSSTCam}.
+Manual inspection of the linkages indicated that those ranked 0--137 corresponded to unique real asteroids; ranks 138--200 contained additional real objects intermixed with some spurious linkages; an d ranks higher than 200 were essentially all spurious.
+This analysis indicates that it will be possible to identify cuts on quality metrics like $\chi^2$ to derive discovery candidate samples with high purity; determining the exact quantitative cut values requires more data with \gls{LSSTCam}.
 We next removed all observations matched to known asteroids (using \gls{MPC}'s MPChecker service), reducing the number of candidates to 97.
 Of these, four had strong astrometric and/or photometric outliers, likely due to self-subtraction in difference images due to the unavoidable limitations of template generation from the limited quantity of data available from  \gls{LSSTComCam}.
 We suspect these four linkages do correspond to real objects, but have chosen to discard them out of an abundance of caution.
@@ -352,7 +355,7 @@ The remaining \nnewasteroiddiscoveries were submitted to the Minor Planet Center
 
 Solar system association associated \nsolarsystemsources DiaSources to \nsolarsystemobjects unique solar system objects. 
 %\jake{Update this after table update!}
-These include 3,934 DiaSources to 338 already-known \gls{MPC} objects and 2,054 DiaSources to the \nnewasteroiddiscoveries discoveries newly-discovered objects.
+These include 3,934 DiaSources to 338 already-known \gls{MPC} objects and 2,054 DiaSources to the \nnewasteroiddiscoveries  newly-discovered objects.
 Association also picked up an additional 143 detections of newly discovered objects.
 % \jake{This too - new parameter in notebook.}
 These were not originally found by the discovery pipelines as they didn't satisfy the number and/or maximum time span requirements to form tracklets.
@@ -372,7 +375,7 @@ Astrometric precision for solar system sources is excellent, the majority of obj
 \subsubsection{Detection Completeness on Difference Images} \label{sec:perf:dia_completeness}
 
 We assess the performance of our difference imaging \gls{pipeline} using synthetic source injection on the science images prior to differencing.
-We construct a catalog of injected sources by joining two different samples of point sources, a set of hosted sources to emulate transients in galaxies and second set of hostless.
+We construct a catalog of injected sources by joining two different samples of point sources, a set of hosted sources to emulate transients in galaxies and second set of hostless sources.
 
 The hosts are selected from the \gls{pipeline} source catalog that is produced upstream by imposing a cut in their extendedness measurement, and selecting $N_{\rm src}={\rm min}(100, N\times0.05)$ of the available sources per detector.
 %
@@ -406,7 +409,8 @@ In \figref{fig:coordinate_offset_diffim_fakes} we show the distribution of the r
 %
 In \figref{fig:phot_residual_diffim_fakes} we show the recovered magnitudes for our detected synthetic sources in the \textit{i} filter, using \gls{PSF} photometry on the difference images, and also show marginal distributions of the true magnitudes for fake sources, and the residuals on the left, split into hosted and hostless.
 %
-Our \gls{flux} measurements are accurate within a wide range of magnitudes, for both hosted and hostless synthetic sources. We obtain that for true $m_i < 22.2$, the median PSF magnitudes residuals are $<0.1$. When considering the \gls{flux} pulls $\delta = (f-f_{\rm{True}})/\sigma_f$ for PSF \gls{flux} $f$ and error $\sigma_f$, we find that $|\left<\delta\right>| <0.1$, and $\sigma_\delta < 1.1$ for $m_i<21.6$.
+Our \gls{flux} measurements are accurate within a wide range of magnitudes, for both hosted and hostless synthetic sources. 
+For true $m_i < 22.2$, the median PSF magnitudes residuals are $<0.1$. When considering the \gls{flux} pulls $\delta = (f-f_{\rm{True}})/\sigma_f$ for PSF \gls{flux} $f$ and error $\sigma_f$, we find that $|\left<\delta\right>| <0.1$, and $\sigma_\delta < 1.1$ for $m_i<21.6$.
 %
 \begin{figure}
     \centering
