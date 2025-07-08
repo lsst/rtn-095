@@ -64,7 +64,7 @@ Details on the choice of polynomial order, overall \gls{PSF} modeling performanc
 % Clare Saunders -- LPG reviewed
 \subsubsection{Astrometric Calibration}
 \label{ssec:global_astrometric_calibration}
-Starting from the astrometric solution calculated in single frame processing \secref{ssec:single_frame_processing}, the final astrometric solution is computed using the ensemble of visits in a given band that overlap a given \gls{tract}.
+Starting from the astrometric solution calculated in single frame processing (\secref{ssec:single_frame_processing}), the final astrometric solution is computed using the ensemble of visits in a given band that overlap a given \gls{tract}.
 This allows the astrometric solution to be further refined by using all of the isolated point sources of sufficient signal-to-noise ratio in an image, rather than only those that appear in the reference catalog (as is done in single frame processing).
 Using multiple whole visits rather than a single detector also allows us to account for effects that impact the full focal plane and for the proper motion and parallax of the sources.
 
@@ -99,7 +99,7 @@ These nominal throughputs were sufficient for the \gls{DP1} calibration, given t
 The FGCM atmosphere model, provided by MODTRAN~\citep{1999SPIE.3756..348B}, was used to generate a look-up table for atmospheric throughput as a function of zenith distance at Cerro Pachón.
 This model accounts for Rayleigh scattering by molecular oxygen ($\mathrm{O}_2$) and ozone ($\mathrm{O}_3$), absorption by water vapor, and Mie scattering by airborne aerosol particulates.
 Nightly variations in the atmosphere are modeled by minimizing the variance in repeated observations of stars with a \gls{SNR} greater than 10, measured using ``compensated aperture fluxes''.
-These fluxes include a local \gls{background} subtraction (see \secref{ssec:background_subtraction} to mitigate the impact of \gls{background} offsets.
+These fluxes include a local \gls{background} subtraction (see \secref{ssec:background_subtraction}) to mitigate the impact of \gls{background} offsets.
 The model fitting process incorporates all 6 bands ($ugrizy$) but does not include any gray (achromatic) terms, except for a linear assumption of mirror reflectance degradation, which is minimal over the short duration of the \gls{DP1} observation campaign.
 As an additional constraint on the fit, we use a subset of stars from the reference catalog~\citep{DMTN-277}, primarily to constrain the system's overall throughput and establish the ``absolute'' calibration.
 
@@ -233,10 +233,10 @@ The suite consists of the following tasks:
     \item Linkage post processing (orbit fitting, outlier rejection, and de-duplication) with {\tt link\_purify}
 \end{itemize}
 
-The inputs to the {\tt heliolinx} suite included all sources detected in difference images produces by an early processing of the \gls{LSSTComCam} commissioning data,  including some that were later rejected as part of \gls{DP1} processing and hence are not part of this \gls{DP1} release.
+The inputs to the {\tt heliolinx} suite included all sources detected in difference images produced by an early processing of the \gls{LSSTComCam} commissioning data,  including some that were later rejected as part of \gls{DP1} processing and hence are not part of this \gls{DP1} release.
 
 About 10\% of all commissioning visits targeted the near-ecliptic field Rubin\_SV\_38\_7 designed to enable asteroid discovery.
-Rubin\_SV\_38\_7 produced the vast majority of asteroid discoveries, as expected, but a few were found in off-ecliptic fields as well.
+Rubin\_SV\_38\_7 produced the vast majority of asteroid discoveries in DP1, as expected, but a few were found in off-ecliptic fields as well.
 
 Tracklet creation with {\tt make\_tracklets} used an upper limit angular velocity of 1.5 \gls{deg}/day, faster than any main belt asteroid and in the range of many \gls{NEO} discoveries.
 To avoid excessive false tracklets from fields that were observed many times per night, the minimum \gls{tracklet} length was set to three and the minimum on-sky motion for a valid \gls{tracklet} was set to five arcseconds.

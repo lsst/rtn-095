@@ -3,17 +3,18 @@
 
 The first Rubin on-sky commissioning campaign was conducted using the \gls{LSSTComCam} between \campaignstartdate and \dponeenddate, spanning a total of \nnightscomcam nights.
 The primary objective was to optically align the Simonyi Survey Telescope and verify its ability to deliver acceptable image quality using \gls{LSSTComCam}.
-In addition, the campaign provided valuable operations experience to facilitate commissioning the full \gls{LSSTCam}, \citep{2024SPIE13096E..1SR,2024SPIE13096E..1OL}.
-It is important to note that commissioning \gls{LSSTComCam}  was not an objective of the campaign.
+In addition, the campaign provided valuable operations experience to facilitate commissioning the full \gls{LSSTCam} \citep{2024SPIE13096E..1OL,2024SPIE13096E..1SR}.
+We note that commissioning \gls{LSSTComCam}  was not an objective of the campaign.
 Instead, LSSTComCam was used as a tool to support broader observatory commissioning, including early testing of the \gls{AOS} and the LSST Science Pipelines.
 As a result,
 % instrument-specific investigations,  such as verifying the pointing model and studying the stray light were deprioritized.
-many artifacts present in the data are specific to \gls{LSSTComCam} and will only be addressed if they persist with \gls{LSSTCam}.
-Accordingly, the image quality achieved during this campaign, and in the \gls{DP1} data, may not reflect the performance ultimately expected from \gls{LSSTCam}.
+many artifacts present in the data are specific to \gls{LSSTComCam} and will be addressed only if they persist with \gls{LSSTCam}.
+Accordingly, the image quality achieved during this campaign, and in the \gls{DP1} data, may not reflect the performance ultimately achieved from \gls{LSSTCam}.
 
 % From data_products to work in
 % For DP1, the term visit and exposure are synonymous and refer to a single full focal plane, 9 CDD image.
-Approximately 16,000 exposures\footnote{We define an ``exposure'' as the process of exposing all LSSTComCam detectors. It is synonymous with ``visit'' in DP1. By contrast, an ``image'' is the output of a single LSSTComCam detector following an exposure.} were collected during this campaign, the majority in support of \gls{AOS} commissioning, system-level verification, and end-to-end testing of the telescope’s hardware and software.
+Approximately 16,000 exposures\footnote{We define an exposure as the process of exposing all LSSTComCam detectors. It is synonymous with visit in DP1. By contrast, an image'is the output of a single LSSTComCam detector following an exposure.} 
+were collected during this campaign, the majority in support of \gls{AOS} commissioning, system-level verification, and end-to-end testing of the telescope’s hardware and software.
 This included over \nexposuresaoscommissioning exposures for \gls{AOS} commissioning, more than \nexposurescalibcommissioning bias and dark calibration frames, and over \nexposuresspcommissioning exposures dedicated to commissioning the LSST Science Pipelines.
 For \gls{DP1}, we have selected a subset of \nexposures science-grade exposures from this campaign that are most useful for the community to begin preparing for early science.
 
@@ -26,6 +27,7 @@ Despite these limitations, the campaign successfully demonstrated system integra
 % SP-2282 : Reviewed by AJC
 \subsection{Simonyi Survey Telescope
 \label{ssec:simonyi}}
+
 The Simonyi Survey Telescope \citep{2024SPIE13094E..09S} features a unique three-mirror design, including an 8.4-meter \gls{M1M3} fabricated from a single substrate and a 3.5-meter \gls{M2}.
 This compact \gls{configuration} supports a wide 3.5-degree field of view while enabling exceptional stability, allowing the telescope to slew and settle in under five seconds.
 To achieve the scientific goals of the 10-year \gls{LSST}, the Observatory must maintain high image quality across its wide field of view \citep{2008arXiv0805.2366I}.
@@ -48,25 +50,27 @@ Under favorable \gls{seeing} conditions, the delivered image quality was typical
 recorded value of \bestimagequality.
 
 %%%%% ComCam
-\subsection{The Rubin Camera
+\subsection{The LSST Commissioning Camera
 \label{ssec:comcam}}
-The \gls{LSSTComCam} \citep{10.71929/rubin/2561361,2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH}, is a 144-megapixel, scaled-down version of the 3.2-gigapixel \gls{LSSTCam}.
-It covers approximately 5\% of the \gls{LSSTCam} focal plane area and is designed to validate camera interfaces with other observatory components and evaluate overall system performance prior to the start of \gls{LSSTCam} commissioning.
+The \gls{LSSTComCam} \citep{10.71929/rubin/2561361,2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH} is a 144-megapixel, smaller version of the 3.2-gigapixel \gls{LSSTCam}.
+It covers approximately 5\% of the \gls{LSSTCam} focal plane area and an area on sky of \comcamarea .
+It was  designed to validate camera interfaces with other observatory components and evaluate overall system performance prior to the start of \gls{LSSTCam} commissioning.
+It is the same physical size  as LSSTCam and has the same plate scale. 
 
 The \gls{LSSTCam} focal plane consists of 21 modular science rafts for imaging, arranged in a 5×5 grid, along with 4 additional corner rafts dedicated to guiding and wavefront sensing.
 Each raft is a self-contained unit comprising nine 4K×4K \gls{CCD} sensors arranged in a 3×3 mosaic, along with integrated readout electronics and cooling systems.
-Each sensor is subdivided into 16 segments arranged in a 2×8 layout, with each segment containing 512×2k pixels.
+Each sensor is subdivided into 16 segments arranged in a 2×8 layout, with each segment containing approximately 512×2k pixels.
 All 16 segments are read out in parallel using dedicated amplifiers, one per segment.
-\gls{LSSTCam} uses \gls{CCD} sensors from two vendors: \gls{ITL} and \gls{E2V}.
+\gls{LSSTCam} uses CCD sensors from two vendors: \gls{ITL} and \gls{E2V}.
 %\gls{ITL} and \gls{E2V}.
 To ensure uniform performance and \gls{calibration} within each module, individual rafts are populated with sensors from only one vendor.
 
 LSSTComCam consists of a single raft equipped exclusively with \gls{ITL} sensors.
 The sensors selected for \gls{LSSTComCam} represent the lowest-performing units from the LSSTCam production batch and exhibit known issues, including high readout noise (e.g., Detector 8) and elevated \gls{CTI} (e.g., Detector 5).
-As a result, some image artifacts observed in the \gls{DP1} dataset may be specific to \gls{ITL} sensors.
+As a result, some image artifacts observed in the \gls{DP1} dataset may be specific to LSSTComCam.
 
-\figref{fig:comcam_raft_in_lsstcam_focal_plane} shows the single-raft \gls{LSSTComCam} positioned at the center of the full LSSTCam focal plane.
-\gls{LSSTComCam} is designated as Raft 22 (R22) and is installed at the center of the \gls{LSSTCam} focal plane, corresponding to the central science raft position.
+\figref{fig:comcam_raft_in_lsstcam_focal_plane} shows the single-raft \gls{LSSTComCam} positioned at the center of the full LSSTCam focal plane, corresponding to the central science raft position.
+\gls{LSSTComCam} is designated as Raft 22 (R22).
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.98\linewidth]{commissioning/comcam_raft_in_lsstcam_focal_plane.pdf}
@@ -105,7 +109,9 @@ The full-system throughput of the six \gls{LSSTComCam} filters, which encompasse
 % Reviewed by Eli
 \subsection{Flat Field System
 \label{ssec:flat_field_system}}
-During the on-sky campaign, key components of the Rubin calibration system ~\citep{2022SPIE12182E..0RI}, including the flat field screen, \gls{CBP}, and the Ekspla tunable laser had not yet been installed.
+During the on-sky campaign, key components of the Rubin calibration system ~\citep{2022SPIE12182E..0RI}, including the flat field screen,
+%\gls{CBP}, and the Ekspla tunable laser 
+had not yet been installed.
 As a result, flat fielding for \gls{DP1} relied entirely on twilight flats.
 While twilight flats pose challenges such as non-uniform illumination and star print-through, they were the only available option during \gls{LSSTComCam} commissioning and for DP1 processing.
 To mitigate these limitations, dithered, tracked exposures were taken over a broad range of azimuth and rotator angles to construct combined flat \gls{calibration} frames.
@@ -133,17 +139,17 @@ All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_20
 \input{tables/dp1_fields}
 
 The temporal sampling distribution of observations per band and per night is shown in \figref{fig:target_fields_temporal_sampling}.
-Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only accommodate three filters at a time \secref{ssec:comcam}.
+Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only accommodate three filters at a time (see \secref{ssec:comcam}).
 As the campaign progressed, the temporal sampling became denser across all fields, reflecting improved efficiency and increased time allocated for science observations.
 The \gls{ECDFS} field received the most consistent and densest temporal sampling.
 It is important to note that the time sampling in the \gls{DP1} dataset differs significantly from what will be seen in the final \gls{LSST} data.
-\begin{figure*}[htb!]
+\begin{figure}[htb!]
 \centering
 \includegraphics[width=1.0\linewidth]{commissioning/temporal_sampling_per_field.pdf}
-\caption{Distribution of \gls{DP1} observations by date grouped by field and color coded by band.}
+\caption{Distribution of DP1 observations by date grouped by field as a function of MJD.  Each dot represents a single 30-second exposure, color-coded by filter.}	
 \label{fig:target_fields_temporal_sampling}
 \vspace{0.1cm}
-\end{figure*}
+\end{figure}
 
 % Spatial coverage  -- are these needed given figure 1?
 % \figref{fig:dp1_fields_coverage} shows the sky coverage for each of the \nfields DP1 fields.
@@ -151,29 +157,29 @@ All fields except for the low ecliptic latitude field, Rubin\_SV\_38\_7, used ra
 The rotational dithers were typically applied at the time of filter changes for operational efficiency, with translational dithers of approximately 1 degree applied between individual visits.
 \begin{figure*}[ht]
     \centering
-    \begin{subfigure}[t]{0.3\textwidth}
+    \begin{subfigure}[t]{0.24\textwidth}
         \centering
         \includegraphics[width=\linewidth]{visitskymaps/showVisit_DP1_47Tuc}
         \caption{47 Tucanae}
     \end{subfigure}\hfill
-    \begin{subfigure}[t]{0.3\textwidth}
+    \begin{subfigure}[t]{0.24\textwidth}
         \centering
         \includegraphics[width=\linewidth]{visitskymaps/showVisit_DP1_Fornax_dSph}
         \caption{Fornax dwarf Spheroidal}
     \end{subfigure}\hfill
-    \begin{subfigure}[t]{0.3\textwidth}
+    \begin{subfigure}[t]{0.24\textwidth}
         \centering
         \includegraphics[width= \linewidth]{visitskymaps/showVisit_DP1_ECDFS}
         \caption{ECDFS}
     \end{subfigure}
-    \vspace{1em}
-
-    % Row 2
-    \begin{subfigure}[t]{0.3\textwidth}
+    \begin{subfigure}[t]{0.24\textwidth}
         \centering
         \includegraphics[width=\linewidth]{visitskymaps/showVisit_DP1_EDFS}
         \caption{EDFS}
     \end{subfigure}\hfill
+    \vspace{1em}
+
+    % Row 2
     \begin{subfigure}[t]{0.3\textwidth}
         \centering
         \includegraphics[width=\linewidth]{visitskymaps/showVisit_DP1_RubinSV_95_-25}
@@ -184,10 +190,6 @@ The rotational dithers were typically applied at the time of filter changes for 
         \includegraphics[width= \linewidth]{visitskymaps/showVisit_DP1_Seagull}
         \caption{Seagull}
     \end{subfigure}
-    \vspace{1em}
-
-    % Row 3
-    \hspace*{0.3\textwidth} % Empty left slot
     \begin{subfigure}[t]{0.29\textwidth}
         \centering
         \includegraphics[width=\linewidth]{visitskymaps/showVisit_DP1_RubinSV_38_7}
@@ -262,14 +264,14 @@ The visits cycled between the grid’s four pointing centers, using small random
 The delivered image quality is influenced by contributions from both the observing system (i.e., dome, telescope and \gls{camera}) and the atmosphere.
 During the campaign, the Rubin \gls{DIMM} was not operational, so atmospheric seeing was estimated using live data from the \gls{SOAR} \gls{RINGSS} seeing monitor.
 Although accelerometers mounted on the mirror cell and top-end assembly were available to track dynamic optics effects, such as mirror oscillations that can degrade optical alignment, this data was not used during the campaign.
-Mount encoder data was used to measure the mount jitter in every image, with a median contribution of 0.004 arcseconds to image degradation measured.
+Mount encoder data was used to measure the mount jitter in every image, with a measured median contribution of 0.004 arcseconds to image degradation.
 As the pointing model was not fine tuned, tracking errors could range from 0.2 to 0.4 arcseconds per image, depending on RA and Dec.
 %RA resolves to Rapid Analysis
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 % Not sure this is needed
 % \input{tables/image_quality_summary}
 % \tabref{tab:image_quality} summarizes the delivered image quality expressed in terms of the PSF FWHM in arcseconds per band for the \nexposures in DP1.
-The median delivered image quality for commanded in-focus images (all bands) was \medianimagequalityallbands, as measured by the \gls{PSF} \gls{FWHM}.
+The DP1 median delivered image quality across all bands is \medianimagequalityallbands, as measured by the \gls{PSF} \gls{FWHM}.
 The best images achieved a \gls{PSF} \gls{FWHM} of approximately \bestimagequality.
 \begin{figure}[htb!]
 \centering
