@@ -39,7 +39,15 @@ clean:
 
 .FORCE:
 
-.FORCE:
 authors.yaml:
-	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py 1yMRqNdPVoAtjBMEPve2WEyt3V_73o4uIv-ZuHvzpeJM "A2:L1000"
+	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py --builder -p 1yMRqNdPVoAtjBMEPve2WEyt3V_73o4uIv-ZuHvzpeJM "A2:L1000"
+
+skip:
+	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py --skip `cat skip.count` --builder -p 1yMRqNdPVoAtjBMEPve2WEyt3V_73o4uIv-ZuHvzpeJM "A2:L1000"
 	
+	
+merge: new_authors.yaml
+	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py -m new_authors.yaml 
+
+merge_affil: new_affiliations.yaml
+	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py -a new_affiliations.yaml 
