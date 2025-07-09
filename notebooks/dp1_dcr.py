@@ -1147,3 +1147,12 @@ def hexbinDp1Paper(differential_refraction, parallel, perpendicular, magnitude, 
     )
 
     plt.show()
+
+
+def main():
+    configuration = DcrEffect(doHexbin=True)
+    configuration.run()
+
+
+if __name__ == "__main__":
+    main()
