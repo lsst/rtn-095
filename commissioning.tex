@@ -50,22 +50,21 @@ recorded value of \bestimagequality.
 %%%%% ComCam
 \subsection{The LSST Commissioning Camera
 \label{ssec:comcam}}
-The \gls{LSSTComCam} \citep{10.71929/rubin/2561361,2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH} is a 144-megapixel, smaller version of the 3.2-gigapixel \gls{LSSTCam}.
-It covers approximately 5\% of the \gls{LSSTCam} focal plane area and an area on sky of \comcamarea .
-It was  designed to validate camera interfaces with other observatory components and evaluate overall system performance prior to the start of \gls{LSSTCam} commissioning.
-It is the same physical size  as LSSTCam and has the same plate scale. 
+The \gls{LSSTComCam} \citep{2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH, 10.71929/rubin/2561361} is a 144-megapixel, scaled-down version of the 3.2-gigapixel \gls{LSSTCam}.
+It covers approximately 5\% of the \gls{LSSTCam} focal plane area, with a  field of view of 0.7deg$^2$   (40\arcmin 	x40\arcmin), compared to LSSTCam's 9.6 deg$^2$. 
+It was developed to validate camera interfaces with other observatory components and evaluate overall system performance prior to the start of \gls{LSSTCam} commissioning. 
+Although it has a smaller imaging area, \gls{LSSTComCam} shares the same plate scale of \rawplatescale and is housed in a support structure that precisely replicates the total mass, center of gravity, and physical dimensions of \gls{LSSTCam}. 
+All mechanical and utility interfaces to the telescope are implemented identically, enabling full end-to-end testing of observatory systems, including readout electronics, image acquisition, and data pipelines.
 
-The \gls{LSSTCam} focal plane consists of 21 modular science rafts for imaging, arranged in a 5×5 grid, along with 4 additional corner rafts dedicated to guiding and wavefront sensing.
-Each raft is a self-contained unit comprising nine 4K×4K \gls{CCD} sensors arranged in a 3×3 mosaic, along with integrated readout electronics and cooling systems.
-Each sensor is subdivided into 16 segments arranged in a 2×8 layout, with each segment containing approximately 512×2k pixels.
-All 16 segments are read out in parallel using dedicated amplifiers, one per segment.
+The \gls{LSSTCam} focal plane is composed  of 21 modular science rafts for imaging, arranged in a 5×5 grid, together with 4 additional corner rafts dedicated to guiding and wavefront sensing.
+Each raft is a self-contained unit comprising nine 4K×4K \gls{CCD} sensors arranged in a 3×3 mosaic, complete with integrated readout electronics and cooling systems.
+Each sensor is subdivided into 16 segments arranged in a 2×8 layout, with each segment consisting of approximately 512×2048 pixels and read out in parallel using individual amplifiers.
 \gls{LSSTCam} uses CCD sensors from two vendors: \gls{ITL} and \gls{E2V}.
-%\gls{ITL} and \gls{E2V}.
-To ensure uniform performance and \gls{calibration} within each module, individual rafts are populated with sensors from only one vendor.
+To maintain uniform performance and \gls{calibration} each raft is populated with sensors from only one vendor.
 
-LSSTComCam consists of a single raft equipped exclusively with \gls{ITL} sensors.
-The sensors selected for \gls{LSSTComCam} represent the lowest-performing units from the LSSTCam production batch and exhibit known issues, including high readout noise (e.g., Detector 8) and elevated \gls{CTI} (e.g., Detector 5).
-As a result, some image artifacts observed in the \gls{DP1} dataset may be specific to LSSTComCam.
+LSSTComCam consists of a single science raft equipped exclusively with \gls{ITL} sensors.
+The sensors selected for \gls{LSSTComCam} represent the lowest-performing units from the LSSTCam production batch and exhibit known issues, such as high readout noise (e.g., Detector 8) and elevated \gls{CTI} (e.g., Detector 5).
+As a result, certain image artifacts present in the \gls{DP1} dataset may be specific to LSSTComCam.
 
 \figref{fig:comcam_raft_in_lsstcam_focal_plane} shows the single-raft \gls{LSSTComCam} positioned at the center of the full LSSTCam focal plane, corresponding to the central science raft position.
 \gls{LSSTComCam} is designated as Raft 22 (R22).
@@ -87,9 +86,6 @@ As a result, some image artifacts observed in the \gls{DP1} dataset may be speci
 \end{figure}
 The LSSTCam and \gls{LSSTComCam} focal planes are described in detail in \cite{ctn001}.
 
-\gls{LSSTComCam} is housed in a support structure that precisely replicates the total mass, center of gravity, and physical dimensions of \gls{LSSTCam}, with all mechanical and utility interfaces to the telescope implemented identically.
-This \gls{configuration} supports full end-to-end testing of the observatory systems, including readout electronics, image acquisition, and data pipelines.
-The \gls{LSSTComCam} plate scale is \rawplatescale.
 
 \subsubsection{Filter Complement}
 \label{sssec:comcam_filters}
