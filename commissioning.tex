@@ -39,11 +39,9 @@ The closed-loop wavefront sensing technique is curvature wavefront sensing, whic
 Since \gls{LSSTComCam} lacks dedicated wavefront sensors, wavefront errors were instead estimated by defocusing the telescope $\pm$1.5 mm on either side of focus and applying the curvature wavefront sensing pipeline to the resulting images to measure and correct for optical aberrations.
 
 Each night began with an initial alignment correction using a laser tracker to position the system within the capture range of the closed-loop \gls{algorithm} \citep{10.1117/12.3019031}.
-% Alignment was achieved using the \gls{AOS} system.
-% to control the hexapods\footnote{Robotic actuators that adjust the positions and orientations of M1M3 and M2}, adjusting the positions of M2 and LSSTComCam relative to M1M3.
 Once this coarse alignment was complete, the \gls{AOS} refined the optical alignment and applied mirror surfaces corrections to optimize the image quality across the \gls{LSSTComCam} field of view.
-During \gls{Science Pipelines} commissioning (\secref{ssec:pipelines_commissioning}), observations were conducted using the AOS in open-loop mode only, without closed-loop corrections between exposures.
-Since closed-loop operation requires additional intra- and extra-focal images with \gls{LSSTComCam}, it was not compatible with the continuous data acquisition required by the pipelines.
+During Science Pipelines commissioning (\secref{ssec:pipelines_commissioning}),  observations were conducted using the AOS in open-loop mode only, without closed-loop corrections between exposures. 
+Closed-loop operation, which requires additional intra- and extra-focal images with LSSTComCam, was not compatible with the continuous data acquisition needed by the pipelines.
 The image quality for these data was monitored by measuring the \gls{PSF} \gls{FWHM}, and closed-loop sequences were periodically run when image quality degradation was observed.
 Under favorable \gls{seeing} conditions, the delivered image quality was typically around {0.7\arcsec\xspace}, with a best
 % Best was 0.65 -- need to check for consistency
