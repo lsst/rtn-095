@@ -37,9 +37,9 @@ The \gls{AOS}, which comprises an open- and a closed-loop component, optimizes i
 The \gls{AOS} open-loop component corrects for predictable distortions and misalignments resulting from gravitational and thermal effects, while the closed-loop component addresses unpredictable or slowly varying aberrations using feedback from the corner wavefront sensors.
 The closed-loop wavefront sensing technique is curvature wavefront sensing, which infers wavefront errors in the optical system by analyzing extra- and intra-focal star images \citep{2023aoel.confE..67T}.
 Since \gls{LSSTComCam} lacks dedicated wavefront sensors, wavefront errors were instead estimated by defocusing the telescope $\pm$1.5 mm on either side of focus and applying the curvature wavefront sensing pipeline to the resulting images to measure and correct for optical aberrations.
-
 Each night began with an initial alignment correction using a laser tracker to position the system within the capture range of the closed-loop \gls{algorithm} \citep{10.1117/12.3019031}.
 Once this coarse alignment was complete, the \gls{AOS} refined the optical alignment and applied mirror surfaces corrections to optimize the image quality across the \gls{LSSTComCam} field of view.
+
 During Science Pipelines commissioning (\secref{ssec:pipelines_commissioning}),  observations were conducted using the AOS in open-loop mode only, without closed-loop corrections between exposures. 
 Closed-loop operation, which requires additional intra- and extra-focal images with LSSTComCam, was not compatible with the continuous data acquisition needed by the pipelines.
 The image quality for these data was monitored by measuring the \gls{PSF} \gls{FWHM}, and closed-loop sequences were periodically run when image quality degradation was observed.
