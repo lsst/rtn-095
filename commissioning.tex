@@ -127,16 +127,12 @@ These \nfields fields form the basis of the \gls{DP1} dataset.
 \end{figure*}
 Each of the \nfields target fields was observed repeatedly in multiple bands over many nights.
 A typical observing \gls{epoch} on a given target field consisted of 5-20 visits in each of the three loaded filters.
-Only images taken as 1x30 second exposures have been included in \gls{DP1}.
+All DP1 images are 30 second exposures for all bands.
 All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_2019, peter_yoachim_2024_13985198}.
 \tabref{tab:dp1_fields} lists the \nfields \gls{DP1} fields and their pointing centers, and provides a summary of the band coverage in each.
 \input{tables/dp1_fields}
 
 The temporal sampling distribution of observations per band and per night is shown in \figref{fig:target_fields_temporal_sampling}.
-Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only accommodate three filters at a time (see \secref{ssec:comcam}).
-As the campaign progressed, the temporal sampling became denser across all fields, reflecting improved efficiency and increased time allocated for science observations.
-The \gls{ECDFS} field received the most consistent and densest temporal sampling.
-It is important to note that the time sampling in the \gls{DP1} dataset differs significantly from what will be seen in the final \gls{LSST} data.
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=1.0\linewidth]{commissioning/temporal_sampling_per_field.pdf}
@@ -144,9 +140,18 @@ It is important to note that the time sampling in the \gls{DP1} dataset differs 
 \label{fig:target_fields_temporal_sampling}
 \vspace{0.1cm}
 \end{figure}
+Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only accommodate three filters at a time (see \secref{ssec:comcam}).
+As the campaign progressed, the temporal sampling became denser across all fields, reflecting improved efficiency and increased time allocated for science observations.
+The \gls{ECDFS} field received the most consistent and densest temporal sampling.
+It is important to note that the time sampling in the \gls{DP1} dataset differs significantly from what will be seen in the final \gls{LSST} data.
+\tabref{tab:dp1_m5_depths} lists the  5$\sigma$ point source depths for coadded images per field and per band, where coverage in a band is non-zero. 
+\input{tables/dp1_m5_coadded_depths}
 
 % Spatial coverage  -- are these needed given figure 1?
 % \figref{fig:dp1_fields_coverage} shows the sky coverage for each of the \nfields DP1 fields.
+% Depth
+
+% Dithering patters
 All fields except for the low ecliptic latitude field, Rubin\_SV\_38\_7, used random translational and rotational dithers within a 0.2 degree radius around the pointing center (\tabref{tab:dp1_fields}).
 The rotational dithers were typically applied at the time of filter changes for operational efficiency, with translational dithers of approximately 1 degree applied between individual visits.
 \begin{figure*}[ht]
@@ -201,6 +206,9 @@ The rotational dithers were typically applied at the time of filter changes for 
 The Rubin\_SV\_38\_7 field used a different dither pattern to optimize coverage of Solar System Objects and test Solar System \gls{Object} linking across multiple nights.
 These observations used a 2 x 2 grid of \gls{LSSTComCam} pointings to cover an area of about 1.3 degree x 1.3 degrees.
 The visits cycled between the grid’s four pointing centers, using small random dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing \gls{epoch}.
+
+% M5 coadded depths 
+
 
 % PSF limiting magnitude
 % \figref{fig:dp1_fields_depth} shows the
