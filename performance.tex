@@ -17,11 +17,8 @@ A summary of the Rubin \gls{DP1} key numbers and data quality metrics  is found 
 \subsection{PSF Models
 \label{ssec:psf_models}}
 
-To characterize \gls{PSF} performance, we use the second moments measured on \gls{PSF} stars
-and on the PSF model via the \gls{HSM} method  (\citealt{2003MNRAS.343..459H} and
-\citealt{2005MNRAS.361.1287M}), all expressed in the camera’s
-pixel frame. Given the second-moment matrix elements $I_{\text{xx}}$,
-$I_{\text{yy}}$, and $I_{\text{xy}}$, we define:
+To characterize \gls{PSF} performance, we use adaptive second moments (\citealt{2002AJ....123..583B}) measured on \gls{PSF} stars and on the PSF model using the \gls{HSM} implementation (\citealt{2003MNRAS.343..459H} and \citealt{2005MNRAS.361.1287M}), all expressed in each detector's pixel frame.
+Given the second-moment matrix elements $I_{\text{xx}}$, $I_{\text{yy}}$, and $I_{\text{xy}}$, we define:
 
 \begin{align*}
 T &= I_{\text{xx}} + I_{\text{yy}} \\
@@ -289,9 +286,9 @@ Curiously, the \gls{GAaP} bias appears to be magnitude-dependent, whereas the Se
 Any of these color measurements are suitable for use for deriving quantities like photometric redshifts, stellar masses, etc.
 
 In addition to photometry, some algorithms include measurements of structural parameters like size, ellipticity, and Sersic index.
-One particular known issue is that many (truly) faint objects have significantly overestimated sizes and fluxes, as was also seen in the Dark Energy Survey \citep{2025arXiv250105739B}. 
+One particular known issue is that many (truly) faint objects have significantly overestimated sizes and fluxes, as was also seen in the Dark Energy Survey \citep{2025arXiv250105739B}.
 We dub such objects "super-spreaders".
-These super-spreaders contribute significantly to overestimated fluxes at the faint end, and are particular problematic for the Kron algorithm \citep{1980ApJS...43..305K}, which is not recommended for general use.
+These super-spreaders contribute significantly to overestimated fluxes at the faint end, and are particularly problematic for the Kron algorithm \citep{1980ApJS...43..305K}, which is not recommended for general use.
 
 As mentioned in \secref{ssec:coadd_processing}, the Sersic fits include a free centroid, which is initialized from the fiducial centroid of the object.
 Preliminary analyses of matched injected objects suggest that the galaxy \gls{astrometry} residuals are somewhat smaller, and so users of the Sersic photometry should also use these centroid values (if needed).
@@ -331,50 +328,6 @@ We expect to be able to mitigate these effects for \gls{LSSTCam}.
 
 Applying a reliability threshold improves the purity of transients but not variable stars; technical limitations at the time of model training prevented injection of variable stars into the synthetic training set.
 Reliability models for \gls{LSSTCam} data will be trained on a wider range of input data.
-
-% Jake/Mario
-\subsection{Solar System}
-\label{sec:performance:solsys}
-
-\subsubsection{Asteroid Linking Performance}
-
-\gls{DP1} performance evaluation of asteroid linking focused on demonstrating discovery capability.
-The solar system discovery \gls{pipeline} produced 269,581 tracklets, 5,691 linkages, and 281 post-processed candidates.
-
-We performed a conservative manual investigation of these 281 candidates, producing a curated list of \nnewasteroiddiscoveries probable new asteroid discoveries.
-All of these candidates are identified as main-belt asteroids.
-As described in Section~\ref{sec:drp:solsys}, post processing of the {\tt heliolinc} output with {\tt link\_purify} produced a final set of 281 candidate linkages, ranked with the most promising candidates first.
-Using {\tt find\_orb} \citep{findorb}, we derived orbit fits for each candidate, sorting the resulting list by $\chi_{\rm dof}^2$, the quality of the fit.
-Manual inspection of the linkages indicated that those ranked 0--137 corresponded to unique real asteroids; ranks 138--200 contained additional real objects intermixed with some spurious linkages; an d ranks higher than 200 were essentially all spurious.
-This analysis indicates that it will be possible to identify cuts on quality metrics like $\chi^2$ to derive discovery candidate samples with high purity; determining the exact quantitative cut values requires more data with \gls{LSSTCam}.
-We next removed all observations matched to known asteroids (using \gls{MPC}'s MPChecker service), reducing the number of candidates to 97.
-Of these, four had strong astrometric and/or photometric outliers, likely due to self-subtraction in difference images due to the unavoidable limitations of template generation from the limited quantity of data available from  \gls{LSSTComCam}.
-We suspect these four linkages do correspond to real objects, but have chosen to discard them out of an abundance of caution.
-The remaining \nnewasteroiddiscoveries were submitted to the Minor Planet Center and accepted as new discoveries, demonstrating the \gls{LSST} pipelines are able to successfully discover new solar system objects.
-%\jake{We should cite the MPEC with discoveries, once we do submit and the MPEC becomes available}
-
-\subsubsection{Asteroid Association Performance}
-
-Solar system association associated \nsolarsystemsources DiaSources to \nsolarsystemobjects unique solar system objects. 
-%\jake{Update this after table update!}
-These include 3,934 DiaSources to 338 already-known \gls{MPC} objects and 2,054 DiaSources to the \nnewasteroiddiscoveries  newly-discovered objects.
-Association also picked up an additional 143 detections of newly discovered objects.
-% \jake{This too - new parameter in notebook.}
-These were not originally found by the discovery pipelines as they didn't satisfy the number and/or maximum time span requirements to form tracklets.
-
-\begin{figure}[htb!]
-\centering
-\includegraphics[width=0.98\linewidth]{figures/sso_residuals.pdf}
-\caption{Astrometric residuals between expected and observed positions of SSOs in \gls{DP1}. The median residuals are $0.''001$ and $-0.''016$ in R.A./Dec direction, with the standard deviations of $0.''19$ and $0.''10$, respectively. No detectable detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. The wider scatter in the RA-direction is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions.}
-\label{fig:sso_residuals}
-\vspace{0.1cm}
-\end{figure}
-
-The astrometric residuals of known asteroid association are shown in Figure \ref{fig:sso_residuals}. 
-%\jake{Todo:} 
-Astrometric precision for solar system sources is excellent, the majority of objects detected within $0''.1$ of their expected positions. 
-Taking the unsigned median residuals to search for biases, we find that previously-known objects have mean residuals of $0.''001$ and $-0.''016$ in the \gls{RA} and Dec directions respectively, while newly-discovered objects have mean residuals of $-0.''035$ and $-0.''010$ in the \gls{RA} and Dec directions, respectively. 
-These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion (which is uncharacterized for LSSTComCam).
 
 \subsection{Detection Completeness on Difference Images} 
 \label{sec:perf:dia_completeness}
@@ -424,6 +377,50 @@ When considering the \gls{flux} pulls $\delta = (f-f_{\rm{True}})/\sigma_f$ for 
     \caption{Magnitude residuals for \gls{PSF} photometry on difference images for ECDFS field in $i$ for detected fake sources. In black solid and dashed lines: the running median, and the mean absolute deviation. Top panel: the distribution of true magnitudes for hostless and hosted fakes sources. Right panel: the distribution of magnitude residuals for hostless and hosted sources.}
     \label{fig:phot_residual_diffim_fakes}
 \end{figure}
+
+% Jake/Mario
+\subsection{Solar System}
+\label{sec:performance:solsys}
+
+\subsubsection{Asteroid Linking Performance}
+
+\gls{DP1} performance evaluation of asteroid linking focused on demonstrating discovery capability.
+The solar system discovery \gls{pipeline} produced 269,581 tracklets, 5,691 linkages, and 281 post-processed candidates.
+
+We performed a conservative manual investigation of these 281 candidates, producing a curated list of \nnewasteroiddiscoveries probable new asteroid discoveries.
+All of these candidates are identified as main-belt asteroids.
+As described in Section~\ref{sec:drp:solsys}, post processing of the {\tt heliolinc} output with {\tt link\_purify} produced a final set of 281 candidate linkages, ranked with the most promising candidates first.
+Using {\tt find\_orb} \citep{findorb}, we derived orbit fits for each candidate, sorting the resulting list by $\chi_{\rm dof}^2$, the quality of the fit.
+Manual inspection of the linkages indicated that those ranked 0--137 corresponded to unique real asteroids; ranks 138--200 contained additional real objects intermixed with some spurious linkages; an d ranks higher than 200 were essentially all spurious.
+This analysis indicates that it will be possible to identify cuts on quality metrics like $\chi^2$ to derive discovery candidate samples with high purity; determining the exact quantitative cut values requires more data with \gls{LSSTCam}.
+We next removed all observations matched to known asteroids (using \gls{MPC}'s MPChecker service), reducing the number of candidates to 97.
+Of these, four had strong astrometric and/or photometric outliers, likely due to self-subtraction in difference images due to the unavoidable limitations of template generation from the limited quantity of data available from  \gls{LSSTComCam}.
+We suspect these four linkages do correspond to real objects, but have chosen to discard them out of an abundance of caution.
+The remaining \nnewasteroiddiscoveries were submitted to the Minor Planet Center and accepted as new discoveries, demonstrating the \gls{LSST} pipelines are able to successfully discover new solar system objects.
+%\jake{We should cite the MPEC with discoveries, once we do submit and the MPEC becomes available}
+
+\subsubsection{Asteroid Association Performance}
+
+Solar system association associated \nsolarsystemsources DiaSources to \nsolarsystemobjects unique solar system objects. 
+%\jake{Update this after table update!}
+These include 3,934 DiaSources to 338 already-known \gls{MPC} objects and 2,054 DiaSources to the \nnewasteroiddiscoveries  newly-discovered objects.
+Association also picked up an additional 143 detections of newly discovered objects.
+% \jake{This too - new parameter in notebook.}
+These were not originally found by the discovery pipelines as they didn't satisfy the number and/or maximum time span requirements to form tracklets.
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.98\linewidth]{figures/sso_residuals.pdf}
+\caption{Astrometric residuals between expected and observed positions of SSOs in \gls{DP1}. The median residuals are $0.''001$ and $-0.''016$ in R.A./Dec direction, with the standard deviations of $0.''19$ and $0.''10$, respectively. No detectable detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. The wider scatter in the RA-direction is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions.}
+\label{fig:sso_residuals}
+\vspace{0.1cm}
+\end{figure}
+
+The astrometric residuals of known asteroid association are shown in Figure \ref{fig:sso_residuals}. 
+%\jake{Todo:} 
+Astrometric precision for solar system sources is excellent, the majority of objects detected within $0''.1$ of their expected positions. 
+Taking the unsigned median residuals to search for biases, we find that previously-known objects have mean residuals of $0.''001$ and $-0.''016$ in the \gls{RA} and Dec directions respectively, while newly-discovered objects have mean residuals of $-0.''035$ and $-0.''010$ in the \gls{RA} and Dec directions, respectively. 
+These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion (which is uncharacterized for LSSTComCam).
 
 \subsection{Crowded Fields}
 Two of the seven \gls{DP1} target fields exhibit high stellar density, 47 Tucanae and the Fornax dwarf galaxy.
