@@ -102,9 +102,7 @@ The full-system throughput of the six \gls{LSSTComCam} filters, which encompasse
 % Reviewed by Eli
 \subsection{Flat Field System
 \label{ssec:flat_field_system}}
-During the on-sky campaign, key components of the Rubin calibration system ~\citep{2022SPIE12182E..0RI}, including the flat field screen,
-%\gls{CBP}, and the Ekspla tunable laser 
-had not yet been installed.
+During the on-sky campaign, key components of the Rubin calibration system ~\citep{2022SPIE12182E..0RI}, including the flat field screen, had not yet been installed.
 As a result, flat fielding for \gls{DP1} relied entirely on twilight flats.
 While twilight flats pose challenges such as non-uniform illumination and star print-through, they were the only available option during \gls{LSSTComCam} commissioning and for DP1 processing.
 To mitigate these limitations, dithered, tracked exposures were taken over a broad range of azimuth and rotator angles to construct combined flat \gls{calibration} frames.
@@ -125,8 +123,9 @@ These \nfields fields form the basis of the \gls{DP1} dataset.
 \label{fig:dp1_fields_on_sky}
 \end{figure*}
 Each of the \nfields target fields was observed repeatedly in multiple bands over many nights.
-A typical observing \gls{epoch} on a given target field consisted of 5-20 visits in each of the three loaded filters.
-All DP1 images are 30 second exposures for all bands.
+A typical observing \gls{epoch} for a given target field consisted of 5-20 visits in each of the three loaded filters.
+All DP1 images were taken as single 30-second exposures for all bands, rather than as 2×15-second “snap” exposures.
+The exposure time for LSST images will be determined after further testing during the commissioning phase with LSSTCam. 
 All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_2019, peter_yoachim_2024_13985198}.
 \tabref{tab:dp1_fields} lists the \nfields \gls{DP1} fields and their pointing centers, and provides a summary of the band coverage in each.
 \input{tables/dp1_fields}
