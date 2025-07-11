@@ -150,8 +150,12 @@ It is important to note that the time sampling in the \gls{DP1} dataset differs 
 % Depth
 
 % Dithering patters
-All fields except for the low ecliptic latitude field, Rubin\_SV\_38\_7, used random translational and rotational dithers within a 0.2 degree radius around the pointing center (\tabref{tab:dp1_fields}).
-The rotational dithers were typically applied at the time of filter changes for operational efficiency, with translational dithers of approximately 1 degree applied between individual visits.
+All fields except for the low ecliptic latitude field, Rubin\_SV\_38\_7, used a small random dithering pattern.
+The random translational dithers of the telescope boresight were applied for each visit, with offsets of up to 0.2 degrees around the pointing center. 
+The rotational dithers of the camera rotator were typically approximately 1 degree per visit, with larger random offsets at each filter change, which worked to keep operational efficiency high. 
+The Rubin\_SV\_38\_7 field used a different dither pattern ton optimize coverage of Solar System Objects and test Solar System Object linking across multiple nights. These
+observations used a 2x2 grid of LSSTComCam pointings to cover an area of about 1.3 degree x 1.3 degrees.
+The visits cycled between the grid's four pointing centers, using small random translational dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing epoch.
 \begin{figure*}[ht]
     \centering
     \begin{subfigure}[b]{0.22\textwidth}
@@ -201,10 +205,6 @@ The rotational dithers were typically applied at the time of filter changes for 
     \caption{Sky coverage maps showing the distribution of visits in each field, color coded by band. The images clearly show the focal plane chip gaps and dithering pattern. Only the detectors for which single frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields. }
     \label{fig:dp1_fields_coverage}
 \end{figure*}
-The Rubin\_SV\_38\_7 field used a different dither pattern to optimize coverage of Solar System Objects and test Solar System \gls{Object} linking across multiple nights.
-These observations used a 2 x 2 grid of \gls{LSSTComCam} pointings to cover an area of about 1.3 degree x 1.3 degrees.
-The visits cycled between the grid’s four pointing centers, using small random dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing \gls{epoch}.
-
 % M5 coadded depths 
 
 
