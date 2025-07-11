@@ -33,11 +33,12 @@ The \gls{DP1} skymap divides the entire celestial sphere into \ntotaltracts trac
 Each \gls{tract} is further subdivided into \npatchx × \npatchy equally-sized patches, with each \gls{patch} covering roughly \innerpatcharea
 Both tracts and patches overlap with their neighboring regions.
 Since the \gls{LSSTComCam} only observed \totalarea of the sky during its campaign, only \ncoveredtracts out of the \ntotaltracts tracts have coverage in \gls{DP1}.
-The \gls{tract} identification numbers and corresponding target names for these tracts are listed in \tabref{tab:dp1_tracts}.
+The tract identification numbers and corresponding target names for these tracts are listed in \tabref{tab:dp1_tracts}.
+The size of a tract is larger than the LSSTCam field of view; however, since each observed field extends across more than one tract, each field covers multiple tracts.
 \input{tables/dp1_field_tracts}
 
 The skymap is integral to the production of co-added images.
-To create a coadded image, the processing pipeline selects all calibrated science images that meet specific quality thresholds (\secref{ssec:science_images} and \secref{ssec:coaddition}) for a given \gls{patch}, warps them onto a single consistent pixel grid for that \gls{patch}, as defined by the skymap, then coadds them.
+To create a coadded image, the processing pipeline selects all calibrated science images in a given field that meet specific quality thresholds (\secref{ssec:science_images} and \secref{ssec:coaddition}) for a given \gls{patch}, warps them onto a single consistent pixel grid for that \gls{patch}, as defined by the skymap, then coadds them.
 Each individual coadd image therefore covers a single \gls{patch}.
 Coadded images and the catalogs of detections from them are termed \texttt{tract}-level data products.
 By contrast, \texttt{visit}-level data products are those derived from individual \gls{LSSTComCam} exposures, such as a raw image or a catalog of detections from a single calibrated image.
@@ -92,7 +93,7 @@ The data product names shown here are those used by the Data \gls{Butler}, but t
 
 % While the inclusion of the calibration images in the data release implies that users can, in principle, perform their own processing of raw images, it is our expectation that this will only be warranted in exceptional cases; in almost all scenarios, users are strongly advised to use the visit images described in this subsection.
 %Describe the science images and types and some statistics on them
-
+ 
 \begin{itemize}
 \item \texttt{raw} images \citep{10.71929/rubin/2570310} are unprocessed data received directly from the \gls{camera}.
 Each \texttt{raw} corresponds to a single \gls{CCD} from a single \gls{LSSTComCam} exposure of \exposuretime duration.
