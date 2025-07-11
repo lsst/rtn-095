@@ -12,10 +12,15 @@ The \gls{DP1} science data products are derived from the \nvisitimages individua
 The data products that comprise \gls{DP1} provide an early preview of future LSST data releases and are strongly dependent on the type and quality of the data that was collected during \gls{LSSTComCam} on-sky campaign (\secref{ssec:pipelines_commissioning}).
 Consequently not all anticipated  \gls{LSST} data products, as described in the \gls{DPDD} \citep{LSE-163} were produced for the \gls{DP1} dataset.
 
+Rubin Observatory has adopted the convention by which single-epoch detections are referred to as Sources.
+By contrast, the astrophysical object associated with a given detection is referred to as an Object.
+\footnote{We caution that this nomenclature is not universal; for example, some surveys call ``detections'' what we call ``sources'', and use the term ``sources'' for what we call ``objects''.}
+As such, a given Object will likely have multiple associated  Sources, since it will be observed in multiple epochs.
+
 At the highest level, the \gls{DP1} data products fall into one of five types:
 \begin{itemize}
 \item \textbf{Images}, including single-\gls{epoch} images, deep and template coadded images, and difference images;
-\item \textbf{Catalogs} of astrophysical Sources (\secref{})and Objects (\secref{}) detected and measured in the aforementioned images. We also provide the astrometric and photometric reference catalog generated from external sources that was used during processing to generate the \gls{DP1} data products;
+\item \textbf{Catalogs} of astrophysical Sources and Objects detected and measured in the aforementioned images. We also provide the astrometric and photometric reference catalog generated from external sources that was used during processing to generate the \gls{DP1} data products;
 \item \textbf{Maps}, which provide non-science-level visualizations of the data within the release. They include, for example, zoomable multi-band images and coverage maps;
 \item \textbf{Ancillary data products}, including, for example, the parameters used to configure the data processing pipelines, log and processing performance files, plots and metrics produced during the data processing steps, and \gls{calibration} data products (e.g. \gls{CTI} models, brighter-fatter kernels, etc.);
 \item \textbf{Metadata} in the form of tables containing information about each visit and processed image, such as pointing, exposure time, and a range of image quality summary statistics.
@@ -200,17 +205,18 @@ Background images are not available via the \gls{IVOA} Service; they can only be
 \subsection{Catalogs}
 \label{ssec:catalogs}
 Here we describe science-ready tables produced by the science pipelines.
-All but one of the catalogs described here contain data for detections in the images described in \secref{ssec:science_images}, the exception being the \texttt{Calibration} catalog that contains reference data obtained from previous surveys.
+All but one of the catalogs described here contain data for detections in the images described in \secref{ssec:science_images}, the exception being the \texttt{Calibration} catalog, which contains reference data obtained from previous surveys.
 Observatory-produced \gls{metadata} tables are described in \secref{ssec:metadata}
+Each type of catalog contains measurements for either Sources  detected in  \texttt{visit\_image}s and \texttt{difference\_image}s, or Objects detected in \texttt{deep\_coadd}s.
 
 %A range of catalogs to support all four Rubin science themes are provided in DP1. %Do we need to say this here?
 
 %Another key concept within Rubin is the distinction between ``objects'' and ``sources''.
-The Rubin Observatory has adopted the convention by which single-\gls{epoch} detections are referred to as sources.
-By contrast, the astrophysical object associated with a given detection is referred to as an object.
-\footnote{We caution that this nomenclature is not universal; for example, some surveys call ``detections'' what we call ``sources'', and use the term ``sources'' for what we call ``objects''.}
-As such, a given object will likely have multiple associated sources, since it will be observed in multiple epochs.
-Each type of catalog contains measurements for either sources or objects detected in one of \texttt{visit\_image}s, \texttt{deep\_coadd}s, or \texttt{difference\_image}s.
+%The Rubin Observatory has adopted the convention by which single-\gls{epoch} detections are referred to as sources.
+%By contrast, the astrophysical object associated with a given detection is referred to as an object.
+%\footnote{We caution that this nomenclature is not universal; for example, some surveys call ``detections'' what we call ``sources'', and use the term ``sources'' for what we call ``objects''.}
+%As such, a given object will likely have multiple associated sources, since it will be observed in multiple epochs.
+%Each type of catalog contains measurements for either sources or objects detected in one of \texttt{visit\_image}s, \texttt{deep\_coadd}s, or \texttt{difference\_image}s.
 %\footnote{When written in bold monospace type, \texttt{objects} and \texttt{sources} refer to objects and sources detected and measured as a part of Data Release processing.}
 % Note: The following was used to explain why the object table is a tract-level dataset, but now all mention of tract-level etc is moved to the Data Services section.
 %While an object {\it may} initially be detected and therefore defined within a single epoch observation --- particularly if it is transient --- the vast majority of objects will be initially detected in deep coadded images.
