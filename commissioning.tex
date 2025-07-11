@@ -43,13 +43,12 @@ Once this coarse alignment was complete, the \gls{AOS} refined the optical align
 During Science Pipelines commissioning (\secref{ssec:pipelines_commissioning}),  observations were conducted using the AOS in open-loop mode only, without closed-loop corrections between exposures. 
 Closed-loop operation, which requires additional intra- and extra-focal images with LSSTComCam, was not compatible with the continuous data acquisition needed by the pipelines.
 The image quality for these data was monitored by measuring the \gls{PSF} \gls{FWHM}, and closed-loop sequences were periodically run when image quality degradation was observed.
-Under favorable \gls{seeing} conditions, the delivered image quality was typically around {0.7\arcsec\xspace}, with a best recorded value of \bestimagequality.
 
 %%%%% ComCam
 \subsection{The LSST Commissioning Camera
 \label{ssec:comcam}}
-The \gls{LSSTComCam} \citep{2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH, 10.71929/rubin/2561361} is a 144-megapixel, scaled-down version of the 3.2-gigapixel \gls{LSSTCam}.
-It covers approximately 5\% of the \gls{LSSTCam} focal plane area, with a  field of view of 0.7deg$^2$   (40\arcmin 	x40\arcmin), compared to LSSTCam's 9.6 deg$^2$. 
+\gls{LSSTComCam} \citep{2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH, 10.71929/rubin/2561361} is a 144-megapixel, scaled-down version of the 3.2-gigapixel \gls{LSSTCam}.
+It covers approximately 5\% of the \gls{LSSTCam} focal plane area, with a  field of view of $\sim$0.5deg$^2$   (40\arcmin x40\arcmin), compared to LSSTCam's 9.6 deg$^2$. 
 It was developed to validate camera interfaces with other observatory components and evaluate overall system performance prior to the start of \gls{LSSTCam} commissioning. 
 Although it has a smaller imaging area, \gls{LSSTComCam} shares the same plate scale of \rawplatescale and is housed in a support structure that precisely replicates the total mass, center of gravity, and physical dimensions of \gls{LSSTCam}. 
 All mechanical and utility interfaces to the telescope are implemented identically, enabling full end-to-end testing of observatory systems, including readout electronics, image acquisition, and data pipelines.
@@ -61,8 +60,10 @@ Each sensor is subdivided into 16 segments arranged in a 2×8 layout, with each 
 To maintain uniform performance and \gls{calibration} each raft is populated with sensors from only one vendor.
 
 LSSTComCam consists of a single science raft equipped exclusively with \gls{ITL} sensors.
-The sensors selected for \gls{LSSTComCam} represent the lowest-performing units from the LSSTCam production batch and exhibit known issues, such as high readout noise (e.g., Detector 8) and elevated \gls{CTI} (e.g., Detector 5).
+The sensors selected for \gls{LSSTComCam} represent  the best performing of the remaining ITL devices after the LSSTCam rafts were fully populated. 
+They  exhibit known issues such as high readout noise (e.g., Detector 8) and elevated \gls{CTI} (e.g., Detector 5).
 As a result, certain image artifacts present in the \gls{DP1} dataset may be specific to LSSTComCam.
+Although the cryostat in LSSTComCam uses a different cooling system (Cryotels), LSSTComCam incorporated a refrigeration pathfinder to validate the cryogenic refrigeration system intended for LSSTCam."
 
 \figref{fig:comcam_raft_in_lsstcam_focal_plane} shows the single-raft \gls{LSSTComCam} positioned at the center of the full LSSTCam focal plane, corresponding to the central science raft position.
 \gls{LSSTComCam} is designated as Raft 22 (R22).
@@ -276,7 +277,7 @@ Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 % \tabref{tab:image_quality} summarizes the delivered image quality expressed in terms of the PSF FWHM in arcseconds per band for the \nexposures in DP1.
 The DP1 median delivered image quality across all bands is \medianimagequalityallbands, as measured by the \gls{PSF} \gls{FWHM}.
 The best images achieved a \gls{PSF} \gls{FWHM} of approximately \bestimagequality.
-\begin{figure}[htb!]
+\begin{figure}[htb]
 \centering
 \includegraphics[width=0.98\linewidth]{commissioning/image_quality_ecdf.pdf}
 \caption{Cumulative distribution of \gls{PSF} \gls{FWHM} of the \gls{DP1} dataset.}
