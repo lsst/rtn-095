@@ -181,7 +181,8 @@ As is the case for \texttt{deep\_coadd}, those pixels within \texttt{template\_c
 
 In total, there are \ndifferenceimages \texttt{difference\_image}s in \gls{DP1}, one for each \texttt{visit\_image}.
 
-Like \texttt{visit\_image}s, \texttt{difference\_image}s contain the science (i.e., difference) image, a variance image, and a pixel mask; all three contain the same number of pixels, which is the same as that of the input \texttt{visit\_image}. Also included is the \gls{PSF} model, \gls{WCS} information, and \gls{metadata}.
+Like \texttt{visit\_image}s, \texttt{difference\_image}s contain the science (i.e., difference) image, a variance image, and a pixel mask; all three contain the same number of pixels, which is the same as that of the input \texttt{visit\_image}. 
+Also included is the \gls{PSF} model, \gls{WCS} information, and \gls{metadata}.
 
 %Difference images are \texttt{visit}-level data products and are uniquely referred to via the \texttt{visit} and \texttt{detector} dimensions.
 
@@ -222,15 +223,12 @@ Each type of catalog contains measurements for either Sources  detected in  \tex
 % Note: The following was used to explain why the object table is a tract-level dataset, but now all mention of tract-level etc is moved to the Data Services section.
 %While an object {\it may} initially be detected and therefore defined within a single epoch observation --- particularly if it is transient --- the vast majority of objects will be initially detected in deep coadded images.
 
-
-% Do we need to explain what a catalog is?
-% Catalogs have a table-like layout, with one row per source/object, and one column per property (whether that be identification number, position, flux, flag, etc.).
 While the \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each differ in terms of their specific columns, in general they each contain: one or more unique identification number, positional information, one or more types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags (indicating, for example, whether the source/object is affected by saturated pixels, cosmic rays, etc.) for each source/object.
 The Solar System catalogs \texttt{SSObject} and \texttt{SSSource} deviate from this general structure in that they instead contain orbital parameters for all known asteroids.
 Where applicable, all measured properties are reported with their associated 1$\sigma$ uncertainties.
 
 Since \gls{DP1} is a preview, it doesn't include all the catalogs expected in a full \gls{LSST} \gls{Data Release}. Additionally, the catalogs it does include may be missing some columns planned for future releases.
-Where this is the case, we note what data is missing in the catalog descriptions that follow.
+Where this is the case, we note what data are missing in the catalog descriptions that follow.
 
 Catalog data are stored in the \gls{Qserv} database (\secref{sssec:qserv}) and are accessible via \gls{TAP}, and an online \gls{DP1} catalog \gls{schema} is available at \url{https://sdm-schemas.lsst.io/dp1.html}.
 Catalog data are also accessible via the Data \gls{Butler} (\secref{sssec:data_butler}).
@@ -241,7 +239,8 @@ Catalog data are also accessible via the Data \gls{Butler} (\secref{sssec:data_b
 %A single \texttt{Source} catalog includes all sources detected in the (up to) nine \texttt{visit\_image}s that result from a single LSSTComCam exposure (i.e., there is one source table {\it per visit}, as opposed to one source table per \texttt{visit\_image}).
 %Since a single exposure is taken with a given band, the \texttt{Source} catalog only contains data from a single band.
 The detections reported in the \texttt{Source} catalog have undergone deblending; in the case of blended detections, only the deblended sources are included in the \texttt{Source} catalog.
-It is important to note that while the criterion for inclusion in a \texttt{Source} catalog is a $>5\sigma$ detection in a \texttt{visit\_image} prior to deblending, the positions and fluxes are reported post-deblending. Hence, it is possible for the \texttt{Source} catalog to contain sources whose \gls{flux}-to-error ratios -- potentially of all types (i.e., aperture \gls{flux}, \gls{PSF} \gls{flux}, etc.) -- are less than $5$.
+It is important to note that while the criterion for inclusion in a \texttt{Source} catalog is a $>5\sigma$ detection in a \texttt{visit\_image} prior to deblending, the positions and fluxes are reported post-deblending. 
+Hence, it is possible for the \texttt{Source} catalog to contain sources whose \gls{flux}-to-error ratios -- potentially of all types (i.e., aperture \gls{flux}, \gls{PSF} \gls{flux}, etc.) -- are less than $5$.
 
 In addition to the general information mentioned above (i.e., IDs, positions, fluxes, flags), the \texttt{Source} catalog also include basic \gls{shape} and extendedness information.
 
@@ -304,18 +303,12 @@ It provides an efficient method to access  \texttt{visit\_image} properties with
 The \texttt{CcdVisit} catalog contains entries summarizing data for all \nvisitdetectorsummaries \texttt{visit\_image}s.
 
 %From mjuric
-\item The \texttt{SSObject} catalog \citep{10.71929/rubin/2570335}..... Two tables, named \gls{MPCORB} and SSObject, carry information about Solar System Objects. The \gls{MPCORB} table provides the Minor Planet \gls{Center}-computed orbital elements for all known asteroids, including those that Rubin discovered. 
-For DP1, the SSObject serves primarily to provide the mapping between the \gls{IAU} designation of an object (listed in \gls{MPCORB}), and the internal ssObjectId identifier (used as a key to find solar system object observations in the DiaSource and SSSource tables).
-%\james{I also need help with this. Also, MPCORB isn't included on the list of DP1 data products. If it is being included in DP1, what is it called in the butler?}
-
+\item The \texttt{SSObject} catalog \citep{10.71929/rubin/2570335}, \gls{MPCORB} and SSObject, carry information about Solar System Objects. 
+The \gls{MPCORB} table provides the Minor Planet \gls{Center}-computed orbital elements for all known asteroids, including those that Rubin discovered. 
+For DP1, the  \texttt{SSObject} catalog serves primarily to provide the mapping between the \gls{IAU} designation of an object (listed in \gls{MPCORB}), and the internal ssObjectId identifier, which is used as a key to find solar system object observations in the DiaSource and SSSource tables.
 \item The \texttt{SSSource} catalog \citep{10.71929/rubin/2570333} contain data on all DiaSources that are either associated with previously-known Solar System Objects, or have been confirmed as newly-discovered Solar System Objects by confirmation of their orbital properties. 
 As entries in the \texttt{SSSource} catalog stem from the \texttt{DiaSource} catalog, they have all been detected at $>5\sigma$ significance in at least one band.
-%\james{I need help with this. I don't know enough about the contents of the SS Source catalog to be able to write anything meaningful about it.}
-
 The \texttt{SSSource} catalog contains data for \nsolarsystemsources Solar System Sources.
-
-%individual detections of objects across multiple epochs above the 5-sigma threshold. DP1 Source catalogs include .... and the SSSource catalog for Solar System Objects
-%Set the expectation that this might not happen in future given the size and that the forced Source catalog is the better choice
 
 
 % Eli
