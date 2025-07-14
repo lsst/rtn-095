@@ -37,7 +37,7 @@ In so doing, true astrophysical sources are isolated to allow for accurate detec
 To generate a \gls{background} model, each post-ISR image is divided into superpixels of $128\times128$ pixels.
 Pixels with a mask flag set that indicates that they contain no useful science data or that they contain \gls{flux} from a preliminary source detection are masked.
 The iterative $3\sigma$ clipped mean of the remaining pixels is calculated for each superpixel, constructing a \gls{background} statistics image.
-A sixth-order Chebyshev polynomial is fit to these values to allow for an extrapolation back to the native pixel resolution of the post-\gls{ISR} image.
+A sixth-order Chebyshev polynomial is fit to these values on the scale of a single detector to allow for an extrapolation back to the native pixel resolution of the post-\gls{ISR} image.
 
 
 \subsection{Calibration}
