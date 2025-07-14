@@ -65,7 +65,7 @@ Details on the choice of polynomial order, overall \gls{PSF} modeling performanc
 \subsubsection{Astrometric Calibration}
 \label{ssec:global_astrometric_calibration}
 Starting from the astrometric solution calculated in single frame processing (\secref{ssec:single_frame_processing}), the final astrometric solution is computed using the ensemble of visits in a given band that overlap a given \gls{tract}.
-This allows the astrometric solution to be further refined by using all of the isolated point sources of sufficient signal-to-noise ratio in an image, rather than only those that appear in the reference catalog (as is done in single frame processing).
+This allows the astrometric solution to be further refined by using all of the isolated point sources of sufficient signal-to-noise ratio in an image, rather than only those that appear in the reference catalog, as is done in single frame processing.
 Using multiple whole visits rather than a single detector also allows us to account for effects that impact the full focal plane and for the proper motion and parallax of the sources.
 
 In order to perform the fit of the astrometric solution, isolated point sources are associated between overlapping visits and with the Gaia \gls{DR3} reference catalog where possible.
@@ -83,17 +83,16 @@ This model is also a polynomial mapping, in this case a degree 6 two-dimensional
 Correction for \gls{DCR} (\secref{sec:differential_chromatic_refraction}) was not done for \gls{DP1}, but will be included in LSSTCam processing during Operations.
 Future processing will also likely include a Gaussian Processes fit to better account for atmospheric turbulence, as was demonstrated in \citet{Fortino2021} and \citet{Leget2021}.
 
-The last component of the astrometric \gls{calibration} is the position of the isolated point sources included in the fit.
-The positions consist of five parameters: position on the sky, proper motion, and parallax.
+The final component of the astrometric \gls{calibration} involves the positions of the isolated point sources included in the fit, which are described by five parameters: sky coordinates, proper motion, and parallax
+While proper motions and parallaxes are not released for DP1, they are fitted for these sources in the astrometric solution to improve the astrometric calibration.
 The reference \gls{epoch} for the fit positions is 2024.9.
 
 % Eli
 \subsubsection{Photometric Calibration}
 \label{photometric_calibration}
-Photometric \gls{calibration} of the \gls{DP1} dataset is based on the Forward Global Calibration Method
-~\citep[FGCM][]{2018AJ....155...41B}, adapted for the LSST Science Pipelines~\citep{2022PASJ...74..247A, SITCOMTN-086}.
+Photometric \gls{calibration} of the \gls{DP1} dataset is based on the \FGCM} ~\citep[FGCM][]{2018AJ....155...41B}, adapted for the LSST Science Pipelines~\citep{2022PASJ...74..247A, SITCOMTN-086}.
 We used \gls{FGCM} to calibrate the full \gls{DP1} dataset with a forward model that uses a parameterized model of the atmosphere as a function of airmass along with a model of the instrument throughput as a function of wavelength.
-The \gls{FGCM} process typically begins with measurements of the instrumental throughput, including the mirrors, filters, and detectors.
+The FGCM process typically begins with measurements of the instrumental throughput, including the mirrors, filters, and detectors.
 However, because full scans of the \gls{LSSTComCam} as-built filters and individual detectors were not available, we instead used the nominal reference throughputs for the Simonyi Survey Telescope and LSSTCam.\footnote{Available at: \url{https://github.com/lsst/throughputs/tree/1.9}}
 These nominal throughputs were sufficient for the \gls{DP1} calibration, given the small and homogeneous focal plane consisting of only 9 \gls{ITL} detectors.
 The FGCM atmosphere model, provided by MODTRAN~\citep{1999SPIE.3756..348B}, was used to generate a look-up table for atmospheric throughput as a function of zenith distance at Cerro Pachón.
@@ -110,7 +109,7 @@ As an additional constraint on the fit, we use a subset of stars from the refere
 With the final \gls{PSF} models, \gls{WCS} solutions, and photometric calibrations in place, we reprocess each single-epoch image to produce a final set of calibrated visit images and source catalogs.
 Source detection is performed down to a $5\sigma$ threshold using the updated \gls{PSF} models, followed by measurement of \gls{PSF} and aperture fluxes.
 These catalogs represent the best single-\gls{epoch} source characterization, but they are not intended for constructing light curves.
-For time-domain analysis, we recommend using the \gls{forced photometry} tables described in \secref{sssec:lightcurves}
+For time-domain analysis, we recommend using the \gls{forced photometry} tables described in \secref{sssec:lightcurves}.
 
 % Yusra
 \subsection{Coaddition Processing}
