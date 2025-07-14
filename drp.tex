@@ -90,7 +90,7 @@ The reference \gls{epoch} for the fit positions is 2024.9.
 % Eli
 \subsubsection{Photometric Calibration}
 \label{photometric_calibration}
-Photometric \gls{calibration} of the \gls{DP1} dataset is based on the \FGCM} ~\citep[FGCM][]{2018AJ....155...41B}, adapted for the LSST Science Pipelines~\citep{2022PASJ...74..247A, SITCOMTN-086}.
+Photometric \gls{calibration} of the \gls{DP1} dataset is based on the \gls{FGCM} ~\citep[FGCM][]{2018AJ....155...41B}, adapted for the LSST Science Pipelines~\citep{2022PASJ...74..247A, SITCOMTN-086}.
 We used \gls{FGCM} to calibrate the full \gls{DP1} dataset with a forward model that uses a parameterized model of the atmosphere as a function of airmass along with a model of the instrument throughput as a function of wavelength.
 The FGCM process typically begins with measurements of the instrumental throughput, including the mirrors, filters, and detectors.
 However, because full scans of the \gls{LSSTComCam} as-built filters and individual detectors were not available, we instead used the nominal reference throughputs for the Simonyi Survey Telescope and LSSTCam.\footnote{Available at: \url{https://github.com/lsst/throughputs/tree/1.9}}
@@ -125,7 +125,7 @@ It operates on a time series of \gls{PSF}-matched images resampled onto a common
 
 Artifact rejection uses both direct and PSF-matched warps, homogenized to a standard PSF of 1.8 arcseconds FWHM,  consistent with the \gls{seeing} threshold used in data screening.
 A sigma-clipped mean of the \gls{PSF}-matched warps serves as a static sky model, against which individual warps are differenced to identify significant positive and negative residuals.
-Candidate artifact regions are classified as \gls{transient} if they appear in less than a small percentage of the total exposures, with the threshold varying based on the number of visits, N,  as follows:
+Candidate artifact regions are classified as \gls{transient} if they appear in less than a small percentage of the total number of exposures, with the threshold  based on the number of visits, N,  as follows:
 \begin{itemize}
     \item $N=1$ or $2$: threshold $= 0$ (no clipping).
     \item $N=3$ or $4$: threshold $= 1$.
@@ -197,16 +197,16 @@ The model was initially trained using simulated data from the second Data Challe
 The same number of bogus sources were selected at random from non-injected DIASources.
 %Since the number of injections (57,832) was much larger than the number of fake SNs (1442) from \eric{LPG: do we need to detail the DC2 initial work}, the model initially outperformed on SNs.
 %To improve the performance metrics on SNs, the loss function was modified to give more weight to SNs, resulting in a 6\% increase in accuracy for SNs.
-Once the  \gls{LSSTComCam} data was available, the model was fine-tuned on a subset of the data containing 183,046 sources with PSF injections.
+Once the  \gls{LSSTComCam} data were available, the model was fine-tuned on a subset of the data containing 183,046 sources with PSF injections.
 %Fake reals refer to injected stars successfully detected by DIA, while bogus represent all other detections.
 %In this second round of training, only stars were injected into the dataset.
 On the \gls{LSSTComCam} test set, the model achieved an accuracy of 98.06\%, purity of 97.87\%, and completeness of 98.27\%.
 
 %YA
-\subsubsection{Lightcurves}
+\subsubsection{Light Curves}
 \label{sssec:lightcurves}
 To produce light curves, we perform multi-epoch \gls{forced photometry} on both the direct visit images and the difference images.
-For lightcurves we recommend the \gls{forced photometry} on the difference images (\texttt{psDiffFlux} on the ForcedSource Table), as it isolates the variable component of the flux and avoids contamination from static sources.
+For light curves we recommend the \gls{forced photometry} on the difference images (\texttt{psDiffFlux} on the ForcedSource Table), as it isolates the variable component of the flux and avoids contamination from static sources.
 In contrast, \gls{forced photometry} on direct images includes flux from nearby or blended static objects, and this contamination can vary with seeing.
 Centroids used in the multi-epoch \gls{forced photometry} stage are taken either from object positions measured on the coadds or from the DIAObjects (the associated DIASources detected on difference images).
 
@@ -238,11 +238,12 @@ About 10\% of all commissioning visits targeted the near-ecliptic field Rubin\_S
 Rubin\_SV\_38\_7 produced the vast majority of asteroid discoveries in DP1, as expected, but a few were found in off-ecliptic fields as well.
 
 Tracklet creation with {\tt make\_tracklets} used an upper limit angular velocity of 1.5 \gls{deg}/day, faster than any main belt asteroid and in the range of many \gls{NEO} discoveries.
-To avoid excessive false tracklets from fields that were observed many times per night, the minimum \gls{tracklet} length was set to three and the minimum on-sky motion for a valid \gls{tracklet} was set to five arcseconds.
+To minimize false tracklets from fields observed multiple times per night, the minimum \gls{tracklet} length was set to three detections, and a minimum on-sky motion of five arcseconds was required for a valid \gls{tracklet}.
 
 The heart of the discovery \gls{pipeline} is the {\tt heliolinc} task, which connects (``links") tracklets belonging to the same object over a series of nights.
 It employs the HelioLinC3D algorithm \citep{2020DPS....5221101E,2022DPS....5450404H}, a refinement of the original HelioLinC algorithm of \citet{2018AJ....156..135H}.
-The {\tt heliolinc} run tested each \gls{tracklet} with 324 different hypotheses spanning heliocentric distances from 1.5 to 9.8 AU and radial velocities spanning the full range of possible bound orbits (eccentricity 0.0 to nearly 1.0).
+The {\tt heliolinc} run tested each \gls{tracklet} with 324 different hypotheses spanning heliocentric distances from 1.5 to 9.8 \gls{au} and radial velocities spanning the full range of possible bound orbits (eccentricity 0.0 to nearly 1.0).
 This range of distance encompasses all main belt asteroids and Jupiter Trojans, as well as many comets and Mars-crossers and some \glspl{NEO}.
 Smaller heliocentric distances were not attempted here because nearby objects move rapidly across the sky and hence were not likely to remain long enough in an \gls{LSSTComCam} field to be discovered.
-A clustering radius was chosen corresponding to $1.33 \times 10^{-3}$~AU at 1 \gls{AU} from Earth. Linkages produced by {\tt heliolinc} are then post-processed with {\tt link\_purify} into a final non-overlapping set of candidate discoveries, ranked from highest to lowest probability of being a real asteroid based on astrometric orbit-fit residuals and other considerations.
+A clustering radius was chosen corresponding to $1.33 \times 10^{-3}$~\gls{au} at 1 \gls{au} from Earth. 
+Linkages produced by {\tt heliolinc} are then post-processed with {\tt link\_purify} into a final non-overlapping set of candidate discoveries, ranked from highest to lowest probability of being a real asteroid based on astrometric orbit-fit residuals and other considerations.
