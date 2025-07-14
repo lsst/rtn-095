@@ -80,7 +80,7 @@ Further improvements may be made by including a pixel-based astrometric offset m
 
 The per-visit model attempts to account for time-varying effects on the path of a photon from both atmospheric sources and those dependent on the telescope position.
 This model is also a polynomial mapping, in this case a degree 6 two-dimensional polynomial.
-Correction for \gls{DCR} was not done for \gls{DP1}, but will be included in LSSTCam processing during Operations.
+Correction for \gls{DCR} (\secref{sec:differential_chromatic_refraction}) was not done for \gls{DP1}, but will be included in LSSTCam processing during Operations.
 Future processing will also likely include a Gaussian Processes fit to better account for atmospheric turbulence, as was demonstrated in \citet{Fortino2021} and \citet{Leget2021}.
 
 The last component of the astrometric \gls{calibration} is the position of the isolated point sources included in the fit.
