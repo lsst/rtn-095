@@ -5,7 +5,7 @@
 The \gls{RSP} \citep{LSE-319,DMTN-212} is a powerful, cloud-based environment for scientific research and analysis of petascale-scale astronomical survey data.
 It serves as the primary interface for scientists to access, visualize, and conduct next-to-the-data analysis of Rubin and \gls{LSST} data.
 The  \gls{RSP} is designed around a  ``bring the compute to the data'' principle, eliminating the need for users to download massive datasets.
-Although \gls{DP1} is comparable in size (\sizeinbytes) to existing survey datasets, future \gls{LSST} datasets will be larger and more complex, making it crucial to co-locate data and analysis for effective scientific discovery.
+Although \gls{DP1} is much smaller in size (\sizeinbytes) than many current survey datasets, future \gls{LSST} datasets will be far larger and more complex, making it crucial to co-locate data and analysis for effective scientific discovery.
 
 The \gls{RSP} provides users with access to data and services through three distinct user-facing Aspects: a \emph{Portal}, which facilitates interactive exploration of the data; a JupyterLab-based \emph{Notebook} environment for data analysis using Python; and an extensive set of \emph{\glspl{API}} that enable programmatic access to both data and services.
 The three Aspects are designed to be fully integrated, enabling seamless workflows across the \gls{RSP}.
@@ -58,7 +58,7 @@ This section provides an overview of the available \gls{IVOA} services and Butle
 
 Rubin has adopted a \gls{VO}-first design philosophy, prioritizing compliance with \gls{IVOA} standard interfaces to foster interoperability, standardization, and collaboration.
 In cases where standardized protocols have yet to be established, additional services have been introduced to complement these efforts.
-This approach ensures that the RSP can be seamlessly integrated with community-standard tools such as TOPCAT \citep{2011ascl.soft01010T} and Aladin \citep{2000A&AS..143...33B, 2014ASPC..485..277B, 2022ASPC..532....7B}, as well as libraries such as  PyVO \citep{2014ascl.soft02004G}.
+This approach ensures that the RSP can be seamlessly integrated with community-standard tools such as \gls{TOPCAT} \citep{2011ascl.soft01010T} and Aladin \citep{2000A&AS..143...33B, 2014ASPC..485..277B, 2022ASPC..532....7B}, as well as libraries such as  PyVO \citep{2014ascl.soft02004G}.
 
 The user-facing \glspl{API} are also used internally within the \gls{RSP}, creating a unified design that ensures consistent and reproducible workflows across all three Aspects.
 This reduces code duplication, simplifies maintenance, and ensures all users, both internal and external, access data in the same way.
@@ -80,7 +80,7 @@ The TAP service provides metadata annotations consistent with the standard, incl
 \item \textbf{Image Access Services}: Rubin image access services are compliant with \gls{IVOA} SIAv2 \citep[Simple Image Access Protocol, version 2;][]{2025arXiv250100544J,2015ivoa.spec.1223D}
 for discovering and accessing astronomical images based on \gls{metadata}.
 SIAv2 is a \gls{REST}-based protocol that supports the discovery and retrieval of image data.
-For example, querying for all images in a given band over a particular sky region observed during a given period.
+For example, executing a query for all images in a given band over a particular sky region observed during a given period.
 
 %e.g. \url{https://<rubin-sia-service-url>?POS=180.0,0.0&SIZE=0.01}
 Users identify an image or observation of interest and query the service.
@@ -91,7 +91,7 @@ The result set includes \gls{metadata} about the image, such as the sky position
 \item \textbf{Image Cutout Service}: The Rubin Cutout Service \citep{SQR-063, SQR-093} is based on the  \gls{IVOA} SODA \citep[Server-side Operations for Data Access;][]{2017ivoa.spec.0517B}.
 Users submit requests specifying sky coordinates and the cutout size as the radius from the coordinates, and the  service performs the operation on the full image and returns a result set.
 % For a YxY cutout, the typical size of the returned result set is <X>
-For \gls{DP1}, The  cutout service is a single cutout service only where N cutout requests will require N independent synchronous calls.
+For \gls{DP1}, the  cutout service is a single cutout service only where N cutout requests will require N independent synchronous calls.
 We expect some form of bulk cutout service by mid 2026, approximately contemporaneously with \gls{DP2}.
 
 % HIPS
@@ -135,16 +135,15 @@ For example, a calibrated single-visit image (\secref{ssec:science_images}) has 
 In contrast, the visit table (\secref{ssec:catalogs}), a catalog of all calibrated single-epoch visits in \gls{DP1}, has only the instrument dimension.
 The main dimensions used in \gls{DP1} are listed, together with a brief description, in \tabref{tab:dp1_dimensions}.
 To determine which dimensions are relevant for a specific dataset, the \gls{Butler} defines dataset types, which associate each dataset with its specific set of relevant dimensions, as well as the associated Python type representing the dataset.
-The dataset type defines the kind of data a dataset represents.
-For example, a raw image  (\texttt{raw}), a processed catalog (\texttt{object\_forced\_source}), or a \gls{sky map} (\texttt{skyMap}).
+The dataset type defines the kind of data a dataset represents, such as  a raw image  (\texttt{raw}), a processed catalog (\texttt{object\_forced\_source}), or a \gls{sky map} (\texttt{skyMap}).
 
 \tabref{tab:butlerdatasets} lists all the dataset types available via the Butler in DP1, together with the dimensions needed to uniquely identify a specific dataset and the number of unique datasets of each type. It is important to highlight a key difference between accessing catalog data via the \gls{TAP} service versus the Butler. While the \gls{TAP} service contains entire catalogs, many of the same catalogs in the Butler are split into multiple separate catalogs. This is partly due to how these catalogs are generated, but also because of the way data is stored within and retrieved from the Butler repository -- it is inefficient to retrieve the entire \texttt{Source} catalog, for example, from the file system. Instead, because the \texttt{Source} catalog contains data for sources detected in the \texttt{visit\_image}s, there is one \texttt{Source} catalog in the Butler for each \texttt{visit\_image}. Similarly, there is one \texttt{Object} catalog for each \texttt{deep\_coadd}. All the catalogs described in \secref{ssec:catalogs}, aside from the \texttt{CcdVisit}, \texttt{SSObject}, \texttt{SSSource}, and \texttt{Calibration} catalogs, are split within the Butler.
 
 \input{tables/dp1_butler_datasets}
 
-A dataset is associated with one or more \emph{Run Collections}; logical groupings of  datasets within the \gls{Butler} system that were created or processed together by the same batch operation.
+A dataset is associated with one or more \emph{Collections}; logical groupings of  datasets within the \gls{Butler} system that were created or processed together by the same batch operation.
 Collections allow multiple datasets with the same data coordinate to coexist without conflict.
-Run Collections support flexible, parallel processing by enabling repeated analyses of the same input data using different configurations.
+Collections support flexible, parallel processing by enabling repeated analyses of the same input data using different configurations.
 
 For \gls{DP1}, a subset of the consolidated database contents (\secref{sssec:consdb}) is accessible through the Data Butler. However, not all metadata from the \texttt{Visit} table (\secref{ssec:metadata}) is available.
 The \gls{DP1} Butler is read-only; a writeable Butler is expected by mid-2026, around the time of \gls{DP2}.
@@ -205,8 +204,8 @@ Although the small \gls{DP1} dataset does not require Qserv’s full capabilitie
 \label{sssec:consdb}}
 
 The Consolidated Database (ConsDB) \citep{dmtn-227} is an SQL-compatible database designed to store and manage metadata for Rubin Observatory science and calibration images.
-Metadata is recorded on a per-exposure basis and includes information such as the target name, pointing coordinates, observation time, physical filter and band, exposure duration, and environmental conditions (e.g., temperature, humidity, and wind speed).
-This key image metadata is also stored in the Butler Registry (\secref{sssec:data_butler}), however the ConsDB stores additional information  including derived metrics from image processing and information from the \gls{EFD} transformed from the time dimension to the exposure dimension.
+Metadata are recorded on a per-exposure basis and includes information such as the target name, pointing coordinates, observation time, physical filter and band, exposure duration, and environmental conditions (e.g., temperature, humidity, and wind speed).
+This key image metadata are also stored in the Butler Registry (\secref{sssec:data_butler}), however the ConsDB stores additional information  including derived metrics from image processing and information from the \gls{EFD} transformed from the time dimension to the exposure dimension.
 
 The ConsDB schema is organized into instrument-specific tables, e.g., \gls{LSSTComCam} and LSSTCam, facilitating instrument-specific queries.
 Within the \gls{LSSTComCam} schema, data is further structured into tables for individual exposures and detectors.

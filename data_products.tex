@@ -122,10 +122,11 @@ The field of view of a single \texttt{raw}, excluding prescan and overscan regio
 They have undergone instrument signature removal (\secref{ssec:isr}) and all the single frame processing steps described in \secref{ssec:single_frame_processing} which are, in summary: \gls{PSF} modeling, \gls{background} subtraction, and astrometric and photometric \gls{calibration}.
 As with \texttt{raw}s, a \texttt{visit\_image} contains processed data from a single \gls{CCD} resulting from a single \exposuretime \gls{LSSTComCam} exposure.
 As a consequence, a single \gls{LSSTComCam} exposure typically results in nine \texttt{visit\_image}s.
-The handful of exposures with fewer than nine \texttt{raw} images also have fewer than nine \texttt{visit\_images}, but there are an additional \nsfpfails \texttt{raw} that failed processing and for which there is thus no corresponding \texttt{visit\_image}. Almost all failures were due to challenges with astrometric fits or \gls{PSF} models.
+The handful of exposures with fewer than nine \texttt{raw} images also have fewer than nine \texttt{visit\_images}, but there are an additional \nsfpfails \texttt{raw} that failed processing and for which there is thus no corresponding \texttt{visit\_image}.
+Almost all failures were due to challenges with astrometric fits or \gls{PSF} models in crowded fields.
 
 In total, there are \nvisitimages \texttt{visit\_image}s in \gls{DP1}.
-Each \texttt{visit\_image}  comprises three images: the calibrated science image, a variance image, and a pixel mask, indicating, for example, bad or saturated pixels, pixels affected by cosmic rays, pixels associated with detected sources, etc.
+Each \texttt{visit\_image}  comprises three images: the calibrated science image, a variance image, and a pixel bitmask, indicating, for example, bad or saturated pixels, pixels affected by cosmic rays, pixels associated with detected sources, etc.
 Each \texttt{visit\_image} also contains a position-dependent \gls{PSF} model, \gls{WCS} information, and various \gls{metadata} providing information about the observation and processing.
 The science and variance images and the pixel mask each contain \nvisitimagepixx$\times$ \nvisitimagepixy pixels.
 In total, a single \texttt{visit\_image}, including all extensions and \gls{metadata}, occupies around \visitimagehdd of disk space.
@@ -319,7 +320,7 @@ We provide a brief summary here.
 
 For the \textit{grizy} bands, the input catalogs were (in order of priority): \gls{DES} Y6 Calibration Stars \citep{2023arXiv230501695R}; Gaia-\gls{XP} Synthetic Magnitudes \citep{2023A&A...674A..33G}; the \gls{Pan-STARRS}1 3pi survey \citep{2016arXiv161205560C}; \gls{Data Release} 2 of the  SkyMapper survey \citep{2019PASA...36...33O}; and \gls{Data Release} 4 of the \gls{VST} \gls{ATLAS} survey \citep{2015MNRAS.451.4238S}. 
 For the \textit{u}-band, the input catalogs were (in order of priority): Standard Stars from \gls{SDSS} \gls{Data Release} 16 \citep{2020ApJS..249....3A}; Gaia-\gls{XP} Synthetic Magnitudes \citep{2023A&A...674A..33G}; and synthetic magnitudes generated using \gls{SLR}, which estimates the \textit{u}-band \gls{flux} from the \textit{g}-band \gls{flux} and \textit{g-r} colors. 
-This latter input (i.e., \gls{SLR} estimates) was used to boost the number of \textit{u}-band reference sources, as otherwise the source density from the \textit{u}-band input catalogs is too low to be useful for the large footprint of the \gls{LSST}.
+This latter input (i.e., \gls{SLR} estimates) was used to boost the number of \textit{u}-band reference sources, as otherwise the source density from the \textit{u}-band input catalogs is too low to be useful for the \gls{LSST}.
 
 Only high quality stellar sources were selected from each input catalog. 
 Throughout, the \texttt{Calibration} catalog uses the \gls{DES} bandpasses for the \textit{grizy}-bands and the \gls{SDSS} bandpass for the \textit{u}-band; color transformations derived from high quality sources were used to convert fluxes from the various input catalogs (some of which did not use the \gls{DES}/SDSS bandpasses) to the respective bandpasses. 
@@ -368,7 +369,7 @@ In \gls{DP1}, these fall into two categories: Survey Property Maps and \gls{HiPS
 Survey Property Maps \citep{10.71929/rubin/2570315} summarize how properties such as observing conditions or exposure time vary across the observed sky.
 Each map provides the spatial distribution of a specific quantity at a defined sky position for each band by aggregating information from the images used to make the \texttt{deep\_coadd}.
 Maps are initially created per-\gls{tract} and then combined to produce a final consolidated map.
-At each sky location, represented by a spatial pixel in the \gls{HEALPix} grid, values are derived using statistical operations, such as minimum, maximum, mean, weighted mean, or sum, depending on the property.
+At each sky location, represented by a spatial pixel in the \gls{HEALPix}\citep{2005ApJ...622..759G} grid, values are derived using statistical operations, such as minimum, maximum, mean, weighted mean, or sum, depending on the property.
 
 There are \nsurveypropertymaps survey property maps in \gls{DP1}.
 The available maps describe total exposure times, observation epochs, \gls{PSF} size and \gls{shape}, \gls{PSF} magnitude limits, sky \gls{background} and noise levels, as well as astrometric shifts and \gls{PSF} distortions due to wavelength-dependent atmospheric \gls{DCR} effects.
@@ -376,7 +377,7 @@ They all use the dataset type  format \texttt{deep\_coadd\_<PROPERTY>\_consolida
 e.g. \texttt{deep\_coadd\_exposure\_time\_consolidated\_map\_sum} provides a spatial map of the total exposure time accumulated per
 sky position in units of seconds.
 All maps are stored in \texttt{HealSparse}\footnote{A sparse \gls{HEALPix}
-representation that efficiently encodes data values on the celestial sphere. \url{https://healsparse.readthedocs.io}}\citep{2005ApJ...622..759G} format.
+representation that efficiently encodes data values on the celestial sphere. \url{https://healsparse.readthedocs.io}} format.
 Survey property maps are only available via the Data \gls{Butler} (\secref{sssec:data_butler}) and  have dimensions \texttt{band} and \texttt{skymap}.
 
 Figure \ref{fig:survey_property_maps} presents three survey property maps for exposure time, \gls{PSF} magnitude limit, and sky noise, computed for representative tracts and bands.
