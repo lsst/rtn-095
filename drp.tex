@@ -54,9 +54,8 @@ These preliminary solutions are subsequently replaced by more accurate fits, as 
 %LPG: Great, thank you
 \subsubsection{PSF Modeling}
 \label{ssec:psf_modelling}
-\gls{PSF} modeling in \gls{DP1} uses the Piff \citep{DES:2020vau} algorithm.
-Piff models represent the \gls{PSF} on a pixel-by-pixel basis and interpolate its parameters across a single CCD using two-dimensional polynomials.
-Piff utilizes its Pixel grid model with a fourth-order polynomial interpolation per \gls{CCD}, except in the u-band, where star counts are insufficient to support a fourth-order fit.
+\gls{PSF} modeling in \gls{DP1} uses the Piff \citep{DES:2020vau} package.
+Our configuration of Piff utilizes its \texttt{PixelGrid} model with a fourth-order polynomial interpolation per \gls{CCD}, except in the u-band, where star counts are insufficient to support a fourth-order fit.
 In this case, a second-order polynomial is used instead.
 Details on the choice of polynomial order, overall \gls{PSF} modeling performance, and known issues are discussed in \secref{ssec:psf_models}.
 
@@ -85,7 +84,6 @@ Future processing will also likely include a Gaussian Processes fit to better ac
 
 The final component of the astrometric \gls{calibration} involves the positions of the isolated point sources included in the fit, which are described by five parameters: sky coordinates, proper motion, and parallax
 While proper motions and parallaxes are not released for DP1, they are fitted for these sources in the astrometric solution to improve the astrometric calibration.
-The reference \gls{epoch} for the fit positions is 2024.9.
 
 % Eli
 \subsubsection{Photometric Calibration}
@@ -137,7 +135,7 @@ Identified \gls{transient} regions are masked before coaddition, improving image
 \subsubsection{Coadd Processing}
 \label{sssec:coadd_processing}
 Coadd-processing consists of detection, \gls{deblend}ing, and  measurement on coadds to produce object tables (\secref{ssec:catalogs}).
-For each coadd in all six bands, we fit a constant \gls{background} and performed source detection at a $5\sigma$ detection threshold.
+For each coadd in all six bands, we perform source detection at a $5\sigma$ detection threshold and then adjust the background with a per-patch constant (coadds are built from background-subtracted images, but the deeper detection on coadds redefines what is considered source vs. background).
 Detections across bands are merged in a fixed priority order, $irzygu$, to form a union detection catalog, which serves as input to deblending.
 
 Deblending is performed using the Scarlet Lite algorithm, which implements the same model as Scarlet \citep{2018A&C....24..129M}, but operates on a single pixel grid.

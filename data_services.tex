@@ -5,7 +5,7 @@
 The \gls{RSP} \citep{LSE-319,DMTN-212} is a powerful, cloud-based environment for scientific research and analysis of petascale-scale astronomical survey data.
 It serves as the primary interface for scientists to access, visualize, and conduct next-to-the-data analysis of Rubin and \gls{LSST} data.
 The  \gls{RSP} is designed around a  ``bring the compute to the data'' principle, eliminating the need for users to download massive datasets.
-Although \gls{DP1} is comparable in size (\sizeinbytes) to existing survey datasets, future \gls{LSST} datasets will be larger and more complex, making it crucial to co-locate data and analysis for effective scientific discovery.
+Although \gls{DP1} is much smaller in size (\sizeinbytes) than many current survey datasets, future \gls{LSST} datasets will be far larger and more complex, making it crucial to co-locate data and analysis for effective scientific discovery.
 
 The \gls{RSP} provides users with access to data and services through three distinct user-facing Aspects: a \emph{Portal}, which facilitates interactive exploration of the data; a JupyterLab-based \emph{Notebook} environment for data analysis using Python; and an extensive set of \emph{\glspl{API}} that enable programmatic access to both data and services.
 The three Aspects are designed to be fully integrated, enabling seamless workflows across the \gls{RSP}.
@@ -141,9 +141,9 @@ The dataset type defines the kind of data a dataset represents, such as  a raw i
 
 \input{tables/dp1_butler_datasets}
 
-A dataset is associated with one or more \emph{Run Collections}; logical groupings of  datasets within the \gls{Butler} system that were created or processed together by the same batch operation.
+A dataset is associated with one or more \emph{Collections}; logical groupings of  datasets within the \gls{Butler} system that were created or processed together by the same batch operation.
 Collections allow multiple datasets with the same data coordinate to coexist without conflict.
-Run Collections support flexible, parallel processing by enabling repeated analyses of the same input data using different configurations.
+Collections support flexible, parallel processing by enabling repeated analyses of the same input data using different configurations.
 
 For \gls{DP1}, a subset of the consolidated database contents (\secref{sssec:consdb}) is accessible through the Data Butler. However, not all metadata from the \texttt{Visit} table (\secref{ssec:metadata}) is available.
 The \gls{DP1} Butler is read-only; a writeable Butler is expected by mid-2026, around the time of \gls{DP2}.

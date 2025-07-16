@@ -50,8 +50,8 @@ There are, however, some residual crosstalk features present post-correction, wi
 \subsubsection{Bleed Trails}
 Bleed trails from saturated sources were expected on LSSTComCam, but they appear in more dramatic forms than was expected.
 As a bleed trail nears the serial register, it fans out into a ``trumpet'' shaped feature.
-Although bright, these features do not have consistently saturated pixels, and were ignored in the first on-sky processing.
-We have since developed the means to programmatically identify and mask these features, which we have named ``edge bleeds.''
+Although bright, these features do not have consistently saturated pixels.
+In DP1 these ``edge bleeds'' were programmatically identified and masked.
 
 Saturated sources can create a second type of bleed, where the central bleed drops below the background level.
 The depressed columns along these trails extend across the entire height of the detector, crossing the detector mid-line.
