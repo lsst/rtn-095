@@ -39,6 +39,9 @@ clean:
 
 .FORCE:
 
+deps:
+	pip install -r lsst-texmf/requirements.txt 
+
 authors.yaml:
 	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py --builder -p 1yMRqNdPVoAtjBMEPve2WEyt3V_73o4uIv-ZuHvzpeJM "A2:L1000"
 
