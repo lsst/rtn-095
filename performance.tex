@@ -4,16 +4,17 @@
 \section{Performance Characterization and Known Issues
 \label{sec:performance}}
 %
-In this section, we provide an assessment of the \gls{DP1}
-data quality and known issues.
-A summary of the Rubin \gls{DP1} key numbers and data quality metrics  is found in PERFSUMMARYTABLE
+In this section, we provide an assessment of the \gls{DP1} data quality and known issues.
+% A summary of the Rubin \gls{DP1} key numbers and data quality metrics  is found in PERFSUMMARYTABLE
 %\input{tables/dp1_key_numbers}
 
+%%%% Chris W
 \subsection{Sensor Anomalies and ISR}
 \label{ssec:sensor_anomalies}
 \input{sensor_anomalies}
+ 
 
-% Pierre-François
+% %%%%Pierre-François
 \subsection{PSF Models
 \label{ssec:psf_models}}
 
@@ -247,15 +248,6 @@ There are several caveats for this analysis. The selection of objects for matchi
 \subsection{Flux Measurement}
 \label{ssec:fluxes}
 
-\begin{figure}[htb]
-\centering
-\includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_i_mag_cmodel.pdf}
-\includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_i_mag_sersic.pdf}
-\caption{Magnitude residuals for matched injected galaxies with the CModel and Sersic algorithms.}
-\label{fig:injected_lsst_cells_v1_5063_i_mag}
-\vspace{0.1cm}
-\end{figure}
-
 \figref{fig:injected_lsst_cells_v1_5063_i_mag} shows $i$-band magnitude residuals for CModel and Sersic measurements using the matched injected galaxies described in \secref{ssec:detection_completeness}.
 Similar behavior is seen in other bands.
 Sersic fluxes show reduced scatter and are more accurate on average for galaxies brighter than 22.5\,${\rm mag_{i}}$, though CModel's are less biased, with median residuals  slightly closer to zero.
@@ -263,21 +255,43 @@ For fainter objects, Sersic fluxes are more biased and less accurate.
 The magnitude of this bias is considerably larger than previously seen in simulated data and is being investigated.
 Aperture fluxes - including Kron and \gls{GAaP} - are not shown as they are not corrected to yield total fluxes and thus are not recommended for use as total galaxy magnitudes.
 
-\begin{figure}[htb]
-\centering
-\includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_r_color_cmodel_g_minus_i.pdf}
-\includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_r_color_gaap_g_minus_i.pdf}
-\includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_r_color_sersic_g_minus_i.pdf}
-\caption{$g-i$ color residuals versus injected r-band magnitude for matched galaxies with the CModel, \gls{GAaP} and Sersic algorithms.}
-\label{fig:injected_lsst_cells_v1_5063_r_color_g_minus_i}
+\begin{figure*}[hbt!]
+  \centering
+  \begin{subfigure}[t]{0.40\textwidth}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_cmodel.pdf}
+  \caption{$ugr$ stellar locus containing 12779 stars with signal-to-noise greater than 50 in the $u$ band.}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.4\textwidth}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_sersic.pdf}
+  \caption{$gri$ stellar locus containing 63236 stars with signal-to-noise greater than 200 in the $i$ band.}
+  \end{subfigure}\hfill
+\caption{Magnitude residuals for matched injected galaxies with the CModel and Sersic algorithms.}
+\label{fig:injected_lsst_cells_v1_5063_i_mag}
 \vspace{0.1cm}
-\end{figure}
-
-\figref{fig:injected_lsst_cells_v1_5063_i_mag} shows $g-i$ color residuals versus $r$-band magnitude for the same sample of galaxies as \figref{fig:injected_lsst_cells_v1_5063_i_mag}.
+\end{figure*}
+\figref{fig:injected_lsst_cells_v1_5063_r_color_g_minus_i} shows $g-i$ color residuals versus $r$-band magnitude for the same sample of galaxies as \figref{fig:injected_lsst_cells_v1_5063_i_mag}.
 For this and most other colors, \gls{GAaP} (with a $1''$ aperture) and Sersic colors both yield lower scatter; however, the CModel colors have the smallest bias.
 Curiously, the \gls{GAaP} bias appears to be magnitude-dependent, whereas the Sersic bias remains stable from $19<r<26$.
 Any of these color measurements are suitable for use for deriving quantities like photometric redshifts, stellar masses, etc.
 
+\begin{figure*}[hbt!]
+  \centering
+  \begin{subfigure}[t]{0.31\textwidth}
+\includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_cmodel_g_minus_i.pdf}
+  \caption{$ugr$ stellar locus containing 12779 stars with signal-to-noise greater than 50 in the $u$ band.}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+\includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_gaap_g_minus_i.pdf}
+  \caption{$gri$ stellar locus containing 63236 stars with signal-to-noise greater than 200 in the $i$ band.}
+  \end{subfigure}\hfill
+    \begin{subfigure}[t]{0.31\textwidth}
+\includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_sersic_g_minus_i.pdf}
+  \caption{$riz$ stellar locus containing 46760 stars with signal-to-noise greater than 200 in the $i$ band.}
+  \end{subfigure}\hfill
+\caption{$g-i$ color residuals versus injected r-band magnitude for matched galaxies with the CModel, \gls{GAaP} and Sersic algorithms.}
+\label{fig:injected_lsst_cells_v1_5063_r_color_g_minus_i}
+\vspace{0.1cm}
+\end{figure*}
 In addition to photometry, some algorithms include measurements of structural parameters like size, ellipticity, and Sersic index.
 One particular known issue is that many (truly) faint objects have significantly overestimated sizes and fluxes, as was also seen in the Dark Energy Survey \citep{2025arXiv250105739B}.
 We dub such objects "super-spreaders".
@@ -404,7 +418,7 @@ These were not originally found by the discovery pipelines as they didn't satisf
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=0.98\linewidth]{figures/sso_residuals.pdf}
-\caption{Astrometric residuals between expected and observed positions of SSOs in \gls{DP1}. The median residuals are $0.''001$ and $-0.''016$ in R.A./Dec direction, with the standard deviations of $0.''19$ and $0.''10$, respectively. No detectable detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. The wider scatter in the RA-direction is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions.}
+\caption{Astrometric residuals between expected and observed positions of SSOs in \gls{DP1}. The median residuals are $0.''001$ and $-0.''016$ in R.A./Dec direction, with the standard deviations of $0.''19$ and $0.''10$, respectively. No detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. The wider scatter in the RA-direction is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions.}
 \label{fig:sso_residuals}
 \vspace{0.1cm}
 \end{figure}

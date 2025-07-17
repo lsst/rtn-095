@@ -3,7 +3,7 @@ Since no corrections are currently available for these anomalies, they are maske
 
 \subsubsection{Vampire Pixels}
 Vampire pixels are visible on the images as a bright defect surrounded by a region of depressed flux, as though the defect is stealing charge from its neighboring pixels; they have been termed ``vampire'' defects.
-\figref{fig:anomalies_vampire_pixels}   sows an example of a vampire pixel near the center of R22\_S11 on an r-band flat.
+ \figref{fig:anomalies_vampire_pixels}  shows an example of a vampire pixel near the center of R22\_S11 on an r-band flat.
 
 From studies on evenly illuminated images, vampires appear to conserve charge.
 Unfortunately, there's no clean way to redistribute this stolen flux, and so we have identified as many of them as possible and created manual defect masks to exclude them from processing.
@@ -11,15 +11,13 @@ We have found some similar features on the ITL detectors on LSSTCam, and will us
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.98\linewidth]{figures/dp1_isr_anomalies-vampire_pixel.pdf}
-  \label{fig:anomalies_vampire_pixels}
-  \caption{
-    A large \textit{vampire pixel} near the center of R22\_S11, as seen on the r-band flat.
-  }
+  \caption{A large \textit{vampire pixel} near the center of R22\_S11, as seen on the r-band flat.}
+   \label{fig:anomalies_vampire_pixels}
 \end{figure}
 
 \subsubsection{Phosphorescence}
 Some regions were seen to contain large numbers of bright defects.
-An example is shown in  \figref{fig:anomalies_phosphorescence}  in a g-band flat. 
+An example is shown in   \figref{fig:anomalies_phosphorescence}  in a g-band flat. 
 On closer study, it appears that on some detectors a layer of photoresist wax was incompletely removed from the detector surface during production.
 As this wax is now trapped below the surface coatings, there is no way to physically clean these surfaces.
 If this wax responded to all wavelengths equally, then it would likely result in quantum efficiency dips, which might be removable during flat correction.
@@ -28,11 +26,9 @@ The worst of these regions were excluded with manual masks, but we do not expect
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.98\linewidth]{figures/dp1_isr_anomalies-phosphorescence.pdf}
+  \caption{The top left corner of R22\_S01 in the g-band flat, showing the many small defect features that are caused by the remnant photoresist wax.
+  A single large defect box masks this region from further analysis to prevent these features from contaminating measurements.}
   \label{fig:anomalies_phosphorescence}
-  \caption{
-    The top left corner of R22\_S01 in the g-band flat, showing the many small defect features that are caused by the remnant photoresist wax.
-    A single large defect box masks this region from further analysis to prevent these features from contaminating measurements.
-  }
 \end{figure}
 
 \subsubsection{Crosstalk}
@@ -43,11 +39,9 @@ There are, however, some residual crosstalk features present post-correction, wi
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.98\linewidth]{figures/dp1_isr_anomalies-crosstalk_residual.pdf}
+  \caption{An example of a bright star with over-subtracted crosstalk residuals visible on neighboring amplifiers to both sides (exposure 2024120600239, detector R22\_S02).
+  The horizontal banding stretching from the center of the star shows the interpolation pattern covering the saturated core and the ITL edge bleed near the serial register.}
   \label{fig:crosstalk_residual}
-  \caption{
-    An example of a bright star with over-subtracted crosstalk residuals visible on neighboring amplifiers to both sides (exposure 2024120600239, detector R22\_S02).
-    The horizontal banding stretching from the center of the star shows the interpolation pattern covering the saturated core and the ITL edge bleed near the serial register.
-  }
 \end{figure}
 
 \subsubsection{Bleed Trails}
@@ -60,14 +54,9 @@ Saturated sources can create a second type of bleed, where the central bleed dro
 The depressed columns along these trails extend across the entire height of the detector, crossing the detector mid-line.
 We developed a model for these to identify which sources are sufficiently saturated to result in such a trail, which is then masked.  As these kind of trails appear only on the ITL detectors, we've named these features ``ITL dips.''
 \figref{fig:anomalies_itl_dip} shows an example of a   bright star exhibiting the ``ITL dip'' phenomenon on exposure: 2024121000503, detector: R22\_S21.
-
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.98\linewidth]{figures/dp1_isr_anomalies-itl_dip.pdf}
-  \label{fig:anomalies_itl_dip}
-  \caption{
-    A bright star showing the ``ITL dip'' phenomenon, in which a dark trail extends out from the star to the top and bottom edges of the detector (exposure: 2024121000503, detector: R22\_S21).
-  }
+  \caption{A bright star showing the ``ITL dip'' phenomenon, in which a dark trail extends out from the star to the top and bottom edges of the detector (exposure: 2024121000503, detector: R22\_S21).}
+\label{fig:anomalies_itl_dip}
 \end{figure}
-
-%% y band diffraction?
