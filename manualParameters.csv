@@ -1,0 +1,14 @@
+campaignstartdate,2024-10-24,
+campaignnweeks,7,
+nnightscomcam,48,
+sizeinbytes,3.5,TB
+tenyearcatalogsize,15,PB
+scipipeversion,v29.0.0,
+totalarea,$\sim$15,deg$^2$.
+comcamarea,xxxx,
+nnewasteroiddiscoveries,93,
+nexposuresaoscommissioning,10000,
+nexposurescalibcommissioning,2000,
+nexposuresspcommissioning,2000,
+sciencepipelinesversion,v29.1,
+sciencepipelinesurl,https://pipelines.lsst.io/v/v29_1_1,

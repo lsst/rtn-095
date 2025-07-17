@@ -1,15 +1,14 @@
 % Lead: Leanne
 \section{On-Sky Commissioning Campaign \label{sec:on_sky_campaign}}
 
-The first Rubin on-sky commissioning campaign was conducted using the \gls{LSSTComCam} between \campaignstartdate and \dponeenddate, spanning a total of \nnightscomcam nights.
-The primary objective was to optically align the Simonyi Survey Telescope and verify its ability to deliver acceptable image quality using \gls{LSSTComCam}.
+The first Rubin on-sky commissioning campaign was conducted using the \gls{LSSTComCam}. The campaign's primary objective was to optically align the Simonyi Survey Telescope and verify its ability to deliver acceptable image quality using \gls{LSSTComCam}.
 In addition, the campaign provided valuable operations experience to facilitate commissioning the full \gls{LSSTCam} \citep{2024SPIE13096E..1OL,2024SPIE13096E..1SR}.
-We note that commissioning \gls{LSSTComCam}  was not an objective of the campaign.
+We note that commissioning \gls{LSSTComCam} was not an objective of the campaign.
 Instead, LSSTComCam was used as a tool to support broader observatory commissioning, including early testing of the \gls{AOS} and the LSST Science Pipelines.
 As a result,
 % instrument-specific investigations,  such as verifying the pointing model and studying the stray light were deprioritized.
 many artifacts present in the data are specific to \gls{LSSTComCam} and will be addressed only if they persist with \gls{LSSTCam}.
-Accordingly, the image quality achieved during this campaign, and in the \gls{DP1} data, may not reflect the performance ultimately achieved from \gls{LSSTCam}.
+Accordingly, the image quality achieved during this campaign, and in the \gls{DP1} data, may not reflect the performance ultimately expected from \gls{LSSTCam}.
 
 % From data_products to work in
 % For DP1, the term visit and exposure are synonymous and refer to a single full focal plane, 9 CDD image.
@@ -40,15 +39,15 @@ Since \gls{LSSTComCam} lacks dedicated wavefront sensors, wavefront errors were 
 Each night began with an initial alignment correction using a laser tracker to position the system within the capture range of the closed-loop \gls{algorithm} \citep{10.1117/12.3019031}.
 Once this coarse alignment was complete, the \gls{AOS} refined the optical alignment and applied mirror surfaces corrections to optimize the image quality across the \gls{LSSTComCam} field of view.
 
-During Science Pipelines commissioning (\secref{ssec:pipelines_commissioning}),  observations were conducted using the AOS in open-loop mode only, without closed-loop corrections between exposures. 
+During LSST \gls{Science Pipelines} commissioning (\secref{ssec:pipelines_commissioning}),  observations were conducted using the AOS in open-loop mode only, without closed-loop corrections between exposures. 
 Closed-loop operation, which requires additional intra- and extra-focal images with LSSTComCam, was not compatible with the continuous data acquisition needed by the pipelines.
 The image quality for these data was monitored by measuring the \gls{PSF} \gls{FWHM}, and closed-loop sequences were periodically run when image quality degradation was observed.
 
 %%%%% ComCam
 \subsection{The LSST Commissioning Camera
 \label{ssec:comcam}}
-\gls{LSSTComCam} \citep{2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH, 10.71929/rubin/2561361} is a 144-megapixel, scaled-down version of the 3.2-gigapixel \gls{LSSTCam}.
-It covers approximately 5\% of the \gls{LSSTCam} focal plane area, with a  field of view of $\sim$0.5deg$^2$   (40\arcmin x40\arcmin), compared to LSSTCam's 9.6 deg$^2$. 
+\gls{LSSTComCam} \citep{2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH, 10.71929/rubin/2561361} is a 144-megapixel version of the 3.2-gigapixel \gls{LSSTCam}.
+It covers approximately 5\% of the \gls{LSSTCam} focal plane area, with a field of view of $\sim$0.5deg$^2$   (40\arcmin x40\arcmin), compared to LSSTCam's 9.6 deg$^2$. 
 It was developed to validate camera interfaces with other observatory components and evaluate overall system performance prior to the start of \gls{LSSTCam} commissioning. 
 Although it has a smaller imaging area, \gls{LSSTComCam} shares the same plate scale of \rawplatescale and is housed in a support structure that precisely replicates the total mass, center of gravity, and physical dimensions of \gls{LSSTCam}. 
 All mechanical and utility interfaces to the telescope are implemented identically, enabling full end-to-end testing of observatory systems, including readout electronics, image acquisition, and data pipelines.
@@ -75,7 +74,7 @@ Although the cryostat in LSSTComCam uses a different cooling system (Cryotels), 
 \vspace{0.1cm}
 \end{figure}
 
-\figref{fig:comcam_focal_plane} shows the \gls{LSSTComCam} focal plane layout, illustrating the enumeration of sensors and amplifiers, along with their physical arrangement within the raft.
+
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=\linewidth]{commissioning/comcam_focal_plane_schematic.pdf}
@@ -119,7 +118,7 @@ These \nfields fields form the basis of the \gls{DP1} dataset.
 \begin{figure*}[bt!]
 \centering
 \plotone{commissioning/dp1_fields_with_survey_fp}
-\caption{Location of the seven DP1 fields overlaid on the \gls{LSST} baseline survey footprint. NES: North Ecliptic Spur, SCP: South Celestial Pole, Low-Dust WFD: regions away from the GP observed with a WFD cadence, GP/MC WFD: Galactic Plane and Magellanic Clouds regions observed with a WFD cadence. The \gls{FOV} covered by the \gls{LSSTCam} and \gls{LSSTComCam} focal planes is shown as concentric yellow circles about the pointing center of each field.}
+\caption{Locations of the seven DP1 fields overlaid on the \gls{LSST} baseline survey footprint. NES: North Ecliptic Spur, SCP: South Celestial Pole, Low-Dust WFD: regions away from the Galactic Plane (GP) observed with a WFD cadence, GP/MC WFD: Galactic Plane and Magellanic Clouds regions observed with a WFD cadence. The \gls{FOV} covered by the \gls{LSSTCam} and \gls{LSSTComCam} focal planes is shown as concentric yellow circles about the pointing center of each field.}
 \label{fig:dp1_fields_on_sky}
 \end{figure*}
 Each of the \nfields target fields was observed repeatedly in multiple bands over many nights.
@@ -268,7 +267,7 @@ The visits cycled between the grid's four pointing centers, using small random t
 The delivered image quality is influenced by contributions from both the observing system (i.e., dome, telescope and \gls{camera}) and the atmosphere.
 During the campaign, the Rubin \gls{DIMM} was not operational, so atmospheric seeing was estimated using live data from the \gls{SOAR} \gls{RINGSS} seeing monitor.
 Although accelerometers mounted on the mirror cell and top-end assembly were available to track dynamic optics effects, such as mirror oscillations that can degrade optical alignment, this data was not used during the campaign.
-Mount encoder data was used to measure the mount jitter in every image, with a measured median contribution of 0.004 arcseconds to image degradation.
+Mount encoder data were used to measure the mount jitter in every image, with a measured median contribution of 0.004 arcseconds to image degradation.
 As the pointing model was not fine tuned, tracking errors could range from 0.2 to 0.4 arcseconds per image, depending on RA and Dec.
 %RA resolves to Rapid Analysis
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
