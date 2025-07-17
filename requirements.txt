@@ -1,6 +1,5 @@
+-r lsst-texmf/requirements-technote.txt
 pydantic<2.11
-setuptools<81 
+setuptools<81
 lander<2.0.0
 pyyaml
-
-
