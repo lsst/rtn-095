@@ -17,20 +17,14 @@ A summary of the Rubin \gls{DP1} key numbers and data quality metrics  is found 
 \subsection{PSF Models
 \label{ssec:psf_models}}
 
-To characterize \gls{PSF} performance, we use adaptive second moments (\citealt{2002AJ....123..583B}) measured on \gls{PSF} stars
-and on the PSF model using the \gls{HSM} implementation (\citealt{2003MNRAS.343..459H} and \citealt{2005MNRAS.361.1287M}), all expressed in each detector's pixel frame.
-Given the second-moment matrix elements $I_{\text{xx}}$, $I_{\text{yy}}$, and $I_{\text{xy}}$, we define:
-
-\begin{align*}
-T &= I_{\text{xx}} + I_{\text{yy}} \\
-e^1 &= \frac{I_{\text{xx}} - I_{\text{yy}}}{T} \\
-e^2 &= \frac{2 I_{\text{xy}}}{T}.
-\end{align*}
-
-\noindent We denote $T_{\text{PSF}}$, $e^1_{\text{PSF}}$, and $e^2_{\text{PSF}}$ for
+To characterize \gls{PSF} performance, we use adaptive second moments (\citealt{2002AJ....123..583B})
+measured on \gls{PSF} stars and on the PSF model using the \gls{HSM} 
+implementation (\citealt{2003MNRAS.343..459H} and \citealt{2005MNRAS.361.1287M}), 
+all expressed in each detector's pixel frame.
+We consider the classical trace of the second moment matrix $T$, along with the ellipticity parameters $e^1$ and $e^2$, to characterize the performance of the PSF.
+We denote $T_{\text{PSF}}$, $e^1_{\text{PSF}}$, and $e^2_{\text{PSF}}$ for
 measurements on the \gls{PSF} stars, and $T_{\text{model}}$, $e^1_{\text{model}}$,
 and $e^2_{\text{model}}$ for the \gls{PSF} model. Two variants are compared:
-
 \begin{itemize}
 \item Piff with second-order polynomial interpolation (default in science pipelines); and
 \item Piff with fourth-order polynomial interpolation (final \gls{DP1} \gls{PSF}).
@@ -38,9 +32,7 @@ and $e^2_{\text{model}}$ for the \gls{PSF} model. Two variants are compared:
 
 Table \ref{tab:psf-1d_stats} summarizes each model’s ability to reconstruct
 the mean $T$, $e^1$, and $e^2$ on  \gls{LSSTComCam}. Piff shows a negative
-residual bias in size. We will explore this further by plotting $\delta T/T$
-versus magnitude (binned by color) in Fig. \ref{fig:psf_residuals_mag_color}.
-
+residual bias in size. 
 \input{tables/psf_1d_stat.tex}
 
 Another way to assess \gls{PSF} performance is to examine the average
@@ -50,7 +42,7 @@ Piff shows strong spatial correlations, with a systematic offset
 that matches Table \ref{tab:psf-1d_stats}. It is the existence of these spatial structures that motivated raising the interpolation order to four, except in the u-band.
 Although not shown in \figref{fig:psf_residuals_fov}, third-order polynomial interpolation still exhibited residual structure.
 A fifth-order polynomial interpolation would require more stars than are available on some CCDs to adequately constrain the model while offering only marginal gains.
-Preliminary analysis of LSSTCam data in the laboratory at \gls{SLAC} shows that the \gls{ITL} sensors exhibit the same pattern.
+Preliminary analysis of LSSTCam data in the laboratory at \gls{SLAC} shows that the \gls{ITL} sensors exhibit the same pattern as \gls{ITL} sensors on \gls{LSSTComCam}.
 The sensor's $\delta T/T$ is fully correlated with the height variation across the LSSTCam \gls{ITL} sensors, which explains this behavior.
 Future data processing will account for this height variation directly in the \gls{PSF} model.
 \begin{figure}[htb!]
