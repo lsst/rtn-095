@@ -1,0 +1,6 @@
+pydantic<2.11
+setuptools<81 
+lander<2.0.0
+pyyaml
+
+
