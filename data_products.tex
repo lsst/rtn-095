@@ -226,7 +226,7 @@ Each type of catalog contains measurements for either Sources  detected in  \tex
 % Note: The following was used to explain why the object table is a tract-level dataset, but now all mention of tract-level etc is moved to the Data Services section.
 %While an object {\it may} initially be detected and therefore defined within a single epoch observation --- particularly if it is transient --- the vast majority of objects will be initially detected in deep coadded images.
 
-While the \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each differ in terms of their specific columns, in general they each contain: one or more unique identification number, positional information, one or more types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags (indicating, for example, whether the source/object is affected by saturated pixels, cosmic rays, etc.) for each source/object.
+While the \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each differ in terms of their specific columns, in general they each contain: one or more unique identification numbers, positional information, one or more types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags (indicating, for example, whether the source/object is affected by saturated pixels, cosmic rays, etc.) for each source/object.
 The Solar System catalogs \texttt{SSObject} and \texttt{SSSource} deviate from this general structure in that they instead contain orbital parameters for all known asteroids.
 Where applicable, all measured properties are reported with their associated 1$\sigma$ uncertainties.
 
@@ -256,8 +256,10 @@ The \texttt{Source} catalog contains data for \nsources \texttt{sources} in \gls
 %A single \texttt{Object} catalog includes all objects detected within an entire tract, rather than a single patch (i.e., there is one \texttt{objectCatalog} per observed tract).
 With coadd images produced on a per-band basis, a $>5\sigma$ detection in one or more of the bands will result in an object being included in the \texttt{Object} catalog.
 For cases where an object is detected at $>5\sigma$ in more than one band, a cross-matching has been performed between bands to associate an object in one band with its counterpart(s) in the other bands.
-As such, unlike the \texttt{Source} catalog, the \texttt{Object} catalog contains data from multiple bands. The objects reported in the \texttt{Object} catalog have also undergone deblending; in the case of blended detections, only the deblended child objects are included in the catalog.
-As with the \texttt{Source} catalog, the criterion for inclusion in the \texttt{Object} catalog is a $>5\sigma$ detection in one of the \texttt{deep\_coadd}s prior to deblending, yet the positions and fluxes of objects are reported post-deblending. Hence, it is possible for \texttt{Object} catalog to contain \texttt{objects} whose \gls{flux}-to-error ratios --- potentially of all types and in all bands --- are less than $5$.
+As such, unlike the \texttt{Source} catalog, the \texttt{Object} catalog contains data from multiple bands. 
+The objects reported in the \texttt{Object} catalog have also undergone deblending; in the case of blended detections, only the deblended child objects are included in the catalog.
+As with the \texttt{Source} catalog, the criterion for inclusion in the \texttt{Object} catalog is a $>5\sigma$ detection in one of the \texttt{deep\_coadd}s prior to deblending, yet the positions and fluxes of objects are reported post-deblending. 
+Hence, it is possible for \texttt{Object} catalog to contain \texttt{objects} whose \gls{flux}-to-error ratios --- potentially of all types and in all bands --- are less than $5$.
 
 In addition to the general information mentioned above (i.e., IDs, positions, fluxes, flags), the \texttt{Object} catalog also includes basic \gls{shape} and extendedness information.
 While they may be included in future data releases, no photometric redshifts, Petrosian magnitudes \citep{1976ApJ...209L...1P}, proper motions or periodicity information are included in the \gls{DP1} object catalogs.
@@ -275,7 +277,9 @@ The \texttt{ForcedSource} catalog contains a total of \nforcedsources entries ac
 %\texttt{objectForcedSourceCatalogs} are \texttt{tract}-level data products and uniquely referred to via the \texttt{tract} and \texttt{patch} dimensions.
 
 \item The \texttt{DiaSource} catalogs \citep{10.71929/rubin/2570317} contains data on all the sources detected at a $>5\sigma$ significance --- including those associated with known Solar System objects --- in the \texttt{difference\_image}s.
-Unlike sources detected in \texttt{visit\_image}s, sources detected in difference images (hereafter, ``DiaSources'') have gone through an association step during which an attempt has been made to associate them with into underlying objects called ``DiaObject''s. The \texttt{DiaSource} catalog consolidates all this information across multiple visits and bands. The detections reported in the \texttt{DiaSource} catalog have not undergone deblending.
+Unlike sources detected in \texttt{visit\_image}s, sources detected in difference images (hereafter, ``DiaSources'') have gone through an association step in which an attempt has been made to associate them into underlying objects called ``DiaObject''s. 
+he \texttt{DiaSource} catalog consolidates all this information across multiple visits and bands. 
+The detections reported in the \texttt{DiaSource} catalog have not undergone deblending.
 
 The \texttt{DiaSource} catalog contains data for \ndiasources \texttt{DiaSources} in \gls{DP1}.
 
@@ -362,10 +366,6 @@ This process generated a set of standard columns containing positional and flux 
 \subsection{Maps}
 Maps are two-dimensional visualizations of survey data. 
 In \gls{DP1}, these fall into two categories: Survey Property Maps and \gls{HiPS} Maps (\citealt{2015A&A...578A.114F}).
-% Duplicated below
-% Survey Property Maps show how properties like observing conditions or exposure time vary across the sky,
-% whereas HiPS Maps enable panning and zooming of a seamless, multi-band tiling of a coadded tile.
-% We detail each type in the following subsections.
 
 \subsubsection{Survey Property Maps}
 Survey Property Maps \citep{10.71929/rubin/2570315} summarize how properties such as observing conditions or exposure time vary across the observed sky.

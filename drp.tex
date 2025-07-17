@@ -67,11 +67,11 @@ Starting from the astrometric solution calculated in single frame processing (\s
 This allows the astrometric solution to be further refined by using all of the isolated point sources of sufficient signal-to-noise ratio in an image, rather than only those that appear in the reference catalog, as is done in single frame processing.
 Using multiple whole visits rather than a single detector also allows us to account for effects that impact the full focal plane and for the proper motion and parallax of the sources.
 
-In order to perform the fit of the astrometric solution, isolated point sources are associated between overlapping visits and with the Gaia \gls{DR3} reference catalog where possible.
+In order to perform the fit of the astrometric solution, isolated point sources are associated between overlapping visits and with the Gaia \gls{DR3} \citep{2023A&A...674A...1G} reference catalog where possible.
 The model used for \gls{DP1} consists of a static map from pixel-space to an intermediate frame (the per-detector model), followed by a per-visit map from the intermediate frame to the plane tangent to the telescope boresight (the per-visit model), then finally a deterministic mapping from the tangent plane to the sky.
 The fit is done using the \texttt{gbdes} package \citep{Bernstein2017}, and a full description is given in \citet{dmtn-266}.
 
-The per-detector model is intended to capture quasi-static characteristics of the telescope and \gls{camera}.
+The per-detector model is intended to capture quasi-static characteristics of the telescope and \gls{camera}. 
 During \gls{Rubin Operations}, the astrometric solution will allow for separate epochs with different per-detector models, to account for changes in the camera due to warming and cooling and other discrete events.
 However, for \gls{DP1}, \gls{LSSTComCam} was assumed to be stable enough that all visits use the same per-detector model. The model itself is a separate two-dimensional polynomial for each detector.
 For \gls{DP1}, a degree 4 polynomial was used; the degree of the polynomial mapping is tuned for each instrument and may be different for LSSTCam.
@@ -170,14 +170,14 @@ Further details on the performance of these algorithms can are in \secref{ssec:f
 \subsubsection{Difference Imaging Analysis
 \label{ssec:difim_analysis}}
 Difference Image Analysis (DIA) uses the decorrelated Alard \& Lupton image differencing algorithm \citep{DMTN-021}.
-We detected both positive and negative \texttt{DIASource}s at $5\sigma$ in the difference image.
-Sources with footprints containing both positive and negative peaks were fit with a dipole centroid code.
+We detected both positive and negative \texttt{DIASource} at $5\sigma$ in the difference image.
+Sources with footprints containing both positive and negative peaks due to offsets from the template position or blending were fit with a dipole centroid code.
 
 We filter a subset of \texttt{DIASource}s that have pixel flags characteristic of artifacts, non-astrophysical trail lengths, and unphysically negative direct fluxes.
 We performed a simple spatial association of \texttt{DIASources} into \texttt{DIAObjects} with a one arcsecond matching radius.
 
 % LPG: Do we need this? AP is not part of DP1. Was the reliability model described applied to DP1 data and any data priducts of the model in the DP1 repo?
-To meet the latency requirements for \gls{Alert Production}, we initially developed a relatively simple Machine Learning reliability model: a Convolutional Neural Network with three convolutional layers, and two fully connected layers.
+The Machine Learning reliability model applied to DP1 was developed with the aim to meet the latency requirements for Rubin \gls{Alert Production} when executed on CPUs. Accordingly we developed a relatively simple model: a Convolutional Neural Network with three convolutional layers, and two fully connected layers.
 The convolutional layers have a $5\times5$ kernel size, with 16, 32, and 64 filters, respectively.
 A max-pooling layer of size 2 is applied at the end of each convolutional layer, followed by a dropout layer of 0.4 to reduce overfitting.
 The last fully connected layers have sizes of 32 and 1.
@@ -197,6 +197,8 @@ Once the  \gls{LSSTComCam} data were available, the model was fine-tuned on a su
 %Fake reals refer to injected stars successfully detected by DIA, while bogus represent all other detections.
 %In this second round of training, only stars were injected into the dataset.
 On the \gls{LSSTComCam} test set, the model achieved an accuracy of 98.06\%, purity of 97.87\%, and completeness of 98.27\%.
+As discussed in \secref{sec:performance:dia}, the injections used to train this model version do not capture all types of astrophysical variability, so performance on the test set will not be representative for variable stars, comets, etc.
+
 
 %YA
 \subsubsection{Light Curves}
