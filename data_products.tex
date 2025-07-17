@@ -286,7 +286,7 @@ The \texttt{DiaObject} catalog contains only non-Solar System Objects; Solar Sys
 When a DiaSource is identified, the \texttt{DiaObject} and \texttt{SSObject} catalogs are searched for objects to associate it with.
 If no association is found, a new DiaObject is created and the DiaSource is associated to it.
 Along similar lines, an attempt has been made to associate DiaObjects across multiple bands, meaning the \texttt{DiaObject} catalog -- like the \texttt{Object} catalog -- contains data from multiple bands.
-Since DiaObjects are typically \gls{transient} or variable (by the nature of their means of detection), the \texttt{DiaObject} catalog contains summary statistics of their fluxes, such as the mean and standard deviation over multiple epochs; users must refer to the \texttt{ForcedSourceOnDiaObject} catalog (see below) or the \texttt{DisSource} catalog for single \gls{epoch} \gls{flux} measurements of DiaObjects.
+Since DiaObjects are typically \gls{transient} or variable (by the nature of their means of detection), the \texttt{DiaObject} catalog contains summary statistics of their fluxes, such as the mean and standard deviation over multiple epochs; users must refer to the \texttt{ForcedSourceOnDiaObject} catalog (see below) or the \texttt{DiaSource} catalog for single \gls{epoch} \gls{flux} measurements of DiaObjects.
 
 The \texttt{DIAObject} catalog contains data for \ndiaobjects DiaObjects in \gls{DP1}.
 
@@ -398,7 +398,7 @@ Many more survey property maps are available in the DP1 repository.
   \end{subfigure}\hfill
     \begin{subfigure}[t]{0.31\textwidth}
   \includegraphics[width=\linewidth, height=5.8cm]{deepCoadd_sky_noise_map_weighted_mean_tract5063_gband.pdf}
-  \caption{Sky noise weighted mean map for \texttt{deep\_coadd} \gls{tract} 5063, band z in ield ECDFS}
+  \caption{Sky noise weighted mean map for \texttt{deep\_coadd} \gls{tract} 5063, band z in field ECDFS}
   \end{subfigure}\hfill
 \caption{Examples of survey property maps from Rubin \gls{DP1} across different bands, clipped to the boundary of a single \gls{tract} for visual clarity.}
   \label{fig:survey_property_maps}
