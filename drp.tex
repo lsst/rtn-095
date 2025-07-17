@@ -77,7 +77,7 @@ However, for \gls{DP1}, \gls{LSSTComCam} was assumed to be stable enough that al
 For \gls{DP1}, a degree 4 polynomial was used; the degree of the polynomial mapping is tuned for each instrument and may be different for LSSTCam.
 Further improvements may be made by including a pixel-based astrometric offset mapping, which would be fit from the ensemble of astrometric residuals, but this is not included in the \gls{DP1} processing.
 
-The per-visit model attempts to account for time-varying effects on the path of a photon from both atmospheric sources and those dependent on the telescope orientation.
+The per-visit model attempts to account for the path of a photon from both atmospheric sources and those dependent on the telescope orientation.
 This model is also a polynomial mapping, in this case a degree 6 two-dimensional polynomial.
 Correction for \gls{DCR} (\secref{sec:differential_chromatic_refraction}) was not done for \gls{DP1}, but will be included in LSSTCam processing during \gls{Rubin Operations}.
 Future processing will also likely include a Gaussian Process fit to better account for atmospheric turbulence, as was demonstrated by \citet{Fortino2021} and \citet{Leget2021}.
