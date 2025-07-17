@@ -361,8 +361,8 @@ class DcrEffect:
         self.elevation = elevation
         self.observatory = observatory
 
-        astrometry["perpendicular"] = perpendicular
-        astrometry["parallel"] = parallel
+        astrometry["perpendicular"] = [p.asArcseconds() for p in perpendicular]
+        astrometry["parallel"] = [p.asArcseconds() for p in parallel]
 
         return astrometry
 
