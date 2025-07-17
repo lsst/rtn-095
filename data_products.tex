@@ -164,10 +164,12 @@ It is this warped template that is subtracted from the \texttt{visit\_image} to 
 For storage space reasons, warped templates are not retained for \gls{DP1}, as they can be readily and reliably recreated from the \texttt{template\_coadd}s.}
 As with \texttt{deep\_coadd}s, \texttt{template\_coadd}s are produced by warping and co-adding multiple \texttt{visit\_image}s covering a given skymap-defined \gls{patch}.
 The process of building \texttt{template\_coadd}s is the same as that for \texttt{deep\_coadd}s, but the selection criteria differ between the two types of coadd.
-In the case of \texttt{template\_coadd}s, the third of \texttt{visit\_image}s covering the \gls{patch} in question with the narrowest \gls{PSF} \gls{FWHM} are selected.
+In the case of \texttt{template\_coadd}s, one third of \texttt{visit\_image}s covering the \gls{patch} in question with the narrowest \gls{PSF} \gls{FWHM} is selected.
 If one third corresponds to fewer than twelve \texttt{visit\_image}s (i.e., there are fewer than 36 \texttt{visit\_image}s covering the \gls{patch}), then the twelve \texttt{visit\_images} with the narrowest \gls{PSF} \gls{FWHM} are selected.
-Finally, if there are fewer than twelve \texttt{visit\_images} covering the \gls{patch}, then all \texttt{visit\_image}s are selected. Of the \nvisitimages \texttt{visit\_image}s, \ntemplatecoaddvisitimages were used to create \texttt{template\_coadd}s.
+Finally, if there are fewer than twelve \texttt{visit\_images} covering the \gls{patch}, then all \texttt{visit\_image}s are selected. 
+Of the \nvisitimages \texttt{visit\_image}s, \ntemplatecoaddvisitimages were used to create \texttt{template\_coadd}s.
 This selection strategy is designed to optimize for \gls{seeing} when a \gls{patch} is well-covered by \texttt{visit\_image}s, yet still enable the production of \texttt{template\_coadd}s for poorly-covered patches.
+
 
 DP1 contains a total of \ntemplatecoadds \texttt{template\_coadd}s.\footnote{The difference in the number of \texttt{deep\_coadd}s and \texttt{template\_coadd}s is due to the difference in the \texttt{visit\_image} selection criteria for each coadd.}
 As with \texttt{deep\_coadd}s, a single \texttt{template\_coadd} covers a single \gls{patch}.
@@ -447,8 +449,6 @@ Configuration files record the parameters used in each processing task, while lo
 %They can be visit-level, tract-level, or neither, depending on the task.
 % The method for uniquely referencing a data product also depends on the task.
 
-\subsubsection{Pipeline-generated plots and metrics}
-\gls{DP1} includes various plots and metrics generated during data processing, such as  plots comparing measured fluxes and source positions relative to references, and metrics indicating the numbers of flagged pixels in a given \texttt{visit\_image}. These data products are used predominantly by the data management team to assess the quality of the processed data. We include them with \gls{DP1} for transparency.
 
 % Leanne -- reviewed by Chris ZW
 \subsubsection{Calibration Data Products}
