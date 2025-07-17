@@ -117,7 +117,7 @@ This includes managing storage formats, physical locations, data staging, and da
 A \gls{Butler} repository contains two components:
 \begin{itemize}
     \item the \emph{Data Store}: A physical storage system for datasets, e.g., a \gls{POSIX} file system or S3 object store; and
-    \item the \emph{Registry}: An \gls{SQL}-compatible database that stores metadata about the datasets in the data store, see \secref{sssec:butler_registry}.
+    \item the \emph{Registry}: An \gls{SQL}-compatible database that stores metadata about the datasets in the data store.
 \end{itemize}
 % Current plan is for DP1 image data to be cloud-hosted for the initial release and then transition to USDF back-end once we get through the initial surge.
 For DP1, the Butler repository is hosted in the Google Cloud, using an \gls{S3}-compatible store for datasets and AlloyDB, a PostgreSQL-compatible database, for the registry.
