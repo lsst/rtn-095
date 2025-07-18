@@ -6,7 +6,7 @@
 % % Data Release data products, which will be made available approximately annually, are produced by a coherent
 % processing of the entire science data set to date, and include calibrated images; measurements of positions, fluxes, and shapes; variability information such as orbital
 % parameters for moving objects.
-\gls{DRP} is the systematic reprocessing of all Rubin Observatory data collected up to a certain date to produce the calibrated images, catalogs of detections, and derived data products described in Section \ref{sec:data_products}.
+\gls{DRP} is the systematic processing of all Rubin Observatory data collected up to a certain date to produce the calibrated images, catalogs of detections, and derived data products described in Section \ref{sec:data_products}.
 \gls{DP1} was processed entirely at the \gls{USDF}, using 17,024 CPU hours.\footnote{For future Data Releases, data processing will be distributed across the \gls{USDF}, the \gls{FrDF} and the \gls{UKDF}.}
 
 This section describes the pipeline algorithms used to produce \gls{DP1} and how they differ from those planned for full-scale LSST data releases.
@@ -37,7 +37,7 @@ In so doing, true astrophysical sources are isolated to allow for accurate detec
 To generate a \gls{background} model, each post-ISR image is divided into superpixels of $128\times128$ pixels.
 Pixels with a mask flag set that indicates that they contain no useful science data or that they contain \gls{flux} from a preliminary source detection are masked.
 The iterative $3\sigma$ clipped mean of the remaining pixels is calculated for each superpixel, constructing a \gls{background} statistics image.
-A sixth-order Chebyshev polynomial is fit to these values to allow for an extrapolation back to the native pixel resolution of the post-\gls{ISR} image.
+A sixth-order Chebyshev polynomial is fit to these values on the scale of a single detector to allow for an extrapolation back to the native pixel resolution of the post-\gls{ISR} image.
 
 
 \subsection{Calibration}
@@ -54,9 +54,8 @@ These preliminary solutions are subsequently replaced by more accurate fits, as 
 %LPG: Great, thank you
 \subsubsection{PSF Modeling}
 \label{ssec:psf_modelling}
-\gls{PSF} modeling in \gls{DP1} uses the Piff \citep{DES:2020vau} algorithm.
-Piff models represent the \gls{PSF} on a pixel-by-pixel basis and interpolate its parameters across a single CCD using two-dimensional polynomials.
-Piff utilizes its Pixel grid model with a fourth-order polynomial interpolation per \gls{CCD}, except in the u-band, where star counts are insufficient to support a fourth-order fit.
+\gls{PSF} modeling in \gls{DP1} uses the Piff \citep{DES:2020vau} package.
+Our configuration of Piff utilizes its \texttt{PixelGrid} model with a fourth-order polynomial interpolation per \gls{CCD}, except in the u-band, where star counts are insufficient to support a fourth-order fit.
 In this case, a second-order polynomial is used instead.
 Details on the choice of polynomial order, overall \gls{PSF} modeling performance, and known issues are discussed in \secref{ssec:psf_models}.
 
@@ -64,42 +63,40 @@ Details on the choice of polynomial order, overall \gls{PSF} modeling performanc
 % Clare Saunders -- LPG reviewed
 \subsubsection{Astrometric Calibration}
 \label{ssec:global_astrometric_calibration}
-Starting from the astrometric solution calculated in single frame processing \secref{ssec:single_frame_processing}, the final astrometric solution is computed using the ensemble of visits in a given band that overlap a given \gls{tract}.
-This allows the astrometric solution to be further refined by using all of the isolated point sources of sufficient signal-to-noise ratio in an image, rather than only those that appear in the reference catalog (as is done in single frame processing).
+Starting from the astrometric solution calculated in single frame processing (\secref{ssec:single_frame_processing}), the final astrometric solution is computed using the ensemble of visits in a given band that overlap a given \gls{tract}.
+This allows the astrometric solution to be further refined by using all of the isolated point sources of sufficient signal-to-noise ratio in an image, rather than only those that appear in the reference catalog, as is done in single frame processing.
 Using multiple whole visits rather than a single detector also allows us to account for effects that impact the full focal plane and for the proper motion and parallax of the sources.
 
-In order to perform the fit of the astrometric solution, isolated point sources are associated between overlapping visits and with the Gaia \gls{DR3} reference catalog where possible.
+In order to perform the fit of the astrometric solution, isolated point sources are associated between overlapping visits and with the Gaia \gls{DR3} \citep{2023A&A...674A...1G} reference catalog where possible.
 The model used for \gls{DP1} consists of a static map from pixel-space to an intermediate frame (the per-detector model), followed by a per-visit map from the intermediate frame to the plane tangent to the telescope boresight (the per-visit model), then finally a deterministic mapping from the tangent plane to the sky.
 The fit is done using the \texttt{gbdes} package \citep{Bernstein2017}, and a full description is given in \citet{dmtn-266}.
 
-The per-detector model is intended to capture quasi-static characteristics of the telescope and \gls{camera}.
+The per-detector model is intended to capture quasi-static characteristics of the telescope and \gls{camera}. 
 During \gls{Rubin Operations}, the astrometric solution will allow for separate epochs with different per-detector models, to account for changes in the camera due to warming and cooling and other discrete events.
 However, for \gls{DP1}, \gls{LSSTComCam} was assumed to be stable enough that all visits use the same per-detector model. The model itself is a separate two-dimensional polynomial for each detector.
 For \gls{DP1}, a degree 4 polynomial was used; the degree of the polynomial mapping is tuned for each instrument and may be different for LSSTCam.
 Further improvements may be made by including a pixel-based astrometric offset mapping, which would be fit from the ensemble of astrometric residuals, but this is not included in the \gls{DP1} processing.
 
-The per-visit model attempts to account for time-varying effects on the path of a photon from both atmospheric sources and those dependent on the telescope position.
+The per-visit model attempts to account for the path of a photon from both atmospheric sources and those dependent on the telescope orientation.
 This model is also a polynomial mapping, in this case a degree 6 two-dimensional polynomial.
-Correction for \gls{DCR} was not done for \gls{DP1}, but will be included in LSSTCam processing during Operations.
-Future processing will also likely include a Gaussian Processes fit to better account for atmospheric turbulence, as was demonstrated in \citet{Fortino2021} and \citet{Leget2021}.
+Correction for \gls{DCR} (\secref{sec:differential_chromatic_refraction}) was not done for \gls{DP1}, but will be included in LSSTCam processing during \gls{Rubin Operations}.
+Future processing will also likely include a Gaussian Process fit to better account for atmospheric turbulence, as was demonstrated by \citet{Fortino2021} and \citet{Leget2021}.
 
-The last component of the astrometric \gls{calibration} is the position of the isolated point sources included in the fit.
-The positions consist of five parameters: position on the sky, proper motion, and parallax.
-The reference \gls{epoch} for the fit positions is 2024.9.
+The final component of the astrometric \gls{calibration} involves the positions of the isolated point sources included in the fit, which are described by five parameters: sky coordinates, proper motion, and parallax.
+While proper motions and parallaxes are not released for DP1, they are fitted for these sources in the astrometric solution to improve the astrometric calibration.
 
 % Eli
 \subsubsection{Photometric Calibration}
 \label{photometric_calibration}
-Photometric \gls{calibration} of the \gls{DP1} dataset is based on the Forward Global Calibration Method
-~\citep[FGCM][]{2018AJ....155...41B}, adapted for the LSST Science Pipelines~\citep{2022PASJ...74..247A, SITCOMTN-086}.
-We used \gls{FGCM} to calibrate the full \gls{DP1} dataset with a forward model that uses a parameterized model of the atmosphere as a function of airmass along with a model of the instrument throughput as a function of wavelength.
-The \gls{FGCM} process typically begins with measurements of the instrumental throughput, including the mirrors, filters, and detectors.
+Photometric \gls{calibration} of the \gls{DP1} dataset is based on the \gls{FGCM} ~\citep[FGCM][]{2018AJ....155...41B}, adapted for the LSST Science Pipelines~\citep{2022PASJ...74..247A, SITCOMTN-086}.
+We used the \gls{FGCM} to calibrate the full \gls{DP1} dataset with a forward model that uses a parameterized model of the atmosphere as a function of airmass along with a model of the instrument throughput as a function of wavelength.
+The FGCM process typically begins with measurements of the instrumental throughput, including the mirrors, filters, and detectors.
 However, because full scans of the \gls{LSSTComCam} as-built filters and individual detectors were not available, we instead used the nominal reference throughputs for the Simonyi Survey Telescope and LSSTCam.\footnote{Available at: \url{https://github.com/lsst/throughputs/tree/1.9}}
 These nominal throughputs were sufficient for the \gls{DP1} calibration, given the small and homogeneous focal plane consisting of only 9 \gls{ITL} detectors.
 The FGCM atmosphere model, provided by MODTRAN~\citep{1999SPIE.3756..348B}, was used to generate a look-up table for atmospheric throughput as a function of zenith distance at Cerro Pachón.
 This model accounts for Rayleigh scattering by molecular oxygen ($\mathrm{O}_2$) and ozone ($\mathrm{O}_3$), absorption by water vapor, and Mie scattering by airborne aerosol particulates.
 Nightly variations in the atmosphere are modeled by minimizing the variance in repeated observations of stars with a \gls{SNR} greater than 10, measured using ``compensated aperture fluxes''.
-These fluxes include a local \gls{background} subtraction (see \secref{ssec:background_subtraction} to mitigate the impact of \gls{background} offsets.
+These fluxes include a local \gls{background} subtraction (see \secref{ssec:background_subtraction}) to mitigate the impact of \gls{background} offsets.
 The model fitting process incorporates all 6 bands ($ugrizy$) but does not include any gray (achromatic) terms, except for a linear assumption of mirror reflectance degradation, which is minimal over the short duration of the \gls{DP1} observation campaign.
 As an additional constraint on the fit, we use a subset of stars from the reference catalog~\citep{DMTN-277}, primarily to constrain the system's overall throughput and establish the ``absolute'' calibration.
 
@@ -110,23 +107,21 @@ As an additional constraint on the fit, we use a subset of stars from the refere
 With the final \gls{PSF} models, \gls{WCS} solutions, and photometric calibrations in place, we reprocess each single-epoch image to produce a final set of calibrated visit images and source catalogs.
 Source detection is performed down to a $5\sigma$ threshold using the updated \gls{PSF} models, followed by measurement of \gls{PSF} and aperture fluxes.
 These catalogs represent the best single-\gls{epoch} source characterization, but they are not intended for constructing light curves.
-For time-domain analysis, we recommend using the \gls{forced photometry} tables described in \secref{sssec:lightcurves}
+For time-domain analysis, we recommend using the \gls{forced photometry} tables described in \secref{sssec:lightcurves}.
 
 % Yusra
 \subsection{Coaddition Processing}
 \label{ssec:coadd_processing}
 \subsubsection{Coaddition}
 \label{ssec:coaddition}
-Only exposures with a \gls{seeing} better than 1.7 arcseconds FWHM are included in the deep coadded images. For the template coadds, only the top third of visits with the best \gls{seeing} are used, resulting in an even tighter image quality cutoff for the template coadds.
+Only exposures with a \gls{seeing} better than 1.7 arcseconds FWHM are included in the deep coadded images. For the template coadds, typically only the top third of visits with the best \gls{seeing} are used (although see \secref{ssec:science_images} for more details), resulting in an even tighter image quality cutoff for the template coadds. Exposures with poor \gls{PSF} model quality, identified using internal diagnostics, are excluded to prevent contamination of the coadds with unreliable \gls{PSF} estimates. The remaining exposures are combined using an inverse-variance weighted mean stacking \gls{algorithm}.
 
-Exposures with poor \gls{PSF} model quality, identified using internal diagnostics, are excluded to prevent contamination of the coadds with unreliable \gls{PSF} estimates.
-The remaining exposures are combined using an inverse-variance weighted mean stacking \gls{algorithm}.
 To mitigate transient artifacts before coaddition, we apply the artifact rejection procedure described in \cite{dmtn-080} that identifies and masks features such as satellite trails, optical ghosts, and cosmic rays.
 It operates on a time series of \gls{PSF}-matched images resampled onto a common pixel grid (``warps'') and leverages their temporal behavior to distinguish persistent astrophysical sources from transient artifacts.
 
-Artifact rejection uses both direct and PSF-matched warps, homogenized to a standard PSF of 1.8 arcseconds FWHM,  consistent with the \gls{seeing} threshold used in data screening.
+Artifact rejection uses both direct (where no PSF-matching is performed) and PSF-matched warps, homogenized to a standard PSF of 1.8 arcseconds FWHM, broadly consistent with the 1.7 arcsecond FWHM \gls{seeing} threshold used in data screening.
 A sigma-clipped mean of the \gls{PSF}-matched warps serves as a static sky model, against which individual warps are differenced to identify significant positive and negative residuals.
-Candidate artifact regions are classified as \gls{transient} if they appear in less than a small percentage of the total exposures, with the threshold varying based on the number of visits, N,  as follows:
+Candidate artifact regions are classified as \gls{transient} if they appear in less than a small percentage of the total number of exposures, with the threshold  based on the number of visits, $N$,  as follows:
 \begin{itemize}
     \item $N=1$ or $2$: threshold $= 0$ (no clipping).
     \item $N=3$ or $4$: threshold $= 1$.
@@ -138,13 +133,13 @@ Identified \gls{transient} regions are masked before coaddition, improving image
 \subsubsection{Coadd Processing}
 \label{sssec:coadd_processing}
 Coadd-processing consists of detection, \gls{deblend}ing, and  measurement on coadds to produce object tables (\secref{ssec:catalogs}).
-For each coadd in all six bands, we fit a constant \gls{background} and performed source detection at a $5\sigma$ detection threshold.
+For each coadd in all six bands, we perform source detection at a $5\sigma$ detection threshold and then adjust the background with a per-patch constant (coadds are built from background-subtracted images, but the deeper detection on coadds redefines what is considered source vs. background).
 Detections across bands are merged in a fixed priority order, $irzygu$, to form a union detection catalog, which serves as input to deblending.
 
 Deblending is performed using the Scarlet Lite algorithm, which implements the same model as Scarlet \citep{2018A&C....24..129M}, but operates on a single pixel grid.
 This allows the use of analytic gradients, resulting in greater computational speed and memory efficiency.
 
-\gls{Source} measurement is then performed on the deblended footprints in each band.
+\gls{Source} measurement is then performed on the deblended detection footprints in each band.
 Measurements are conducted in three modes: independent per-band measurements, forced measurements in each band, and multiband measurements.
 Most measurement algorithms operate through a single-band plugin system, largely as originally described in \citet{2018PASJ...70S...5B}.
 % TODO: Not sure if the deblending section will describe this next part in full
@@ -152,21 +147,21 @@ These plugins run on a deblended image, which is generated by using the Scarlet 
 This effectively preserves the original image in regions where objects are not blended, while dampening the noise elsewhere.
 
 % How much detail should be added about centroids, shapes, extendedness, etc?
-Measurement \gls{algorithm} outputs include object fluxes, centroids, and higher-order moments thereof like sizes and shapes.
-
-A reference band is then chosen for each object based on detection significance and measurement quality using the same priority order as detection merging ($irzygu$) and a second round of measurements is performed in forced mode using the shape and position from the reference band to ensure consistent colors \citep{2018PASJ...70S...5B}.
+Measurement \gls{algorithm} outputs include object fluxes, centroids, and higher-order moments thereof such as sizes and shapes.
+A reference band is then selected for each object based on detection significance and measurement quality following the same priority order as detection merging ($irzygu$).
+A second round of measurements is performed in forced mode using the shape and position from the reference band to ensure consistent colors \citep{2018PASJ...70S...5B}.
 A variety of \gls{flux} measurements are included in the object tables, from aperture fluxes and forward modeling algorithms.
 
-Composite model (CModel) magnitudes are used to calculate the extendedness parameter, which functions as a star-galaxy classifier.
+Composite model (CModel) magnitudes \citep{2004AJ....128..502A, 2018PASJ...70S...5B} are used to calculate the extendedness parameter, which functions as a star-galaxy classifier.
 Gaussian-aperture-and-PSF \citep[GAaP][]{2008A&A...482.1053K, DMTN-190} fluxes are provided to ensure consistent galaxy colors across bands.
-Sersic model fits are run on all available bands simultaneously \cite[MultiProFit][]{dmtn-312}.
-The resulting Sersic \citep{1963BAAA....6...41S, 1968adga.book.....S} model fluxes are provided as an alternative to CModel and are intended to represent total galaxy fluxes.
+Sersic model \citep{1963BAAA....6...41S, 1968adga.book.....S} fits are run on all available bands simultaneously \cite[MultiProFit,][]{dmtn-312}.
+The resulting Sersic model fluxes are provided as an alternative to CModel and are intended to represent total galaxy fluxes.
 Like CModel, the Sersic model is a Gaussian mixture approximation to a true Sersic profile, convolved with a Gaussian mixture approximation to the \gls{PSF}.
 CModel measurements use a double ``shapelet'' \citep{2003ARA&A..41..645R} PSF with a single shared shape, while the Sersic fits use a double Gaussian with independent shape parameters for each component.
 Sersic model fits also include a free centroid, with all other structural parameters shared across all bands.
 That is, the intrinsic model has no color gradients, but the convolved model may have color gradients if the \gls{PSF} parameters vary significantly between bands.
 
-Further details on the performance of these algorithms can be found in \ref{ssec:fluxes}.
+Further details on the performance of these algorithms can are in \secref{ssec:fluxes}.
 
 %%%%%%%%%%%
 \subsection{Variability Measurement}
@@ -174,52 +169,52 @@ Further details on the performance of these algorithms can be found in \ref{ssec
 % Eric
 \subsubsection{Difference Imaging Analysis
 \label{ssec:difim_analysis}}
-Difference Image Analysis (DIA) used the decorrelated Alard \& Lupton image differencing algorithm \citep{DMTN-021}.
+Difference Image Analysis (DIA) uses the decorrelated Alard \& Lupton image differencing algorithm \citep{DMTN-021}.
 We detected both positive and negative \texttt{DIASource} at $5\sigma$ in the difference image.
-Sources with footprints containing both positive and negative peaks were fit with a dipole centroid code.
+Sources with footprints containing both positive and negative peaks due to offsets from the template position or blending were fit with a dipole centroid code.
 
-We filter a subset of \texttt{DIASources} that have pixel flags characteristic of artifacts, non-astrophysical trail lengths, and unphysically negative direct fluxes.
+We filter a subset of \texttt{DIASource}s that have pixel flags characteristic of artifacts, non-astrophysical trail lengths, and unphysically negative direct fluxes.
 We performed a simple spatial association of \texttt{DIASources} into \texttt{DIAObjects} with a one arcsecond matching radius.
 
 % LPG: Do we need this? AP is not part of DP1. Was the reliability model described applied to DP1 data and any data priducts of the model in the DP1 repo?
-To meet the latency requirements for \gls{Alert Production}, we initially developed a relatively simple Machine Learning reliability model: a Convolutional Neural Network with three convolutional layers, and two fully connected layers.
+The Machine Learning reliability model applied to DP1 was developed with the aim to meet the latency requirements for Rubin \gls{Alert Production} when executed on CPUs. Accordingly we developed a relatively simple model: a Convolutional Neural Network with three convolutional layers, and two fully connected layers.
 The convolutional layers have a $5\times5$ kernel size, with 16, 32, and 64 filters, respectively.
 A max-pooling layer of size 2 is applied at the end of each convolutional layer, followed by a dropout layer of 0.4 to reduce overfitting.
 The last fully connected layers have sizes of 32 and 1.
 The ReLU activation function is used for the convolutional layers and the first fully connected layer, while a sigmoid function is used for the output layer to provide a probabilistic interpretation.
 The cutouts are generated by extracting postage stamps of $51\times51$ pixels centered on the detected source.
-The input data of the model consists of the template, science, and difference image stacked to have a tensor of \gls{shape} (3, 51, 51).
+The input data of the model consist of the template, science, and difference image stacked to have an array of \gls{shape} (3, 51, 51).
 The model is implemented using PyTorch \citep{10.1145/3620665.3640366}.
 The Binary Cross Entropy loss function was used, along with the \gls{Adam} optimizer with a fixed learning rate of $1\times10^{-4}$, weight decay of $3.6\times10^{-2}$, and a batch size of 128.
 The final model uses the weights that achieved the best precision/purity for the test set.
-Training was done on the \gls{S3DF} with an NVIDIA L40S GPU model.
+Training was done on the \gls{S3DF} with an NVIDIA model L40S GPU.
 
-The model was initially trained using simulated data from the second Data Challenge (DC2; \citep{2021ApJS..253...31L}) plus randomly located injections of PSFs to increase the number of real sources, for a total of 89,066 real sources.
+The model was initially trained using simulated data from the second \gls{DESC} Data Challenge (DC2; \citep{2021ApJS..253...31L}) plus randomly located injections of PSFs to increase the number of real sources, for a total of 89,066 real sources.
 The same number of bogus sources were selected at random from non-injected DIASources.
 %Since the number of injections (57,832) was much larger than the number of fake SNs (1442) from \eric{LPG: do we need to detail the DC2 initial work}, the model initially outperformed on SNs.
 %To improve the performance metrics on SNs, the loss function was modified to give more weight to SNs, resulting in a 6\% increase in accuracy for SNs.
-Once the  \gls{LSSTComCam} data was available, the model was fine-tuned on a subset of the data containing 183,046 sources with PSF injections.
+Once the  \gls{LSSTComCam} data were available, the model was fine-tuned on a subset of the data containing 183,046 sources with PSF injections.
 %Fake reals refer to injected stars successfully detected by DIA, while bogus represent all other detections.
 %In this second round of training, only stars were injected into the dataset.
 On the \gls{LSSTComCam} test set, the model achieved an accuracy of 98.06\%, purity of 97.87\%, and completeness of 98.27\%.
+As discussed in \secref{sec:performance:dia}, the injections used to train this model version do not capture all types of astrophysical variability, so performance on the test set will not be representative for variable stars, comets, etc.
+
 
 %YA
-\subsubsection{Lightcurves}
+\subsubsection{Light Curves}
 \label{sssec:lightcurves}
 To produce light curves, we perform multi-epoch \gls{forced photometry} on both the direct visit images and the difference images.
-For lightcurves we recommend the \gls{forced photometry} on the difference images (\texttt{psDiffFlux} on the ForcedSource Table), as it isolates the variable component of the flux and avoids contamination from static sources.
+For light curves we recommend the \gls{forced photometry} on the difference images (\texttt{psDiffFlux} on the ForcedSource Table), as it isolates the variable component of the flux and avoids contamination from static sources.
 In contrast, \gls{forced photometry} on direct images includes flux from nearby or blended static objects, and this contamination can vary with seeing.
 Centroids used in the multi-epoch \gls{forced photometry} stage are taken either from object positions measured on the coadds or from the DIAObjects (the associated DIASources detected on difference images).
-
-This stage takes the longest in terms of integrated \gls{CPU}-hours.
-
 
 % Mario and or Jake
 % Reviewed by LPG -- need to extract numbers from dp1 repo and put into the parameters file
 \subsubsection{Solar System Processing
 \label{sec:drp:solsys}}
 
-Solar system processing in \gls{DP1} consists of two key components: the association of observations (sources) with known solar system objects, and the discovery of previously unknown objects by linking sets of {\em tracklets}\footnote{A tracklet is defined as two or more observations taken in close succession in a single night.}.
+Solar system processing in \gls{DP1} consists of two key components: the association of observations (sources) with known solar system objects, and the discovery of previously unknown objects by linking sets of 
+{\em tracklets}\footnote{A tracklet is defined as two or more detections of a moving object candidate taken in close succession in a single night.}.
 
 To generate expected positions, ephemerides are computed for all objects found in the Minor Planet \gls{Center} orbit catalog using the \texttt{Sorcha} survey simulation toolkit (Merritt et al., in press)\footnote{Available at \url{https://github.com/dirac-institute/sorcha}}.
 To enable fast lookup of objects potentially present in an observed visit, we use the {\tt mpsky} package \citep{mpsky}.
@@ -233,17 +228,17 @@ The suite consists of the following tasks:
     \item Linkage post processing (orbit fitting, outlier rejection, and de-duplication) with {\tt link\_purify}
 \end{itemize}
 
-The inputs to the {\tt heliolinx} suite included all sources detected in difference images produces by an early processing of the \gls{LSSTComCam} commissioning data,  including some that were later rejected as part of \gls{DP1} processing and hence are not part of this \gls{DP1} release.
+The inputs to the {\tt heliolinx} suite included all sources detected in difference images produced by an early processing of the \gls{LSSTComCam} commissioning data,  including some that were later rejected as part of \gls{DP1} processing and hence are not part of \gls{DP1}.
 
-About 10\% of all commissioning visits targeted the near-ecliptic field Rubin\_SV\_38\_7 designed to enable asteroid discovery.
-Rubin\_SV\_38\_7 produced the vast majority of asteroid discoveries, as expected, but a few were found in off-ecliptic fields as well.
+About 10\% of all commissioning visits targeted the near-ecliptic field Rubin\_SV\_38\_7 chosen to facilitate asteroid discovery.
+Rubin\_SV\_38\_7 produced the vast majority of asteroid discoveries in DP1, as expected, but a few were found in off-ecliptic fields as well.
 
 Tracklet creation with {\tt make\_tracklets} used an upper limit angular velocity of 1.5 \gls{deg}/day, faster than any main belt asteroid and in the range of many \gls{NEO} discoveries.
-To avoid excessive false tracklets from fields that were observed many times per night, the minimum \gls{tracklet} length was set to three and the minimum on-sky motion for a valid \gls{tracklet} was set to five arcseconds.
+To minimize false tracklets from fields observed multiple times per night, the minimum \gls{tracklet} length was set to three detections, and a minimum on-sky motion of five arcseconds was required for a valid \gls{tracklet}.
 
 The heart of the discovery \gls{pipeline} is the {\tt heliolinc} task, which connects (``links") tracklets belonging to the same object over a series of nights.
 It employs the HelioLinC3D algorithm \citep{2020DPS....5221101E,2022DPS....5450404H}, a refinement of the original HelioLinC algorithm of \citet{2018AJ....156..135H}.
-The {\tt heliolinc} run tested each \gls{tracklet} with 324 different hypotheses spanning heliocentric distances from 1.5 to 9.8 AU and radial velocities spanning the full range of possible bound orbits (eccentricity 0.0 to nearly 1.0).
+The {\tt heliolinc} run tested each \gls{tracklet} with 324 different hypotheses spanning heliocentric distances from 1.5 to 9.8 \gls{au} and radial velocities spanning the full range of possible bound orbits (eccentricity 0.0 to nearly 1.0).
 This range of distance encompasses all main belt asteroids and Jupiter Trojans, as well as many comets and Mars-crossers and some \glspl{NEO}.
 Smaller heliocentric distances were not attempted here because nearby objects move rapidly across the sky and hence were not likely to remain long enough in an \gls{LSSTComCam} field to be discovered.
-A clustering radius was chosen corresponding to $1.33 \times 10^{-3}$~AU at 1 \gls{AU} from Earth. Linkages produced by {\tt heliolinc} are then post-processed with {\tt link\_purify} into a final non-overlapping set of candidate discoveries, ranked from highest to lowest probability of being a real asteroid based on astrometric orbit-fit residuals and other considerations.
+A clustering radius was chosen corresponding to $1.33 \times 10^{-3}$~au at 1~au from Earth. Linkages produced by {\tt heliolinc} are then post-processed with {\tt link\_purify} into a final non-overlapping set of candidate discoveries, ranked from highest to lowest probability of being a real asteroid based on astrometric orbit-fit residuals and other considerations.

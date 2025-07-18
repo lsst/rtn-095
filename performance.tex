@@ -4,35 +4,25 @@
 \section{Performance Characterization and Known Issues
 \label{sec:performance}}
 %
-In this section, we provide an assessment of the \gls{DP1}
-data quality and known issues.
-A summary of the Rubin \gls{DP1} key numbers and data quality metrics and is found in PERFSUMMARYTABLE
+In this section, we provide an assessment of the \gls{DP1} data quality and known issues.
+% A summary of the Rubin \gls{DP1} key numbers and data quality metrics  is found in PERFSUMMARYTABLE
 %\input{tables/dp1_key_numbers}
 
+%%%% Chris W
 \subsection{Sensor Anomalies and ISR}
 \label{ssec:sensor_anomalies}
 \input{sensor_anomalies}
+ 
 
-% Pierre-François
+% %%%%Pierre-François
 \subsection{PSF Models
 \label{ssec:psf_models}}
-
-To characterize \gls{PSF} performance, we use the second moments measured on \gls{PSF} stars
-and on the PSF model via the \gls{HSM} method  (\citealt{2003MNRAS.343..459H} and
-\citealt{2005MNRAS.361.1287M}), all expressed in the camera’s
-pixel frame. Given the second-moment matrix elements $I_{\text{xx}}$,
-$I_{\text{yy}}$, and $I_{\text{xy}}$, we define:
-
-\begin{align*}
-T &= I_{\text{xx}} + I_{\text{yy}} \\
-e^1 &= \frac{I_{\text{xx}} - I_{\text{yy}}}{T} \\
-e^2 &= \frac{2 I_{\text{xy}}}{T}.
-\end{align*}
-
-\noindent We denote $T_{\text{PSF}}$, $e^1_{\text{PSF}}$, and $e^2_{\text{PSF}}$ for
-measurements on the \gls{PSF} stars, and $T_{\text{model}}$, $e^1_{\text{model}}$,
-and $e^2_{\text{model}}$ for the \gls{PSF} model. Two variants are compared:
-
+To characterize \gls{PSF} performance, we use adaptive second moments (\citealt{2002AJ....123..583B})
+measured on \gls{PSF} stars and on the PSF model using the \gls{HSM} 
+implementation (\citealt{2003MNRAS.343..459H}, \citealt{2005MNRAS.361.1287M}), 
+all expressed in each detector's pixel frame.
+We consider the classical trace of the second moment matrix $T$, along with the ellipticity parameters $e^1$ and $e^2$, to characterize the performance of the PSF.
+We denote the measurements on \gls{PSF} stars as $T_{\text{PSF}}$, $e^1_{\text{PSF}}$, and $e^2_{\text{PSF}}$, use and $T_{\text{model}}$, $e^1_{\text{model}}$, and $e^2_{\text{model}}$ for the \gls{PSF} model. Two variants are compared:
 \begin{itemize}
 \item Piff with second-order polynomial interpolation (default in science pipelines); and
 \item Piff with fourth-order polynomial interpolation (final \gls{DP1} \gls{PSF}).
@@ -40,8 +30,7 @@ and $e^2_{\text{model}}$ for the \gls{PSF} model. Two variants are compared:
 
 Table \ref{tab:psf-1d_stats} summarizes each model’s ability to reconstruct
 the mean $T$, $e^1$, and $e^2$ on  \gls{LSSTComCam}. Piff shows a negative
-residual bias in size. We will explore this further by plotting $\delta T/T$
-versus magnitude (binned by color) in Fig. \ref{fig:psf_residuals_mag_color}.
+residual bias in size. 
 
 \input{tables/psf_1d_stat.tex}
 
@@ -52,7 +41,7 @@ Piff shows strong spatial correlations, with a systematic offset
 that matches Table \ref{tab:psf-1d_stats}. It is the existence of these spatial structures that motivated raising the interpolation order to four, except in the u-band.
 Although not shown in \figref{fig:psf_residuals_fov}, third-order polynomial interpolation still exhibited residual structure.
 A fifth-order polynomial interpolation would require more stars than are available on some CCDs to adequately constrain the model while offering only marginal gains.
-Preliminary analysis of LSSTCam data in the laboratory at \gls{SLAC} shows that the \gls{ITL} sensors exhibit the same pattern.
+Preliminary analysis of LSSTCam data in the laboratory at \gls{SLAC} shows that the \gls{ITL} sensors exhibit the same pattern as \gls{ITL} sensors on \gls{LSSTComCam}.
 The sensor's $\delta T/T$ is fully correlated with the height variation across the LSSTCam \gls{ITL} sensors, which explains this behavior.
 Future data processing will account for this height variation directly in the \gls{PSF} model.
 \begin{figure}[htb!]
@@ -64,7 +53,7 @@ Future data processing will account for this height variation directly in the \g
 \end{figure}
 
 Another way to look at the \gls{PSF} modeling quality is via whisker plots of the \gls{PSF} second and fourth moments and their modeling residuals projected on a part of the sky.
-In addition to the second moment, the spin-2 fourth moments, $e^{(4)}$, is defined as:
+In addition to the second moment, the spin-2 fourth moments, $e^{(4)}$, are defined as:
 \begin{align*}
 e^{(4)}_1 &= M_{\text{40}} - M_{\text{04}} \\
 e^{(4)}_2 &= 2\left(M_{\text{31}} - M_{\text{13}}\right),
@@ -82,8 +71,11 @@ We observe coherent patterns in both the \gls{PSF} moments and the residuals, th
     \label{fig:psf_residuals_whisker_ECDFS}
 \end{figure}
 
-Another characterization of \gls{PSF}-modeling performance is to look at $\delta T/T$ versus stellar magnitude to reveal any \gls{PSF} size–flux dependencies (\figref{fig:psf_residuals_mag_color}). We also repeat this analysis in color bins to probe chromatic effects. Fainter stars show a larger negative bias in \gls{PSF} size
-compared to brighter ones. Binning by color uncovers a clear color dependence, as seen in \gls{DES} (e.g., \citealt{DES:2020vau}). DP1 does not include the color correction implemented in \cite{2025OJAp....8E..26S}.
+Another characterization of \gls{PSF}-modeling performance is to look at $\delta T/T$ versus stellar magnitude to reveal any \gls{PSF} size–flux dependencies (\figref{fig:psf_residuals_mag_color}). 
+We also repeat this analysis in color bins to probe chromatic effects. 
+Fainter stars show a larger negative bias in \gls{PSF} size compared to brighter ones. 
+Binning by color uncovers a clear color dependence, as seen in \gls{DES} (e.g., \citealt{DES:2020vau}). 
+DP1 does not include the color correction implemented in \cite{2025OJAp....8E..26S}.
 Post-DP1 tests added a color correction similar to \cite{2025OJAp....8E..26S}: it reduced the color-dependent scatter in PSF size but did not eliminate the negative bias for faint sources.
 The cause of this residual remains unknown and is consistent with what is shown in Table \ref{tab:psf-1d_stats}.
 
@@ -96,13 +88,9 @@ all visits and filters and binned in different colors.}
 \vspace{0.1cm}
 \end{figure}
 
-As mentioned in \cite{PSTN-019}, there are two important Piff features that
-were not used during \gls{DP1}. First, PSF color dependence was not yet implemented
-but will be added in the next release of the Rubin \gls{Science Pipelines}. Second,
-although the current Rubin \gls{software} allows Piff to operate in sky coordinates
-(including \gls{WCS} transformations), it does not yet correct for sensor-induced
-astrometric distortions (e.g., tree rings). That capability is also planned
-for future data releases.
+As noted in  \cite{PSTN-019}, two key Piff features were not used in the DP1 processing. 
+PSF color dependence wasn’t implemented, and, while Rubin software allows Piff to work with sky coordinates (including WCS transformations), it doesn’t yet correct for sensor-induced astrometric distortions such as tree rings. 
+Both features are planned for upcoming releases.
 
 
 % Clare or Pierre-François
@@ -145,7 +133,7 @@ between isolated point sources 5 \gls{arcmin} apart.}
 \end{figure}
 
 Finally, we consider the median separation between sources not included in the astrometric fit and associated objects from a reference catalog.
-For this, we use the Gaia \gls{DR3} catalog, with the object positions shifted to the observation epoch using the Gaia motion parameters.
+For this, we use the Gaia \gls{DR3} catalog, with the object positions shifted to the observation epoch using the Gaia proper motion parameters.
 Figure~\ref{fig:AA1} shows the median separation for each visit in the r-band in \gls{tract} 4849.
 \begin{figure}[htb!]
 \centering
@@ -245,10 +233,11 @@ To avoid deblender failures from excessive increases in object density, stars wh
 \vspace{0.1cm}
 \end{figure}
 
-\figref{fig:injected_lsst_cells_v1_5063_i_completeness_any} shows completeness as a function of magnitude for these injected objects. The completeness estimates are comparable to results from matching external catalogs. The Hubble Legacy Field catalog \citep{2019ApJS..244...16W,2016arXiv160600841I} reaches 50\% completeness at 26.13\,${\rm mag_{F775W}}$, approximately 0.4 magnitudes fainter; this is roughly equivalent to 25.83\,${\rm mag_{i}}$ from differences in matched object magnitudes. Similarly, completeness drops below 90\% at 23.80${\rm mag_{VIS}}$ matching to Euclid Q1 \citep{2025arXiv250315305E} objects, equivalent to about 23.5\,${\rm mag_{i}}$. The Euclid imaging is of comparable (or shallower) depth, so magnitude limits at lower completeness percentages than 90\% are unreliable, whereas the HST images cover too small (and irregular) of an area to accurately characterize 80-90\% completeness limits.
+\figref{fig:injected_lsst_cells_v1_5063_i_completeness_any} shows completeness as a function of magnitude for these injected objects. The completeness estimates are comparable to results from matching external catalogs. The Hubble Legacy Field catalog \citep{2019ApJS..244...16W,2016arXiv160600841I} reaches 50\% completeness at 26.13\,${\rm mag_{F775W}}$, approximately 0.4 magnitudes fainter; this is roughly equivalent to 25.83\,${\rm mag_{i}}$ from differences in matched object magnitudes. Similarly, completeness drops below 90\% at 23.80${\rm mag_{VIS}}$ matching to Euclid Q1 \citep{2025arXiv250315305E} objects, equivalent to about 23.5\,${\rm mag_{i}}$. 
+The Euclid imaging is of comparable or shallower depth, so magnitude limits at lower completeness percentages than 90\% are unreliable, whereas the HST images cover too small and irregular an area to accurately characterize 80-90\% completeness limits.
 % DST: Is the above sentence TMI? It can be cut.
 
-At the 80\% completeness limit, nearly 20\% of objects, primarily injected galaxies, are incorrectly classified as stars based on the refExtendedness parameter, which indicates whether a source is more likely to be a point source or an extended source.
+At the 80\% completeness limit, nearly 20\% of objects, primarily injected galaxies, are incorrectly classified as stars based on extendedness, which indicates whether a source is more likely to be a point source or an extended source.
 Similarly, the fraction of correctly classified injected stars drops to about 50\% at 23.8\,${\rm mag_{i}}$ (90\% completeness).
 
 There are several caveats for this analysis. The selection of objects for matching in any catalog is not trivial. Some fraction of the detections are either artifacts (particularly close to diffraction spikes around bright stars) or otherwise spurious. Additionally, some objects lie in masked regions of one survey but not another, which has not been accounted for. For injected source matching, the reference catalog does not include real on-sky objects. For this reason, we do not quote specific figures for purity; however, based on prior analyses of the \gls{DC2} simulations, purity is generally higher than completeness at any given magnitude.
@@ -257,40 +246,53 @@ There are several caveats for this analysis. The selection of objects for matchi
 \subsection{Flux Measurement}
 \label{ssec:fluxes}
 
-\begin{figure}[htb]
-\centering
-\includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_i_mag_cmodel.pdf}
-\includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_i_mag_sersic.pdf}
-\caption{Magnitude residuals for matched injected galaxies with the CModel and Sersic algorithms.}
-\label{fig:injected_lsst_cells_v1_5063_i_mag}
-\vspace{0.1cm}
-\end{figure}
-
-\figref{fig:injected_lsst_cells_v1_5063_i_mag} shows $i$-band magnitude residuals for CModel and Sersic measurements using the matched injected galaxies described in \ref{ssec:detection_completeness}.
+\figref{fig:injected_lsst_cells_v1_5063_i_mag} shows $i$-band magnitude residuals for CModel and Sersic measurements using the matched injected galaxies described in \secref{ssec:detection_completeness}.
 Similar behavior is seen in other bands.
-Sersic fluxes show reduced scatter and are more accurate on average for galaxies brighter than 22.5\,${\rm mag_{i}}$, though CModel's are less biased, median residuals are slightly closer to zero.
+Sersic fluxes show reduced scatter and are more accurate on average for galaxies brighter than 22.5\,${\rm mag_{i}}$, though CModel's are less biased, with median residuals  slightly closer to zero.
 For fainter objects, Sersic fluxes are more biased and less accurate.
 The magnitude of this bias is considerably larger than previously seen in simulated data and is being investigated.
 Aperture fluxes - including Kron and \gls{GAaP} - are not shown as they are not corrected to yield total fluxes and thus are not recommended for use as total galaxy magnitudes.
 
-\begin{figure}[htb]
-\centering
-\includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_r_color_cmodel_g_minus_i.pdf}
-\includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_r_color_gaap_g_minus_i.pdf}
-\includegraphics[width=0.98\linewidth]{figures/injected_lsst_cells_v1_5063_r_color_sersic_g_minus_i.pdf}
-\caption{$g-i$ color residuals versus injected r-band magnitude for matched galaxies with the CModel, \gls{GAaP} and Sersic algorithms.}
-\label{fig:injected_lsst_cells_v1_5063_r_color_g_minus_i}
+\begin{figure*}[hbt!]
+  \centering
+  \begin{subfigure}[t]{0.40\textwidth}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_cmodel.pdf}
+  \caption{CModel}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.4\textwidth}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_sersic.pdf}
+  \caption{Sersic}
+  \end{subfigure}\hfill
+\caption{Magnitude residuals for matched injected galaxies with the CModel and Sersic algorithms.}
+\label{fig:injected_lsst_cells_v1_5063_i_mag}
 \vspace{0.1cm}
-\end{figure}
-
-\figref{fig:injected_lsst_cells_v1_5063_i_mag} shows $g-i$ color residuals versus $r$-band magnitude for the same sample of galaxies as \figref{fig:injected_lsst_cells_v1_5063_i_mag}.
+\end{figure*}
+\figref{fig:injected_lsst_cells_v1_5063_r_color_g_minus_i} shows $g-i$ color residuals versus $r$-band magnitude for the same sample of galaxies as \figref{fig:injected_lsst_cells_v1_5063_i_mag}.
 For this and most other colors, \gls{GAaP} (with a $1''$ aperture) and Sersic colors both yield lower scatter; however, the CModel colors have the smallest bias.
 Curiously, the \gls{GAaP} bias appears to be magnitude-dependent, whereas the Sersic bias remains stable from $19<r<26$.
 Any of these color measurements are suitable for use for deriving quantities like photometric redshifts, stellar masses, etc.
-
+\begin{figure*}[hbt!]
+  \centering
+  \begin{subfigure}[t]{0.31\textwidth}
+    \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_cmodel_g_minus_i.pdf}
+    \caption{CModel}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_gaap_g_minus_i.pdf}
+    \caption{GAaP}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_sersic_g_minus_i.pdf}
+    \caption{Sersic}
+ \end{subfigure}\hfill
+\caption{$g-i$ color residuals versus injected r-band magnitude for matched galaxies with the CModel, \gls{GAaP} and Sersic algorithms.}
+\label{fig:injected_lsst_cells_v1_5063_r_color_g_minus_i}
+\vspace{0.1cm}
+\end{figure*}
 In addition to photometry, some algorithms include measurements of structural parameters like size, ellipticity, and Sersic index.
-One particular known issue is that many (truly) faint objects have significantly overestimated sizes and fluxes, as was also seen in the Dark Energy Survey \citep{2025arXiv250105739B} and dubbed "super-spreaders".
-These super-spreaders contribute significantly to overestimated fluxes at the faint end, and are particular problematic for the Kron algorithm \citep{1980ApJS...43..305K}, which is not recommended for general use.
+One particular known issue is that many (truly) faint objects have significantly overestimated sizes and fluxes, as was also seen in the Dark Energy Survey \citep{2025arXiv250105739B}.
+We dub such objects "super-spreaders".
+These super-spreaders contribute significantly to overestimated fluxes at the faint end, and are particularly problematic for the Kron algorithm \citep{1980ApJS...43..305K}, which is not recommended for general use.
 
 As mentioned in \secref{ssec:coadd_processing}, the Sersic fits include a free centroid, which is initialized from the fiducial centroid of the object.
 Preliminary analyses of matched injected objects suggest that the galaxy \gls{astrometry} residuals are somewhat smaller, and so users of the Sersic photometry should also use these centroid values (if needed).
@@ -301,14 +303,17 @@ One caveat is that for faint objects and/or in crowded regions with unreliable d
 %% Think we'll need to correct for this in templates  to some degree to prevent dipoles appearing as extrems color sources at hight airmass.
 %% Science -- Fed -- measure stellar flar temperatures, AGN uise the effect to identiyf quasar lines - bight emmision lines in quasars as they transiotion.
 \label{sec:differential_chromatic_refraction}
-\gls{Differential Chromatic Refraction} (DCR) occurs when light passes through Earth’s atmosphere, refracting more for shorter wavelengths, which causes blue light to appear shifted closer to the zenith. This wavelength-dependent effect results in the smearing of point sources along the zenith direction, specifically parallel to the parallactic angle. The DCR effect is observable in LSSTComCam data, particularly in the angular offset versus g-i band magnitude difference plots \figref{fig:dcr} which contains all direct sources with \gls{SNR} $>10$ from 41 visits from November 26, 2024. When looking at data perpendicular to the parallactic angle, sources show no DCR effect (as expected), forming a clear vertical distribution on the hexbin plots.
+\gls{Differential Chromatic Refraction} (DCR) occurs when light passes through Earth’s atmosphere, refracting more for shorter wavelengths, which causes blue light to appear shifted closer to the zenith. 
+This wavelength-dependent effect results in the smearing of point sources along the zenith direction, specifically parallel to the parallactic angle. 
+The DCR effect is observable in LSSTComCam data, particularly in the angular offset versus g-i band magnitude difference plots,  as shown in \figref{fig:dcr}, which plots all direct sources with \gls{SNR} $>10$ from 41 visits from November 26, 2024. 
+When looking at data perpendicular to the parallactic angle, sources show no DCR effect (as expected), forming a clear vertical distribution on the 2-dimensional density plots in \figref{fig:dcr}.
 
 In contrast, sources aligned with the parallactic angle exhibit a tilted, linear distribution, clearly demonstrating the relationship between angular offset and the $g-i$ band magnitude difference, thereby providing a visual indication of the \gls{DCR} effect.
 
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=0.98\linewidth]{dcrHexbin.pdf}
-\caption{Visualization of \gls{Differential Chromatic Refraction} (DCR) observed in the  LSSTComCam commissioning campaign. The $g-i$ color is computed for every source in the reference catalog that is matched to a direct source in the science image, and the binned density for the full survey is plotted against the angular offset between the reference and detected positions. The angular offset is projected along coordinates parallel and perpendicular to the parallactic angle of the observation, and shows a characteristic correlation along the parallel axis with no correlation along the perpendicular axis. The orange vertical dashed line indicates the expected $g-i$ magnitude distribution at zero angular offset, while the green ‘x’ marks the average $g-i$ magnitude of the plotted sources.}
+\caption{Visualization of \gls{Differential Chromatic Refraction} (DCR) observed in the  LSSTComCam commissioning campaign. The $g-i$ color is computed for every source in the reference catalog that is matched to a direct source in the science image, and the binned density for the full survey is plotted against the angular offset between the reference and detected positions. The angular offset is projected along coordinates parallel and perpendicular to the parallactic angle of the observation, and shows a characteristic correlation along the parallel axis with no correlation along the perpendicular axis. The orange vertical dashed line indicates the expected $g-i$ magnitude distribution at zero angular offset.}
 \label{fig:dcr}
 \vspace{0.1cm}
 \end{figure}
@@ -320,7 +325,7 @@ In contrast, sources aligned with the parallactic angle exhibit a tilted, linear
 We assessed the performance of image differencing using human vetting and source injection (\S \ref{sec:perf:dia_completeness}).
 Members of the \gls{DP1} team labeled more than 9500 DIASource image triplets consisting of cutouts from the science, template, and difference images.
 We classified these into various real and artifact categories.
-The raw real:bogus ratio was roughly 9:1.
+The raw artifact to real ratio without filtering was roughly 9:1.
 Bright stars are the main source of artifacts.
 Correlated noise, primarily in u and g bands, also leads to spurious detections near the threshold.
 We expect to be able to mitigate these effects for \gls{LSSTCam}.
@@ -328,51 +333,11 @@ We expect to be able to mitigate these effects for \gls{LSSTCam}.
 Applying a reliability threshold improves the purity of transients but not variable stars; technical limitations at the time of model training prevented injection of variable stars into the synthetic training set.
 Reliability models for \gls{LSSTCam} data will be trained on a wider range of input data.
 
-% Jake/Mario
-\subsection{Solar System}
-\label{sec:performance:solsys}
-
-\subsubsection{Asteroid Linking Performance}
-
-\gls{DP1} performance evaluation of asteroid linking focused on demonstrating discovery capability.
-The solar system discovery \gls{pipeline} produced 269,581 tracklets, 5,691 linkages, and 281 post-processed candidates.
-
-We performed a conservative manual investigation of these 281 candidates, producing a curated list of \nnewasteroiddiscoveries probable new asteroid discoveries.
-As described in Section~\ref{sec:drp:solsys}, post processing of the {\tt heliolinc} output with {\tt link\_purify} produced a final set of 281 candidate linkages, ranked with the most promising candidates first.
-Using {\tt find\_orb} \citep{findorb}, we derived orbit fits for each candidate, sorting the resulting list by $\chi_{\rm dof}^2$, the quality of the fit.
-Manual inspection of the linkages indicated that those ranked 0--137 corresponded to unique real asteroids; ranks 138--200 contained additional real objects intermixed with some spurious linkages; and ranks higher than 200 were essentially all spurious.
-This analysis indicates that it will be possible to identify cuts on quality metrics like $\chi^2$ to derive discovery candidate samples with high purity; determining the exact quantitative cut values require more data with \gls{LSSTCam}.
-We next removed all observations matched to known asteroids (using \gls{MPC}'s MPChecker service), reducing the number of candidates to 97.
-Of these, four had strong astrometric and/or photometric outliers, likely due to self-subtraction in difference images due to the unavoidable limitations of template generation from the limited quantity of data available from  \gls{LSSTComCam}.
-We suspect these four linkages do correspond to real objects, but have chosen to discard them out of an abundance of caution.
-The remaining \nnewasteroiddiscoveries were submitted to the Minor Planet Center and accepted as new discoveries, demonstrating the \gls{LSST} pipelines are able to successfully discover new solar system objects.
-%\jake{We should cite the MPEC with discoveries, once we do submit and the MPEC becomes available}
-
-\subsubsection{Asteroid Association Performance}
-
-Solar system association associated \nsolarsystemsources DiaSources to \nsolarsystemobjects unique solar system objects. 
-%\jake{Update this after table update!}
-These include 3,934 DiaSources to 338 already-known \gls{MPC} objects and 2,054 DiaSources to the \nnewasteroiddiscoveries discoveries newly-discovered objects.
-Association also picked up an additional 143 detections of newly discovered objects.
-% \jake{This too - new parameter in notebook.}
-These were not originally found by the discovery pipelines as they didn't satisfy the number and/or maximum time span requirements to form tracklets.
-
-\begin{figure}[htb!]
-\centering
-\includegraphics[width=0.98\linewidth]{figures/sso_residuals.pdf}
-\caption{Astrometric residuals between expected and observed positions of SSOs in \gls{DP1}. The median residuals are $0.''001$ and $-0.''016$ in R.A./Dec direction, with the standard deviations of $0.''19$ and $0.''10$, respectively. No detectable detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. The wider scatter in the RA-direction is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions.}
-\label{fig:sso_residuals}
-\vspace{0.1cm}
-\end{figure}
-
-The astrometric residuals of known asteroid association are shown in Figure \ref{fig:sso_residuals}. 
-%\jake{Todo:} 
-Astrometric precision for solar system sources is excellent, the majority of objects detected within $0''.1$ of their expected positions. Taking the unsigned median residuals to search for biases, we find that previously-known objects have mean residuals of $0.''001$ and $-0.''016$ in the \gls{RA} and Dec directions respectively, while newly-discovered objects have mean residuals of $-0.''035$ and $-0.''010$ in the \gls{RA} and Dec directions, respectively. These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion (which is uncharacterized for LSSTComCam).
-
-\subsubsection{Detection Completeness on Difference Images} \label{sec:perf:dia_completeness}
+\subsection{Detection Completeness on Difference Images} 
+\label{sec:perf:dia_completeness}
 
 We assess the performance of our difference imaging \gls{pipeline} using synthetic source injection on the science images prior to differencing.
-We construct a catalog of injected sources by joining two different samples of point sources, a set of hosted sources to emulate transients in galaxies and second set of hostless.
+We construct a catalog of injected sources by joining two different samples of point sources, a set of hosted sources to emulate transients in galaxies and second set of hostless sources.
 
 The hosts are selected from the \gls{pipeline} source catalog that is produced upstream by imposing a cut in their extendedness measurement, and selecting $N_{\rm src}={\rm min}(100, N\times0.05)$ of the available sources per detector.
 %
@@ -406,7 +371,9 @@ In \figref{fig:coordinate_offset_diffim_fakes} we show the distribution of the r
 %
 In \figref{fig:phot_residual_diffim_fakes} we show the recovered magnitudes for our detected synthetic sources in the \textit{i} filter, using \gls{PSF} photometry on the difference images, and also show marginal distributions of the true magnitudes for fake sources, and the residuals on the left, split into hosted and hostless.
 %
-Our \gls{flux} measurements are accurate within a wide range of magnitudes, for both hosted and hostless synthetic sources. We obtain that for true $m_i < 22.2$, the median PSF magnitudes residuals are $<0.1$. When considering the \gls{flux} pulls $\delta = (f-f_{\rm{True}})/\sigma_f$ for PSF \gls{flux} $f$ and error $\sigma_f$, we find that $|\left<\delta\right>| <0.1$, and $\sigma_\delta < 1.1$ for $m_i<21.6$.
+Our \gls{flux} measurements are accurate within a wide range of magnitudes, for both hosted and hostless synthetic sources. 
+For true $m_i < 22.2$, the median PSF magnitudes residuals are $<0.1$. 
+When considering the \gls{flux} pulls $\delta = (f-f_{\rm{True}})/\sigma_f$ for PSF \gls{flux} $f$ and error $\sigma_f$, we find that $|\left<\delta\right>| <0.1$, and $\sigma_\delta < 1.1$ for $m_i<21.6$.
 %
 \begin{figure}
     \centering
@@ -414,6 +381,50 @@ Our \gls{flux} measurements are accurate within a wide range of magnitudes, for 
     \caption{Magnitude residuals for \gls{PSF} photometry on difference images for ECDFS field in $i$ for detected fake sources. In black solid and dashed lines: the running median, and the mean absolute deviation. Top panel: the distribution of true magnitudes for hostless and hosted fakes sources. Right panel: the distribution of magnitude residuals for hostless and hosted sources.}
     \label{fig:phot_residual_diffim_fakes}
 \end{figure}
+
+% Jake/Mario
+\subsection{Solar System}
+\label{sec:performance:solsys}
+
+\subsubsection{Asteroid Linking Performance}
+
+\gls{DP1} performance evaluation of asteroid linking focused on demonstrating discovery capability.
+The solar system discovery \gls{pipeline} produced 269,581 tracklets, 5,691 linkages, and 281 post-processed candidates.
+
+We performed a conservative manual investigation of these 281 candidates, producing a curated list of \nnewasteroiddiscoveries probable new asteroid discoveries.
+All of these candidates are identified as main-belt asteroids.
+As described in Section~\ref{sec:drp:solsys}, post processing of the {\tt heliolinc} output with {\tt link\_purify} produced a final set of 281 candidate linkages, ranked with the most promising candidates first.
+Using {\tt find\_orb} \citep{findorb}, we derived orbit fits for each candidate, sorting the resulting list by $\chi_{\rm dof}^2$, the quality of the fit.
+Manual inspection of the linkages indicated that those ranked 0--137 corresponded to unique real asteroids; ranks 138--200 contained additional real objects intermixed with some spurious linkages; an d ranks higher than 200 were essentially all spurious.
+This analysis indicates that it will be possible to identify cuts on quality metrics like $\chi^2$ to derive discovery candidate samples with high purity; determining the exact quantitative cut values requires more data with \gls{LSSTCam}.
+We next removed all observations matched to known asteroids (using \gls{MPC}'s MPChecker service), reducing the number of candidates to 97.
+Of these, four had strong astrometric and/or photometric outliers, likely due to self-subtraction in difference images due to the unavoidable limitations of template generation from the limited quantity of data available from  \gls{LSSTComCam}.
+We suspect these four linkages do correspond to real objects, but have chosen to discard them out of an abundance of caution.
+The remaining \nnewasteroiddiscoveries were submitted to the Minor Planet Center and accepted as new discoveries, demonstrating the \gls{LSST} pipelines are able to successfully discover new solar system objects.
+%\jake{We should cite the MPEC with discoveries, once we do submit and the MPEC becomes available}
+
+\subsubsection{Asteroid Association Performance}
+
+Solar system association associated \nsolarsystemsources DiaSources to \nsolarsystemobjects unique solar system objects. 
+%\jake{Update this after table update!}
+These include 3,934 DiaSources to 338 already-known \gls{MPC} objects and 2,054 DiaSources to the \nnewasteroiddiscoveries  newly-discovered objects.
+Association also picked up an additional 143 detections of newly discovered objects.
+% \jake{This too - new parameter in notebook.}
+These were not originally found by the discovery pipelines as they didn't satisfy the number and/or maximum time span requirements to form tracklets.
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.98\linewidth]{figures/sso_residuals.pdf}
+\caption{Astrometric residuals between expected and observed positions of SSOs in \gls{DP1}. The median residuals are $0.''001$ and $-0.''016$ in R.A./Dec direction, with the standard deviations of $0.''19$ and $0.''10$, respectively. No detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. The wider scatter in the RA-direction is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions.}
+\label{fig:sso_residuals}
+\vspace{0.1cm}
+\end{figure}
+
+The astrometric residuals of known asteroid association are shown in Figure \ref{fig:sso_residuals}. 
+%\jake{Todo:} 
+Astrometric precision for solar system sources is excellent, the majority of objects detected within $0''.1$ of their expected positions. 
+Taking the unsigned median residuals to search for biases, we find that previously-known objects have mean residuals of $0.''001$ and $-0.''016$ in the \gls{RA} and Dec directions respectively, while newly-discovered objects have mean residuals of $-0.''035$ and $-0.''010$ in the \gls{RA} and Dec directions, respectively. 
+These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion (which is uncharacterized for LSSTComCam).
 
 \subsection{Crowded Fields}
 Two of the seven \gls{DP1} target fields exhibit high stellar density, 47 Tucanae and the Fornax dwarf galaxy.

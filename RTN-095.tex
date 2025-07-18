@@ -1,6 +1,5 @@
 %\documentclass[twocolappendix, trackchanges]{aastex7}
-\documentclass[twocolumn,twocolappendix,linenumbers,trackchanges]{aastex7}
-
+\documentclass[twocolumn, linenumbers, twocolappendix,trackchanges]{aastex7}
 
 % line numbers must be on for submission
 
@@ -70,7 +69,7 @@
     pdfkeywords={}
 }
 \input{authors}
-%\collaboration{0}{(The Vera C. Rubin Observatory)}
+\correspondingauthor{Leanne P. Guy; Tim Jenness; James Mullaney}
 
 \input{abstract}
 
@@ -91,11 +90,13 @@
 \input{summary}
 
 %% Modify acknowldgments as needed.
-\begin{acknowledgments}
-This material is based upon work supported in part by the National Science Foundation through Cooperative Agreement AST-1258333 and Cooperative Support Agreement AST-1202910 managed by the Association of Universities for Research in Astronomy (AURA), and the Department of Energy under Contract No. DE-AC02-76SF00515 with the SLAC National Accelerator Laboratory managed by Stanford University.
-Additional Rubin Observatory funding comes from private donations, grants to universities, and in-kind support from LSSTC Institutional Members.
-This research has made use of NASA's Astrophysics Data System Bibliographic Services.
+\begin{acknowledgments}.
+This material is based upon work supported in part by the National Science Foundation through Cooperative Agreements AST-1258333 and AST-2241526 and Cooperative Support Agreements AST-1202910 and 2211468 managed by the Association of Universities for Research in Astronomy (AURA), and the Department of Energy under Contract No. DE-AC02-76SF00515 with the SLAC National Accelerator Laboratory managed by Stanford University. 
+Additional Rubin Observatory funding comes from private donations, grants to universities, and in-kind support from LSST-DA Institutional Members.
 
+This work has been supported by the French National Institute of Nuclear and Particle Physics (IN2P3) through dedicated funding provided by the National Center for Scientific Research (CNRS).
+
+This work has been supported by STFC funding for UK participation in LSST, through grant ST/Y00292X/1.
 \end{acknowledgments}
 \vspace{5mm}
 
@@ -109,7 +110,8 @@ This research has made use of NASA's Astrophysics Data System Bibliographic Serv
           Astropy \citep{astropy:2013, astropy:2018, astropy:2022}
           PIFF \citep{DES:2020vau},
           GBDES \citep{2022ascl.soft10011B},
-          Qserv \citep{Wang:2011:QDS:2063348.2063364, C15_adassxxxii}
+          Qserv \citep{Wang:2011:QDS:2063348.2063364, C15_adassxxxii}, 
+          Slurm, HTCondor, CVMFS, FTS3, ESNet
           }
 
 \appendix
