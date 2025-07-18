@@ -161,7 +161,7 @@ class DcrEffect:
         selectedVisits = dcrMetricResults["DCR Visits"][0]
         selectedVisits = list(selectedVisits)
 
-        # Get references for set of visits with highests DCR metric
+        # Get references for set of visits with highest DCR metric
         references = [
             self.butler.query_datasets(
                 "preliminary_visit_image", where="band='g'" and f"visit={v}"
