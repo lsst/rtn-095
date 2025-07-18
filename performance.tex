@@ -263,15 +263,15 @@ The correction for Kron fluxes can be derived from the Sersic index \citep{2005P
 
 \begin{figure*}[hbt!]
   \centering
-  \begin{subfigure}[t]{0.40\textwidth}
+  \begin{subfigure}[t]{0.45\textwidth}
   \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_i_mag_cmodel.pdf}
-  \caption{i-band magnitude residuals for CModel measurements.}
+  \caption{$i$-band magnitude residuals for CModel measurements.}
   \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.4\textwidth}
+  \begin{subfigure}[t]{0.45\textwidth}
   \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_i_mag_sersic.pdf}
-  \caption{i-band magnitude residuals for Sersic measurements.}
+  \caption{$i$-band magnitude residuals for Sersic measurements.}
   \end{subfigure}\hfill
-\caption{i-band magnitude residuals for matched injected DC2 galaxies with the CModel and Sersic algorithms in a portion of the \gls{ECDFS} region.}
+\caption{$i$-band magnitude residuals for matched injected DC2 galaxies with the CModel and Sersic algorithms in a portion of the \gls{ECDFS} region.}
 \label{fig:injected_lsst_cells_v1_5063_i_mag}
 \vspace{0.1cm}
 \end{figure*}
@@ -312,12 +312,64 @@ Currently, only the on-diagonal dispersion term (square root of the variance) is
 Future release may provide more off-diagonal terms of the covariance matrix - particularly for the structural parameters, which are known to be correlated.
 
 A major outstanding issue is that many parameter uncertainties - including but not limited to those for fluxes - are underestimated.
-Based on estimates of the scatter in the error-scaled residuals in matched injected objects, flux uncertainties are underestimated by a factor of at least 2 (for PSF model fluxes for stars) to 3 (for galaxy model fluxes).
 This is at least partly (but not wholly) due to the fact that coaddition introduces covariance between pixels, which is not captured in per-pixel variances.
+
+\begin{figure*}[hbt!]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_i_mag_chi_psf.pdf}
+  \caption{$i$-band magnitude uncertainty-scaled residuals for PSF model measurements of injected stars.}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_r_color_chi_psf_g_minus_i.pdf}
+  \caption{$g-i$ color uncertainty-scaled residuals for PSF model measurements of injected stars.}
+  \end{subfigure}\hfill
+\caption{Color and magnitude uncertainty-scaled residuals for matched injected DC2 stars' PSF model fluxes in a portion of the \gls{ECDFS} region.}
+\label{fig:injected_lsst_cells_v1_5063_star_psf_chi}
+\vspace{0.1cm}
+\end{figure*}
+
 The degree to which uncertainties are underestimated can depend on the parameter in question and on the brightness of the object.
-For example, centroids and color uncertainties overestimates are consistent over a broad magnitude range, whereas flux uncertainty overestimates increase with signal-to-noise.
+\ref{fig:injected_lsst_cells_v1_5063_star_psf_chi} shows that flux and color uncertainties for PSF model magnitudes of injected stars are both underestimated, but by a factor of approximately $1.7-2$ that is not very sensitive to \gls{SNR}.
+This holds for astrometric/centroid parameters as well.
+
+\begin{figure*}[hbt!]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_i_mag_chi_cmodel.pdf}
+  \caption{$i$-band magnitude uncertainty-scaled residuals for CModel measurements of injected galaxies.}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_r_color_chi_cmodel_g_minus_i.pdf}
+  \caption{$g-i$ color uncertainty-scaled residuals for CModel measurements of injected galaxies.}
+  \end{subfigure}\hfill
+\caption{Color and magnitude uncertainty-scaled residuals for matched injected DC2 galaxies' CModel fluxes in a portion of the \gls{ECDFS} region.}
+\label{fig:injected_lsst_cells_v1_5063_galaxy_cmodel_chi}
+\vspace{0.1cm}
+\end{figure*}
+
+\begin{figure*}[hbt!]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_i_mag_chi_sersic.pdf}
+  \caption{$i$-band magnitude uncertainty-scaled residuals for Sersic measurements of injected galaxies.}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_r_color_chi_sersic_g_minus_i.pdf}
+  \caption{$g-i$ color uncertainty-scaled residuals for Sersic measurements of injected galaxies.}
+  \end{subfigure}\hfill
+\caption{Color and magnitude uncertainty-scaled residuals for matched injected DC2 galaxies' Sersic fluxes in a portion of the \gls{ECDFS} region.}
+\label{fig:injected_lsst_cells_v1_5063_galaxy_sersic_chi}
+\vspace{0.1cm}
+\end{figure*}
+
+In turn, \ref{fig:injected_lsst_cells_v1_5063_galaxy_cmodel_chi} shows that CModel color uncertainties are underestimated by a similar factor at the faint end, but with appreciable scaling with \gls{SNR}.
+Flux error underestimation is both larger than for colors and scales more strongly with \gls{SNR}.
 This indicates that systematic effects dominate the errors in fluxes, particularly for bright galaxies.
 This is also at least partly but not wholly due to so-called model inadequacy - that is, the fact that galaxy models, parameteric or otherwise, are insufficiently complex to capture the structure of real galaxies.
+
+\ref{fig:injected_lsst_cells_v1_5063_galaxy_sersic_chi} shows that Sersic model fluxes and colors have similar behavior to as CModel, but with a greater degree of overestimation.
+This may be partly due to the fact that Sersic parameter uncertainties are estimated along with the free centroid and structural (shape and Sersic index) parameters, whereas the forced CModel fluxes and errors are derived from linear flux fits with a fixed shape and centroid.
 
 Efforts are underway to investigate and quantify the origin of uncertainty underestimates and future releases will, at the least, provide recommendations for mitigations.
 
