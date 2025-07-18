@@ -257,11 +257,11 @@ Aperture fluxes - including Kron and \gls{GAaP} - are not shown as they are not 
   \centering
   \begin{subfigure}[t]{0.40\textwidth}
   \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_cmodel.pdf}
-  \caption{$ugr$ stellar locus containing 12779 stars with signal-to-noise greater than 50 in the $u$ band.}
+  \caption{CModel}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.4\textwidth}
   \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_sersic.pdf}
-  \caption{$gri$ stellar locus containing 63236 stars with signal-to-noise greater than 200 in the $i$ band.}
+  \caption{Sersic}
   \end{subfigure}\hfill
 \caption{Magnitude residuals for matched injected galaxies with the CModel and Sersic algorithms.}
 \label{fig:injected_lsst_cells_v1_5063_i_mag}
@@ -271,21 +271,20 @@ Aperture fluxes - including Kron and \gls{GAaP} - are not shown as they are not 
 For this and most other colors, \gls{GAaP} (with a $1''$ aperture) and Sersic colors both yield lower scatter; however, the CModel colors have the smallest bias.
 Curiously, the \gls{GAaP} bias appears to be magnitude-dependent, whereas the Sersic bias remains stable from $19<r<26$.
 Any of these color measurements are suitable for use for deriving quantities like photometric redshifts, stellar masses, etc.
-
 \begin{figure*}[hbt!]
   \centering
   \begin{subfigure}[t]{0.31\textwidth}
-\includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_cmodel_g_minus_i.pdf}
-  \caption{$ugr$ stellar locus containing 12779 stars with signal-to-noise greater than 50 in the $u$ band.}
+    \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_cmodel_g_minus_i.pdf}
+    \caption{CModel}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.31\textwidth}
-\includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_gaap_g_minus_i.pdf}
-  \caption{$gri$ stellar locus containing 63236 stars with signal-to-noise greater than 200 in the $i$ band.}
+    \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_gaap_g_minus_i.pdf}
+    \caption{GAaP}
   \end{subfigure}\hfill
-    \begin{subfigure}[t]{0.31\textwidth}
-\includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_sersic_g_minus_i.pdf}
-  \caption{$riz$ stellar locus containing 46760 stars with signal-to-noise greater than 200 in the $i$ band.}
-  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_sersic_g_minus_i.pdf}
+    \caption{Sersic}
+ \end{subfigure}\hfill
 \caption{$g-i$ color residuals versus injected r-band magnitude for matched galaxies with the CModel, \gls{GAaP} and Sersic algorithms.}
 \label{fig:injected_lsst_cells_v1_5063_r_color_g_minus_i}
 \vspace{0.1cm}
