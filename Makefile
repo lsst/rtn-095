@@ -25,7 +25,7 @@ $(DOCNAME).pdf: $(tex) local.bib authors.tex aglossary.tex
 	xelatex $(DOCNAME)
 
 authors.tex:  authors.yaml
-	python3 $(TEXMFHOME)/../bin/db2authors.py -m aas > authors.tex
+	python3 $(TEXMFHOME)/../bin/db2authors.py -m aas7 > authors.tex
 
 aglossary.tex :$(tex) myacronyms.txt
 	python3 $(TEXMFHOME)/../bin/generateAcronyms.py -t"Sci DM" -g $(tex)
