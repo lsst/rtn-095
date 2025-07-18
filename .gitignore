@@ -7,7 +7,6 @@
 *.out
 *.xdv
 *.dvi
-*.pdf
 authors.tex
 RTN-095.glg
 RTN-095.glo
