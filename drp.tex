@@ -156,11 +156,11 @@ Extendedness is a binary classifier that is set to 1 if the PSF model flux is le
 Additionally, the extendedness in the reference band is provided as a separate column for convenience as a multiband star-galaxy classification, and is recommended generally but also specifically for objects with low signal-to-noise in some bands.
 
 Gaussian-Aperture-and-PSF \citep[\gls{GAaP}][]{2008A&A...482.1053K, DMTN-190} fluxes are provided to ensure consistent galaxy colors across bands.
-Sersic model \citep{1963BAAA....6...41S, 1968adga.book.....S} fits are run on all available bands simultaneously \cite[MultiProFit,][]{dmtn-312}.
-The resulting Sersic model fluxes are provided as an alternative to CModel and are intended to represent total galaxy fluxes.
-Like CModel, the Sersic model is a Gaussian mixture approximation to a true Sersic profile, convolved with a Gaussian mixture approximation to the \gls{PSF}.
-CModel measurements use a double ``shapelet'' \citep{2003ARA&A..41..645R} PSF with a single shared shape, while the Sersic fits use a double Gaussian with independent shape parameters for each component.
-Sersic model fits also include a free centroid, with all other structural parameters shared across all bands.
+S\'ersic model \citep{1963BAAA....6...41S, 1968adga.book.....S} fits are run on all available bands simultaneously \cite[MultiProFit,][]{dmtn-312}.
+The resulting S\'ersic model fluxes are provided as an alternative to CModel and are intended to represent total galaxy fluxes.
+Like CModel, the S\'ersic model is a Gaussian mixture approximation to a true S\'ersic profile, convolved with a Gaussian mixture approximation to the \gls{PSF}.
+CModel measurements use a double ``shapelet'' \citep{2003ARA&A..41..645R} PSF with a single shared shape, while the S\'ersic fits use a double Gaussian with independent shape parameters for each component.
+S\'ersic model fits also include a free centroid, with all other structural parameters shared across all bands.
 That is, the intrinsic model has no color gradients, but the convolved model may have color gradients if the \gls{PSF} parameters vary significantly between bands.
 
 Further details on the performance of these algorithms can are in \secref{ssec:fluxes}.
