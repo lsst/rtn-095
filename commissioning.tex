@@ -98,6 +98,16 @@ The full-system throughput of the six \gls{LSSTComCam} filters, which encompasse
 \vspace{0.1cm}
 \end{figure}
 
+\subsubsection{Timing Resolution}
+
+The absolute time accuracy of data taken with LSSTComCam relies on the Network Time Protocol(NTP) for clock synchronization, which should be accurate to approximately 1 millisecond. In order to evaluate the absolute timing accuracy of the entire system we observed the geosynchronous satellite EUTELSAT 117 West B with a set of 10 usable 10-second exposures over two nights.  EUTELSAT 117 West B is part the GPS system and serves as one of WAAS (Wide Area Augmentation System) satellites operated for the U.S. Federal Aviation Administration (FAA) and used to broadcast GPS corrections to air traffic.
+
+As these satellites are part of the GPS system, their precision is tracked very precisely and the record of their locations are published after the fact and can be downloaded.  Following the technique previously employed by other surveys~\cite{2018PASP..130f4505T}  we observed the satellite while tracking the sky and then downloaded the data-files with its precise locations from the National Satellite Test Bed web site~\footnote{https://www.nstb.tc.faa.gov/nstbarchive.html}.  By comparing the measured and predicted locations of the start of the satellite track on the sky, we determined that (relative to the start of integration-time recorded in the FITS headers) our time was accurate to 53.6 $\pm$ 11.0 milliseconds.
+
+This work continues to be an area of ongoing study, with the exact timing of when the shutter open command is issued and the complete profile of the shutter movement not yet determined. However the open command is on average near 29 milliseconds later. Incorporating the delays into the fit reduces the offset to 24.8 $\pm$ 11.0 milliseconds.
+
+The full shutter takes approximately 396 milliseconds to completely open.  As the LSSTComCam sensors are centered in the aperture, the center of the focal plane should be exposed about half-way through the shutter open procedure, 198 milliseconds after the open command. There are uncertainties on the full profile and the blade direction motions are currently not known, but the fraction of the shutter aperture subtended by the focal plane is 52\%. This implies that that the shutter will pass any pixel between 198 +/- 103 milliseconds.  Subtracting this from the fitted delay of 24.8 milliseconds and adding the fitted error of 11.0 milliseconds in quadrature, results in a current conservative estimate of the delay of -173.2 $\pm$ 104.1 milliseconds, consistent with and smaller than the constraints on the timing offset determined using astrometric residuals from known asteroid associations presented in Section~\ref{ssec:asteroid_association}.
+
 % Reviewed by Eli
 \subsection{Flat Field System
 \label{ssec:flat_field_system}}
