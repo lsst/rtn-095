@@ -509,7 +509,17 @@ Taking the unsigned median residuals to search for biases, we find that previous
 These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion (which is consistent with the timing studies presented in Section~\ref{ssec:comcam_timing}).
 
 \subsection{Crowded Fields}
-Two of the seven \gls{DP1} target fields exhibit high stellar density, 47 Tucanae and the Fornax dwarf galaxy.
-47 Tucanae was chosen as an initial stress test for the science pipelines processing.
-The Fornax dwarf galaxy also exhibits high stellar density, particularly in its central regions.
+Among the seven Rubin Observatory \gls{DP1} target fields, two stand out for their severe stellar crowding: the globular cluster 47 Tucanae (47 Tuc) and the Fornax dwarf spheroidal galaxy (Fornax dSph). These fields were selected in part to stress-test the LSST Science Pipelines under high-density conditions. While both exhibit high stellar densities, the nature and spatial extent of the crowding differ significantly.
+
+47 Tuc presents extreme crowding across much of the field, encompassing its dense core and the eastern regions influenced by the Small Magellanic Cloud (SMC). This pervasive crowding leads to persistent challenges for deblending and reliable source detection, exposing field-wide limitations in the current pipeline performance \citep{Choi2025}. In contrast, Fornax dSph shows significant crowding only in its central region, with outer areas remaining well resolved and easier to process.
+
+In both 47 Tuc and Fornax, extreme crowding led to frequent deblending skipping when memory or runtime limits were exceeded, typically due to excessive peaks, large parent footprints, or a single-peak configuration. However, the impact of these limitations differed: in 47 Tuc, deblending was often skipped across the entire field, resulting in large gaps and substantially reduced completeness. In Fornax, these issues were largely confined to the central region, with much better recovery in the outskirts. This contrast highlights how the pipeline’s limitations depend on the spatial extent of high-density regions: 47 Tuc exposed systematic, field-wide challenges, whereas Fornax revealed more localized, density-driven limits.
+
+\citet{Wainer2025} explored the Rubin DP1 diaObject table in the 47 Tuc field, which contains sources detected in difference images. Because forced photometry is performed at these positions across all single-epoch images, this dataset bypasses the coadd-based detection and deblending stages that often fail in crowded regions. By computing the median of the forced photometry for each diaObject across available visits, they recovered approximately three times more candidate cluster members than found in the standard Object table \citep[cf.][]{Choi2025}. This result underscores the value of difference-imaging–based catalogs for probing dense stellar regions inaccessible to standard coadd processing in DP1.
+
+Although the DP1 pipeline was not optimized for crowded-field photometry, these early studies of 47 Tuc and Fornax provide critical benchmarks. They highlight both the limitations and opportunities for structural science with Rubin data in crowded environments, and they inform future pipeline development aimed at robust source recovery in complex stellar fields.
+
+%Two of the seven \gls{DP1} target fields exhibit high stellar density, 47 Tucanae and the Fornax dwarf galaxy.
+%47 Tucanae was chosen as an initial stress test for the science pipelines processing.
+%The Fornax dwarf galaxy also exhibits high stellar density, particularly in its central regions.
 %\yusra{Explain where the pipelines broke down. and  how the performance is different in the 2 crowded fields}
