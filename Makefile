@@ -31,7 +31,7 @@ authors.txt:  authors.txt
 	python3 $(TEXMFHOME)/../bin/db2authors.py -m arxiv > authors.txt
 
 aglossary.tex :$(tex) myacronyms.txt
-	python3 $(TEXMFHOME)/../bin/generateAcronyms.py -t"Sci DM" -g $(tex)
+	python3 $(TEXMFHOME)/../bin/generateAcronyms.py -t"Sci DM Gen" -g $(tex)
 
 
 .PHONY: clean
