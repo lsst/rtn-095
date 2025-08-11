@@ -134,7 +134,7 @@ Identified \gls{transient} regions are masked before coaddition, improving image
 \subsubsection{Coadd Processing}
 \label{sssec:coadd_processing}
 Coadd-processing consists of detection, \gls{deblend}ing, and  measurement on coadds to produce object tables (\secref{ssec:catalogs}).
-For each coadd in all six bands, we perform source detection at a $5\sigma$ detection threshold and then adjust the background with a per-patch constant (coadds are built from background-subtracted images, but the deeper detection on coadds redefines what is considered source vs. background).
+For each coadd in all six bands, we perform source detection at a $5\sigma$ detection threshold and then adjust the background with a per-patch constant (coadds are built from background-subtracted images, but the deeper detection on coadds redefines what is considered source versus background).
 Detections across bands are merged in a fixed priority order, $irzygu$, to form a union detection catalog, which serves as input to deblending.
 
 Deblending is performed using the Scarlet Lite algorithm, which implements the same model as Scarlet \citep{2018A&C....24..129M}, but operates on a single pixel grid.
