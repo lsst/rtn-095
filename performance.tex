@@ -222,7 +222,9 @@ In both cases, we use a greedy, probabilistic matching \gls{algorithm}, whereby 
 
 We inject sources in 12 of the patches of the \gls{ECDFS} region with the deepest coverage.
 The input catalog contains stars and galaxies from part of the \gls{DC2} simulations \citep{2021ApJS..253...31L}, where the galaxies consist of an exponential disk and de Vaucouleurs \citep{1948AnAp...11..247D,1953MNRAS.113..134D} bulge.
-To avoid deblender failures from excessive increases in object density, stars whose total \gls{flux} (i.e., summed across all six bands) is brighter than 17.5~${\rm mag_{\rm AB}}$ are excluded, as are galaxies whose total \gls{flux} is brighter than 15~${\rm mag_{AB}}$ or fainter than 26.5~${\rm mag_{AB}}$. Half of the remaining objects are selected for injection.
+To avoid deblender failures from excessive increases in object density, stars whose total \gls{flux} (i.e., summed across all six bands) is brighter than 17.5~${\rm mag_{\rm AB}}$ are excluded, as are galaxies whose total \gls{flux} is brighter than 15~${\rm mag_{AB}}$ or fainter than 26.5~${\rm mag_{AB}}$.
+Half of the remaining objects are selected for injection.
+Afterwards, individual components fainter than 29~${\rm mag_{AB}}$ are also excluded for computational expediency, and because the properties of these very faint bulges and disks are not as well-constrained as for brighter galaxies.
 
 \begin{figure}[htb]
 \centering
@@ -243,7 +245,7 @@ Similarly, the fraction of correctly classified injected stars drops to about 50
 
 There are several caveats for this analysis.
 The selection of objects for matching in any catalog is not trivial.
-Some fraction of the detections are either artifacts (particularly close to diffraction spikes around bright stars) or otherwise spurious.
+Some fraction of the detections are spurious, particularly close to bright stars and their diffraction spikes.
 Additionally, some objects lie in masked regions of one survey but not another, which has not been accounted for. 
 For injected source matching, the reference catalog does not include real on-sky objects.
 Based on prior analyses of the \gls{DC2} simulations, purity is generally higher than completeness at any given magnitude.
