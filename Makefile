@@ -13,7 +13,10 @@ endif
 
 export TEXMFHOME ?= lsst-texmf/texmf
 
-$(DOCNAME).pdf: $(tex) local.bib authors.tex aglossary.tex
+SCRIPTS_DIR=scripts
+PYTHON_SCRIPTS=$(wildcard $(SCRIPTS_DIR)/*.py)
+
+$(DOCNAME).pdf: $(scripts) $(tex) local.bib authors.tex aglossary.tex
 	mv $(DOCNAME).tex orig.tex
 	sed s/twocolumn,//1 orig.tex > $(DOCNAME).tex 
 	latexmk -bibtex -xelatex -f $(DOCNAME)
@@ -58,3 +61,9 @@ merge: new_authors.yaml
 
 merge_affil: new_affiliations.yaml
 	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py -a new_affiliations.yaml 
+
+scripts:
+	@echo "Running Python scripts..."
+	@for script in $(PYTHON_SCRIPTS); do \
+		python3 $$script; \
+	done
