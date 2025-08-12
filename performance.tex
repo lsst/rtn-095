@@ -352,10 +352,11 @@ Efforts are underway to investigate and quantify the origin of uncertainty under
 \label{sec:differential_chromatic_refraction}
 \gls{Differential Chromatic Refraction} (DCR) occurs when light passes through Earth’s atmosphere, refracting more for shorter wavelengths, which causes blue light to appear shifted closer to the zenith.
 This wavelength-dependent effect results in the smearing of point sources along the zenith direction, specifically parallel to the parallactic angle.
-The DCR effect is observable in LSSTComCam data, particularly in the angular offset versus g-i band magnitude difference plots,  as shown in \figref{fig:dcr}. These plots contain 228 visits chosen to maximize the range of observed airmass.
-When looking at data perpendicular to the parallactic angle, sources show no DCR effect (as expected), forming a clear vertical distribution on the 2-dimensional density plots in \figref{fig:dcr}.
+The DCR effect is observable in LSSTComCam data, particularly in the angular offset versus $g-i$ band magnitude difference plots,  as shown in \figref{fig:dcr}. 
+These plots contain 228 visits chosen to maximize the range of observed airmass.
+When looking at data perpendicular to the parallactic angle, sources exhibit no discernible DCR effect, which is expected, and form a clear vertical distribution on the two-dimensional density plots in \figref{fig:dcr}.
 
-In contrast, sources aligned with the parallactic angle exhibit a tilted, linear distribution, clearly demonstrating the relationship between angular offset and the $g-i$ band magnitude difference, thereby providing a visual indication of the \gls{DCR} effect.
+In contrast, sources aligned with the parallactic angle exhibit a tilted, linear distribution, clearly demonstrating that the relationship between angular offset and the $g-i$ band magnitude difference, thereby providing a visual indication of the \gls{DCR} effect.
 
 \begin{figure}[htb!]
 \centering
@@ -378,14 +379,14 @@ Correlated noise, primarily in u and g bands, also leads to spurious detections 
 We expect to be able to mitigate these effects for \gls{LSSTCam}.
 
 Applying a reliability threshold improves the purity of transients but not variable stars; technical limitations at the time of model training prevented injection of variable stars into the synthetic training set.
-Reliability models for \gls{LSSTCam} data will be trained on a wider range of input data.
+Reliability models, described in \secref{ssec:diffim_analysis},  for \gls{LSSTCam} data will be trained on a wider range of input data.
 
 % Bruno
 \subsection{Difference Imaging Detection Completeness} \label{sec:perf:dia_completeness}
 
 We assess the performance of our difference imaging \gls{pipeline} using synthetic source injection on the science images prior to differencing.
 We construct a catalog of injected sources by joining two different samples of point sources, a set of hosted sources to emulate transients in galaxies and second set of hostless sources.
-The hosts are selected from the \gls{pipeline} source catalog that is produced upstream by imposing a cut in their extendedness measurement, and selecting $N_{\rm src}={\rm min}(100, N\times0.05)$ of the available sources per detector.
+The hosts are selected from the pipeline source catalog that is produced upstream by imposing a cut on their extendedness measurement and selecting $N_{\rm src}={\rm min}(100, N\times0.05)$ of the N available sources per detector.
 For each host we pick a random position angle and radius using its light profile \gls{shape}, and also a random value of brightness for the injected source, with magnitudes higher than the host source.
 
 The hostless sources instead have random positions in the \gls{CCD} focal plane, and magnitudes chosen from a random uniform distribution with $20 \geq m \geq m_{lim} + 1$  with $m_{lim}$ the limiting magnitude of the image.
@@ -408,7 +409,10 @@ In \figref{fig:coordinate_offset_diffim_fakes} we show the distribution of the r
 \begin{figure}[htb!]
 \centering
 \includegraphics[trim={0 0 0 0},width=\linewidth]{figures/coordinate_offsets_hexbin.pdf}
-\caption{Coordinate residuals for detected synthetic sources in difference images, between recovered and true position of the sources in the \gls{ECDFS} field. In the top and right panels we include the distribution of these offsets, for all sources as well as for sources with S/N$>20$. These high S/N sources show gaussian coordinate residual distributions with $\sigma=0\farcs02$ (black solid lines). The circle reflects the matching radius of $0\farcs5$.}
+\caption{Coordinate residuals for detected synthetic sources in difference images, between recovered and true position of the sources in the \gls{ECDFS} field. 
+In the top and right panels we include the distribution of these offsets, for all sources as well as for sources with S/N$>20$. 
+These high S/N sources show gaussian coordinate residual distributions with $\sigma=0\farcs02$ (black solid lines). 
+The circle reflects the matching radius of $0\farcs5$.}
 \label{fig:coordinate_offset_diffim_fakes}
 \end{figure}
 %
@@ -449,7 +453,7 @@ This analysis indicates that it will be possible to identify cuts on quality met
 We next removed all observations matched to known asteroids (using \gls{MPC}'s MPChecker service), reducing the number of candidates to 97.
 Of these, four had strong astrometric and/or photometric outliers, likely due to self-subtraction in difference images due to the unavoidable limitations of template generation from the limited quantity of data available from  \gls{LSSTComCam}.
 We suspect these four linkages do correspond to real objects, but have chosen to discard them out of an abundance of caution.
-The remaining \nnewasteroiddiscoveries were submitted to the Minor Planet Center and accepted as new discoveries, demonstrating the \gls{LSST} pipelines are able to successfully discover new solar system objects.
+The remaining \nnewasteroiddiscoveries were submitted to the Minor Planet Center and accepted as  discoveries, demonstrating the \gls{LSST} pipelines are able to successfully discover new solar system objects.
 %\jake{We should cite the MPEC with discoveries, once we do submit and the MPEC becomes available}
 
 \subsubsection{Asteroid Association Performance}
@@ -458,33 +462,42 @@ The remaining \nnewasteroiddiscoveries were submitted to the Minor Planet Center
 Solar system association associated \nsolarsystemsources DiaSources to \nsolarsystemobjects unique solar system objects.
 These include 3,934 DiaSources to 338 already-known \gls{MPC} objects and 2,054 DiaSources to the \nnewasteroiddiscoveries  newly-discovered objects.
 Association also picked up an additional 143 detections of newly discovered objects.
-These were not originally found by the discovery pipelines as they didn't satisfy the number and/or maximum time span requirements to form tracklets.
+These were not originally found by the discovery pipelines as they did not satisfy the number and/or maximum time span requirements to form tracklets.
 
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=0.98\linewidth]{figures/sso_residuals.pdf}
-\caption{Astrometric residuals between expected and observed positions of SSOs in \gls{DP1}. The median residuals are $0.''001$ and $-0.''016$ in R.A./Dec direction, with the standard deviations of $0.''19$ and $0.''10$, respectively. No detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. The wider scatter in the RA-direction is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions.}
+\caption{Astrometric residuals between expected and observed positions of SSOs in \gls{DP1}. 
+The median residuals are $0\farcs001$ and $-0\farcs016$ in R.A./Dec direction, with  standard deviations of $0.''19$ and $0.''10$, respectively. 
+No detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. 
+The wider scatter in the RA-direction is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions.}
 \label{fig:sso_residuals}
 \vspace{0.1cm}
 \end{figure}
 
 The astrometric residuals of known asteroid association are shown in Figure \ref{fig:sso_residuals}.
-Astrometric precision for solar system sources is excellent, the majority of objects detected within $0''.1$ of their expected positions.
-Taking the unsigned median residuals to search for biases, we find that previously-known objects have mean residuals of $0.''001$ and $-0.''016$ in the RA and Dec directions respectively, while newly-discovered objects have mean residuals of $-0.''035$ and $-0.''010$ in the \gls{RA} and Dec directions, respectively.
-These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion (which is consistent with the timing studies presented in Section~\ref{ssec:comcam_timing}).
+Astrometric precision for solar system sources is excellent, the majority of objects being detected within $0\farcs1$ of their expected positions.
+Taking the unsigned median residuals to search for biases, we find that previously-known objects have mean residuals of $0\farcs001$ and $-0\farcs016$ in the RA and Dec directions respectively, while newly-discovered objects have mean residuals of $-0\farcs035$ and $-0\farcs010$ in the \gls{RA} and Dec directions, respectively.
+These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion, which is consistent with the timing studies presented in Section~\ref{ssec:comcam_timing}.
 
 \subsection{Crowded Fields}
-Among the seven Rubin Observatory \gls{DP1} target fields, two stand out for their severe stellar crowding: the globular cluster 47 Tucanae (47 Tuc) and the Fornax dwarf spheroidal galaxy (Fornax dSph). These fields were selected in part to stress-test the LSST Science Pipelines under high-density conditions. While both exhibit high stellar densities, the nature and spatial extent of the crowding differ significantly.
+Among the seven Rubin Observatory \gls{DP1} target fields, two stand out for their severe stellar crowding: the globular cluster 47\,Tucanae (47\,Tuc) and the Fornax dwarf spheroidal galaxy (Fornax dSph). 
+These fields were selected in part to stress-test the LSST Science Pipelines under high-density conditions. 
+While both exhibit high stellar densities, the nature and spatial extent of the crowding differ significantly.
 
-47 Tuc presents extreme crowding across much of the field, encompassing its dense core and the eastern regions influenced by the Small Magellanic Cloud (SMC). This pervasive crowding leads to persistent challenges for deblending and reliable source detection, exposing field-wide limitations in the current pipeline performance \citep{Choi2025}. In contrast, Fornax dSph shows significant crowding only in its central region, with outer areas remaining well resolved and easier to process.
+47\,Tuc presents extreme crowding across much of the field, encompassing its dense core and the eastern regions influenced by the Small Magellanic Cloud (SMC). 
+This pervasive crowding leads to persistent challenges for deblending and reliable source detection, exposing field-wide limitations in the current pipeline performance \citep{Choi2025}. 
+In contrast, Fornax \,dSph shows significant crowding only in its central region, with outer areas remaining well resolved and easier to process.
 
-In both 47 Tuc and Fornax, extreme crowding led to frequent deblending skipping when memory or runtime limits were exceeded, typically due to excessive peaks, large parent footprints, or a single-peak configuration. However, the impact of these limitations differed: in 47 Tuc, deblending was often skipped across the entire field, resulting in large gaps and substantially reduced completeness. In Fornax, these issues were largely confined to the central region, with much better recovery in the outskirts. This contrast highlights how the pipeline’s limitations depend on the spatial extent of high-density regions: 47 Tuc exposed systematic, field-wide challenges, whereas Fornax revealed more localized, density-driven limits.
+In both 47\,Tuc and Fornax, extreme crowding led to frequent deblending skipping when memory or runtime limits were exceeded, typically due to excessive peaks, large parent footprints, or a single-peak configuration. 
+However, the impact of these limitations differed: in 47\,Tuc, deblending was often skipped across the entire field, resulting in large gaps and substantially reduced completeness. 
+In Fornax, these issues were largely confined to the central region, with much better recovery in the outskirts. 
+This contrast highlights how the pipeline’s limitations depend on the spatial extent of high-density regions: 47\,Tuc exposed systematic, field-wide challenges, whereas Fornax revealed more localized, density-driven limits.
 
-\citet{Wainer2025} explored the Rubin DP1 diaObject table in the 47 Tuc field, which contains sources detected in difference images. Because forced photometry is performed at these positions across all single-epoch images, this dataset bypasses the coadd-based detection and deblending stages that often fail in crowded regions. By computing the median of the forced photometry for each diaObject across available visits, they recovered approximately three times more candidate cluster members than found in the standard Object table \citep[cf.][]{Choi2025}. This result underscores the value of difference-imaging–based catalogs for probing dense stellar regions inaccessible to standard coadd processing in DP1.
+\citet{Wainer2025} explored the Rubin DP1 \texttt{DiaObject} catalog (\secref{ssec:catalogs}) in the 47\,Tuc field, which contains sources detected in difference images. 
+Because forced photometry is performed at these positions across all single-epoch images, this dataset bypasses the coadd-based detection and deblending stages that often fail in crowded regions. 
+By computing the median of the forced photometry for each  \texttt{DiaObject} across available visits, they recovered approximately three times more candidate cluster members than found in the standard \texttt{Object table} \citep{Choi2025}. 
+This result underscores the value of difference-imaging–based catalogs for probing dense stellar regions inaccessible to standard coadd processing in DP1.
 
-Although the DP1 pipeline was not optimized for crowded-field photometry, these early studies of 47 Tuc and Fornax provide critical benchmarks. They highlight both the limitations and opportunities for structural science with Rubin data in crowded environments, and they inform future pipeline development aimed at robust source recovery in complex stellar fields.
-
-%Two of the seven \gls{DP1} target fields exhibit high stellar density, 47 Tucanae and the Fornax dwarf galaxy.
-%47 Tucanae was chosen as an initial stress test for the science pipelines processing.
-%The Fornax dwarf galaxy also exhibits high stellar density, particularly in its central regions.
-%\yusra{Explain where the pipelines broke down. and  how the performance is different in the 2 crowded fields}
+Although the DP1 pipeline was not optimized for crowded-field photometry, these early studies of 47\,Tuc and Fornax provide critical benchmarks. 
+They highlight both the limitations and opportunities for structural science with Rubin data in crowded environments, and they inform future pipeline development aimed at robust source recovery in complex stellar fields.
