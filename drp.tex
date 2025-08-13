@@ -31,7 +31,7 @@ Documentation for this version is available at: \url{\sciencepipelinesurl}
 \label{ssec:background_subtraction}
 
 The background subtraction algorithms in the \gls{LSST Science Pipelines} estimate and remove large-scale background signals from science imaging.
-Such signals may include sky brightness from airglow, moonlight, scattered light instrumental effects and diffuse astrophysical emission.
+Such signals may include sky brightness from airglow, moonlight, scattered light instrumental effects, zodiacal light, and diffuse astrophysical emission.
 In so doing, true astrophysical sources are isolated to allow for accurate detection and measurement.
 
 To generate a \gls{background} model, each post-ISR image is divided into superpixels of $128\times128$ pixels.
@@ -94,7 +94,7 @@ The FGCM process typically begins with measurements of the instrumental throughp
 However, because full scans of the \gls{LSSTComCam} as-built filters and individual detectors were not available, we instead used the nominal reference throughputs for the Simonyi Survey Telescope and LSSTCam.\footnote{Available at: \url{https://github.com/lsst/throughputs/tree/1.9}}
 These nominal throughputs were sufficient for the \gls{DP1} calibration, given the small and homogeneous focal plane consisting of only 9 \gls{ITL} detectors.
 The FGCM atmosphere model, provided by MODTRAN~\citep{1999SPIE.3756..348B}, was used to generate a look-up table for atmospheric throughput as a function of zenith distance at Cerro Pachón.
-This model accounts for Rayleigh scattering by molecular oxygen ($\mathrm{O}_2$) and ozone ($\mathrm{O}_3$), absorption by water vapor, and Mie scattering by airborne aerosol particulates.
+This model accounts for absorption and scattering by molecular constituents of the atmosphere, including O2 and O3; absorption by water vapor; and Mie scattering by airborne aerosol particulates.
 Nightly variations in the atmosphere are modeled by minimizing the variance in repeated observations of stars with a \gls{SNR} greater than 10, measured using ``compensated aperture fluxes''.
 These fluxes include a local \gls{background} subtraction (see \secref{ssec:background_subtraction}) to mitigate the impact of \gls{background} offsets.
 The model fitting process incorporates all 6 bands ($ugrizy$) but does not include any gray (achromatic) terms, except for a linear assumption of mirror reflectance degradation, which is minimal over the short duration of the \gls{DP1} observation campaign.

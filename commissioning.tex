@@ -136,11 +136,12 @@ These \nfields fields form the basis of the \gls{DP1} dataset.
 \end{figure*}
 Each of the \nfields target fields was observed repeatedly in multiple bands over many nights.
 A typical observing \gls{epoch} for a given target field consisted of 5-20 visits in each of the three loaded filters.
-All DP1 images were captured as single 30-second exposures for all bands, rather than as 2×15-second “snap” exposures.
+All DP1 images were captured as single 1x30-second exposures for all bands, rather than as 2×15-second ``snap'' exposures.
 Additionally, some u-band exposures were taken as 38-second exposures.
 The exposure time for LSST images will be determined after further testing during the commissioning phase with LSSTCam. 
 All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_2019, peter_yoachim_2024_13985198}.
 \tabref{tab:dp1_fields} lists the \nfields \gls{DP1} fields and their pointing centers, and provides a summary of the band coverage in each.
+Fields denonted by ``SV'' indicate Rubin Science Validation fields. 
 \input{tables/dp1_fields}
 
 The temporal sampling distribution of observations per band and per night is shown in \figref{fig:target_fields_temporal_sampling}.

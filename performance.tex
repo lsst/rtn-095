@@ -25,14 +25,14 @@ Table \ref{tab:psf-1d_stats} summarizes each model’s ability to reconstruct th
 Both models exhibit a negative residual bias in the reconstructed PSF size, with Piff O4 providing improved performance over Piff O2.
 \input{tables/psf_1d_stat.tex}
 
-Another way to assess \gls{PSF} modeling performance is to examine the average across visits of $\delta T/T$ projected onto focal-plane coordinates (\figref{fig:psf_residuals_fov}).
-Piff reveals strong spatial correlations, with a systematic offset
-that matches Table \ref{tab:psf-1d_stats}. It is the existence of these spatial structures that motivated raising the interpolation order to four, except in the u-band.
-Although not shown in \figref{fig:psf_residuals_fov}, third-order polynomial interpolation still exhibited residual structure.
-A fifth-order polynomial interpolation would require more stars than are available on some CCDs to adequately constrain the model while offering only marginal gains.
+An alternative approach to evaluating the performance of the \gls{PSF} model is to examine the average $\delta T/T$ across visits, projected onto focal-plane coordinates, as shown in \figref{fig:psf_residuals_fov}. 
+Piff reveals strong spatial correlations in the residuals, including a systematic offset consistent with the results presented in \tabref{tab:psf-1d_stats}. 
+The presence of these spatial structures motivated the adoption of fourth-order polynomial interpolation in all bands except u-band. 
+Although not shown in \figref{fig:psf_residuals_fov}, residual patterns persist even with third-order interpolation, indicating that it is insufficient to capture the complexity of the PSF variation. 
+Increasing the interpolation order to five would nominally reduce the residuals further, but the limited number of stars available on some CCDs would not provide adequate constraints for such a model, while the resulting improvement would likely be minimal.
 Preliminary analysis of LSSTCam data in the laboratory at \gls{SLAC} shows that the \gls{ITL} sensors exhibit the same pattern as \gls{ITL} sensors on \gls{LSSTComCam}.
-The sensors' $\delta T/T$ is fully correlated with the height variation across the LSSTCam \gls{ITL} sensors, which explains this behavior.
-Future data processing will account for this height variation directly in the \gls{PSF} model.
+%The sensors' $\delta T/T$ is fully correlated with the height variation across the LSSTCam \gls{ITL} sensors, which explains this behavior.
+%Future data processing will account for this height variation directly in the \gls{PSF} model.
 \begin{figure}[htb!]
 \centering
 \includegraphics[scale=0.29]{figures/dT_T_Piff_poly_order_2.pdf}
@@ -77,7 +77,7 @@ all visits and filters and binned in different colors.}
 \end{figure}
 
 As noted in  \cite{PSTN-019}, two key Piff features were not used in the DP1 processing.
-PSF color dependence was not implemented, and, while Rubin software allows Piff to work with sky coordinates (including WCS transformations), it does not yet correct for sensor-induced astrometric distortions such as tree rings.
+PSF color dependence was not implemented, and, while Rubin software allows Piff to work with sky coordinates (including WCS transformations), it does not yet correct for sensor-induced astrometric distortions such as tree rings, \citep{2017JInst..12C5015P}.
 Both features are planned for upcoming releases.
 
 \subsection{Astrometry}
