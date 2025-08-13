@@ -138,8 +138,12 @@ The main dimensions used in \gls{DP1} are listed, together with a brief descript
 To determine which dimensions are relevant for a specific dataset, the \gls{Butler} defines dataset types, which associate each dataset with its specific set of relevant dimensions, as well as the associated Python type representing the dataset.
 The dataset type defines the kind of data a dataset represents, such as  a raw image  (\texttt{raw}), a processed catalog (\texttt{object\_forced\_source}), or a \gls{sky map} (\texttt{skyMap}).
 
-\tabref{tab:butlerdatasets} lists all the dataset types available via the Butler in DP1, together with the dimensions needed to uniquely identify a specific dataset and the number of unique datasets of each type. It is important to highlight a key difference between accessing catalog data via the \gls{TAP} service versus the Butler. While the \gls{TAP} service contains entire catalogs, many of the same catalogs in the Butler are split into multiple separate catalogs. This is partly due to how these catalogs are generated, but also because of the way data is stored within and retrieved from the Butler repository -- it is inefficient to retrieve the entire \texttt{Source} catalog, for example, from the file system. Instead, because the \texttt{Source} catalog contains data for sources detected in the \texttt{visit\_image}s, there is one \texttt{Source} catalog in the Butler for each \texttt{visit\_image}. Similarly, there is one \texttt{Object} catalog for each \texttt{deep\_coadd}. All the catalogs described in \secref{ssec:catalogs}, aside from the \texttt{CcdVisit}, \texttt{SSObject}, \texttt{SSSource}, and \texttt{Calibration} catalogs, are split within the Butler.
-
+\tabref{tab:butlerdatasets} lists all the dataset types available via the Butler in DP1, together with the dimensions needed to uniquely identify a specific dataset and the number of unique datasets of each type. 
+It is important to highlight a key difference between accessing catalog data via the \gls{TAP} service versus the Butler. 
+While the \gls{TAP} service contains entire catalogs, many of the same catalogs in the Butler are split into multiple separate catalogs. 
+This is partly due to how these catalogs are generated, but also because of the way data is stored within and retrieved from the Butler repository -- it is inefficient to retrieve the entire \texttt{Source} catalog, for example, from the file system. 
+Instead, because the \texttt{Source} catalog contains data for sources detected in the \texttt{visit\_image}s, there is one \texttt{Source} catalog in the Butler for each \texttt{visit\_image}. Similarly, there is one \texttt{Object} catalog for each \texttt{deep\_coadd}. 
+All the catalogs described in \secref{ssec:catalogs}, aside from the \texttt{CcdVisit}, \texttt{SSObject}, \texttt{SSSource}, and \texttt{Calibration} catalogs, are split within the Butler.
 \input{tables/dp1_butler_datasets}
 
 A dataset is associated with one or more \emph{Collections}; logical groupings of  datasets within the \gls{Butler} system that were created or processed together by the same batch operation.
@@ -152,7 +156,8 @@ The \gls{DP1} Butler is read-only; a writeable Butler is expected by mid-2026, a
 \subsubsection{Remote Programmatic Access
 \label{sssec:remote_api}}
 The Rubin \gls{RSP} \gls{API} can be accessed from a local system by data rights holders outside of the \gls{RSP}, by creating a user security token. This token can then be used as a bearer token for \gls{API} calls to the \gls{RSP} TAP service.
-This capability is especially useful for remote data analysis using tools such as \gls{TOPCAT}, as well as enabling third-party systems (e.g., Community Alert Brokers) to access Rubin data. Additionally, it supports remote development with local IDEs, allowing for more flexible workflows and integration with external systems.
+This capability is especially useful for remote data analysis using tools such as \gls{TOPCAT}, as well as enabling third-party systems, e.g., Community Alert Brokers, to access Rubin data. 
+Additionally, it supports remote development, allowing for more flexible workflows and integration with external systems.
 
 % Portal
 \subsection{Portal Aspect

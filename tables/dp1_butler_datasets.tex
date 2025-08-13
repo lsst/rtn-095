@@ -1,8 +1,36 @@
 %%%%% This table is auto generated from data, DO NOT EDIT
 \setlength{\tabcolsep}{6pt}  % default is 6pt
+%\begin{deluxetable}{llcc}
+%\tablecaption{The name and number of each type of data product in the Butler and the dimensions required to identify a specific dataset.
+%\label{tab:butlerdatasets} }
+%
+%\tablehead{
+%  \textbf{Data Product} & 
+%  \textbf{Name in Butler} & 
+%  \textbf{Required Dimensions} & 
+%  \textbf{Number in DP1}\
+%}
+%\startdata
+%\texttt{raw}&\texttt{raw}&instrument, detector, exposure&16125\\
+%\texttt{visit\_image}&\texttt{visit\_image}&instrument, detector, visit&15972\\
+%\texttt{deep\_coadd}&\texttt{deep\_coadd}&band, skymap, tract, patch&2644\\
+%\texttt{template\_coadd}&\texttt{template\_coadd}&band, skymap, tract, patch&2730\\
+%\texttt{difference\_image}&\texttt{difference\_image}&instrument, detector, visit&15972\\
+%\texttt{Source}&\texttt{source}&instrument, visit&1786\\
+%\texttt{Object}&\texttt{object}&skymap, tract&29\\
+%\texttt{ForcedSource}&\texttt{object\_forced\_source}&skymap, tract, patch&636\\
+%\texttt{DiaSource}&\texttt{dia\_source}&skymap, tract&25\\
+%\texttt{DiaObject}&\texttt{dia\_object}&skymap, tract&25\\
+%\texttt{ForcedSourceOnDiaObject}&\texttt{dia\_object\_forced\_source}&skymap, tract, patch&597\\
+%\texttt{CCDVisit}&\texttt{visit\_detector\_table}&instrument&1\\
+%\texttt{SSObject}&\texttt{ss\_object}&--&1\\
+%\texttt{SSSource}&\texttt{ss\_source}&--&1\\
+%\texttt{Visit}&\texttt{visit\_table}&instrument&1\\
+%\enddata
+%\end{deluxetable}
 \begin{deluxetable}{llcc}
 \tablecaption{The name and number of each type of data product in the Butler and the dimensions required to identify a specific dataset.
-\label{tab:butlerdatasets} }
+\label{tab:butlerdatasets}}
 
 \tablehead{
   \textbf{Data Product} & 
@@ -11,20 +39,23 @@
   \textbf{Number in DP1}\
 }
 \startdata
-\texttt{raw}&\texttt{raw}&instrument, detector, exposure&16125\\
-\texttt{visit\_image}&\texttt{visit\_image}&instrument, detector, visit&15972\\
-\texttt{deep\_coadd}&\texttt{deep\_coadd}&band, skymap, tract, patch&2644\\
-\texttt{template\_coadd}&\texttt{template\_coadd}&band, skymap, tract, patch&2730\\
-\texttt{difference\_image}&\texttt{difference\_image}&instrument, detector, visit&15972\\
-\texttt{Source}&\texttt{source}&instrument, visit&1786\\
-\texttt{Object}&\texttt{object}&skymap, tract&29\\
-\texttt{ForcedSource}&\texttt{object\_forced\_source}&skymap, tract, patch&636\\
-\texttt{DiaSource}&\texttt{dia\_source}&skymap, tract&25\\
-\texttt{DiaObject}&\texttt{dia\_object}&skymap, tract&25\\
-\texttt{ForcedSourceOnDiaObject}&\texttt{dia\_object\_forced\_source}&skymap, tract, patch&597\\
-\texttt{CCDVisit}&\texttt{visit\_detector\_table}&instrument&1\\
-\texttt{SSObject}&\texttt{ss\_object}&--&1\\
-\texttt{SSSource}&\texttt{ss\_source}&--&1\\
-\texttt{Visit}&\texttt{visit\_table}&instrument&1\\
+\multicolumn{4}{l}{\textbf{Image Data Products}} \\
+\texttt{raw} & \texttt{raw} & instrument, detector, exposure & 16125 \\
+\texttt{visit\_image} & \texttt{visit\_image} & instrument, detector, visit & 15972 \\
+\texttt{deep\_coadd} & \texttt{deep\_coadd} & band, skymap, tract, patch & 2644 \\
+\texttt{template\_coadd} & \texttt{template\_coadd} & band, skymap, tract, patch & 2730 \\
+\texttt{difference\_image} & \texttt{difference\_image} & instrument, detector, visit & 15972 \\
+%
+\multicolumn{4}{l}{\textbf{Catalog Data Products}} \\
+\texttt{Source} & \texttt{source} & instrument, visit & 1786 \\
+\texttt{Object} & \texttt{object} & skymap, tract & 29 \\
+\texttt{ForcedSource} & \texttt{object\_forced\_source} & skymap, tract, patch & 636 \\
+\texttt{DiaSource} & \texttt{dia\_source} & skymap, tract & 25 \\
+\texttt{DiaObject} & \texttt{dia\_object} & skymap, tract & 25 \\
+\texttt{ForcedSourceOnDiaObject} & \texttt{dia\_object\_forced\_source} & skymap, tract, patch & 597 \\
+\texttt{SSSource} & \texttt{ss\_source} & -- & 1 \\
+\texttt{SSObject} & \texttt{ss\_object} & -- & 1 \\
+\texttt{Visit} & \texttt{visit\_table} & instrument & 1 \\
+\texttt{CCDVisit} & \texttt{visit\_detector\_table} & instrument & 1 \\
 \enddata
 \end{deluxetable}
