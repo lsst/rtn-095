@@ -151,21 +151,13 @@ Additionally, it supports remote development, allowing for more flexible workflo
 
 \subsection{Portal Aspect}
 \label{ssec:rsp_portal}
-The Portal Aspect provides an interactive environment for exploratory data discovery, query, filtering, and visualization of both image and catalog data,  without requiring programming experience.
+The Portal Aspect provides an interactive web-based environment for exploratory data discovery, filtering, querying ,and visualization of both image and catalog data, without requiring programming expertise.
+It enables users to access and analyze large datasets via tools for catalog queries, image browsing, time-series inspection, and cross-matching.
 
-It enables users to search, visualize, and interact with large datasets through tools for catalog queries, image browsing, time series inspection, and cross-matching.
-The Portal is designed to support both exploratory data access and detailed scientific investigation.
+The Portal is built on \gls{Firefly} \citep{2019ASPC..521...32W}, a  web application framework developed by the Infrared Processing and Analysis Center (IPAC).
+\gls{Firefly} provides interactive capabilities such as customizable table views, image overlays, multi-panel visualizations, and synchronized displays linking catalog and image data.
 
-The Portal is built on \gls{Firefly} \citep{2019ASPC..521...32W}, a powerful web application framework developed by IPAC (Infrared Processing and Analysis Center).
-\gls{Firefly} provides interactive capabilities such as customizable table views, image overlays, multi-panel visualizations, and linked displays between catalogs and images.
-Through \gls{Firefly}, the Portal delivers a intuitive user experience, allowing users to analyze data visually while maintaining access to underlying metadata and query controls.
-\begin{figure}[htb]
-\centering
-\includegraphics[width=0.98\linewidth]{rsp_portal_light}
-\caption{The Rubin \gls{Science Platform} Portal Aspect}
-% \gregory{Replace with a real DP1 image}
-\label{fig:rsp_portal}
-\end{figure}
+Designed to support both exploratory data access and detailed scientific investigation, the Portal delivers an intuitive user experience, allowing users to visually analyze data while retaining access to underlying metadata and query controls.
 
 \subsection{Notebook Aspect}
 \label{subsec:notebook}
