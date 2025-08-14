@@ -1,5 +1,6 @@
- \graphicspath{{./}{figures/commissioning}}
-\section{On-Sky Commissioning Campaign \label{sec:on_sky_campaign}}
+\graphicspath{{./}{figures/commissioning}}
+\section{On-Sky Commissioning Campaign}
+\label{sec:on_sky_campaign}
 
 The first Rubin on-sky commissioning campaign was conducted using the \gls{LSSTComCam}. The campaign's primary objective was to optically align the Simonyi Survey Telescope and verify its ability to deliver acceptable image quality using \gls{LSSTComCam}.
 In addition, the campaign provided valuable operations experience to facilitate commissioning the full \gls{LSSTCam} \citep{2024SPIE13096E..1OL,2024SPIE13096E..1SR}.
@@ -24,8 +25,8 @@ Despite these limitations, the campaign successfully demonstrated system integra
 % These results indicate that Rubin Observatory is already capable of achieving a system contribution to the delivered image quality of approximately 0.4 arcseconds after accounting for atmospheric seeing, even in its current incomplete state.
 
 % SP-2282 : Reviewed by AJC
-\subsection{Simonyi Survey Telescope
-\label{ssec:simonyi}}
+\subsection{Simonyi Survey Telescope}
+\label{ssec:simonyi}
 
 The Simonyi Survey Telescope \citep{2024SPIE13094E..09S} features a unique three-mirror design, including an 8.4-meter \gls{M1M3} fabricated from a single substrate and a 3.5-meter \gls{M2}.
 This compact \gls{configuration} supports a wide 3.5-degree field of view while enabling exceptional stability, allowing the telescope to slew and settle in under five seconds.
@@ -44,8 +45,8 @@ Closed-loop operation, which requires additional intra- and extra-focal images w
 The image quality for these data was monitored by measuring the \gls{PSF} \gls{FWHM}, and closed-loop sequences were periodically run when image quality degradation was observed.
 
 %%%%% ComCam
-\subsection{The LSST Commissioning Camera
-\label{ssec:comcam}}
+\subsection{The LSST Commissioning Camera}
+\label{ssec:comcam}
 \gls{LSSTComCam} \citep{2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH, 10.71929/rubin/2561361} is a 144-megapixel version of the 3.2-gigapixel \gls{LSSTCam}.
 It covers approximately 5\% of the \gls{LSSTCam} focal plane area, with a field of view of $\sim$0.5deg$^2$   (40\arcmin x40\arcmin), compared to LSSTCam's 9.6 deg$^2$. 
 It was developed to validate camera interfaces with other observatory components and evaluate overall system performance prior to the start of \gls{LSSTCam} commissioning. 
@@ -110,8 +111,8 @@ This work continues to be an area of ongoing study, with the exact timing of whe
 The full shutter takes approximately 396 milliseconds to completely open.  As the LSSTComCam sensors are centered in the aperture, the center of the focal plane should be exposed about half-way through the shutter open procedure, 198 milliseconds after the open command. There are uncertainties on the full motion profile, and the blade direction motions are currently not known, but the fraction of the shutter aperture subtended by the focal plane is 52\%. This implies that that the shutter will pass any pixel between 198 +/- 103 milliseconds.  Subtracting this from the fitted delay of 24.8 milliseconds and adding the fitted error of 11.0 milliseconds in quadrature, results in a current conservative estimate of the delay of -173.2 $\pm$ 104.1 milliseconds, consistent with and smaller than the constraints on the timing offset determined using astrometric residuals from known asteroid associations presented in Section~\ref{ssec:asteroid_association}.
 
 % Reviewed by Eli
-\subsection{Flat Field System
-\label{ssec:flat_field_system}}
+\subsection{Flat Field System}
+\label{ssec:flat_field_system}
 During the on-sky campaign, key components of the Rubin calibration system ~\citep{2022SPIE12182E..0RI}, including the flat field screen, had not yet been installed.
 As a result, flat fielding for \gls{DP1} relied entirely on twilight flats.
 While twilight flats pose challenges such as non-uniform illumination and star print-through, they were the only available option during \gls{LSSTComCam} commissioning and for DP1 processing.
@@ -119,8 +120,8 @@ To mitigate these limitations, dithered, tracked exposures were taken over a bro
 Exposure times were dynamically adjusted to reach target signal levels of between 10,000 and 20,000 electrons.
 Future campaigns will benefit from more stable and uniform flat fielding using the Rubin flat field system, described in \citet{SITCOMTN-086}.
 
-\subsection{LSST Science Pipelines Commissioning
-\label{ssec:pipelines_commissioning}}
+\subsection{LSST Science Pipelines Commissioning}
+\label{ssec:pipelines_commissioning}
 Commissioning of the \gls{LSST Science Pipelines} \citep{PSTN-019} began once the telescope was able to routinely deliver sub-arcsecond image quality.
 The goals included testing the internal astrometric and photometric calibration across a range of observing conditions, validating the difference image analysis and Prompt Processing \citep{dmtn-219} framework, and accumulating over 200 visits per band to evaluate deep coadded images with integrated exposure times roughly equivalent to those of the planned LSST \gls{WFD} 10-year depth.
 To support these goals, \nfields target fields were selected that span a range of stellar densities, overlap with external reference datasets, and collectively span the full breadth of the four primary \gls{LSST} science themes.
@@ -274,8 +275,8 @@ The visits cycled between the grid's four pointing centers, using small random t
 % \end{figure*}
 
 % Reviewed by Elana
-\subsection{Delivered Image Quality
-\label{ssec:image_quality}}
+\subsection{Delivered Image Quality}
+\label{ssec:image_quality}
 The delivered image quality is influenced by contributions from both the observing system (i.e., dome, telescope and \gls{camera}) and the atmosphere.
 During the campaign, the Rubin \gls{DIMM} was not operational, so atmospheric seeing was estimated using live data from the \gls{SOAR} \gls{RINGSS} seeing monitor, also located on Cerro Pach\'on.
 Although accelerometers mounted on the mirror cell and top-end assembly were available to track dynamic optics effects, such as mirror oscillations that can degrade optical alignment, this data was not used during the campaign.

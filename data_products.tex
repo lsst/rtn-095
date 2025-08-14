@@ -3,8 +3,8 @@
 %The Data Products that could be produced were strongly dependent on the type and quality of the data collected during the on-sky commissioning campaign.
 %This section should also describe clearly  which columns are not yet available in DP1 from the baseline schema
 %Link to the online schema for DP1. Explain what is not there and if known an expected release timescale. Maybe also include a static extract in an appendix.
-\section{Overview of the contents of Rubin DP1
-\label{sec:data_products}}
+\section{Overview of the contents of Rubin DP1}
+\label{sec:data_products}
 %\james{All parts, aside from the Solar System Data Products are ready for review. I also need to get to the bottom of why some of the numbers don't reconcile, so please review the text, rather than the numbers.}
 
 Here we describe Rubin \gls{DP1} data products and provide summary statistics for each.
@@ -85,8 +85,8 @@ Data products are accessed via either the \gls{IVOA} Services ( \secref{sssec:iv
 %Details on how to access the DP1 data products are presented in \secref{sec:data_access}.
 
 % Image data products
-\subsection{Science Images
-\label{ssec:science_images}}
+\subsection{Science Images}
+\label{ssec:science_images}
 Science images are exposures of the night sky, as distinct from \gls{calibration} images (\secref{ssec:calibration_data}).
 Although the release includes \gls{calibration} images, allowing users to reprocess the raw images if needed, this is expected to be necessary only in rare cases.
 Users are strongly encouraged to start from the visit-level images provided.
@@ -422,8 +422,8 @@ All multi-band \gls{HiPS} images are provided in \gls{PNG} format.
 % Visit summary table.
 %visitSummaryTable == visit_table = Visit (TAP)
 % visitDetectorSummaryTable ==visit_detector_table == CCDVisit?
-\subsection{Metadata
-\label{ssec:metadata}}
+\subsection{Metadata}
+\label{ssec:metadata}
 %Here we describe metadata tables produced by the Observatory directly and not the science pipelines
 
 \gls{DP1} also includes \gls{metadata} about the observations, which are stored in the \texttt{Visit} table. The data it contains was produced by the observatory directly, rather than the science pipelines.
@@ -440,8 +440,8 @@ It contains technical data for each visit, such as telescope pointing, \gls{came
 % The \texttt{visit\_detector\_table} sits outside the \texttt{tract} and \texttt{visit}-level convention.
 %\james{Why is the number of rows in the visit-detector summary table (\nvisitdetectorsummaries) not the same as either the number of raw images ({\nraws}) or the number of visit images (\nvisitimages)?!}
 
-\subsection{Ancillary Data Products
-\label{subsec:ancilliary}}
+\subsection{Ancillary Data Products}
+\label{subsec:ancilliary}
 DP1 also includes several ancillary data products. While we do not expect most users to need these, we describe them here for completeness. All the Data Products described in this section can only be accessed via the Data Butler (\secref{sssec:data_butler}).
 
 \subsubsection{Task configuration, log, and metadata}
