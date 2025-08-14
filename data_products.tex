@@ -301,9 +301,6 @@ The \texttt{DIAObject} catalog contains data for \ndiaobjects DiaObjects in \gls
 
 The \texttt{ForcedSourceOnDiaObject} catalog  contains a total of \ndiaforcedsources entries across \ndiaforcedobjects unique DiaObjects.
 
-%\texttt{DIAObjectForcedSourceCatalogs} are \texttt{tract}-level data products and are uniquely referred to via the \texttt{tract} and \texttt{patch} dimensions.
-% ADD A SUBSECTION HERE? "Other Catalogs" (in contrast to the source and object catalogs from direct and difference imaging described so far)
-
 \item The \texttt{CcdVisit} catalog \citep{10.71929/rubin/2570331} contains data for each individual processed \texttt{visit\_image}.
 In addition to technical information, such as the on-sky coordinates of the central pixel and measured pixel scale, the \texttt{CcdVisit} catalog contains a range of data quality measurements, such as whole-image summary statistics for the \gls{PSF} size, zeropoint, sky \gls{background}, sky noise, and quality of \gls{astrometry} solution.
 It provides an efficient method to access  \texttt{visit\_image} properties without needing to access the image data.
@@ -336,35 +333,8 @@ All sources from the input catalogs are matched to \textit{Gaia}-\gls{DR3} sourc
 After collating the input catalogs and transforming the fluxes to the standard DES/SDSS bandpasses, the catalog was used to identify sources within a specific region of the sky. 
 This process generated a set of standard columns containing positional and flux information, along with their associated uncertainties.
 %\texttt{theMonster} sits outside the \texttt{tract} and \texttt{visit}-level convention.
-
 \end{itemize}
 
-
-% Include in the introduction a definition of Objest and Source
-% ..
-% DIAObject
-% visit_detector_table == CcdVisit
-% visit_table == Visit
-% source -- Source
-% object = Object
-% object_forced_source == ForcedSource
-% dia_object_forced_source == ForcedSourceonDiaObject
-% dia_object == DiaObject
-% dia_source == DiaSource
-% ss_source == SSSource
-% ss_object == SSObject
-% MPCORB = MPCORB
-
-% Standard Bandpasses
-%  these includes the standard atmosphere
-
-%\subsubsection{Butler Catalogs}
-%Recommend TAP access but....
-%The catalogs described in this section are also accessible via the Data Butler.
-
-%.......
-% Survey property maps - Erfan Nourbakhsh
-\subsection{Maps}
 Maps are two-dimensional visualizations of survey data. 
 In \gls{DP1}, these fall into two categories: Survey Property Maps and \gls{HiPS} Maps (\citealt{2015A&A...578A.114F}).
 
@@ -451,25 +421,10 @@ Configuration files record the parameters used in each processing task, while lo
 % The method for uniquely referencing a data product also depends on the task.
 
 
-% Leanne -- reviewed by Chris ZW
 \subsubsection{Calibration Data Products}
 \label{ssec:calibration_data}
 Calibration data products include a variety of images and models that are used to characterize and correct the performance of the \gls{camera} and other system components.
 These include bias, dark, and flat-field images, \gls{PTC} gains, brighter-fatter kernels, charge transfer inefficiency (\gls{CTI}) models, linearizers, and illumination corrections.
 For flat-field corrections, \gls{DP1} processing used combined flats, which are averaged from multiple individual flat-field exposures to provide a stable \gls{calibration}. These \gls{calibration} products are essential inputs to \gls{ISR} (\secref{ssec:isr}). While these products are included in \gls{DP1} for transparency and completeness, users should not need to rerun ISR for their science and are advised to start with the processed \texttt{visit\_image}.
 
-\subsubsection{Standard Bandpasses}
-\label{ssec:bandpasses_dataproducts}
-The \texttt{standard\_passband} data products contain the system throughputs described in \secref{sssec:comcam_filters}.
 
-% \tabref{tab:calibration_data_products} lists the calibration data products in DP1, their associated Butler dataset types, and describes the issues each addresses and the order in which they are applied.. which flat? combined? certified?
-% \input{tables/calibration_data_products}
-
-% Check if we are providing any files and if not, remove
-%\subsection{Files}
-%\label{subsec:files}
-%\james{Are we providing any files?}
-
-%Parquet Files -- check if we are providing them. remove if not
-
-%FITS files -- are we providing these? Probably not
