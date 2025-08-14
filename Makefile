@@ -16,12 +16,12 @@ export TEXMFHOME ?= lsst-texmf/texmf
 SCRIPTS_DIR=scripts
 PYTHON_SCRIPTS=$(wildcard $(SCRIPTS_DIR)/*.py)
 
-$(DOCNAME).pdf: $(scripts) $(tex) local.bib authors.tex aglossary.tex
-	mv $(DOCNAME).tex orig.tex
-	sed s/twocolumn,//1 orig.tex > $(DOCNAME).tex 
+$(DOCNAME).pdf: $(scripts) $(tex) local.bib authors.tex
+	# mv $(DOCNAME).tex orig.tex
+	# sed s/twocolumn,//1 orig.tex > $(DOCNAME).tex
 	latexmk -bibtex -xelatex -f $(DOCNAME)
-	makeglossaries $(DOCNAME)
-	mv orig.tex $(DOCNAME).tex
+	#makeglossaries $(DOCNAME)
+	# mv orig.tex $(DOCNAME).tex
 	latexmk -bibtex -xelatex -f $(DOCNAME)
 	# dont like it much ut this removes the error 
 	echo "\@istfilename{RTN-095.ist}" >> RTN-095.aux
