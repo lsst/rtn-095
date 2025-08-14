@@ -1,4 +1,4 @@
-% Lead: Leanne
+ \graphicspath{{./}{figures/commissioning}}
 \section{On-Sky Commissioning Campaign \label{sec:on_sky_campaign}}
 
 The first Rubin on-sky commissioning campaign was conducted using the \gls{LSSTComCam}. The campaign's primary objective was to optically align the Simonyi Survey Telescope and verify its ability to deliver acceptable image quality using \gls{LSSTComCam}.
@@ -68,22 +68,20 @@ Although the cryostat in LSSTComCam uses a different cooling system (Cryotels), 
 \gls{LSSTComCam} is designated as Raft 22 (R22).
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.98\linewidth]{commissioning/comcam_raft_in_lsstcam_focal_plane.pdf}
+\includegraphics[width=0.98\linewidth]{comcam_raft_in_lsstcam_focal_plane}
 \caption{Schematic showing the single-raft \gls{LSSTComCam} positioned at the center of the full LSSTCam focal plane. The perspective is from above, looking down through the \gls{LSSTComCam} lenses onto the focal plane. Credit: RubinObs/NOIRLab/SLAC/NSF/DOE/AURA.}
 \label{fig:comcam_raft_in_lsstcam_focal_plane}
 \vspace{0.1cm}
 \end{figure}
 
-
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=\linewidth]{commissioning/comcam_focal_plane_schematic.pdf}
+\includegraphics[width=\linewidth]{comcam_focal_plane_schematic}
 \caption{LSSTComCam focal plane layout illustrating the placement and numbering scheme of sensors (S) and amplifiers (C). The view is looking down from above the focal plane through the \gls{LSSTComCam} lenses. Each sensor contains 16 amplifiers, and a group of nine sensors comprises one raft. \gls{LSSTComCam} is Raft 22 (R22). The detector number for each sensor is shown in parentheses.}
 \label{fig:comcam_focal_plane}
 \vspace{0.1cm}
 \end{figure}
 The LSSTCam and \gls{LSSTComCam} focal planes are described in detail in \cite{ctn001}.
-
 
 \subsubsection{Filter Complement}
 \label{sssec:comcam_filters}
@@ -92,7 +90,7 @@ However, its filter exchanger can hold only three filters at a time, compared to
 The full-system throughput of the six \gls{LSSTComCam} filters, which encompasses contributions from a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and the mean \gls{ITL} detector quantum efficiency is shown in \figref{fig:comcam_standard_bandpasses}.
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.98\linewidth]{commissioning/dp1_comcam_std_bandpasses.pdf}
+\includegraphics[width=0.98\linewidth]{dp1_comcam_std_bandpasses}
 \caption{LSSTComCam standard bandpasses, illustrating full system throughput. The bandpasses include a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and mean \gls{ITL} detector quantum efficiency.}
 \label{fig:comcam_standard_bandpasses}
 \vspace{0.1cm}
@@ -130,7 +128,7 @@ These \nfields fields form the basis of the \gls{DP1} dataset.
 \figref{fig:dp1_fields_on_sky} shows the locations of these \nfields fields on the sky, overlaid on the LSST baseline survey footprint \citep{PSTN-051, PSTN-052, PSTN-053, PSTN-055, PSTN-056}, along with sky coverage of both the LSSTCam and \gls{LSSTComCam} focal planes.
 \begin{figure*}[bt!]
 \centering
-\plotone{commissioning/dp1_fields_with_survey_fp}
+\plotone{dp1_fields_with_survey_fp}
 \caption{Locations of the seven DP1 fields overlaid on the \gls{LSST} baseline survey footprint. NES: North Ecliptic Spur, SCP: South Celestial Pole, Low-Dust WFD: regions away from the Galactic Plane (GP) observed with a WFD cadence, GP/MC WFD: Galactic Plane and Magellanic Clouds regions observed with a WFD cadence. The \gls{FOV} covered by the \gls{LSSTCam} and \gls{LSSTComCam} focal planes is shown as concentric yellow circles about the pointing center of each field.}
 \label{fig:dp1_fields_on_sky}
 \end{figure*}
@@ -147,7 +145,7 @@ Fields denonted by ``SV'' indicate Rubin Science Validation fields.
 The temporal sampling distribution of observations per band and per night is shown in \figref{fig:target_fields_temporal_sampling}.
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=1.0\linewidth]{commissioning/temporal_sampling_per_field.pdf}
+\includegraphics[width=1.0\linewidth]{temporal_sampling_per_field.pdf}
 \caption{Distribution of DP1 observations by date grouped by field as a function of MJD.  Each dot represents a single 30-second exposure, color-coded by filter.}	
 \label{fig:target_fields_temporal_sampling}
 \vspace{0.1cm}
@@ -174,22 +172,22 @@ The visits cycled between the grid's four pointing centers, using small random t
     \centering
     \begin{subfigure}[b]{0.22\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{visitskymaps/showVisit_DP1_47Tuc}
+        \includegraphics[width=\linewidth]{showVisit_DP1_47Tuc}
         \caption{47 Tucanae}
     \end{subfigure}\hfill
     \begin{subfigure}[b]{0.22\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{visitskymaps/showVisit_DP1_Fornax_dSph}
+        \includegraphics[width=\linewidth]{showVisit_DP1_Fornax_dSph}
         \caption{Fornax dwarf Spheroidal}
     \end{subfigure}\hfill
     \begin{subfigure}[b]{0.22\textwidth}
         \centering
-        \includegraphics[width= \linewidth]{visitskymaps/showVisit_DP1_ECDFS}
+        \includegraphics[width= \linewidth]{showVisit_DP1_ECDFS}
         \caption{ECDFS}
     \end{subfigure}
     \begin{subfigure}[b]{0.22\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{visitskymaps/showVisit_DP1_EDFS}
+        \includegraphics[width=\linewidth]{showVisit_DP1_EDFS}
         \caption{EDFS}
     \end{subfigure}\hfill
     \vspace{1em}
@@ -197,17 +195,17 @@ The visits cycled between the grid's four pointing centers, using small random t
     % Row 2
     \begin{subfigure}[b]{0.22\textwidth}
       \centering
-        \includegraphics[width=\linewidth]{visitskymaps/showVisit_DP1_RubinSV_95_-25}
+        \includegraphics[width=\linewidth]{showVisit_DP1_RubinSV_95_-25}
         \caption{RubinSV\_95\_-25}
     \end{subfigure}\hfill
     \begin{subfigure}[b]{0.22\textwidth}
         \centering
-        \includegraphics[width= \linewidth]{visitskymaps/showVisit_DP1_Seagull}
+        \includegraphics[width= \linewidth]{showVisit_DP1_Seagull}
         \caption{Seagull}
     \end{subfigure}\hfill
     \begin{subfigure}[b]{0.22\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{visitskymaps/showVisit_DP1_RubinSV_38_7}
+        \includegraphics[width=\linewidth]{showVisit_DP1_RubinSV_38_7}
         \caption{Rubin\_SV\_38\_7}
     \end{subfigure}\hfill
     \begin{subfigure}[b]{0.22\textwidth}
@@ -292,7 +290,7 @@ The DP1 median delivered image quality across all bands is \medianimagequalityal
 The best images achieved a \gls{PSF} \gls{FWHM} of approximately \bestimagequality.
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.98\linewidth]{commissioning/image_quality_ecdf.pdf}
+\includegraphics[width=0.98\linewidth]{image_quality_ecdf}
 \caption{Cumulative distribution of \gls{PSF} \gls{FWHM} (arcsec) over all \nvisitdetectorsummaries visits images in the DP1 dataset for each filter. 
 The vertical dashed lines represent the median PSF FWHMs of ∼1.46, 1.36, 1.24, 1.18 and 1.20 arcsec for the ugrizy wavebands, respectively
 }

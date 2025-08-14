@@ -1,3 +1,4 @@
+\graphicspath{{./}{figures/performance}}
 \section{Performance Characterization and Known Issues
 \label{sec:performance}}
 %
@@ -35,8 +36,8 @@ Preliminary analysis of LSSTCam data in the laboratory at \gls{SLAC} shows that 
 %Future data processing will account for this height variation directly in the \gls{PSF} model.
 \begin{figure}[htb!]
 \centering
-\includegraphics[scale=0.29]{figures/dT_T_Piff_poly_order_2.pdf}
-\includegraphics[scale=0.29]{figures/dT_T_Piff_poly_order_4.pdf}
+\includegraphics[scale=0.29]{dT_T_Piff_poly_order_2}
+\includegraphics[scale=0.29]{dT_T_Piff_poly_order_4}
 \caption{\small Average across all visits of $\delta T/T$  for Piff O2 and Piff O4 modeling on \gls{LSSTComCam}. Averages are computed using a 120x120 binning.}
 \label{fig:psf_residuals_fov}
 \end{figure}
@@ -55,8 +56,8 @@ The direction of a whisker represents the orientation of the \gls{shape}, while 
 We observe coherent patterns in both the \gls{PSF} moments and the residuals, the latter of which warrants further investigation if it persists in future data releases.
 \begin{figure}[htb!]
     \centering
-    \includegraphics[scale=0.33]{figures/performance/psf_fourth_whisker.pdf}
-    \includegraphics[scale=0.33]{figures/performance/psf_second_whisker.pdf}
+    \includegraphics[scale=0.33]{psf_fourth_whisker}
+    \includegraphics[scale=0.33]{psf_second_whisker}
     \caption{\small Whisker plots for the  \gls{ECDFS} field for $e$, $e^{(4)}$ and $\delta e$, $\delta e^{(4)}$.}
     \label{fig:psf_residuals_whisker_ECDFS}
 \end{figure}›
@@ -69,7 +70,7 @@ DP1 does not include the color correction implemented in \cite{2025OJAp....8E..2
 This will be included in processing of future data releases.
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.98\linewidth]{dT_T_Piff_poly_4_vs_mag.pdf}
+\includegraphics[width=0.98\linewidth]{dT_T_Piff_poly_4_vs_mag}
 \caption{Binned $\delta T/T$ as a function of magnitude across
 all visits and filters and binned in different colors.}
 \label{fig:psf_residuals_mag_color}
@@ -90,7 +91,7 @@ Global calibration yields only modest improvement, likely due to the short time 
 In the main survey, the longer time baseline and greater distortions near the \gls{LSSTCam} field edges will make global calibration more impactful.
  \begin{figure}[htb!]
  \centering
- \includegraphics[width=0.98\linewidth]{Astrometry_dmAstroErr.pdf}
+ \includegraphics[width=0.98\linewidth]{Astrometry_dmAstroErr}
  \caption{Mean per-tract astrometric repeatability of measurements of isolated point sources in RA.}
  \label{fig:dmAstroErr}
  \end{figure}
@@ -101,7 +102,7 @@ The scatter in these separation measurements provides an indication of the inter
 \figref{fig:AM1} shows the median separation for pairs of objects separated by approximately 5 arcminutes, computed per tract after the final calibration.
  \begin{figure}[htb!]
  \centering
- \includegraphics[width=0.9\linewidth]{Astrometry_AM1.pdf}
+ \includegraphics[width=0.9\linewidth]{Astrometry_AM1}
  \caption{Median per-tract repeatability in separations between isolated point sources 5~arcmin apart.}
  \label{fig:AM1}
  \end{figure}
@@ -124,7 +125,7 @@ By examining the astrometric residuals, we can assess whether there are distorti
 In some cases, residuals from a single visit exhibit behavior consistent with atmospheric turbulence, as shown in \figref{fig:Astrometry_Emode}, which is characterized by a curl-free gradient field in the two-point correlation function of the residuals (E-mode),  \citet{Leget2021} and \citet{Fortino2021}. 
 \begin{figure*}[htb!]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/Astrometry_2024120200359.pdf}
+\includegraphics[width=0.98\linewidth]{Astrometry_2024120200359}
 \caption{\small Astrometric residuals in $u$ (left panel) and $v$ (center panel) directions, with the E and B-modes of the two-point correlation function (right panel). 
 The residuals show a wave-like pattern characteristic of atmospheric turbulence, and there is significant E-mode and negligible B-mode in the correlation function.}
 \label{fig:Astrometry_Emode}
@@ -134,7 +135,7 @@ The residuals show a wave-like pattern characteristic of atmospheric turbulence,
 However, as seen in \figref{fig:Astrometry_EBmode}, the residuals in many visits also have correlation functions with a non-negligible divergence-free B-mode, indicating that some of the remaining residuals are due to unmodeled instrumental effects, such as rotations between visits.
 \begin{figure*}[htb!]
 \centering
-\includegraphics[width=0.98\linewidth]{Astrometry_2024120700527.pdf}
+\includegraphics[width=0.98\linewidth]{Astrometry_2024120700527}
 \caption{\small Astrometric residuals in $u$ (left panel) and $v$ (center panel) directions, with the E and B-modes of the two-point correlation function (right panel). 
 There are coherent residuals, but without the wave-like pattern seen in \figref{fig:Astrometry_Emode}, and the correlation function has significant values for both E and B-modes.}
 \label{fig:Astrometry_EBmode}
@@ -145,7 +146,7 @@ We can see unmodeled \gls{camera} distortions by stacking the residuals over man
 Figure~\ref{fig:Astrometry_FoV} shows the median residuals in x and y directions for \nvisits visits.
 \begin{figure*}[htb!]
 \centering
-\includegraphics[width=\linewidth]{Astrometry_FoV.pdf}
+\includegraphics[width=\linewidth]{Astrometry_FoV}
 \caption{Median residuals as a function of focal plane position in $x$ (left panel) and $y$ (right panel) directions}
 \label{fig:Astrometry_FoV}
 \end{figure*}
@@ -155,7 +156,7 @@ Further stacking all the detectors makes certain effects particularly clear.
 Figure~\ref{fig:Astrometry_CCD} shows distortions very similar to those measured for an \gls{LSSTCam} \gls{ITL} sensor in a laboratory setting in \citet{2023PASP..135k5003E}.
 \begin{figure*}[htb!]
 \centering
-\includegraphics[width=1.0\linewidth]{Astrometry_CCD.pdf}
+\includegraphics[width=1.0\linewidth]{Astrometry_CCD}
 \caption{\small Median residuals as a function of pixel position in $dx$ (left panel) and $dy$ (right panel) directions}
 \label{fig:Astrometry_CCD}
 \end{figure*}
@@ -169,15 +170,15 @@ In \figref{fig:stellarloci}, we show the stellar loci for $ugriz$ from the full 
 \begin{figure*}[hbt!]
   \centering
   \begin{subfigure}[t]{0.31\textwidth}
-  \includegraphics[width=\linewidth]{dp1_stellar_locus_ugr.pdf}
+  \includegraphics[width=\linewidth]{dp1_stellar_locus_ugr}
   \caption{$ugr$ stellar locus containing 12779 stars with signal-to-noise greater than 50 in the $u$ band.}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.31\textwidth}
-  \includegraphics[width=\linewidth]{dp1_stellar_locus_gri.pdf}
+  \includegraphics[width=\linewidth]{dp1_stellar_locus_gri}
   \caption{$gri$ stellar locus containing 63236 stars with signal-to-noise greater than 200 in the $i$ band.}
   \end{subfigure}\hfill
     \begin{subfigure}[t]{0.31\textwidth}
-  \includegraphics[width=\linewidth]{dp1_stellar_locus_riz.pdf}
+  \includegraphics[width=\linewidth]{dp1_stellar_locus_riz}
   \caption{$riz$ stellar locus containing 46760 stars with signal-to-noise greater than 200 in the $i$ band.}
   \end{subfigure}\hfill
 \caption{Examples of stellar loci from the full DP1 data set.}
@@ -197,7 +198,7 @@ Half of the remaining objects are selected for injection.
 Afterwards, individual components fainter than 29~${\rm mag_{AB}}$ are also excluded for computational expediency, and because the properties of these very faint bulges and disks are not as well-constrained as for brighter galaxies.
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/performance/injected_lsst_cells_v1_5063_i_completeness_any.pdf}
+\includegraphics[width=0.98\linewidth]{injected_lsst_cells_v1_5063_i_completeness_any}
 \caption{Completeness and incorrect classification fraction as a function of $i$-band CModel magnitude for DC2-based injected objects into a portion of the ECDFS field. 
 The "Incorrect Class" line shows the proportion of objects that are matched but classified incorrectly by their reference-band extendedness, i.e. stars with extendedness of 1 or galaxies with extendedness of 0 in the reference band.}
 \label{fig:injected_lsst_cells_v1_5063_i_completeness_any}
@@ -236,11 +237,11 @@ The correction for Kron fluxes can be derived from the S\'ersic index \citep{200
 \begin{figure*}[hbt!]
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
-  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_i_mag_cmodel.pdf}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_cmodel}
   \caption{$i$-band magnitude residuals for CModel measurements of injected galaxies.}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.45\textwidth}
-  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_i_mag_sersic.pdf}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_sersic}
   \caption{$i$-band magnitude residuals for S\'ersic model measurements of injected galaxies.}
   \end{subfigure}\hfill
 \caption{$i$-band magnitude residuals for matched injected DC2 galaxies with the CModel and S\'ersic algorithms in a portion of the \gls{ECDFS} region.}
@@ -255,15 +256,15 @@ Any of these color measurements are suitable for use for deriving quantities lik
 \begin{figure*}[hbt!]
   \centering
   \begin{subfigure}[t]{0.31\textwidth}
-\includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_r_color_cmodel_g_minus_i.pdf}
+\includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_cmodel_g_minus_i}
   \caption{$g-i$ color residuals for CModel measurements of injected galaxies.}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.31\textwidth}
-\includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_r_color_gaap_g_minus_i.pdf}
+\includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_gaap_g_minus_i}
   \caption{$g-i$ color residuals for \gls{GAaP} measurements of injected galaxies.}
   \end{subfigure}\hfill
     \begin{subfigure}[t]{0.31\textwidth}
-\includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_r_color_sersic_g_minus_i.pdf}
+\includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_sersic_g_minus_i}
   \caption{$g-i$ color residuals for S\'ersic model measurements of injected galaxies.}
   \end{subfigure}\hfill
 \caption{$g-i$ color residuals versus r-band magnitude for matched injected DC2 galaxies with the CModel, \gls{GAaP} and S\'ersic algorithms in a portion of the \gls{ECDFS} region.}
@@ -289,11 +290,11 @@ This is at least partly (but not wholly) due to the fact that coaddition introdu
 \begin{figure*}[hbt!]
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
-  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_i_mag_chi_psf.pdf}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_chi_psf}
   \caption{$i$-band magnitude uncertainty-scaled residuals for PSF model measurements of injected stars.}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.45\textwidth}
-  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_r_color_chi_psf_g_minus_i.pdf}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_chi_psf_g_minus_i}
   \caption{$g-i$ color uncertainty-scaled residuals for PSF model measurements of injected stars.}
   \end{subfigure}\hfill
 \caption{Color and magnitude uncertainty-scaled residuals for matched injected DC2 stars' PSF model fluxes in a portion of the \gls{ECDFS} region.}
@@ -308,11 +309,11 @@ This holds for astrometric/centroid parameters as well.
 \begin{figure*}[hbt!]
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
-  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_i_mag_chi_cmodel.pdf}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_chi_cmodel}
   \caption{$i$-band magnitude uncertainty-scaled residuals for CModel measurements of injected galaxies.}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.45\textwidth}
-  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_r_color_chi_cmodel_g_minus_i.pdf}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_chi_cmodel_g_minus_i}
   \caption{$g-i$ color uncertainty-scaled residuals for CModel measurements of injected galaxies.}
   \end{subfigure}\hfill
 \caption{Color and magnitude uncertainty-scaled residuals for matched injected DC2 galaxies' CModel fluxes in a portion of the \gls{ECDFS} region.}
@@ -323,11 +324,11 @@ This holds for astrometric/centroid parameters as well.
 \begin{figure*}[hbt!]
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
-  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_i_mag_chi_sersic.pdf}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_chi_sersic}
   \caption{$i$-band magnitude uncertainty-scaled residuals for S\'ersic model measurements of injected galaxies.}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.45\textwidth}
-  \includegraphics[width=\linewidth]{performance/injected_lsst_cells_v1_5063_r_color_chi_sersic_g_minus_i.pdf}
+  \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_chi_sersic_g_minus_i}
   \caption{$g-i$ color uncertainty-scaled residuals for S\'ersic model measurements of injected galaxies.}
   \end{subfigure}\hfill
 \caption{Color and magnitude uncertainty-scaled residuals for matched injected DC2 galaxies' S\'ersic fluxes in a portion of the \gls{ECDFS} region.}
@@ -360,7 +361,7 @@ In contrast, sources aligned with the parallactic angle exhibit a tilted, linear
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.98\linewidth]{dcrHexbin.pdf}
+\includegraphics[width=0.98\linewidth]{dcrHexbin}
 \caption{Visualization of \gls{Differential Chromatic Refraction} (DCR) observed in the LSSTComCam commissioning campaign. The $g-i$ color is computed for every source in the reference catalog that is matched to a direct source in the science image, and the binned density for the full survey is plotted against the angular offset between the reference and detected positions. The angular offset is projected along coordinates parallel and perpendicular to the parallactic angle of the observation, and shows a characteristic correlation along the parallel axis with no correlation along the perpendicular axis. The orange vertical dashed line indicates the expected $g-i$ magnitude distribution at zero angular offset.}
 \label{fig:dcr}
 \vspace{0.1cm}
@@ -398,7 +399,7 @@ We observe a completeness $>95\%$ for sources with \gls{SNR}$> 6$, with mean com
 %
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/efficiency_snr_griz.pdf}
+\includegraphics[width=0.98\linewidth]{efficiency_snr_griz}
 \caption{The difference image detection completeness for injected sources in the \gls{ECDFS} field, for filters \textit{griz}, as a function of the estimated signal to noise ratio S/N. This completeness is the ratio between the found fake sources (shaded histogram) and all the sources (solid line). The horizontal dashed line represents where the $50\%$ completeness level is reached, at approximately S/N $\simeq 5.07$.}
 \label{fig:eff_snr_griz}
 \vspace{0.1cm}
@@ -408,7 +409,7 @@ In \figref{fig:coordinate_offset_diffim_fakes} we show the distribution of the r
 %
 \begin{figure}[htb!]
 \centering
-\includegraphics[trim={0 0 0 0},width=\linewidth]{figures/coordinate_offsets_hexbin.pdf}
+\includegraphics[trim={0 0 0 0},width=\linewidth]{coordinate_offsets_hexbin}
 \caption{Coordinate residuals for detected synthetic sources in difference images, between recovered and true position of the sources in the \gls{ECDFS} field. 
 In the top and right panels we include the distribution of these offsets, for all sources as well as for sources with S/N$>20$. 
 These high S/N sources show gaussian coordinate residual distributions with $\sigma=0\farcs02$ (black solid lines). 
@@ -427,7 +428,7 @@ When considering the \gls{flux} pulls we find that for all sources with $m_i<21.
 %
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/hexbin_psf_magpull.pdf}
+    \includegraphics[width=\linewidth]{hexbin_psf_magpull}
     \caption{Magnitude residuals and flux pulls for \gls{PSF} photometry on difference images for ECDFS field in $i$ for detected fake sources.
      Top panel: Distribution of true magnitudes for injected sources (blue), also splitting into hostless (black dash) and hosted (orange) sources, with detection completeness as a function of true magnitude (gray line). Vertical dashed lines indicate the 90\% and 50\% completeness magnitude limits.
     Center left panel: 2D hexbin plot of PSF magnitude residuals (measured minus true) versus true magnitude for detected sources, with running median (solid black) and $\sigma_{MAD}$ (dashed black) overlaid.
@@ -466,7 +467,7 @@ These were not originally found by the discovery pipelines as they did not satis
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/sso_residuals.pdf}
+\includegraphics[width=0.98\linewidth]{sso_residuals}
 \caption{Astrometric residuals between expected and observed positions of SSOs in \gls{DP1}. 
 The median residuals are $0\farcs001$ and $-0\farcs016$ in R.A./Dec direction, with  standard deviations of $0.''19$ and $0.''10$, respectively. 
 No detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. 
