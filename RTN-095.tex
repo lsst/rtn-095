@@ -1,5 +1,5 @@
 %\documentclass[twocolappendix, trackchanges]{aastex7}
-\documentclass[ twocolappendix, linenumbers, twocolappendix,trackchanges]{aastex7}
+\documentclass[ twocolumn,twocolappendix, linenumbers, twocolappendix,trackchanges]{aastex7}
 
 % line numbers must be on for submission
 
@@ -33,8 +33,8 @@
 
 \newcommand{\TODO}[1]{\textcolor{red}{\textbf{TODO:} #1}}
 
-% All figures here
-\graphicspath{{./}{figures/}}
+% All graphicspath here
+\graphicspath{{./}{figures/}{figures/commissioning}{figures/data_access/}{figures/data_products/}{figures/data_services/}{figures/drp/}{figures/performance/}}
 
 
 % Local commands go here.
@@ -76,11 +76,6 @@
 
 \keywords{Rubin Observatory -- LSST}
 
-% Todos to be reviewed before completion
-%\listoftodos
-%\clearpage
-
-% Content
 \input{introduction}
 \input{commissioning}
 \input{data_products}

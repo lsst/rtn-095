@@ -1,4 +1,3 @@
-\graphicspath{{./}{figures/performance}}
 \section{Performance Characterization and Known Issues}
 \label{sec:performance}
 %
@@ -85,7 +84,7 @@ Both features are planned for upcoming releases.
 To characterize astrometric performance, we evaluate both internal consistency and agreement with an external reference.
 A primary measure of internal consistency is the repeatability of position measurements for the same object, defined as the RMS of the astrometric distance distribution for stellar pairs having a specified separation in arcminutes. 
 We associate isolated point sources across visits and compute the RMS of their fitted positions, with the isolation radius for DP1 set to 2 arcseconds, rejecting any stars with average centroids within this radius of another star from the final catalog.
-\figref{fig:AM1_and_dm_astro_error} shows the median per-\gls{tract} astrometric error for all isolated point sources, both after the initial calibration and after the final calibration, which includes proper motion corrections.
+\figref{fig:dmAstroErr} shows the median per-\gls{tract} astrometric error for all isolated point sources, both after the initial calibration and after the final calibration, which includes proper motion corrections.
 The results indicate that the astrometric solution is already very good after the initial \gls{calibration}.
 Global calibration yields only modest improvement, likely due to the short time span of \gls{DP1} and the minimal distortions in the LSSTComCam.
 In the main survey, the longer time baseline and greater distortions near the \gls{LSSTCam} field edges will make global calibration more impactful.
@@ -142,7 +141,7 @@ There are coherent residuals, but without the wave-like pattern seen in \figref{
 \vspace{0.1cm}
 \end{figure*}
 
-We can see unmodeled \gls{camera} distortions by stacking the residuals over many visits as a function of the focal plane position.
+We can see unmodeled camera distortions by stacking the residuals over many visits as a function of the focal plane position.
 Figure~\ref{fig:Astrometry_FoV} shows the median residuals in x and y directions for \nvisits visits.
 \begin{figure*}[htb!]
 \centering

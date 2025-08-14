@@ -1,20 +1,15 @@
-\graphicspath{{./}{figures/drp}}
 \section{Data Release Processing}
 \label{sec:drp}
 
-% Leanne: from data_products -- to integrate:
-% % Data Release data products, which will be made available approximately annually, are produced by a coherent
-% processing of the entire science data set to date, and include calibrated images; measurements of positions, fluxes, and shapes; variability information such as orbital
-% parameters for moving objects.
 \gls{DRP} is the systematic processing of all Rubin Observatory data collected up to a certain date to produce the calibrated images, catalogs of detections, and derived data products described in Section \ref{sec:data_products}.
-\gls{DP1} was processed entirely at the \gls{USDF}, using 17,024 CPU hours.\footnote{For future Data Releases, data processing will be distributed across the \gls{USDF}, the \gls{FrDF} and the \gls{UKDF}.}
+\gls{DP1} was processed entirely at the \gls{USDF}, using 17,024 CPU hours.\footnote{For future Data Releases, data processing will be distributed across the USDF, the FrDF and the UKDF.}
 
 This section describes the pipeline algorithms used to produce \gls{DP1} and how they differ from those planned for full-scale LSST data releases.
 Data Release Production consists of four major stages: (1) single-frame processing, (2) calibration, (3) coaddition, and (4) difference imaging analysis (\gls{DIA}).
 
 \subsection{LSST Science Pipelines Software}
 \label{ssec:pipelines}
-The \gls{LSST Science Pipelines} software \citep{PSTN-019, LDM-151} will be used to generate all Rubin Observatory and LSST data products.
+The  LSST Science Pipelines software \citep{PSTN-019, LDM-151} will be used to generate all Rubin Observatory and LSST data products.
 It provides both the \glspl{algorithm} and \gls{middleware} frameworks necessary to process raw data into science-ready products, enabling analysis by the Rubin scientific community.
 Version \sciencepipelinesversion of the pipelines was used to produce \gls{DP1}.
 Documentation for this version is available at: \url{\sciencepipelinesurl}
@@ -30,7 +25,7 @@ Documentation for this version is available at: \url{\sciencepipelinesurl}
 \subsubsection{Background Subtraction}
 \label{ssec:background_subtraction}
 
-The background subtraction algorithms in the \gls{LSST Science Pipelines} estimate and remove large-scale background signals from science imaging.
+The background subtraction algorithms in the LSST Science Pipelines estimate and remove large-scale background signals from science imaging.
 Such signals may include sky brightness from airglow, moonlight, scattered light instrumental effects, zodiacal light, and diffuse astrophysical emission.
 In so doing, true astrophysical sources are isolated to allow for accurate detection and measurement.
 
@@ -59,8 +54,6 @@ Our configuration of Piff utilizes its \texttt{PixelGrid} model with a fourth-or
 In this case, a second-order polynomial is used instead.
 Details on the choice of polynomial order, overall \gls{PSF} modeling performance, and known issues are discussed in \secref{ssec:psf_models}.
 
-% Global astrometric calibration
-% Clare Saunders -- LPG reviewed
 \subsubsection{Astrometric Calibration}
 \label{ssec:global_astrometric_calibration}
 Starting from the astrometric solution calculated in single frame processing (\secref{ssec:single_frame_processing}), the final astrometric solution is computed using the ensemble of visits in a given band that overlap a given \gls{tract}.
@@ -71,7 +64,7 @@ In order to perform the fit of the astrometric solution, isolated point sources 
 The model used for \gls{DP1} consists of a static map from pixel-space to an intermediate frame (the per-detector model), followed by a per-visit map from the intermediate frame to the plane tangent to the telescope boresight (the per-visit model), then finally a deterministic mapping from the tangent plane to the sky.
 The fit is done using the \texttt{gbdes} package \citep{Bernstein2017}, and a full description is given in \citet{dmtn-266}.
 
-The per-detector model is intended to capture quasi-static characteristics of the telescope and \gls{camera}. 
+The per-detector model is intended to capture quasi-static characteristics of the telescope and camera. 
 During \gls{Rubin Operations}, the astrometric solution will allow for separate epochs with different per-detector models, to account for changes in the camera due to warming and cooling and other discrete events.
 However, for \gls{DP1}, \gls{LSSTComCam} was assumed to be stable enough that all visits use the same per-detector model. The model itself is a separate two-dimensional polynomial for each detector.
 For \gls{DP1}, a degree 4 polynomial was used; the degree of the polynomial mapping is tuned for each instrument and may be different for LSSTCam.
