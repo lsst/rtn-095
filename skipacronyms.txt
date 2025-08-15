@@ -26,4 +26,3 @@ R22
 GAIA
 STARRS
 B
-camera
