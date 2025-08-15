@@ -16,3 +16,4 @@ RTN-095.pdf
 aglossary.tex
 .ipynb_checkpoints/
 .idea/
+**pycache**
