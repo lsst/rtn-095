@@ -79,6 +79,18 @@ def formatParameter(params, name):
         unit = params[1][name]
         if unit[0:7] not in ['\\arcsec', '\\arcmin', '\\degree']:
             unit = f'\\xspace {unit}'
+        else:
+            if '.' in value:
+                match unit[0:7]:
+                    case '\\arcsec':
+                        value = value.replace('.','\\farcs')
+                        unit = unit.replace('\\arcsec', '')
+                    case '\\arcmin':
+                        value = value.replace('.','\\farcm')
+                        unit = unit.replace('\\arcmin', '')
+                    case '\\degree':
+                        value = value.replace('.','\\fdg')
+                        unit = unit.replace('\\degree', '')
     else:
         unit = ''
 
@@ -609,7 +621,7 @@ def nTemplateCoaddInputImages(params):
     return params
 
 def depthEcdfs(params):
-    print('Adding number ECDFS depths...')
+    print('Adding ECDFS depths...')
 
     tracts = []
     with butler.query() as base_query:
