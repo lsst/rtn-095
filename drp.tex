@@ -184,7 +184,7 @@ The Binary Cross Entropy loss function was used, along with the \gls{Adam} optim
 The final model uses the weights that achieved the best precision/purity for the test set.
 Training was done on the \gls{S3DF} with an NVIDIA model L40S GPU.
 
-The model was initially trained using simulated data from the second \gls{DESC} Data Challenge (DC2; \citep{2021ApJS..253...31L}) plus randomly located injections of PSFs to increase the number of real sources, for a total of 89,066 real sources.
+The model was initially trained using simulated data from the second DESC Data Challenge (DC2; \citep{2021ApJS..253...31L}) plus randomly located injections of PSFs to increase the number of real sources, for a total of 89,066 real sources.
 The same number of bogus sources were selected at random from non-injected DIASources.
 %Since the number of injections (57,832) was much larger than the number of fake SNs (1442) from \eric{LPG: do we need to detail the DC2 initial work}, the model initially outperformed on SNs.
 %To improve the performance metrics on SNs, the loss function was modified to give more weight to SNs, resulting in a 6\% increase in accuracy for SNs.
