@@ -12,7 +12,7 @@ In this section, we provide an assessment of the \gls{DP1} data quality and know
 
 \subsection{PSF Models}
 \label{ssec:psf_models}
-To characterize \gls{PSF}  performance, we use adaptive second moments (\citealt{2002AJ....123..583B}) measured on \gls{PSF} stars and on the PSF model using the \gls{HSM} implementation (\citealt{2003MNRAS.343..459H}, \citealt{2005MNRAS.361.1287M}).
+To characterize \gls{PSF}  performance, we use adaptive second moments \citep{2002AJ....123..583B} measured on \gls{PSF} stars and on the PSF model using the \gls{HSM} implementation \citep{2003MNRAS.343..459H, 2005MNRAS.361.1287M}.
 All measurements are expressed in the pixel coordinate frame of each detector.
 We characterize the performance of the PSF using the classical trace of the  second moment matrix $T$, along with the ellipticity parameters $e^1$ and $e^2$.
 Measurements on the observed PSF stars are are denoted as  $T_{\text{PSF}}$, $e^1_{\text{PSF}}$,  $e^2_{\text{PSF}}$, while those fro PSF models are denoted as  $T_{\text{model}}$, $e^1_{\text{model}}$, $e^2_{\text{model}}$.
@@ -63,9 +63,9 @@ We observe coherent patterns in both the \gls{PSF} moments and the residuals, th
 
 \figref{fig:psf_residuals_mag_color} shows a plot of  $\delta T/T$ versus stellar magnitude, which can be reveal any dependencies between \gls{PSF} size and flux.
 We also repeat this analysis in color bins to probe chromatic effects.
-Binning by color uncovers a clear color dependence, as seen in \gls{DES} (e.g., \citealt{DES:2020vau}).
+Binning by color uncovers a clear color dependence, as seen in \gls{DES} \citep{DES:2020vau}.
 The residual is consistent with \tabref{tab:psf-1d_stats} and its cause is unknown.
-DP1 does not include the color correction implemented in \cite{2025OJAp....8E..26S}. 
+DP1 does not include the color correction implemented in \citet{2025OJAp....8E..26S}. 
 This will be included in processing of future data releases.
 \begin{figure}[htb!]
 \plotone{dT_T_Piff_poly_4_vs_mag}
