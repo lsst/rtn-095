@@ -230,8 +230,8 @@ At each sky location, represented by a spatial pixel in the \gls{HEALPix}\citep{
 
 DP1 contains \nsurveypropertymaps survey property maps.
 The available maps describe total exposure times, observation epochs, \gls{PSF} size and \gls{shape}, \gls{PSF} magnitude limits, sky \gls{background} and noise levels, as well as astrometric shifts and \gls{PSF} distortions due to wavelength-dependent atmospheric \gls{DCR} effects.
-They all use the dataset type  format \texttt{deep\_coadd\_<PROPERTY>\_consolidated\_map\_<STATISTIC>}
-e.g., \texttt{deep\_coadd\_exposure\_time\_consolidated\_map\_sum} provides a spatial map of the total exposure time accumulated per
+They all use the dataset type  format \texttt{deep\_coadd\_<PROPERTY>\_consolidated\_map\_<STATISTIC>}.
+For example, \texttt{deep\_coadd\_exposure\_time\_consolidated\_map\_sum} provides a spatial map of the total exposure time accumulated per
 sky position in units of seconds.
 All maps are stored in \texttt{HealSparse}\footnote{A sparse \gls{HEALPix}
 representation that efficiently encodes data values on the celestial sphere. \url{https://healsparse.readthedocs.io}} format.
@@ -287,5 +287,5 @@ Configuration files record the parameters used in each processing task, while lo
 \subsubsection{Calibration Data Products}
 \label{ssec:calibration_data}
 Calibration data products include a variety of images and models that are used to characterize and correct the performance of the camera and other system components.
-These include bias, dark, and flat-field images, \gls{PTC} gains, brighter-fatter kernels, charge transfer inefficiency (\gls{CTI}) models, linearizers, and illumination corrections.
+These include bias, dark, and flat-field images, \gls{PTC} gains, brighter-fatter kernels \citep{2014JInst...9C3048A}, charge transfer inefficiency (\gls{CTI}) models, linearizers, and illumination corrections.
 For flat-field corrections, \gls{DP1} processing used combined flats, which are averaged from multiple individual flat-field exposures to provide a stable \gls{calibration}. These \gls{calibration} products are essential inputs to \gls{ISR} (\secref{ssec:isr}). While these products are included in \gls{DP1} for transparency and completeness, users should not need to rerun ISR for their science and are advised to start with the processed \texttt{visit\_image}.
