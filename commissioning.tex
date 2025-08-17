@@ -72,7 +72,7 @@ The \gls{LSSTCam} and \gls{LSSTComCam} focal planes are described in detail in \
 \subsubsection{Filter Complement}
 \label{sssec:comcam_filters}
 \gls{LSSTComCam} supports imaging with six broadband filters $ugrizy$ spanning 320--1050 nm, identical in design to LSSTCam. 
-Whereas the LSSTCam filter exchanger holds five filters, the LSSTComCam exchanger accommodates only three.
+Whereas the LSSTCam filter exchanger holds five filters, the LSSTComCam exchanger holds only three at a time.
 The full-system throughput of the six LSSTComCam filters, which encompasses contributions from a standard atmosphere at airmass 1.2, telescope optics, 
 camera surfaces, and the mean ITL detector quantum efficiency is shown in \figref{fig:comcam_standard_bandpasses}.
 \begin{figure}[htb!]
@@ -120,31 +120,33 @@ deep coadded images with integrated exposure times roughly equivalent to those o
 To support these goals, \nfields target fields were selected that span a range of stellar densities, overlap with external reference datasets, and collectively span the full breadth of the four primary \gls{LSST} science themes.
 These \nfields fields form the basis of the \gls{DP1} dataset.
 \figref{fig:dp1_fields_on_sky} shows the locations of these \nfields fields on the sky, overlaid on the LSST baseline survey footprint \citep{PSTN-051, PSTN-052, PSTN-053, PSTN-055, PSTN-056}, along with sky coverage of both the LSSTCam and \gls{LSSTComCam} focal planes.
-\begin{figure*}[b!]
+\begin{figure*}[bt!]
 \centering
 \plotone{dp1_fields_with_survey_fp}
-\caption{Locations of the seven DP1 fields overlaid on the LSST baseline survey footprint \citep{PSTN-051, PSTN-052, PSTN-053, PSTN-055, PSTN-056}. 
+\caption{Locations of the seven DP1 fields overlaid on the LSST baseline survey footprint \citep{PSTN-056}. 
 NES: North Ecliptic Spur, SCP: South Celestial Pole, Low-Dust WFD: regions away from the Galactic Plane (GP) observed with a WFD cadence, GP/MC WFD: Galactic Plane and Magellanic Clouds regions observed with a WFD cadence. 
 The fields of view covered by the LSSTCam and LSSTComCam focal planes are represented as outer and inner concentric circles, respectively, centered on the pointing center of each field.}
 \label{fig:dp1_fields_on_sky}
 \end{figure*}
 
 \input{tables/dp1_fields.tex}
-Each of the \nfields target fields was observed repeatedly in multiple bands over many nights.
+Each of the \nfields target fields was observed repeatedly in multiple bands over  many nights. 
 A typical observing \gls{epoch} on a given target field consisted of 5-20 visits in each of the three loaded filters (\secref{sssec:comcam_filters}).
-Only images taken as  single 1$\times$30 second exposures have been included in DP1.
+All DP1 images were captured as single 1$\times$30-second exposures for all bands, rather than as  2$\times$15-second ``snap" exposures. 
+Additionally, some $u$-band exposures were taken as 38-second exposures. 
+The  exposure time for LSST images will be determined following further testing during the commissioning phase with  LSSTCam. 
 All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_2019, peter_yoachim_2024_13985198}.
 \tabref{tab:dp1_fields} lists the \nfields \gls{DP1} fields and their pointing centers, and provides a summary of the band coverage in each.
-
 
 The temporal sampling distribution of observations per band and per night is shown in \figref{fig:target_fields_temporal_sampling}.
 \begin{figure}[htb!]
 \centering
 \plotone{temporal_sampling_per_field}
-\caption{Distribution of DP1 observations by date grouped by field as a function of MJD. Each dot represents a single 30-second exposure, color-coded by filter.}	
+\caption{Distribution of DP1 observations by date grouped by field as a function of time over the \nnightscomcam nights of data taking with LSSTComCam. 
+Each dot represents a single  exposure, color-coded by band.}	
 \label{fig:target_fields_temporal_sampling}
 \end{figure}
-Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only accommodate three filters at a time (see \secref{ssec:comcam}).
+Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only hold three filters at a time (see \secref{sssec:comcam_filters}).
 As the campaign progressed, the temporal sampling became denser across all fields, reflecting improved efficiency and increased time allocated for science observations.
 The \gls{ECDFS} field received the most consistent and densest temporal sampling.
 It is important to note that the time sampling in the \gls{DP1} dataset differs significantly from what will be seen in the final \gls{LSST} data.
@@ -159,8 +161,8 @@ It is important to note that the time sampling in the \gls{DP1} dataset differs 
 All fields except for the low ecliptic latitude field, Rubin\_SV\_38\_7, used a small random dithering pattern.
 The random translational dithers of the telescope boresight were applied for each visit, with offsets of up to 0.2 degrees around the pointing center (\tabref{tab:dp1_fields}). 
 The rotational dithers of the camera rotator were typically approximately 1 degree per visit, with larger random offsets at each filter change, which worked to keep operational efficiency high. 
-The Rubin\_SV\_38\_7 field used a different dither pattern ton optimize coverage of Solar System Objects and test Solar System Object linking across multiple nights. These
-observations used a 2x2 grid of LSSTComCam pointings to cover an area of about 1.3 degree x 1.3 degrees.
+The Rubin\_SV\_38\_7 field used a different dither pattern to optimize coverage of Solar System Objects and test Solar System Object linking across multiple nights. 
+These observations used a 2$\times$2 grid of \gls{LSSTComCam} pointings to cover an area of about 1.3 degree$\times$1.3 degrees.
 The visits cycled between the grid's four pointing centers, using small random translational dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing epoch.
 \begin{figure*}[ht]
     \centering
@@ -274,7 +276,7 @@ The delivered image quality is influenced by contributions from both the observi
 During the campaign, the Rubin \gls{DIMM} was not operational, so atmospheric seeing was estimated using live data from the \gls{SOAR} \gls{RINGSS} seeing monitor, also located on Cerro Pach\'on.
 Although accelerometers mounted on the mirror cell and top-end assembly were available to track dynamic optics effects, such as mirror oscillations that can degrade optical alignment, this data was not used during the campaign.
 Mount encoder data were used to measure the mount jitter in every image, with a measured median contribution of 0.004 arcseconds to image degradation.
-As the pointing model was not fine tuned, tracking errors could range from 0.2 to 0.4 arcseconds per image, depending on RA and Dec.
+As the pointing model was not fine-tuned, tracking errors could range from 0.2 to 0.4 arcseconds per image, depending on RA and Dec.
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 
 % Not sure this is needed
@@ -285,7 +287,8 @@ The best images achieved a \gls{PSF} \gls{FWHM} of approximately \bestimagequali
 \begin{figure}[htb]
 \centering
 \plotone{image_quality_ecdf}
-\caption{Cumulative distribution of PSF FWHM (arcsec) over all \nvisitdetectorsummaries visits images in the DP1 dataset for each filter. The vertical dashed lines represent the median PSF FWHM at 1.46, 1.36, 1.24, 1.18 and 1.20 arcsec for the $ugrizy$ wavebands, respectively}
+\caption{Cumulative distribution of PSF FWHM (arcsec) over all \nvisitdetectorsummaries visits images in the DP1 dataset for each filter. 
+The vertical dashed lines represent the median PSF FWHM at 1.46, 1.36, 1.24, 1.18 and 1.20 arcsec for the $ugrizy$ wavebands, respectively.}
 \label{fig:delivered_image_quality_ecdf}
 \end{figure}
 Ongoing efforts aim to quantify all sources of image degradation,  including contributions from the camera system, static and dynamic optical components, telescope mount motion,  observatory-induced seeing from the dome and mirror, and atmospheric conditions.
