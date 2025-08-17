@@ -22,8 +22,8 @@ At the highest level, the \gls{DP1} data products fall into one of five types:
 While images and catalogs are expected to be the primary data products for scientific research, we also recognize the value of providing access to other data types to support investigations and ensure transparency.
 
 To facilitate processing, Rubin \gls{DP1} uses a single skymap\footnote{A skymap is a tiling of the celestial sphere, organizing large-scale sky coverage into manageable sections for processing and analysis.} that covers the entire sky area encompassing the seven \gls{DP1} fields.
-The \gls{DP1} skymap divides the entire celestial sphere into \ntotaltracts tracts, each covering approximately \tractarea.
-Each \gls{tract} is further subdivided into \npatchx × \npatchy equally-sized patches, with each \gls{patch} covering roughly \innerpatcharea
+The \gls{DP1} skymap divides the entire celestial sphere into \ntotaltracts \gls{tract}s, each covering approximately \tractarea.
+Each \gls{tract} is further subdivided into \npatchx$times$\npatchy equally-sized patches, with each \gls{patch} covering roughly \innerpatcharea.
 Both tracts and patches overlap with their neighboring regions.
 Since the \gls{LSSTComCam} only observed \totalarea of the sky during its campaign, only \ncoveredtracts out of the \ntotaltracts tracts have coverage in \gls{DP1}.
 The tract identification numbers and corresponding target names for these tracts are listed in \tabref{tab:dp1_tracts}.
@@ -67,7 +67,7 @@ The handful of exposures with fewer than nine \texttt{raw} images also have fewe
 Almost all failures were due to challenges with astrometric fits or \gls{PSF} models in crowded fields.
 
 In total, there are \nvisitimages \texttt{visit\_image}s in \gls{DP1}.
-Each \texttt{visit\_image}  comprises three images: the calibrated science image, a variance image, and a pixel bitmask, indicating, for example, bad or saturated pixels, pixels affected by cosmic rays, pixels associated with detected sources, etc.
+Each \texttt{visit\_image} comprises three images: a calibrated science image, a variance image, and a pixel-level bitmask that flags issues such as saturation, cosmic rays, or other artifacts. 
 Each \texttt{visit\_image} also contains a position-dependent \gls{PSF} model, \gls{WCS} information, and various \gls{metadata} providing information about the observation and processing.
 The science and variance images and the pixel mask each contain \nvisitimagepixx$\times$ \nvisitimagepixy pixels.
 In total, a single \texttt{visit\_image}, including all extensions and \gls{metadata}, occupies around \visitimagehdd of disk space.
@@ -84,14 +84,16 @@ The skymap used for \gls{DP1} defines a \gls{patch} as having an on-sky area of 
 Each \texttt{deep\_coadd} contains the science image (i.e., the coadd), a variance image, and a pixel mask; all three contain the same number of pixels.
 Each \texttt{deep\_coadd} also contains a position-dependent \gls{PSF} model (which is the weighted sum of the \gls{PSF} models of the input \texttt{visit\_image}s), \gls{WCS} information, plus various \gls{metadata}.
 
-Since coadds always cover an entire \gls{patch}, it is fairly common for a \text{deep\_coadd} to contain regions that were not covered by any of the selected \texttt{visit\_image}s, particularly if the \gls{patch} is on the outskirts of a field and was thus not fully observed. By the nature of how coadds are produced, such regions may contain seemingly valid \gls{flux} values (i.e., not necessarily zeros or \texttt{NaNs}), but will instead be flagged with the \texttt{NO\_DATA} flag in the pixel mask. It is therefore crucial that the pixel mask is referred to when analyzing \texttt{deep\_coadds}.
+Since coadds always cover an entire \gls{patch}, it is common for a \texttt{deep\_coadd} to contain regions that were not covered by any of the selected \texttt{visit\_image}s, particularly if the \gls{patch} is on the outskirts of a field and was thus not fully observed. 
+By the nature of how coadds are produced, such regions may contain seemingly valid \gls{flux} values (i.e., not necessarily zeros or \texttt{NaNs}), but will instead be flagged with the \texttt{NO\_DATA} flag in the pixel mask. 
+It is therefore crucial that the pixel mask be referred to when analyzing \texttt{deep\_coadds}.
 
 \item \texttt{template\_coadd}s \citep{10.71929/rubin/2570314} are those created to use as templates for difference imaging, i.e., the process of subtracting a template image from a \texttt{visit\_image} to identify either variable or \gls{transient} objects.\footnote{It should be noted that \texttt{template\_coadd}s are not themselves subtracted from \texttt{visit\_image}s but are, instead, warped to match the \gls{WCS} of a \texttt{visit\_image}.
 It is this warped template that is subtracted from the \texttt{visit\_image} to create a difference image.
 For storage space reasons, warped templates are not retained for \gls{DP1}, as they can be readily and reliably recreated from the \texttt{template\_coadd}s.}
 As with \texttt{deep\_coadd}s, \texttt{template\_coadd}s are produced by warping and co-adding multiple \texttt{visit\_image}s covering a given skymap-defined \gls{patch}.
 The process of building \texttt{template\_coadd}s is the same as that for \texttt{deep\_coadd}s, but the selection criteria differ between the two types of coadd.
-In the case of \texttt{template\_coadd}s, one third of \texttt{visit\_image}s covering the \gls{patch} in question with the narrowest \gls{PSF} \gls{FWHM} is selected.
+In the case of \texttt{template\_coadd}s, one third of \texttt{visit\_image}s covering the \gls{patch} in question with the narrowest \gls{PSF} \gls{FWHM} are selected.
 If one third corresponds to fewer than twelve \texttt{visit\_image}s (i.e., there are fewer than 36 \texttt{visit\_image}s covering the \gls{patch}), then the twelve \texttt{visit\_images} with the narrowest \gls{PSF} \gls{FWHM} are selected.
 Finally, if there are fewer than twelve \texttt{visit\_images} covering the \gls{patch}, then all \texttt{visit\_image}s are selected. 
 Of the \nvisitimages \texttt{visit\_image}s, \ntemplatecoaddvisitimages were used to create \texttt{template\_coadd}s.
@@ -122,7 +124,7 @@ Background images are not available via the \gls{IVOA} Service; they can only be
 
 \label{ssec:catalogs}
 Here we describe science-ready tables produced by the science pipelines.
-All but one of the catalogs described here contain data for detections in the images described in \secref{ssec:science_images}, the exception being the \texttt{Calibration} catalog, which contains reference data obtained from previous surveys.
+All but one of the catalogs described here contain data for detections in the images described in section \ref{ssec:science_images}, the exception being the \texttt{Calibration} catalog, which contains reference data obtained from previous surveys.
 Observatory-produced \gls{metadata} tables are described in \secref{ssec:metadata}
 Each type of catalog contains measurements for either Sources  detected in  \texttt{visit\_image}s and \texttt{difference\_image}s, or Objects detected in \texttt{deep\_coadd}s.
 
@@ -137,7 +139,7 @@ Catalog data are stored in the \gls{Qserv} database (\secref{sssec:qserv}) and a
 Catalog data are also accessible via the Data \gls{Butler} (\secref{sssec:data_butler}).
 
 \begin{itemize}
-\item The \texttt{Source} catalog \citep{10.71929/rubin/2570323} contains data on all sources which are, prior to deblending, detected with a greater than 5$\sigma$ significance in each individual visit.
+\item The \texttt{Source} catalog \citep{10.71929/rubin/2570323} contains data on all sources which are, prior to deblending (\secref{sssec:coadd_processing}), detected with a greater than 5$\sigma$ significance in each individual visit.
 The detections reported in the \texttt{Source} catalog have undergone deblending; in the case of blended detections, only the deblended sources are included in the \texttt{Source} catalog.
 It is important to note that while the criterion for inclusion in a \texttt{Source} catalog is a $>5\sigma$ detection in a \texttt{visit\_image} prior to deblending, the positions and fluxes are reported post-deblending. 
 Hence, it is possible for the \texttt{Source} catalog to contain sources whose \gls{flux}-to-error ratios -- potentially of all types (i.e., aperture \gls{flux}, \gls{PSF} \gls{flux}, etc.) -- are less than $5$.
@@ -159,15 +161,15 @@ While they may be included in future data releases, no photometric redshifts, Pe
 
 The \texttt{Object} catalog contains data for \nobjects objects in \gls{DP1}.
 
-\item The \texttt{ForcedSource} catalog \citep{10.71929/rubin/2570327} contains forced \gls{PSF} photometry measurements performed on both \texttt{difference\_image}s (i.e., the \texttt{psfDiffFlux} column) and \texttt{visit\_image}s (i.e., the \texttt{psfFlux} column) at the positions of all the objects in the \texttt{Object} catalog.
-We recommend using the \texttt{psfDiffFlux} column when generating lightcurves because this quantity is less sensitive to \gls{flux} from neighboring sources than \texttt{psfFlux}.
-As well as \gls{forced photometry} \gls{PSF} fluxes, a number of boolean flags are also included in the \texttt{ForcedSource} catalog.
+\item The \texttt{ForcedSource} catalog \citep{10.71929/rubin/2570327} contains forced \gls{PSF} photometry measurements performed on both \texttt{difference\_image}s (i.e., the \texttt{psfDiffFlux} column) and \texttt{visit\_image}s (i.e., the \texttt{psfFlux} column) at the positions of all the objects in the \texttt{Object} catalog, to allow assessment of the time variability of the fluxes.
+We recommend using the \texttt{psfDiffFlux} column when generating light curves because this quantity is less sensitive to \gls{flux} from neighboring sources than \texttt{psfFlux}.
+In addition to \gls{forced photometry} \gls{PSF} fluxes, a number of boolean flags are also included in the \texttt{ForcedSource} catalog.
 
 The \texttt{ForcedSource} catalog contains a total of \nforcedsources entries across \nforcedobjects unique objects.
 
 \item The \texttt{DiaSource} catalogs \citep{10.71929/rubin/2570317} contains data on all the sources detected at a $>5\sigma$ significance --- including those associated with known Solar System objects --- in the \texttt{difference\_image}s.
 Unlike sources detected in \texttt{visit\_image}s, sources detected in difference images (hereafter, ``DiaSources'') have gone through an association step in which an attempt has been made to associate them into underlying objects called ``DiaObject''s. 
-he \texttt{DiaSource} catalog consolidates all this information across multiple visits and bands. 
+The \texttt{DiaSource} catalog consolidates all this information across multiple visits and bands. 
 The detections reported in the \texttt{DiaSource} catalog have not undergone deblending.
 
 The \texttt{DiaSource} catalog contains data for \ndiasources \texttt{DiaSources} in \gls{DP1}.
@@ -176,7 +178,7 @@ The \texttt{DiaSource} catalog contains data for \ndiasources \texttt{DiaSources
 The \texttt{DiaObject} catalog contains only non-Solar System Objects; Solar System Objects are, instead, recorded in the \texttt{SSObject} catalog.
 When a DiaSource is identified, the \texttt{DiaObject} and \texttt{SSObject} catalogs are searched for objects to associate it with.
 If no association is found, a new DiaObject is created and the DiaSource is associated to it.
-Along similar lines, an attempt has been made to associate DiaObjects across multiple bands, meaning the \texttt{DiaObject} catalog -- like the \texttt{Object} catalog -- contains data from multiple bands.
+Along similar lines, an attempt has been made to associate DiaObjects across multiple bands, meaning the \texttt{DiaObject} catalog, like  the \texttt{Object} catalog, contains data from multiple bands.
 Since DiaObjects are typically \gls{transient} or variable (by the nature of their means of detection), the \texttt{DiaObject} catalog contains summary statistics of their fluxes, such as the mean and standard deviation over multiple epochs; users must refer to the \texttt{ForcedSourceOnDiaObject} catalog (see below) or the \texttt{DiaSource} catalog for single \gls{epoch} \gls{flux} measurements of DiaObjects.
 
 The \texttt{DIAObject} catalog contains data for \ndiaobjects DiaObjects in \gls{DP1}.
@@ -186,12 +188,12 @@ The \texttt{DIAObject} catalog contains data for \ndiaobjects DiaObjects in \gls
 The \texttt{ForcedSourceOnDiaObject} catalog  contains a total of \ndiaforcedsources entries across \ndiaforcedobjects unique DiaObjects.
 
 \item The \texttt{CcdVisit} catalog \citep{10.71929/rubin/2570331} contains data for each individual processed \texttt{visit\_image}.
-In addition to technical information, such as the on-sky coordinates of the central pixel and measured pixel scale, the \texttt{CcdVisit} catalog contains a range of data quality measurements, such as whole-image summary statistics for the \gls{PSF} size, zeropoint, sky \gls{background}, sky noise, and quality of \gls{astrometry} solution.
+In addition to technical information, such as the on-sky coordinates of the central pixel and measured pixel scale, the \texttt{CcdVisit} catalog contains a range of data quality measurements, such as whole-image summary statistics for the \gls{PSF} size, zeropoint, sky \gls{background}, sky noise, and quality of astrometric solution.
 It provides an efficient method to access  \texttt{visit\_image} properties without needing to access the image data.
 
 The \texttt{CcdVisit} catalog contains entries summarizing data for all \nvisitdetectorsummaries \texttt{visit\_image}s.
 
-\item The \texttt{SSObject} catalog \citep{10.71929/rubin/2570335}, \gls{MPCORB} and SSObject, carry information about Solar System Objects. 
+\item The \texttt{SSObject} catalog \citep{10.71929/rubin/2570335}, \gls{MPCORB} and SSObject, carry information about solar system objects. 
 The \gls{MPCORB} table provides the Minor Planet \gls{Center}-computed orbital elements for all known asteroids, including those that Rubin discovered. 
 For DP1, the  \texttt{SSObject} catalog serves primarily to provide the mapping between the \gls{IAU} designation of an object (listed in \gls{MPCORB}), and the internal ssObjectId identifier, which is used as a key to find solar system object observations in the DiaSource and SSSource tables.
 \item The \texttt{SSSource} catalog \citep{10.71929/rubin/2570333} contains data on all DiaSources that are either associated with previously-known Solar System Objects, or have been confirmed as newly-discovered Solar System Objects by confirmation of their orbital properties. 
@@ -207,10 +209,10 @@ We provide a brief summary here.
 
 For the \textit{grizy} bands, the input catalogs were (in order of decreasing priority): \gls{DES} Y6 Calibration Stars \citep{2023arXiv230501695R}; Gaia-\gls{XP} Synthetic Magnitudes \citep{2023A&A...674A..33G}; the \gls{Pan-STARRS}1 3PI Survey \citep{2016arXiv161205560C}; \gls{Data Release} 2 of the  SkyMapper survey \citep{2019PASA...36...33O}; and \gls{Data Release} 4 of the \gls{VST} \gls{ATLAS} survey \citep{2015MNRAS.451.4238S}. 
 For the \textit{u}-band, the input catalogs were (in order of decreasing priority): Standard Stars from \gls{SDSS} \gls{Data Release} 16 \citep{2020ApJS..249....3A}; Gaia-\gls{XP} Synthetic Magnitudes \citep{2023A&A...674A..33G}; and synthetic magnitudes generated using \gls{SLR}, which estimates the \textit{u}-band \gls{flux} from the \textit{g}-band \gls{flux} and \textit{g-r} colors. 
-This latter input (i.e., \gls{SLR} estimates) was used to boost the number of \textit{u}-band reference sources, as otherwise the source density from the \textit{u}-band input catalogs is too low to be useful for the \gls{LSST}.
+This \gls{SLR} estimates were used to boost the number of \textit{u}-band reference sources, as otherwise the source density from the \textit{u}-band input catalogs is too low to be useful for the \gls{LSST}.
 
 Only stellar sources were selected from each input catalog. 
-Throughout, the \texttt{Calibration} catalog uses the \gls{DES} bandpasses for the \textit{grizy}-bands and the \gls{SDSS} bandpass for the \textit{u}-band; color transformations derived from high quality sources were used to convert fluxes from the various input catalogs (some of which did not use the \gls{DES}/SDSS bandpasses) to the respective bandpasses. 
+Throughout, the \texttt{Calibration} catalog uses the \gls{DES} bandpasses for the \textit{grizy} bands and the \gls{SDSS} bandpass for the \textit{u}-band; color transformations derived from high quality sources were used to convert fluxes from the various input catalogs (some of which did not use the \gls{DES}/SDSS bandpasses) to the respective bandpasses. 
 All sources from the input catalogs are matched to \textit{Gaia}-\gls{DR3} sources for robust astrometric information, selecting only isolated sources (i.e., no neighbors within 1\arcsec).
 
 After collating the input catalogs and transforming the fluxes to the standard DES/SDSS bandpasses, the catalog was used to identify sources within a specific region of the sky. 
