@@ -2,26 +2,23 @@
 \label{sec:drp}
 
 \gls{DRP} is the systematic processing of all Rubin Observatory data collected up to a certain date to produce the calibrated images, catalogs of detections, and derived data products described in Section \ref{sec:data_products}.
-\gls{DP1} was processed entirely at the \gls{USDF}, using 17,024 CPU hours.\footnote{For future Data Releases, data processing will be distributed across the USDF, the FrDF and the UKDF.}
+\gls{DP1} was processed entirely at the \gls{USDF} at SLAC using 17,024 CPU hours.\footnote{For future Data Releases, data processing will be distributed across the USDF, the French (FrDF)and UK (UKDF) data facilities.}
 
 This section describes the pipeline algorithms used to produce \gls{DP1} and how they differ from those planned for full-scale LSST data releases.
-Data Release Production consists of four major stages: (1) single-frame processing, (2) calibration, (3) coaddition, and (4) difference imaging analysis (\gls{DIA}).
+Data Release Production consists of four major stages: (1) single-frame processing, (2) calibration, (3) coaddition, and (4) difference image analysis (DIA).
 
 \subsection{LSST Science Pipelines Software}
 \label{ssec:pipelines}
 The  LSST Science Pipelines software \citep{PSTN-019, LDM-151} will be used to generate all Rubin Observatory and LSST data products.
 It provides both the \glspl{algorithm} and \gls{middleware} frameworks necessary to process raw data into science-ready products, enabling analysis by the Rubin scientific community.
-Version \sciencepipelinesversion of the pipelines was used to produce \gls{DP1}.
-Documentation for this version is available at: \url{\sciencepipelinesurl}
+Version \sciencepipelinesversion of the pipelines was used to produce \gls{DP1}\footnote{Documentation for this version is available at: \sciencepipelinesurl}.
 
 %%%%%  %%%%%%%%%%%%%%%%%%%%%%
 \subsection{Single Frame Processing}
 \label{ssec:single_frame_processing}
 
-%% Chris
 \input{isr}
 
-% Lee
 \subsubsection{Background Subtraction}
 \label{ssec:background_subtraction}
 
@@ -34,7 +31,6 @@ Pixels with a mask flag set that indicates that they contain no useful science d
 The iterative $3\sigma$ clipped mean of the remaining pixels is calculated for each superpixel, constructing a \gls{background} statistics image.
 A sixth-order Chebyshev polynomial is fit to these values on the scale of a single detector to allow for an extrapolation back to the native pixel resolution of the post-\gls{ISR} image.
 
-
 \subsection{Calibration}
 \label{ssec:drp_calibration}
 Stars are detected in each post-\gls{ISR} image using a $5\sigma$ threshold.
@@ -44,13 +40,10 @@ Initial astrometric and photometric solutions are derived using only the calibra
 These preliminary solutions provide approximate source positions, fluxes, and \gls{PSF} shapes that serve as essential inputs to the \gls{calibration} process, enabling reliable source matching, selection of high-quality stars, and iterative refinement of the final astrometric, photometric, and \gls{PSF} models.
 These preliminary solutions are subsequently replaced by more accurate fits, as described in the following sections.
 
-% PFL -- LPG reviewed
-% Edited by YA: we throw away the PSFEx models, so I removed the discuession about them.
-%LPG: Great, thank you
 \subsubsection{PSF Modeling}
 \label{ssec:psf_modelling}
 \gls{PSF} modeling in \gls{DP1} uses the Piff \citep{DES:2020vau} package.
-Our configuration of Piff utilizes its \texttt{PixelGrid} model with a fourth-order polynomial interpolation per \gls{CCD}, except in the u-band, where star counts are insufficient to support a fourth-order fit.
+Our configuration of Piff utilizes its \texttt{PixelGrid} model with a fourth-order polynomial interpolation per \gls{CCD}, except in the $u$-band, where star counts are insufficient to support a fourth-order fit.
 In this case, a second-order polynomial is used instead.
 Details on the choice of polynomial order, overall \gls{PSF} modeling performance, and known issues are discussed in \secref{ssec:psf_models}.
 
@@ -58,10 +51,10 @@ Details on the choice of polynomial order, overall \gls{PSF} modeling performanc
 \label{ssec:global_astrometric_calibration}
 Starting from the astrometric solution calculated in single frame processing (\secref{ssec:single_frame_processing}), the final astrometric solution is computed using the ensemble of visits in a given band that overlap a given \gls{tract}.
 This allows the astrometric solution to be further refined by using all of the isolated point sources of sufficient signal-to-noise ratio in an image, rather than only those that appear in the reference catalog, as is done in single frame processing.
-Using multiple whole visits rather than a single detector also allows us to account for effects that impact the full focal plane and for the proper motion and parallax of the sources.
+Using multiple whole visits rather than a single detector also allows us to account for effects that impact the full focal plane, and for the proper motion and parallax of the sources.
 
 In order to perform the fit of the astrometric solution, isolated point sources are associated between overlapping visits and with the Gaia \gls{DR3} \citep{2023A&A...674A...1G} reference catalog where possible.
-The model used for \gls{DP1} consists of a static map from pixel-space to an intermediate frame (the per-detector model), followed by a per-visit map from the intermediate frame to the plane tangent to the telescope boresight (the per-visit model), then finally a deterministic mapping from the tangent plane to the sky.
+The model used for \gls{DP1} consists of a static map from pixel space to an intermediate frame (the per-detector model), followed by a per-visit map from the intermediate frame to the plane tangent to the telescope boresight (the per-visit model), then finally a deterministic mapping from the tangent plane to the sky.
 The fit is done using the \texttt{gbdes} package \citep{Bernstein2017}, and a full description is given in \citet{dmtn-266}.
 
 The per-detector model is intended to capture quasi-static characteristics of the telescope and camera. 
@@ -78,23 +71,20 @@ Future processing will also likely include a Gaussian Process fit to better acco
 The final component of the astrometric \gls{calibration} involves the positions of the isolated point sources included in the fit, which are described by five parameters: sky coordinates, proper motion, and parallax.
 While proper motions and parallaxes are not released for DP1, they are fitted for these sources in the astrometric solution to improve the astrometric calibration.
 
-% Eli
 \subsubsection{Photometric Calibration}
 \label{photometric_calibration}
 Photometric \gls{calibration} of the \gls{DP1} dataset is based on the \gls{FGCM} ~\citep[FGCM][]{2018AJ....155...41B}, adapted for the LSST Science Pipelines~\citep{2022PASJ...74..247A, SITCOMTN-086}.
 We used the \gls{FGCM} to calibrate the full \gls{DP1} dataset with a forward model that uses a parameterized model of the atmosphere as a function of airmass along with a model of the instrument throughput as a function of wavelength.
 The FGCM process typically begins with measurements of the instrumental throughput, including the mirrors, filters, and detectors.
 However, because full scans of the \gls{LSSTComCam} as-built filters and individual detectors were not available, we instead used the nominal reference throughputs for the Simonyi Survey Telescope and LSSTCam.\footnote{Available at: \url{https://github.com/lsst/throughputs/tree/1.9}}
-These nominal throughputs were sufficient for the \gls{DP1} calibration, given the small and homogeneous focal plane consisting of only 9 \gls{ITL} detectors.
+These nominal throughputs were sufficient for the \gls{DP1} calibration, given the small and homogeneous focal plane consisting of only nine \gls{ITL} detectors.
 The FGCM atmosphere model, provided by MODTRAN~\citep{1999SPIE.3756..348B}, was used to generate a look-up table for atmospheric throughput as a function of zenith distance at Cerro Pachón.
-This model accounts for absorption and scattering by molecular constituents of the atmosphere, including O2 and O3; absorption by water vapor; and Mie scattering by airborne aerosol particulates.
+This model accounts for absorption and scattering by molecular constituents of the atmosphere, including $O_2$ and $O_3$; absorption by water vapor; and Mie scattering by airborne aerosol particulates.
 Nightly variations in the atmosphere are modeled by minimizing the variance in repeated observations of stars with a \gls{SNR} greater than 10, measured using ``compensated aperture fluxes''.
 These fluxes include a local \gls{background} subtraction (see \secref{ssec:background_subtraction}) to mitigate the impact of \gls{background} offsets.
-The model fitting process incorporates all 6 bands ($ugrizy$) but does not include any gray (achromatic) terms, except for a linear assumption of mirror reflectance degradation, which is minimal over the short duration of the \gls{DP1} observation campaign.
+The model fitting process incorporates all six bands ($ugrizy$) but does not include any gray (achromatic) terms, except for a linear assumption of mirror reflectance degradation, which is minimal over the short duration of the \gls{DP1} observation campaign.
 As an additional constraint on the fit, we use a subset of stars from the reference catalog~\citep{DMTN-277}, primarily to constrain the system's overall throughput and establish the ``absolute'' calibration.
 
-%YA
-% LPG: Moved this here
 \subsection{Visit Images and Source Catalogs}
 \label{sssec:visit_images_source_catalogs}
 With the final \gls{PSF} models, \gls{WCS} solutions, and photometric calibrations in place, we reprocess each single-epoch image to produce a final set of calibrated visit images and source catalogs.
@@ -102,7 +92,6 @@ Source detection is performed down to a $5\sigma$ threshold using the updated \g
 These catalogs represent the best single-\gls{epoch} source characterization, but they are not intended for constructing light curves.
 For time-domain analysis, we recommend using the \gls{forced photometry} tables described in \secref{sssec:lightcurves}.
 
-% Yusra
 \subsection{Coaddition Processing}
 \label{ssec:coadd_processing}
 \subsubsection{Coaddition}
@@ -123,10 +112,9 @@ Candidate artifact regions are classified as \gls{transient} if they appear in l
 \end{itemize}
 Identified \gls{transient} regions are masked before coaddition, improving image quality and reducing contamination in derived catalogs.
 
-% Dan, Fred, Jim, others? (Yusra?)
-\subsubsection{Coadd Processing}
+\subsubsection{Detection, Deblending and Measurement}
 \label{sssec:coadd_processing}
-Coadd-processing consists of detection, \gls{deblend}ing, and  measurement on coadds to produce object tables (\secref{ssec:catalogs}).
+After constructing coadded images, sources are detected in each band, merged across bands, deblended, and measured to generate the final object catalogs  (\secref{ssec:catalogs}).
 For each coadd in all six bands, we perform source detection at a $5\sigma$ detection threshold and then adjust the background with a per-patch constant (coadds are built from background-subtracted images, but the deeper detection on coadds redefines what is considered source versus background).
 Detections across bands are merged in a fixed priority order, $irzygu$, to form a union detection catalog, which serves as input to deblending.
 
@@ -146,7 +134,7 @@ Measurement \gls{algorithm} outputs include object fluxes, centroids, and higher
 
 Composite model (CModel) magnitudes \citep{2004AJ....128..502A, 2018PASJ...70S...5B} are used to calculate the extendedness parameter, which functions as a star-galaxy classifier.
 Extendedness is a binary classifier that is set to 1 if the PSF model flux is less than $98.5\%$ of the (free, not forced) CModel flux in a given band.
-Additionally, the extendedness in the reference band is provided as a separate column for convenience as a multiband star-galaxy classification, and is recommended generally but also specifically for objects with low signal-to-noise in some bands.
+Additionally, the extendedness in the reference band is provided as a separate column for convenience as a multiband star-galaxy classification, and is recommended generally but also specifically for objects with low signal-to-noise ratio in some bands.
 
 Gaussian-Aperture-and-PSF \citep[\gls{GAaP}][]{2008A&A...482.1053K, DMTN-190} fluxes are provided to ensure consistent galaxy colors across bands.
 S\'ersic model \citep{1963BAAA....6...41S, 1968adga.book.....S} fits are run on all available bands simultaneously \cite[MultiProFit,][]{dmtn-312}.
@@ -156,16 +144,13 @@ CModel measurements use a double ``shapelet'' \citep{2003ARA&A..41..645R} PSF wi
 S\'ersic model fits also include a free centroid, with all other structural parameters shared across all bands.
 That is, the intrinsic model has no color gradients, but the convolved model may have color gradients if the \gls{PSF} parameters vary significantly between bands.
 
-Further details on the performance of these algorithms can are in \secref{ssec:fluxes}.
+Further details on the performance of these algorithms are found in \secref{ssec:fluxes}.
 
-%%%%%%%%%%%
 \subsection{Variability Measurement}
-
-% Eric
 \subsubsection{Difference Imaging Analysis}
 \label{ssec:diffim_analysis}
 Difference Image Analysis (DIA) uses the decorrelated Alard \& Lupton image differencing algorithm \citep{DMTN-021}.
-We detected both positive and negative \texttt{DIASource} at $5\sigma$ in the difference image.
+We detected both positive and negative \texttt{DIASource}s at $5\sigma$ in the difference image.
 Sources with footprints containing both positive and negative peaks due to offsets from the template position or blending were fit with a dipole centroid code.
 
 We filter a subset of \texttt{DIASource}s that have pixel flags characteristic of artifacts, non-astrophysical trail lengths, and unphysically negative direct fluxes.
@@ -177,7 +162,7 @@ The convolutional layers have a $5\times5$ kernel size, with 16, 32, and 64 filt
 A max-pooling layer of size 2 is applied at the end of each convolutional layer, followed by a dropout layer of 0.4 to reduce overfitting.
 The last fully connected layers have sizes of 32 and 1.
 The ReLU activation function is used for the convolutional layers and the first fully connected layer, while a sigmoid function is used for the output layer to provide a probabilistic interpretation.
-The cutouts are generated by extracting postage stamps of $51\times51$ pixels centered on the detected source.
+The cutouts are generated by extracting postage stamps of $51\times51$ pixels centered on the detected sources.
 The input data of the model consist of the template, science, and difference image stacked to have an array of \gls{shape} (3, 51, 51).
 The model is implemented using PyTorch \citep{10.1145/3620665.3640366}.
 The Binary Cross Entropy loss function was used, along with the \gls{Adam} optimizer with a fixed learning rate of $1\times10^{-4}$, weight decay of $3.6\times10^{-2}$, and a batch size of 128.
@@ -192,7 +177,7 @@ Once the  \gls{LSSTComCam} data were available, the model was fine-tuned on a su
 %Fake reals refer to injected stars successfully detected by DIA, while bogus represent all other detections.
 %In this second round of training, only stars were injected into the dataset.
 On the \gls{LSSTComCam} test set, the model achieved an accuracy of 98.06\%, purity of 97.87\%, and completeness of 98.27\%.
-As discussed in \secref{sec:performance:dia}, the injections used to train this model version do not capture all types of astrophysical variability, so performance on the test set will not be representative for variable stars, comets, etc.
+As discussed in \secref{sec:performance:dia}, the injections used to train this model version do not capture all types of astrophysical variability, so performance on the test set will not be representative for variable stars, comets, and other types of variable objects. 
 
 
 %YA
