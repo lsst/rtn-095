@@ -11,7 +11,10 @@ We have found some similar features on the ITL detectors on LSSTCam, and will us
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.98\linewidth]{dp1_isr_anomalies-vampire_pixel}
-  \caption{A large \textit{vampire pixel} near the center of R22\_S11, as seen on the r-band flat.}
+  \caption{ A large vampire pixel near the center of R22\_S11, as seen on the $r$-band flat.  
+  This clearly shows the central hot "vampire" pixels, surrounded by a region of depressed signal, with a brighter ring surrounding that caused by the local electric field effects.  
+  The charge contained in the central pixels is incompletely shifted as the image is read, and that charge leaks out into subsequent rows as they are shifted through the remnant charge.  
+  The columns that contain the hot pixels are masked as defects in all processing, as this feature cannot be otherwise corrected.}
    \label{fig:anomalies_vampire_pixels}
 \end{figure}
 
