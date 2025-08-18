@@ -33,13 +33,13 @@ Increasing the interpolation order to five would nominally reduce the residuals 
 Preliminary analysis of LSSTCam data in the laboratory at \gls{SLAC} shows that the \gls{ITL} sensors exhibit the same pattern as \gls{ITL} sensors on \gls{LSSTComCam}.
 %The sensors' $\delta T/T$ is fully correlated with the height variation across the LSSTCam \gls{ITL} sensors, which explains this behavior.
 %Future data processing will account for this height variation directly in the \gls{PSF} model.
-\begin{figure}[htb!]
+\begin{figure*}[htb!]
 \centering
-\includegraphics[scale=0.29]{dT_T_Piff_poly_order_2}
-\includegraphics[scale=0.29]{dT_T_Piff_poly_order_4}
+\includegraphics[scale=0.45]{dT_T_Piff_poly_order_2}
+\includegraphics[scale=0.45]{dT_T_Piff_poly_order_4}
 \caption{\small Average across all visits of $\delta T/T$  for Piff O2 and Piff O4 modeling on \gls{LSSTComCam}. Averages are computed using a 120x120 binning.}
 \label{fig:psf_residuals_fov}
-\end{figure}
+\end{figure*}
 
 Another way to look at the \gls{PSF} modeling quality is via whisker plots of the \gls{PSF} second and fourth moments and their modeling residuals projected on a part of the sky.
 In addition to the second moment, the spin-2 fourth moments, $e^{(4)}$, are defined as:
@@ -81,8 +81,8 @@ Both features are planned for upcoming releases.
 \subsection{Astrometry}
 To characterize astrometric performance, we evaluate both internal consistency and agreement with an external reference.
 A primary measure of internal consistency is the repeatability of position measurements for the same object, defined as the RMS of the astrometric distance distribution for stellar pairs having a specified separation in arcminutes. 
-We associate isolated point sources across visits and compute the RMS of their fitted positions, with the isolation radius for DP1 set to 2 arcseconds, rejecting any stars with average centroids within this radius of another star from the final catalog.
-\figref{fig:dmAstroErr} shows the median per-\gls{tract} astrometric error for all isolated point sources, both after the initial calibration and after the final calibration, which includes proper motion corrections.
+We associate isolated point sources across visits and compute the rms of their fitted positions, rejecting any stars with another star within  2\arcsec.
+\figref{fig:dmAstroErr} shows the median per-\gls{tract} rms astrometric error in RA  for all isolated point sources, both after the initial calibration and after the final calibration, which includes proper motion corrections.
 The results indicate that the astrometric solution is already very good after the initial \gls{calibration}.
 Global calibration yields only modest improvement, likely due to the short time span of \gls{DP1} and the minimal distortions in the LSSTComCam.
 In the main survey, the longer time baseline and greater distortions near the \gls{LSSTCam} field edges will make global calibration more impactful.
@@ -96,7 +96,7 @@ An additional measure of internal consistency is the repeatability of separation
 To compute this, we identify pairs of objects that are separated by a specified distance and measure their precise separation during each visit in which both objects are observed.
 The scatter in these separation measurements provides an indication of the internal consistency of the astrometric model.
 \figref{fig:AM1} shows the median separation for pairs of objects separated by approximately 5 arcminutes, computed per tract after the final calibration.
- \begin{figure}[htb!]
+\begin{figure}[htb!]
 \plotone{Astrometry_AM1}
  \caption{Median per-tract repeatability in separations between isolated point sources 5~arcmin apart.}
  \label{fig:AM1}
@@ -105,7 +105,7 @@ These values are already approaching the design requirement of $10$ mas.
 
 Finally, we consider the median separation between sources not included in the astrometric fit and associated objects from a reference catalog.
 For this, we use the Gaia \gls{DR3} catalog, with the object positions shifted to the observation epoch using the Gaia proper motion parameters.
-Figure~\ref{fig:AA1} shows the median separation for each visit in the $r$-band in \gls{tract} 4849 in the ECDFS fields (\tabref{tab:dp1_tracts}).
+\figref{fig:AA1} shows the median separation for each visit in the $r$-band in \gls{tract} 4849 in the ECDFS fields (\tabref{tab:dp1_tracts}).
 \begin{figure*}[htb!]
 \plotone{Astrometry_AA1}
 \caption{Median absolute offset for all visits in $r$-band in \gls{tract} 4849 in the ECDFS field. 
@@ -131,8 +131,8 @@ There are coherent residuals, but without the wave-like pattern seen in \figref{
 \label{fig:Astrometry_EBmode}
 \end{figure*}
 
-We can see unmodeled camera distortions by stacking the residuals over many visits as a function of the focal plane position.
-Figure~\ref{fig:Astrometry_FoV} shows the median residuals in x and y directions for \nvisits visits.
+We can see unmodeled camera distortions by stacking the astrometric residuals over many visits as a function of the focal plane position.
+\figref{fig:Astrometry_FoV} shows the median residuals in $x$ and $y$ directions for \nvisits visits.
 \begin{figure*}[htb!]
 \plotone{Astrometry_FoV}
 \caption{Median residuals as a function of focal plane position in $x$ (left panel) and $y$ (right panel) directions}
@@ -141,7 +141,7 @@ Figure~\ref{fig:Astrometry_FoV} shows the median residuals in x and y directions
 Spatial structures are evident at the \gls{CCD} level, along with the mid-line break in the y-direction residuals.
 
 Further stacking all the detectors makes certain effects particularly clear.
-Figure~\ref{fig:Astrometry_CCD} shows distortions very similar to those measured for an \gls{LSSTCam} \gls{ITL} sensor in a laboratory setting in \citet{2023PASP..135k5003E}.
+\figref{fig:Astrometry_CCD} shows distortions very similar to those measured for an \gls{LSSTCam} \gls{ITL} sensor in a laboratory setting in \citet{2023PASP..135k5003E}.
 \begin{figure*}[htb!]
 \plotone{Astrometry_CCD}
 \caption{\small Median residuals as a function of pixel position in $dx$ (left panel) and $dy$ (right panel) directions}
