@@ -2,8 +2,8 @@ In addition to the known detector features identified before LSSTComCam commissi
 Since no corrections are currently available for these anomalies, they are masked and excluded from downstream data products.
 
 \subsubsection{Vampire Pixels}
-Vampire pixels are visible on the images as a bright defect surrounded by a region of depressed flux, as though the defect is stealing charge from its neighboring pixels; they have been termed ``vampire'' defects.
-\figref{fig:anomalies_vampire_pixels} shows an example of a vampire pixel near the center of R22\_S11 on an r-band flat.
+``Vampire" pixels are visible on the images as a bright defect surrounded by a region of depressed flux, as though the defect is stealing charge from its neighboring pixels.
+\figref{fig:anomalies_vampire_pixels} shows an example of a vampire pixel near the center of R22\_S11 on an $r$-band flat.
 
 From studies on evenly illuminated images, vampires appear to conserve charge.
 Unfortunately, no unique optimum way exists to redistribute this stolen flux so, following visual inspection, a defect mask was created to exclude them from processing.
@@ -17,7 +17,7 @@ We have found some similar features on the ITL detectors on LSSTCam, and will us
 
 \subsubsection{Phosphorescence}
 Some regions of the LSSTComCam CCD raft were seen to contain large numbers of bright defects.
-An example is shown in \figref{fig:anomalies_phosphorescence}  in a g-band flat. 
+An example is shown in \figref{fig:anomalies_phosphorescence}  in a $g$-band flat. 
 On further investigation, it appears that on some detectors a layer of photoresist wax was incompletely removed from the detector surface during production.
 As this wax is now trapped below the surface coatings, there is no way to physically clean these surfaces.
 If this wax responded to all wavelengths equally, then it would likely result in quantum efficiency dips, which might be removable during flat correction.
@@ -50,7 +50,7 @@ Bleed trails are produced when charge from saturated pixels spills into adjacent
 Bleed trails were anticipated on LSSTComCam sensors, but they appear in more dramatic forms than had been expected.
 As a bleed trail nears the serial register, it fans out into a ``trumpet'' shaped feature.
 Although bright, these features do not have consistently saturated pixels.
-In DP1 these ``edge bleeds'' were programmatically identified and masked.
+In DP1 these ``edge bleeds'' were  identified and masked.
 
 Saturated sources can create a second type of bleed, where the central bleed drops below the background level.
 The depressed columns along these trails extend across the entire readout column of the detector, crossing the detector mid-line.

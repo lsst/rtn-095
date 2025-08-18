@@ -151,12 +151,11 @@ Further details on the performance of these algorithms are found in \secref{ssec
 \label{ssec:diffim_analysis}
 Difference Image Analysis (DIA) uses the decorrelated Alard \& Lupton image differencing algorithm \citep{DMTN-021}.
 We detected both positive and negative \texttt{DIASource}s at $5\sigma$ in the difference image.
-Sources with footprints containing both positive and negative peaks due to offsets from the template position or blending were fit with a dipole centroid code.
+Sources with footprints containing both positive and negative peaks due to offsets from the template position or blending were fit with a dipole centroid code, , which simultaneously fits offset positive and negative PSFs.
 
 We filter a subset of \texttt{DIASource}s that have pixel flags characteristic of artifacts, non-astrophysical trail lengths, and unphysically negative direct fluxes.
 We performed a simple spatial association of \texttt{DIASources} into \texttt{DIAObjects} with a one arcsecond matching radius.
 
-% LPG: Do we need this? AP is not part of DP1. Was the reliability model described applied to DP1 data and any data priducts of the model in the DP1 repo?
 The Machine Learning reliability model applied to DP1 was developed with the aim to meet the latency requirements for Rubin \gls{Alert Production} when executed on CPUs. Accordingly we developed a relatively simple model: a Convolutional Neural Network with three convolutional layers, and two fully connected layers.
 The convolutional layers have a $5\times5$ kernel size, with 16, 32, and 64 filters, respectively.
 A max-pooling layer of size 2 is applied at the end of each convolutional layer, followed by a dropout layer of 0.4 to reduce overfitting.
@@ -171,16 +170,10 @@ Training was done on the \gls{S3DF} with an NVIDIA model L40S GPU.
 
 The model was initially trained using simulated data from the second DESC Data Challenge (DC2; \citep{2021ApJS..253...31L}) plus randomly located injections of PSFs to increase the number of real sources, for a total of 89,066 real sources.
 The same number of bogus sources were selected at random from non-injected DIASources.
-%Since the number of injections (57,832) was much larger than the number of fake SNs (1442) from \eric{LPG: do we need to detail the DC2 initial work}, the model initially outperformed on SNs.
-%To improve the performance metrics on SNs, the loss function was modified to give more weight to SNs, resulting in a 6\% increase in accuracy for SNs.
 Once the  \gls{LSSTComCam} data were available, the model was fine-tuned on a subset of the data containing 183,046 sources with PSF injections.
-%Fake reals refer to injected stars successfully detected by DIA, while bogus represent all other detections.
-%In this second round of training, only stars were injected into the dataset.
 On the \gls{LSSTComCam} test set, the model achieved an accuracy of 98.06\%, purity of 97.87\%, and completeness of 98.27\%.
 As discussed in \secref{sec:performance:dia}, the injections used to train this model version do not capture all types of astrophysical variability, so performance on the test set will not be representative for variable stars, comets, and other types of variable objects. 
 
-
-%YA
 \subsubsection{Light Curves}
 \label{sssec:lightcurves}
 To produce light curves, we perform multi-epoch \gls{forced photometry} on both the direct visit images and the difference images.
@@ -188,8 +181,6 @@ For light curves we recommend the \gls{forced photometry} on the difference imag
 In contrast, \gls{forced photometry} on direct images includes flux from nearby or blended static objects, and this contamination can vary with seeing.
 Centroids used in the multi-epoch \gls{forced photometry} stage are taken either from object positions measured on the coadds or from the DIAObjects (the associated DIASources detected on difference images).
 
-% Mario and or Jake
-% Reviewed by LPG -- need to extract numbers from dp1 repo and put into the parameters file
 \subsubsection{Solar System Processing}
 \label{sec:drp:solsys}
 
@@ -208,17 +199,23 @@ The suite consists of the following tasks:
     \item Linkage post processing (orbit fitting, outlier rejection, and de-duplication) with {\tt link\_purify}
 \end{itemize}
 
-The inputs to the {\tt heliolinx} suite included all sources detected in difference images produced by an early processing of the \gls{LSSTComCam} commissioning data,  including some that were later rejected as part of \gls{DP1} processing and hence are not part of \gls{DP1}.
+The inputs to the \texttt{heliolinx} suite included all sources detected in difference images produced by an early processing of the \gls{LSSTComCam} commissioning data,  including some that were later rejected as part of \gls{DP1} processing and hence are not part of \gls{DP1}.
 
 About 10\% of all commissioning visits targeted the near-ecliptic field Rubin\_SV\_38\_7 chosen to facilitate asteroid discovery.
 Rubin\_SV\_38\_7 produced the vast majority of asteroid discoveries in DP1, as expected, but a few were found in off-ecliptic fields as well.
 
-Tracklet creation with {\tt make\_tracklets} used an upper limit angular velocity of 1.5 \gls{deg}/day, faster than any main belt asteroid and in the range of many \gls{NEO} discoveries.
+Tracklet creation with \texttt{make\_tracklets} used an upper limit angular velocity of 1.5 \gls{deg}/day, faster than any main belt asteroid and in the range of many \gls{NEO} discoveries.
 To minimize false tracklets from fields observed multiple times per night, the minimum \gls{tracklet} length was set to three detections, and a minimum on-sky motion of five arcseconds was required for a valid \gls{tracklet}.
 
-The heart of the discovery \gls{pipeline} is the {\tt heliolinc} task, which connects (``links") tracklets belonging to the same object over a series of nights.
+The heart of the discovery \gls{pipeline} is the \texttt{heliolinc} task, which connects (``links") tracklets belonging to the same object over a series of nights.
 It employs the HelioLinC3D algorithm \citep{2020DPS....5221101E,2022DPS....5450404H}, a refinement of the original HelioLinC algorithm of \citet{2018AJ....156..135H}.
-The {\tt heliolinc} run tested each \gls{tracklet} with 324 different hypotheses spanning heliocentric distances from 1.5 to 9.8 \gls{au} and radial velocities spanning the full range of possible bound orbits (eccentricity 0.0 to nearly 1.0).
+
+The \texttt{heliolinc} run tested each \gls{tracklet} with 324 different hypotheses spanning heliocentric distances from 1.5 to 9.8 \gls{au} and radial velocities spanning the full range of possible bound orbits (eccentricity 0.0 to nearly 1.0).
 This range of distance encompasses all main belt asteroids and Jupiter Trojans, as well as many comets and Mars-crossers and some \glspl{NEO}.
 Smaller heliocentric distances were not attempted here because nearby objects move rapidly across the sky and hence were not likely to remain long enough in an \gls{LSSTComCam} field to be discovered.
-A clustering radius was chosen corresponding to $1.33 \times 10^{-3}$~au at 1~au from Earth. Linkages produced by {\tt heliolinc} are then post-processed with {\tt link\_purify} into a final non-overlapping set of candidate discoveries, ranked from highest to lowest probability of being a real asteroid based on astrometric orbit-fit residuals and other considerations.
+Candidate linkage, groups of tracklets whose propagated orbits cluster within a  radius of 1.33$\times$10⁻³ AU at 1 AU, are identified, then post-processed via \texttt{link\_purify} to yield a final, non‐overlapping set of high-confidence asteroid candidates, ranked by orbit-fit residuals and related metrics.
+%A clustering radius was chosen corresponding to $1.33\times10^{-3}$~au at 1~au from Earth. 
+%Linkages produced by \texttt{heliolinc} are then post-processed with \ttextt{link\_purify} into a final non-overlapping set of candidate discoveries, ranked from highest to lowest probability of being a real asteroid based on astrometric orbit-fit residuals and other considerations.
+
+
+

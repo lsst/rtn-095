@@ -15,7 +15,7 @@ In this section, we provide an assessment of the \gls{DP1} data quality and know
 To characterize \gls{PSF}  performance, we use adaptive second moments \citep{2002AJ....123..583B} measured on \gls{PSF} stars and on the PSF model using the \gls{HSM} implementation \citep{2003MNRAS.343..459H, 2005MNRAS.361.1287M}.
 All measurements are expressed in the pixel coordinate frame of each detector.
 We characterize the performance of the PSF using the classical trace of the  second moment matrix $T$, along with the ellipticity parameters $e^1$ and $e^2$.
-Measurements on the observed PSF stars are are denoted as  $T_{\text{PSF}}$, $e^1_{\text{PSF}}$,  $e^2_{\text{PSF}}$, while those fro PSF models are denoted as  $T_{\text{model}}$, $e^1_{\text{model}}$, $e^2_{\text{model}}$.
+Measurements on the observed PSF stars are are denoted as  $T_{\text{PSF}}$, $e^1_{\text{PSF}}$,  $e^2_{\text{PSF}}$, while those from PSF models are denoted as  $T_{\text{model}}$, $e^1_{\text{model}}$, $e^2_{\text{model}}$.
 We compare two PSF modeling approaches:
 \begin{itemize}
 \item Piff with second-order polynomial interpolation (Piff O2), the pipeline's default, and
@@ -25,9 +25,9 @@ Table \ref{tab:psf-1d_stats} summarizes each model’s ability to reconstruct th
 Both models exhibit a negative residual bias in the reconstructed PSF size, with Piff O4 providing improved performance over Piff O2.
 \input{tables/psf_1d_stat.tex}
 
-An alternative approach to evaluating the performance of the \gls{PSF} model is to examine the average $\delta T/T$ across visits, projected onto focal-plane coordinates, as shown in \figref{fig:psf_residuals_fov}. 
+An alternative approach to evaluating the performance of the \gls{PSF} model is to examine the average $\delta T/T$, where $\delta T$ is $T_{\text{PSF}}$ - $T_{\text{model}}$, across visits, projected onto focal-plane coordinates, as shown in \figref{fig:psf_residuals_fov}. 
 Piff reveals strong spatial correlations in the residuals, including a systematic offset consistent with the results presented in \tabref{tab:psf-1d_stats}. 
-The presence of these spatial structures motivated the adoption of fourth-order polynomial interpolation in all bands except u-band. 
+The presence of these spatial structures motivated the adoption of fourth-order polynomial interpolation in all bands except $u$-band. 
 Although not shown in \figref{fig:psf_residuals_fov}, residual patterns persist even with third-order interpolation, indicating that it is insufficient to capture the complexity of the PSF variation. 
 Increasing the interpolation order to five would nominally reduce the residuals further, but the limited number of stars available on some CCDs would not provide adequate constraints for such a model, while the resulting improvement would likely be minimal.
 Preliminary analysis of LSSTCam data in the laboratory at \gls{SLAC} shows that the \gls{ITL} sensors exhibit the same pattern as \gls{ITL} sensors on \gls{LSSTComCam}.
@@ -61,20 +61,21 @@ We observe coherent patterns in both the \gls{PSF} moments and the residuals, th
     \label{fig:psf_residuals_whisker_ECDFS}
 \end{figure}›
 
-\figref{fig:psf_residuals_mag_color} shows a plot of  $\delta T/T$ versus stellar magnitude, which can be reveal any dependencies between \gls{PSF} size and flux.
+\figref{fig:psf_residuals_mag_color} shows a plot of  $\delta T/T$ versus stellar magnitude, which can reveal any dependencies between \gls{PSF} size and flux.
 We also repeat this analysis in color bins to probe chromatic effects.
-Binning by color uncovers a clear color dependence, as seen in \gls{DES} \citep{DES:2020vau}.
+Binning by color uncovers a clear color dependence, as was also seen in \gls{DES} \citep{DES:2020vau}.
 The residual is consistent with \tabref{tab:psf-1d_stats} and its cause is unknown.
-DP1 does not include the color correction implemented in \citet{2025OJAp....8E..26S}. 
+DP1 does not include the color correction implemented in the DES Year 6 analysis, \citet{2025OJAp....8E..26S}. 
 This will be included in processing of future data releases.
 \begin{figure}[htb!]
 \plotone{dT_T_Piff_poly_4_vs_mag}
-\caption{Binned $\delta T/T$ as a function of magnitude across all visits and filters and binned in different colors.}
+\caption{Binned $\delta T/T$ as a function of magnitude across all visits and filters and in bins of stellar colors.}
 \label{fig:psf_residuals_mag_color}
 \end{figure}
 
 As noted in  \cite{PSTN-019}, two key Piff features were not used in the DP1 processing.
-PSF color dependence was not implemented, and, while Rubin software allows Piff to work with sky coordinates (including WCS transformations), it does not yet correct for sensor-induced astrometric distortions such as tree rings, \citep{2017JInst..12C5015P}.
+PSF color dependence was not implemented, and, while Rubin software allows Piff to work with sky coordinates (including WCS transformations), 
+it does not yet correct for sensor-induced astrometric distortions such as tree rings \citep{2017JInst..12C5015P}.
 Both features are planned for upcoming releases.
 
 \subsection{Astrometry}
@@ -104,10 +105,10 @@ These values are already approaching the design requirement of $10$ mas.
 
 Finally, we consider the median separation between sources not included in the astrometric fit and associated objects from a reference catalog.
 For this, we use the Gaia \gls{DR3} catalog, with the object positions shifted to the observation epoch using the Gaia proper motion parameters.
-Figure~\ref{fig:AA1} shows the median separation for each visit in the r-band in \gls{tract} 4849.
+Figure~\ref{fig:AA1} shows the median separation for each visit in the $r$-band in \gls{tract} 4849 in the ECDFS fields (\tabref{tab:dp1_tracts}).
 \begin{figure*}[htb!]
 \plotone{Astrometry_AA1}
-\caption{Median absolute offset for all visits in r-band in \gls{tract} 4849. 
+\caption{Median absolute offset for all visits in $r$-band in \gls{tract} 4849 in the ECDFS field. 
 The offset is the difference between the positions of isolated point sources that were reserved from the astrometric fit and matched objects from the Gaia DR3 catalog.}
 \label{fig:AA1}
 \end{figure*}
