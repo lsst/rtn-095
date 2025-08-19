@@ -80,7 +80,8 @@ Both features are planned for upcoming releases.
 
 \subsection{Astrometry}
 To characterize astrometric performance, we evaluate both internal consistency and agreement with an external reference.
-A primary measure of internal consistency is the repeatability of position measurements for the same object, defined as the RMS of the astrometric distance distribution for stellar pairs having a specified separation in arcminutes. 
+The primary measure of internal consistency is the repeatability of position measurements for the same object, defined as the RMS of the astrometric distance distribution for 
+stellar pairs having a specified separation in arcminutes. 
 We associate isolated point sources across visits and compute the rms of their fitted positions, rejecting any stars with another star within  2\arcsec.
 \figref{fig:dmAstroErr} shows the median per-\gls{tract} rms astrometric error in RA  for all isolated point sources, both after the initial calibration and after the final calibration, which includes proper motion corrections.
 The results indicate that the astrometric solution is already very good after the initial \gls{calibration}.
@@ -88,22 +89,21 @@ Global calibration yields only modest improvement, likely due to the short time 
 In the main survey, the longer time baseline and greater distortions near the \gls{LSSTCam} field edges will make global calibration more impactful.
 \begin{figure}[htb!]
 \plotone{Astrometry_dmAstroErr}
-\caption{Mean per-tract astrometric repeatability of measurements of isolated point sources in RA.}
+\caption{Mean per-tract astrometric repeatability of measurements of isolated point sources in RA in visits across all bands.}
 \label{fig:dmAstroErr}
 \end{figure}
-
 An additional measure of internal consistency is the repeatability of separations between objects at a given distance.
 To compute this, we identify pairs of objects that are separated by a specified distance and measure their precise separation during each visit in which both objects are observed.
 The scatter in these separation measurements provides an indication of the internal consistency of the astrometric model.
 \figref{fig:AM1} shows the median separation for pairs of objects separated by approximately 5 arcminutes, computed per tract after the final calibration.
 \begin{figure}[htb!]
 \plotone{Astrometry_AM1}
- \caption{Median per-tract repeatability in separations between isolated point sources 5~arcmin apart.}
+ \caption{Median per-tract repeatability in separations between isolated point sources 5~arcmin apart in visits across all bands.}
  \label{fig:AM1}
  \end{figure}
 These values are already approaching the design requirement of $10$ mas.
 
-Finally, we consider the median separation between sources not included in the astrometric fit and associated objects from a reference catalog.
+To assess external consistency, we consider the median separation between sources not included in the astrometric fit and associated objects from a reference catalog.
 For this, we use the Gaia \gls{DR3} catalog, with the object positions shifted to the observation epoch using the Gaia proper motion parameters.
 \figref{fig:AA1} shows the median separation for each visit in the $r$-band in \gls{tract} 4849 in the ECDFS fields (\tabref{tab:dp1_tracts}).
 \begin{figure*}[htb!]
@@ -113,20 +113,18 @@ The offset is the difference between the positions of isolated point sources tha
 \label{fig:AA1}
 \end{figure*}
 The calculated values are almost all within $5$\xspace mas, well below the design requirement of $50$\xspace mas for the main survey.
-
 By examining the astrometric residuals, we can assess whether there are distortions not accounted for by the astrometric model. 
 In some cases, residuals from a single visit exhibit behavior consistent with atmospheric turbulence, as shown in \figref{fig:Astrometry_Emode}, which is characterized by a curl-free gradient field in the two-point correlation function of the residuals (E-mode),  \citet{Leget2021} and \citet{Fortino2021}. 
 \begin{figure*}[htb!]
 \plotone{Astrometry_2024120200359}
-\caption{\small Astrometric residuals in $u$ (left panel) and $v$ (center panel) directions, with the E and B-modes of the two-point correlation function (right panel). 
+\caption{Astrometric residuals in $u$ (left panel) and $v$ (center panel) directions with the E (blue) and B (orange) modes of the two-point correlation function (right panel) seen in visit 2024120200359 in tract 2393 in $u$ band.
 The residuals show a wave-like pattern characteristic of atmospheric turbulence, and there is significant E-mode and negligible B-mode in the correlation function.}
 \label{fig:Astrometry_Emode}
 \end{figure*}
-
 However, as seen in \figref{fig:Astrometry_EBmode}, the residuals in many visits also have correlation functions with a non-negligible divergence-free B-mode, indicating that some of the remaining residuals are due to unmodeled instrumental effects, such as rotations between visits.
 \begin{figure*}[htb!]
 \plotone{Astrometry_2024120700527}
-\caption{\small Astrometric residuals in $u$ (left panel) and $v$ (center panel) directions, with the E and B-modes of the two-point correlation function (right panel). 
+\caption{Astrometric residuals in $u$ (left panel) and $v$ (center panel) directions, with the E (blue)  and B (orange) modes of the two-point correlation function (right panel) seen in visit 2024120700527 in tract 2393 in $u$ band.. 
 There are coherent residuals, but without the wave-like pattern seen in \figref{fig:Astrometry_Emode}, and the correlation function has significant values for both E and B-modes.}
 \label{fig:Astrometry_EBmode}
 \end{figure*}
@@ -138,20 +136,20 @@ We can see unmodeled camera distortions by stacking the astrometric residuals ov
 \caption{Median residuals as a function of focal plane position in $x$ (left panel) and $y$ (right panel) directions}
 \label{fig:Astrometry_FoV}
 \end{figure*}
-Spatial structures are evident at the \gls{CCD} level, along with the mid-line break in the y-direction residuals.
-
+Spatial structures are evident at the \gls{CCD} level, as well as at the mid-line break,  the discontinuity between the two rows of amplifiers,  in the y-direction residuals.
 Further stacking all the detectors makes certain effects particularly clear.
 \figref{fig:Astrometry_CCD} shows distortions very similar to those measured for an \gls{LSSTCam} \gls{ITL} sensor in a laboratory setting in \citet{2023PASP..135k5003E}.
 \begin{figure*}[htb!]
 \plotone{Astrometry_CCD}
-\caption{\small Median residuals as a function of pixel position in $dx$ (left panel) and $dy$ (right panel) directions}
+\caption{Median residuals as a function of pixel position in $dx$ (left panel) and $dy$ (right panel) directions}
 \label{fig:Astrometry_CCD}
 \end{figure*}
 
-\subsection{Photometry}
+\subsection{Stellar Photometry}
 The photometric repeatability for isolated bright stars following the \gls{FGCM} fits was excellent. 
-For the 10\% of stars withheld from the fit and having signal-to-noise ratios greater than 100, the photometric repeatability after applying chromatic correction was 
-After accounting for photometric noise, the intrinsic photometric repeatability was approximately 4.8, 2.7, 1.7, 1.0, 2.0, and 1.1 mmag in $ugrizy$ respectively.
+For the 10\% of stars withheld from the fit and having signal-to-noise ratios greater than 100, the photometric repeatability 
+after applying chromatic correction was 7.1, 5.4, 5.4, 5.1, 5.9, and 6.5  mmag in the $ugrizy$ bands respectively, across all fields.
+After accounting for photometric noise, the intrinsic photometric repeatability was approximately 4.8, 2.7, 1.7, 1.0, 2.0, and 1.1 mmag in $ugrizy$.
 The DP1 processing does not yet incorporate chromatic corrections in the final photometry, resulting in a delivered photometric repeatability of 3--8 mmag in the $grizy$ bands.
 In \figref{fig:stellarloci}, we show the stellar loci for $ugriz$ from the full DP1 object table.
 \begin{figure*}[hbt!]
@@ -197,7 +195,7 @@ Similarly, completeness drops below 90\% at $VIS=23.80$ from matching to Euclid 
 The Euclid imaging is of comparable or shallower depth, so magnitude limits at lower completeness percentages than 90\% are unreliable, whereas the HST images cover too small and irregular of an area to accurately characterize 80-90\% completeness limits.
 
 At the 80\% completeness limit, nearly 20\% of objects, primarily injected galaxies, are incorrectly classified as stars based on their reference band extendedness.
-Similarly, the fraction of correctly classified injected stars drops to about 50\% at $i=23.8$ (90\% completeness).
+Similarly, the fraction of correctly classified injected stars drops to about 50\% at $i=23.8$ (corresponding to 90\% completeness).
 
 This analysis has several caveats.
 The selection of objects for matching in any catalog is not trivial.
