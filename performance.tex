@@ -385,19 +385,20 @@ The horizontal dashed line represents where the $50\%$ completeness level is rea
 \label{fig:eff_snr_griz}
 \end{figure}
 %
-In \figref{fig:coordinate_offset_diffim_fakes} we show the distribution of the residuals of the recovered sky coordinates for the detected synthetic sources. The marginal distributions are both centered at zero, and for sources of S/N $>20$ the residuals are compatible with normal distributions $\mathcal{N}(\mu=0, \sigma^2=(0''.02)^2)$.
+In \figref{fig:coordinate_offset_diffim_fakes} we show the distribution of the residuals of the recovered sky coordinates for the detected synthetic sources. The marginal distributions are both centered at zero, and for sources of SNR $>20$ the residuals are compatible with normal distributions $\mathcal{N}(\mu=0, \sigma^2=(0''.02)^2)$.
 %
 \begin{figure}[htb!]
 \plotone{coordinate_offsets_hexbin}
 \caption{Coordinate residuals for detected synthetic sources in difference images, between recovered and true position of the sources in the \gls{ECDFS} field. 
-In the top and right panels we include the distribution of these offsets, for all sources as well as for sources with S/N$>20$. 
-These high S/N sources show gaussian coordinate residual distributions with $\sigma=0\farcs02$ (black solid lines). 
+In the top and right panels we include the distribution of these offsets, for all sources as well as for sources with SNR$>20$. 
+These high SNR sources show gaussian coordinate residual distributions with $\sigma=0\farcs02$ (black solid lines). 
 The circle reflects the matching radius of $0\farcs5$.}
 \label{fig:coordinate_offset_diffim_fakes}
 \end{figure}
 %
 In \figref{fig:phot_residual_diffim_fakes} we show photometry results for our detected synthetic sources in the \textit{i} filter, using \gls{PSF} photometry on the difference images. 
-We include both the magnitude residuals as well as the \gls{flux} pulls $\delta = (f_{PSF}-f_{\rm{True}})/\sigma_{f_{PSF}}$ (for PSF \gls{flux} $f_{PSF}$ and error $\sigma_{f_{PSF}}$) as a function of the true magnitude of the synthetic sources, including the running median and median absolute deviation (MAD) for the whole brightness range. 
+We include both the magnitude residuals as well as the flux pulls, defined as (f_{PSF}-f_{\rm{True}})/\sigma_{f_{PSF}}$ for PSF \gls{flux} $f_{PSF}$ and error $\sigma_{f_{PSF}}$,  
+as a function of the true magnitude of the synthetic sources, including the running median and median absolute deviation (MAD) for the whole brightness range. 
 We also include the true magnitude distribution as well as the detection completeness on the top panel, and for reference the $90\%$ and $50\%$ completeness magnitude values in vertical lines. 
 On the right panels we include the marginal distribution for sources brighter than $mag < 22.5$, splitting the data into hosted and hostless, as well as the robust mean and standard deviation.
 %
