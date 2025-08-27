@@ -428,10 +428,10 @@ Bottom right panel: Marginalized distributions of PSF flux pulls for hostless (b
 \subsubsection{Asteroid Linking Performance}
 
 The evaluation of asteroid linking performance in DP1 focused on demonstrating discovery capability.
-The solar system discovery \gls{pipeline} produced 269,581 tracklets, 5,691 linkages, and 281 post-processed candidates.
+The solar system discovery pipeline produced 269,581 tracklets, 5,691 linkages, and 281 post-processed candidates.
 
-As described in \secref{sec:drp:solsys}, post-processing of the {\tt heliolinc} output with {\tt link_purify} produced a final set of 281 candidate linkages, ranked with the most promising first. 
-We then used {\tt find_orb} \citep{findorb} to derive orbit fits for each candidate, sorting the resulting list by $\chi_{\rm dof}^2$, a measure of fit quality. 
+As described in \secref{sec:drp:solsys}, post-processing of the \texttt{heliolinc} output with \texttt{link\_purify} produced a final set of 281 candidate linkages, ranked with the most promising first. 
+We then used \texttt{find\_orb} \citep{findorb} to derive orbit fits for each candidate, sorting the resulting list by $\chi\_{\rm dof}^2$, a measure of fit quality. 
 A conservative manual investigation of these candidates yielded a curated list of \nnewasteroiddiscoveries probable new asteroid discoveries.
 Manual inspection of the linkages indicated that those ranked 0--137 corresponded to unique real asteroids; ranks 138--200 contained additional real objects intermixed with some spurious linkages; and ranks higher than 200 were essentially all spurious.
 This analysis indicates that it will be possible to identify cuts on quality metrics such as $\chi^2$ to define discovery candidate samples with high purity; determining the exact quantitative cut values requires more data with \gls{LSSTCam}.
