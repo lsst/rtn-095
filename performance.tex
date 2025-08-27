@@ -426,39 +426,39 @@ Bottom right panel: Marginalized distributions of PSF flux pulls for hostless (b
 
 \subsubsection{Asteroid Linking Performance}
 
-\gls{DP1} performance evaluation of asteroid linking focused on demonstrating discovery capability.
+The evaluation of asteroid linking performance in DP1 focused on demonstrating discovery capability.
 The solar system discovery \gls{pipeline} produced 269,581 tracklets, 5,691 linkages, and 281 post-processed candidates.
 
-We performed a conservative manual investigation of these 281 candidates, producing a curated list of \nnewasteroiddiscoveries probable new asteroid discoveries.As described in Section~\ref{sec:drp:solsys}, post processing of the {\tt heliolinc} output with {\tt link\_purify} produced a final set of 281 candidate linkages, ranked with the most promising candidates first.
-Using {\tt find\_orb} \citep{findorb}, we derived orbit fits for each candidate, sorting the resulting list by $\chi_{\rm dof}^2$, the quality of the fit.
-Manual inspection of the linkages indicated that those ranked 0--137 corresponded to unique real asteroids; ranks 138--200 contained additional real objects intermixed with some spurious linkages; an d ranks higher than 200 were essentially all spurious.
-This analysis indicates that it will be possible to identify cuts on quality metrics like $\chi^2$ to derive discovery candidate samples with high purity; determining the exact quantitative cut values requires more data with \gls{LSSTCam}.
+As described in \secref{sec:drp:solsys}, post-processing of the {\tt heliolinc} output with {\tt link_purify} produced a final set of 281 candidate linkages, ranked with the most promising first. 
+We then used {\tt find_orb} \citep{findorb} to derive orbit fits for each candidate, sorting the resulting list by $\chi_{\rm dof}^2$, a measure of fit quality. 
+A conservative manual investigation of these candidates yielded a curated list of \nnewasteroiddiscoveries probable new asteroid discoveries.
+Manual inspection of the linkages indicated that those ranked 0--137 corresponded to unique real asteroids; ranks 138--200 contained additional real objects intermixed with some spurious linkages; and ranks higher than 200 were essentially all spurious.
+This analysis indicates that it will be possible to identify cuts on quality metrics such as $\chi^2$ to define discovery candidate samples with high purity; determining the exact quantitative cut values requires more data with \gls{LSSTCam}.
 We next removed all observations matched to known asteroids (using \gls{MPC}'s MPChecker service), reducing the number of candidates to 97.
 Of these, four had strong astrometric and/or photometric outliers, likely due to self-subtraction in difference images due to the unavoidable limitations of template generation from the limited quantity of data available from  \gls{LSSTComCam}.
 We suspect these four linkages do correspond to real objects, but have chosen to discard them out of an abundance of caution.
 The remaining \nnewasteroiddiscoveries were submitted to the Minor Planet Center and accepted as  discoveries, demonstrating the \gls{LSST} pipelines are able to successfully discover new solar system objects.
-%\jake{We should cite the MPEC with discoveries, once we do submit and the MPEC becomes available}
 
 \subsubsection{Asteroid Association Performance}
 \label{ssec:asteroid_association}
 
-Solar system association associated \nsolarsystemsources DiaSources to \nsolarsystemobjects unique solar system objects.
-These include 3,934 DiaSources to 338 already-known \gls{MPC} objects and 2,054 DiaSources to the \nnewasteroiddiscoveries  newly-discovered objects.
-Association also picked up an additional 143 detections of newly discovered objects.
-These were not originally found by the discovery pipelines as they did not satisfy the number and/or maximum time span requirements to form tracklets.
+During the Solar System association step,  \nsolarsystemsources \textit{DiaSources} were linked to \nsolarsystemobjects  unique Solar System objects, 
+These include 3,934 \textit{DiaSources} with 338 previously known objects cataloged by the \gls{MPC}, and 2,054 \textit{DiaSources} with the \nnewasteroiddiscoveries  newly-discovered objects. 
+An additional 143 detections of these newly discovered objects were also recovered. 
+These detections were not initially identified by the discovery pipelines, as they did not meet the required criteria for tracklet formation, specifically the minimum number of detections and/or the maximum allowed time span between observations.
 
 \begin{figure}[htb!]
 \plotone{sso_residuals}
-\caption{Astrometric residuals between expected and observed positions of SSOs in \gls{DP1}. 
+\caption{Astrometric residuals between expected and observed positions of Solar System Objects in \gls{DP1}. 
 The median residuals are $0\farcs001$ and $-0\farcs016$ in R.A./Dec direction, with  standard deviations of $0.''19$ and $0.''10$, respectively. 
 No detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. 
-The wider scatter in the RA-direction is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions.}
+The wider scatter in the RA direction is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions.}
 \label{fig:sso_residuals}
 \end{figure}
 
-The astrometric residuals of known asteroid association are shown in \figref{fig:sso_residuals}.
-Astrometric precision for solar system sources is excellent, the majority of objects being detected within $0\farcs1$ of their expected positions.
-Taking the signed median residuals to search for biases, we find that previously-known objects have mean residuals of $0\farcs001$ and $-0\farcs016$ in the RA and Dec directions respectively, while newly-discovered objects have mean residuals of $-0\farcs035$ and $-0\farcs010$ in the \gls{RA} and Dec directions, respectively.
+The astrometric residuals of known asteroid associations are shown in \figref{fig:sso_residuals}.
+The astrometric precision for solar system sources is excellent, with the majority of objects detected within $0\farcs1$ of their expected positions.
+Taking the signed median residuals to search for biases, we find that previously-known objects have mean residuals of $0\farcs001$ and $-0\farcs016$ in the RA and Dec directions respectively, while newly-discovered objects have mean residuals of $-0\farcs035$ and $-0\farcs010$ in the RA and Dec directions, respectively.
 These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion, which is consistent with the timing studies presented in Section~\ref{ssec:comcam_timing}.
 
 \subsection{Crowded Fields}
@@ -470,7 +470,7 @@ While both exhibit high stellar densities, the nature and spatial extent of the 
 This pervasive crowding leads to persistent challenges for deblending and reliable source detection, exposing field-wide limitations in the current pipeline performance \citep{Choi2025}.
 In contrast, Fornax\,dSph shows significant crowding only in its central region, with outer areas remaining well resolved and easier to process. 
 
-In both 47\,Tuc and Fornax, extreme crowding led to frequent deblending skipping when memory or runtime limits were exceeded, typically due to excessive peaks, large parent footprints, or a single-peak configuration. 
+In both 47\,Tuc and Fornax, extreme crowding led to the deblending step being skipped frequently when memory or runtime limits were exceeded, typically due to an excessive number of peaks, or large parent footprints.
 However, the impact of these limitations differed: in 47\,Tuc, deblending was often skipped across the entire field, resulting in large gaps and substantially reduced completeness. 
 In Fornax, these issues were largely confined to the central region, with much better recovery in the outskirts. 
 This contrast highlights how the pipeline’s limitations depend on the spatial extent of high-density regions: 47\,Tuc exposed systematic, field-wide challenges, whereas Fornax revealed more localized, density-driven limits.
@@ -481,4 +481,4 @@ By computing the median of the forced photometry for each  \texttt{DiaObject} ac
 This result underscores the value of difference-imaging–based catalogs for probing dense stellar regions inaccessible to standard coadd processing in DP1.
 
 Although the DP1 pipeline was not optimized for crowded-field photometry, these early studies of 47\,Tuc and Fornax provide critical benchmarks. 
-They highlight both the limitations and opportunities for structural science with Rubin data in crowded environments, and they inform future pipeline development aimed at robust source recovery in complex stellar fields.
+They highlight both the limitations and opportunities for science with Rubin data in crowded environments, and they inform future pipeline development aimed at robust source recovery in complex stellar fields.
