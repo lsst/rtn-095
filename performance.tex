@@ -201,13 +201,13 @@ In both cases, we use a greedy, probabilistic matching \gls{algorithm} that matc
 
 We inject sources in 12 of the patches of the \gls{ECDFS} region with the deepest coverage.
 The input catalog contains stars and galaxies from part of the \gls{DC2} simulations \citep{2021ApJS..253...31L}, where the galaxies consist of an exponential disk and de Vaucouleurs \citep{1948AnAp...11..247D,1953MNRAS.113..134D} bulge.
-To avoid deblender failures from excessive increases in object density, stars whose total \gls{flux} (i.e., summed across all six bands) is brighter than 17.5~${\rm mag}$ are excluded, as are galaxies whose total \gls{flux} is brighter than 15~${\rm mag}$ or fainter than 26.5~${\rm mag}$.
+To avoid deblender failures from excessive increases in object density, stars with a total \gls{flux} (i.e., summed across all six bands) brighter than 17.5~${\rm mag}$ are excluded, as are galaxies whose total \gls{flux} is brighter than 15~${\rm mag}$ or fainter than 26.5~${\rm mag}$.
 Half of the remaining objects are selected for injection.
-Afterwards, individual components fainter than 29~${\rm mag}$ are also excluded for computational expediency, and because the properties of these very faint bulges and disks are not as well-constrained as for brighter galaxies.
+Afterwards, individual bulge and disk components fainter than 29~${\rm mag}$ are also excluded, both for computational expediency and because their structural properties are less likely to be representative of real galaxies.
 \begin{figure}[htb]
 \plotone{injected_lsst_cells_v1_5063_i_completeness_any}
 \caption{Completeness and incorrect classification fraction as a function of $i$-band CModel magnitude (Reference Magnitude) for DC2-based injected objects into a portion of the ECDFS field. 
-The ``Incorrect Class" line shows the proportion of objects that are matched but classified incorrectly by their reference-band extendedness, i.e. stars with extendedness of 1 or galaxies with extendedness of 0 in the reference band.}
+The ``Incorrect Class'' line shows the proportion of objects that are matched but classified incorrectly by their reference-band extendedness, i.e. stars with extendedness of 1 or galaxies with extendedness of 0 in the reference band.}
 \label{fig:injected_lsst_cells_v1_5063_i_completeness_any}
 \end{figure}
 
@@ -229,7 +229,7 @@ Based on prior analyses of the \gls{DC2} simulations, purity is generally greate
 Similarly, for bright ($i<23$) objects classified as stars by reference band extendedness, $<5\%$ are either unmatched to a Euclid or HST object, or misclassified - that is, selecting on extendedness alone yields a fairly pure but incomplete sample of stars.
 We expect to remedy some of these shortcomings in future releases.
 
-\subsection{Galaxy Flux and Shape Measurement}
+\subsection{Model Flux and Shape Measurement}
 \label{ssec:fluxes}
 
 \figref{fig:injected_lsst_cells_v1_5063_i_mag} shows $i$-band magnitude residuals for CModel and S\'ersic measurements using the matched injected galaxies described in \secref{ssec:detection_completeness}.
@@ -250,7 +250,7 @@ The correction for Kron fluxes can be derived from the S\'ersic index \citep{200
   \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_sersic}
   \caption{$i$-band magnitude residuals for S\'ersic model measurements of injected galaxies.}
   \end{subfigure}\hfill
-\caption{$i$-band magnitude residuals for matched injected DC2 galaxies with the Compel and S\'ersic algorithms in a portion of the \gls{ECDFS} region. 
+\caption{$i$-band magnitude residuals for matched injected DC2 galaxies with the CModel and S\'ersic algorithms in a portion of the \gls{ECDFS} region, including the median and scatter thereof.
 The black line is the median.}
 \label{fig:injected_lsst_cells_v1_5063_i_mag}
 \end{figure*}
@@ -273,13 +273,13 @@ Any of these color measurements are suitable for use for deriving quantities lik
 \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_sersic_g_minus_i}
   \caption{$g-i$ color residuals for S\'ersic model measurements of injected galaxies.}
   \end{subfigure}\hfill
-\caption{$g-i$ color residuals versus true r-band magnitude for matched injected DC2 galaxies with the CModel, \gls{GAaP} and S\'ersic algorithms in a portion of the \gls{ECDFS} region.}
+\caption{$g-i$ color residuals versus true $r$-band magnitude for matched injected DC2 galaxies with the CModel, \gls{GAaP} and S\'ersic algorithms in a portion of the \gls{ECDFS} region.}
 \label{fig:injected_lsst_cells_v1_5063_r_color_g_minus_i}
 \end{figure*}
 In addition to photometry, some algorithms include measurements of structural parameters like size, ellipticity, and S\'ersic index.
 One particular known issue is that many (truly) faint objects have significantly overestimated sizes and fluxes.
 This was also seen in the Dark Energy Survey \citep{2025arXiv250105739B}, who dubbed such objects ``super-spreaders''.
-These super-spreaders contribute significantly to overestimated fluxes at the faint end, and are particularly problematic for the Kron algorithm \citep{1980ApJS...43..305K}, which should only be used with caution.
+These super-spreaders contribute significantly to overestimated fluxes at the faint end (see e.g. \figref{fig:injected_lsst_cells_v1_5063_i_mag}), and are particularly problematic for the Kron algorithm \citep{1980ApJS...43..305K}, which should only be used with caution.
 
 As mentioned in \secref{ssec:coadd_processing}, the S\'ersic fits include a free centroid, which is initialized from the fiducial centroid of the object.
 Preliminary analyses of matched injected objects suggest that the S\'ersic model galaxy \gls{astrometry} residuals are somewhat smaller than for the standard centroids used in other measurements, and so users of the S\'ersic photometry should also use these centroid values.
@@ -296,17 +296,18 @@ This is at least partly (but not wholly) due to the fact that coaddition introdu
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
   \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_chi_psf}
-  \caption{$i$-band magnitude uncertainty-scaled residuals for PSF model measurements of injected stars.}
+  \caption{$i$-band flux uncertainty-scaled residuals for PSF model measurements of injected stars.}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.45\textwidth}
   \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_chi_psf_g_minus_i}
   \caption{$g-i$ color uncertainty-scaled residuals for PSF model measurements of injected stars.}
   \end{subfigure}\hfill
-\caption{Color and magnitude uncertainty-scaled residuals for matched injected DC2 stars' PSF model fluxes in a portion of the \gls{ECDFS} region.}
+\caption{Color and flux uncertainty-scaled residuals for matched injected DC2 stars' PSF model measurements in a portion of the \gls{ECDFS} region.}
 \label{fig:injected_lsst_cells_v1_5063_star_psf_chi}
 \end{figure*}
 
 The degree to which uncertainties are underestimated can depend on the parameter in question and on the brightness of the object.
+In plots of uncertainty-scaled residuals, the ideal behavior is for the median (i.e. the bias) to lie close to zero, and for the $\pm1\sigma$ lines to lie at $\pm1$, without any dependence on magnitude.
 \figref{fig:injected_lsst_cells_v1_5063_star_psf_chi} shows that flux and color uncertainties for PSF model magnitudes of injected stars are both underestimated, but by a factor of approximately $1.7-2$ that is not very sensitive to \gls{SNR}.
 This holds for astrometric/centroid parameters as well.
 
@@ -314,13 +315,13 @@ This holds for astrometric/centroid parameters as well.
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
   \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_chi_cmodel}
-  \caption{$i$-band magnitude uncertainty-scaled residuals for CModel measurements of injected galaxies.}
+  \caption{$i$-band flux uncertainty-scaled residuals for CModel measurements of injected galaxies.}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.45\textwidth}
   \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_chi_cmodel_g_minus_i}
   \caption{$g-i$ color uncertainty-scaled residuals for CModel measurements of injected galaxies.}
   \end{subfigure}\hfill
-\caption{Color and magnitude uncertainty-scaled residuals for matched injected DC2 galaxies' CModel fluxes in a portion of the \gls{ECDFS} region.}
+\caption{Color and flux uncertainty-scaled residuals for matched injected DC2 galaxies' CModel measurements in a portion of the \gls{ECDFS} region.}
 \label{fig:injected_lsst_cells_v1_5063_galaxy_cmodel_chi}
 \end{figure*}
 
@@ -328,17 +329,17 @@ This holds for astrometric/centroid parameters as well.
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
   \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_mag_chi_sersic}
-  \caption{$i$-band magnitude uncertainty-scaled residuals for S\'ersic model measurements of injected galaxies.}
+  \caption{$i$-band flux uncertainty-scaled residuals for S\'ersic model measurements of injected galaxies.}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.45\textwidth}
   \includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_r_color_chi_sersic_g_minus_i}
   \caption{$g-i$ color uncertainty-scaled residuals for S\'ersic model measurements of injected galaxies.}
   \end{subfigure}\hfill
-\caption{Color and magnitude uncertainty-scaled residuals for matched injected DC2 galaxies' S\'ersic fluxes in a portion of the \gls{ECDFS} region.}
+\caption{Color and flux uncertainty-scaled residuals for matched injected DC2 galaxies' S\'ersic measurements in a portion of the \gls{ECDFS} region.}
 \label{fig:injected_lsst_cells_v1_5063_galaxy_sersic_chi}
 \end{figure*}
 
-In turn, \figref{fig:injected_lsst_cells_v1_5063_galaxy_cmodel_chi} shows that CModel color uncertainties of galaxies are underestimated by a similar factor at the faint end, but with appreciable scaling with \gls{SNR}.
+In turn, \figref{fig:injected_lsst_cells_v1_5063_galaxy_cmodel_chi} shows that CModel color uncertainties of galaxies are underestimated by a similar factor at the faint end, but with appreciable scaling with magnitude (and thereby \gls{SNR}).
 Flux error underestimation is both larger than for colors and scales more strongly with \gls{SNR}.
 This indicates that systematic effects dominate the errors in fluxes, particularly for bright galaxies.
 This is also at least partly but not wholly due to so-called model inadequacy - that is, the fact that galaxy models, parameteric or otherwise, are insufficiently complex to capture the structure of real galaxies.
