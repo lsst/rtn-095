@@ -220,6 +220,28 @@ After collating the input catalogs and transforming the fluxes to the standard D
 This process generated a set of standard columns containing positional and flux information, along with their associated uncertainties.
 \end{itemize}
 
+\subsubsection{Source Designations}\label{ssec:src_naming}
+To refer to individual sources or objects from the DP1 catalogs, one should follow the LSST DP1 naming convention that has been registered with the International Astronomical Union.
+Because the \texttt{Source}, \texttt{Object}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{SSObject} tables each have their own unique IDs, their designations should differ.
+In general, source designations should begin with the string ``LSST-DP1'' (denoting the Legacy Survey of Space and Time, Data Preview 1), followed by a string specifying the table that the source was obtained from.
+These strings should be ``O'' (for the \texttt{Object} table), ``S'' (\texttt{Source}), ``DO'' (\texttt{DiaObject}), ``DS'' (\texttt{DiaSource}), or ``SSO'' (\texttt{SSObject}).
+Following the table identifier, the designation should contain the full unique numeric identifier from the specified table (i.e., the \textit{objectId}, \textit{sourceId}, \textit{diaObjectId}, \textit{diaSourceId}, or \textit{ssObjectId}).
+Each of the components of the identifier should be separated by dashes, so that the designation appears like ``LSST-DP1-TAB-123456789012345678.''
+In summary, source designations should adhere to one of the following examples:
+
+\begin{itemize}
+\item Object: LSST-DP1-O-609788942606161356 (for objectId 609788942606161356)
+\item Source: LSST-DP1-S-600408134082103129 (for sourceId 600408134082103129)
+\item DiaObject: LSST-DP1-DO-609788942606140532 (for diaObjectId 609788942606140532)
+\item DiaSource: LSST-DP1-DS-600359758253260853 (for diaSourceId 600359758253260853)
+\item SSObject: LSST-DP1-SSO-21163611375481943 (for ssObjectId 21163611375481943)
+\end{itemize}
+
+Tables that were not explicitly mentioned in the description above do not have their own unique IDs, but are instead linked to one of the five tables listed above via a unique ID.
+For example, the \texttt{ForcedSource} table is keyed on \textit{objectId}, \texttt{ForcedSourceOnDiaObject} uses \textit{diaObjectId}, \texttt{SSSource} is linked to \textit{diaSourceId} and \textit{ssObjectId}, and \texttt{MPCORB} uses \textit{ssObjectId}.
+
+
+
 Maps are two-dimensional visualizations of survey data. 
 In \gls{DP1}, these fall into two categories: Survey Property Maps and \gls{HiPS} Maps \citep{2015A&A...578A.114F}.
 
