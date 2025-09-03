@@ -220,14 +220,14 @@ After collating the input catalogs and transforming the fluxes to the standard D
 This process generated a set of standard columns containing positional and flux information, along with their associated uncertainties.
 \end{itemize}
 
-\subsubsection{Source Designations}\label{ssec:src_naming}
+\subsubsection{Source and Object Designations}\label{ssec:src_naming}
 To refer to individual sources or objects from the DP1 catalogs, one should follow the LSST DP1 naming convention that has been registered with the International Astronomical Union.
 Because the \texttt{Source}, \texttt{Object}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{SSObject} tables each have their own unique IDs, their designations should differ.
-In general, source designations should begin with the string ``LSST-DP1'' (denoting the Legacy Survey of Space and Time, Data Preview 1), followed by a string specifying the table that the source was obtained from.
+In general, source designations should begin with the string ``LSST-DP1'' (denoting the Legacy Survey of Space and Time, Data Preview 1), followed by a string specifying the table from which the source was obtained.
 These strings should be ``O'' (for the \texttt{Object} table), ``S'' (\texttt{Source}), ``DO'' (\texttt{DiaObject}), ``DS'' (\texttt{DiaSource}), or ``SSO'' (\texttt{SSObject}).
 Following the table identifier, the designation should contain the full unique numeric identifier from the specified table (i.e., the objectId, sourceId, diaObjectId, diaSourceId, or ssObjectId).
-Each of the components of the identifier should be separated by dashes, so that the designation appears like ``LSST-DP1-TAB-123456789012345678.''
-In summary, source designations should adhere to one of the following examples:
+Each component of the identifier should be separated by dashes, resulting in a designation such as ``LSST-DP1-TAB-123456789012345678''.
+In summary, source designations should adhere to the formats listed below:
 
 \begin{itemize}
 \item Object: LSST-DP1-O-609788942606161356 (for objectId 609788942606161356)
