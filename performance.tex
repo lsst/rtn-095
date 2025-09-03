@@ -96,17 +96,17 @@ An additional measure of internal consistency is the repeatability of separation
 To compute this, we identify pairs of objects that are separated by a specified distance and measure their precise separation during each visit in which both objects are observed.
 The scatter in these separation measurements provides an indication of the internal consistency of the astrometric model.
 \figref{fig:AM1} shows the median separation for pairs of objects separated by approximately 5 arcminutes, computed per tract after the final calibration.
-\begin{figure}[htb!]
+These values are already approaching the design requirement of $10$ mas.
+\begin{figure}[htb]
 \plotone{Astrometry_AM1}
  \caption{Median per-tract repeatability in separations between isolated point sources 5~arcmin apart in visits across all bands.}
  \label{fig:AM1}
  \end{figure}
-These values are already approaching the design requirement of $10$ mas.
 
 To assess external consistency, we consider the median separation between sources not included in the astrometric fit and associated objects from a reference catalog.
 For this, we use the Gaia \gls{DR3} catalog, with the object positions shifted to the observation epoch using the Gaia proper motion parameters.
 \figref{fig:AA1} shows the median separation for each visit in the $r$-band in \gls{tract} 4849 in the ECDFS fields (\tabref{tab:dp1_tracts}).
-\begin{figure*}[htb!]
+\begin{figure*}[htb]
 \plotone{Astrometry_AA1}
 \caption{Median absolute offset for all visits in $r$-band in \gls{tract} 4849 in the ECDFS field. 
 The offset is the difference between the positions of isolated point sources that were reserved from the astrometric fit and matched objects from the Gaia DR3 catalog.}
@@ -115,7 +115,7 @@ The offset is the difference between the positions of isolated point sources tha
 The calculated values are almost all within $5$\xspace mas, well below the design requirement of $50$\xspace mas for the main survey.
 By examining the astrometric residuals, we can assess whether there are distortions not accounted for by the astrometric model. 
 In some cases, residuals from a single visit exhibit behavior consistent with atmospheric turbulence, as shown in \figref{fig:Astrometry_Emode}, which is characterized by a curl-free gradient field in the two-point correlation function of the residuals (E-mode),  \citet{Leget2021} and \citet{Fortino2021}. 
-\begin{figure*}[htb!]
+\begin{figure*}[htb]
 \plotone{Astrometry_2024120200359}
 \caption{Astrometric residuals in $u$ (left panel) and $v$ (center panel) directions with the E (blue) and B (orange) modes of the two-point correlation function (right panel) 
 seen in visit 2024120200359 in tract 2393 in $u$ band.
@@ -134,22 +134,22 @@ There are coherent residuals, but without the wave-like pattern seen in \figref{
 
 We can see unmodeled camera distortions by stacking the astrometric residuals over many visits as a function of the focal plane position.
 \figref{fig:Astrometry_FoV} shows the median residuals in $x$ and $y$ directions for \nvisits visits.
-\begin{figure*}[htb!]
+\begin{figure}[htb!]
 \plotone{Astrometry_FoV}
 \caption{Median astrometric residuals  as a function of focal plane position, shown in the left panel for the $x$ direction and in the right panel for the $y$ direction, for all nine LSSTComCam CCDs independently.
 The range of the color scale is $\pm$ 0.01 pixels, corresponding to 2 mas, showing that the effect is small. }
 \label{fig:Astrometry_FoV}
-\end{figure*}
+\end{figure}
 Spatial structures are evident at the \gls{CCD} level, as well as at the mid-line break,  the discontinuity between the two rows of amplifiers,  in the y-direction residuals.
 Further stacking all the detectors makes certain effects particularly clear.
 \figref{fig:Astrometry_CCD} shows distortions very similar to those measured for an \gls{LSSTCam} \gls{ITL} sensor in a laboratory setting in \citet{2023PASP..135k5003E}.
-\begin{figure*}[htb!]
+\begin{figure}[htb!]
 \plotone{Astrometry_CCD}
 \caption{Median residuals as a function of pixel position, shown in the left panel for the $x$ direction and in the right panel for the $y$ direction. 
 These residuals are aggregated across all nine CCDs that comprise the central LSSTComCam raft.
 The range of the color scale is $\pm$ 0.01 pixels, corresponding to 2 mas, showing that the effect is small.}
 \label{fig:Astrometry_CCD}
-\end{figure*}
+\end{figure}
 
 \subsection{Differential Chromatic Refraction}
 \label{sec:differential_chromatic_refraction}
@@ -169,28 +169,53 @@ The DCR effect will be addressed in future releases.
 \end{figure}
 
 \subsection{Stellar Photometry}
-The photometric repeatability for isolated bright stars following the \gls{FGCM} fits was excellent. 
-For the 10\% of stars withheld from the fit and having signal-to-noise ratios greater than 100, the photometric repeatability 
+The photometric repeatability for isolated bright unresolved sources following the \gls{FGCM} fits was excellent. 
+For the 10\% of unresolved sources withheld from the fit and having signal-to-noise ratios greater than 100, the photometric repeatability 
 after applying chromatic correction was 7.1, 5.4, 5.4, 5.1, 5.9, and 6.5  mmag in the $ugrizy$ bands respectively, across all fields.
 After accounting for photometric noise, the intrinsic photometric repeatability was approximately 4.8, 2.7, 1.7, 1.0, 2.0, and 1.1 mmag in $ugrizy$.
-The DP1 processing does not yet incorporate chromatic corrections in the final photometry, resulting in a delivered photometric repeatability of 3--8 mmag in the $grizy$ bands.
-In \figref{fig:stellarloci}, we show the stellar loci for $ugriz$ from the full DP1 object table.
+The DP1 processing does not yet include chromatic corrections in the final photometry. 
+In this case  the delivered photometric repeatability was 3−8 mmag  for grizy.  
+
+In \figref{fig:stellarloci}, we show the stellar loci for $ugriz$ for unresolved sources in the DP1 \texttt{Object} table (\secref{ssec:catalogs}).
+These unresolved sources  were selected using the extendedness parameter (\secref{ssec:catalogs}) in the \texttt{Object} catalog. 
+This parameter is assigned a value of 0 (unresolved) or 1 (resolved) in each band based on the difference between the PSF and CModel magnitudes. 
+The extendedness is set to 1 when this magnitude difference exceeds 0.016 mag, as the PSF flux for extended sources is biased low relative to the CModel flux. 
+This method has been previously employed by SDSS pipelines, and its statistical properties, including the optimal combination of information from different bands and repeated measurements, are discussed in \cite{2020AJ....159...65S}.
 \begin{figure*}[hbt!]
   \centering
   \begin{subfigure}[t]{0.31\textwidth}
-  \includegraphics[width=\linewidth]{dp1_stellar_locus_ugr}
-  \caption{$ugr$ stellar locus containing 12779 stars with signal-to-noise ratio $>$ 50 in the $u$ band.}
+\includegraphics[width=\linewidth]{dp1_stellar_locus_ugr}
+\caption{$ugr$ stellar locus containing 12,779 stars with signal-to-noise ratio $>$ 50 in the $u$ band.}
+\label{fig:stellarloci-ugr}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.31\textwidth}
-  \includegraphics[width=\linewidth]{dp1_stellar_locus_gri}
-  \caption{$gri$ stellar locus containing 63236 stars with signal-to-noise ratio $>$ 200 in the $i$ band.}
+\includegraphics[width=\linewidth]{dp1_stellar_locus_gri}
+ \caption{$gri$ stellar locus containing 63,236 stars with signal-to-noise ratio $>$ 200 in the $i$ band.}
+\label{fig:stellarloci-gri}
   \end{subfigure}\hfill
     \begin{subfigure}[t]{0.31\textwidth}
-  \includegraphics[width=\linewidth]{dp1_stellar_locus_riz}
-  \caption{$riz$ stellar locus containing 46760 stars with signal-to-noise ratio $>$ 200 in the $i$ band.}
+\includegraphics[width=\linewidth]{dp1_stellar_locus_riz}
+  \caption{$riz$ stellar locus containing 46,760 stars with signal-to-noise ratio $>$ 200 in the $i$ band.}
+    \label{fig:stellarloci-riz}
   \end{subfigure}\hfill
-\caption{Examples of stellar loci from the full DP1 data set.}
-  \label{fig:stellarloci}
+ \caption{Examples of stellar loci for unresolved sources from the DP1 dataset.}
+ \label{fig:stellarloci}
+\end{figure*}
+
+\figref{fig:extendedness} illustrates the behavior of the extendness parameter. 
+Its behavior in the $g$ and $r$ bands is similar, with unresolved sources scattered around the vertical line centered on zero. 
+The width of the distribution increases towards fainter magnitudes.
+Resolved sources are found to the right and the dashed lines in the top panels show the adopted ``star-galaxy" separation boundary.
+The morphology of the two color-magnitude diagrams in the bottom panels suggest that the unresolved sample suffers from increasing contamination by galaxies for $r>24$. 
+This behavior is consistent with simulation-based predictions from \cite{2020AJ....159...65S}.
+\begin{figure*}[hbt!]
+\plotone{SG_DP1_ECDFS}
+\caption{The top two panels shows the difference between the PSF and CModel magnitudes as a function of CModel magnitude in the
+$g$ and $r$ bands for 178,547 sources with $CModel_r < 25$ from the ECDFS field. The vertical dashed line in each panel
+marks the minimum value (0.016 mag) for setting the extendedness parameter to 1. The bottom two panels show the $r$ vs.
+$g-r$ color-magnitude diagrams for 14,701 unresolved (left) and 163,666 resolved (right) sources. Note the unresolved sample
+suffers from increasing contamination by galaxies for $r>24$.}
+\label{fig:extendedness}
 \end{figure*}
 
 %%

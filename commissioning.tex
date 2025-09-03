@@ -63,7 +63,7 @@ Credit: RubinObs/NOIRLab/SLAC/NSF/DOE/AURA.}
 \end{figure}
 
 \begin{figure}[htb!]
-\plotone{comcam_focal_plane_schematic}
+\plotone{ComCam_focal_plane}
 \caption{LSSTComCam focal plane layout illustrating the placement and numbering scheme of sensors (S) and amplifiers (C). The view is looking down from above the focal plane through the LSSTComCam lenses. Each sensor contains 16 amplifiers, and a group of nine sensors comprises one raft. LSSTComCam is Raft 22 (R22). The detector number for each sensor is shown in parentheses.}
 \label{fig:comcam_focal_plane}
 \end{figure}
@@ -140,14 +140,14 @@ All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_20
 
 The temporal sampling distribution of observations per band and per night is shown in \figref{fig:target_fields_temporal_sampling}.
 \begin{figure}[htb!]
-\plotone{dp1_fields_temporal_sampling}
+\includegraphics[width=\linewidth]{visitDates}
 \caption{Distribution of DP1 observations by date grouped by field as a function of time over the \nnightscomcam nights of data taking with LSSTComCam.
 Each dot represents a single  exposure, color-coded by band.}
 \label{fig:target_fields_temporal_sampling}
 \end{figure}
 Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only hold three filters at a time (see \secref{sssec:comcam_filters}).
 As the campaign progressed, the temporal sampling became denser across all fields, reflecting improved efficiency and increased time allocated for science observations.
-The \gls{ECDFS} field received the most consistent and densest temporal sampling.
+
 It is important to note that the time sampling in the \gls{DP1} dataset differs significantly from what will be seen in the final \gls{LSST} data.
 \tabref{tab:dp1_m5_depths} lists the  5$\sigma$ point source depths for coadded images per field and per band, where coverage in a band is non-zero.
 \input{tables/dp1_m5_coadded_depths}
@@ -163,57 +163,62 @@ The rotational dithers of the camera rotator were typically approximately 1 degr
 The Rubin\_SV\_38\_7 field used a different dither pattern to optimize coverage of Solar System Objects and test Solar System Object linking across multiple nights.
 These observations used a 2$\times$2 grid of \gls{LSSTComCam} pointings to cover an area of about 1.3 degree$\times$1.3 degrees.
 The visits cycled between the grid's four pointing centers, using small random translational dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing epoch.
-\begin{figure*}[ht]
-    \centering
-    \begin{subfigure}[b]{0.22\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{showVisit_DP1_47Tuc}
-        \caption{47 Tucanae}
-    \end{subfigure}\hfill
-    \begin{subfigure}[b]{0.22\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{showVisit_DP1_Fornax_dSph}
-        \caption{Fornax dwarf Spheroidal}
-    \end{subfigure}\hfill
-    \begin{subfigure}[b]{0.22\textwidth}
-        \centering
-        \includegraphics[width= \linewidth]{showVisit_DP1_ECDFS}
-        \caption{ECDFS}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.22\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{showVisit_DP1_EDFS}
-        \caption{EDFS}
-    \end{subfigure}\hfill
-    \vspace{1em}
-
-    % Row 2
-    \begin{subfigure}[b]{0.22\textwidth}
-      \centering
-        \includegraphics[width=\linewidth]{showVisit_DP1_RubinSV_95_-25}
-        \caption{RubinSV\_95\_-25}
-    \end{subfigure}\hfill
-    \begin{subfigure}[b]{0.22\textwidth}
-        \centering
-        \includegraphics[width= \linewidth]{showVisit_DP1_Seagull}
-        \caption{Seagull}
-    \end{subfigure}\hfill
-    \begin{subfigure}[b]{0.22\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{showVisit_DP1_RubinSV_38_7}
-        \caption{Rubin\_SV\_38\_7}
-    \end{subfigure}\hfill
-    \begin{subfigure}[b]{0.22\textwidth}
-        % Empty slot
-        % \includegraphics[width=\linewidth]{}
-        \caption*{}
-    \end{subfigure}
-     \vspace{1em}
-    \caption{Sky coverage maps showing the distribution of visits in each field, color coded by band. The images clearly show the focal plane chip gaps and dithering pattern. Only the detectors for which single frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields. }
-    \label{fig:dp1_fields_coverage}
-\end{figure*}
+%\begin{figure*}[ht]
+%    \centering
+%    \begin{subfigure}[b]{0.22\textwidth}
+%        \centering
+%        \includegraphics[width=\linewidth]{showVisit_DP1_47Tuc}
+%        \caption{47 Tucanae}
+%    \end{subfigure}\hfill
+%    \begin{subfigure}[b]{0.22\textwidth}
+%        \centering
+%        \includegraphics[width=\linewidth]{showVisit_DP1_Fornax_dSph}
+%        \caption{Fornax dwarf Spheroidal}
+%    \end{subfigure}\hfill
+%    \begin{subfigure}[b]{0.22\textwidth}
+%        \centering
+%        \includegraphics[width= \linewidth]{showVisit_DP1_ECDFS}
+%        \caption{ECDFS}
+%    \end{subfigure}
+%    \begin{subfigure}[b]{0.22\textwidth}
+%        \centering
+%        \includegraphics[width=\linewidth]{showVisit_DP1_EDFS}
+%        \caption{EDFS}
+%    \end{subfigure}\hfill
+%    \vspace{1em}
+%
+%    % Row 2
+%    \begin{subfigure}[b]{0.22\textwidth}
+%      \centering
+%        \includegraphics[width=\linewidth]{showVisit_DP1_RubinSV_95_-25}
+%        \caption{RubinSV\_95\_-25}
+%    \end{subfigure}\hfill
+%    \begin{subfigure}[b]{0.22\textwidth}
+%        \centering
+%        \includegraphics[width= \linewidth]{showVisit_DP1_Seagull}
+%        \caption{Seagull}
+%    \end{subfigure}\hfill
+%    \begin{subfigure}[b]{0.22\textwidth}
+%        \centering
+%        \includegraphics[width=\linewidth]{showVisit_DP1_RubinSV_38_7}
+%        \caption{Rubin\_SV\_38\_7}
+%    \end{subfigure}\hfill
+%    \begin{subfigure}[b]{0.22\textwidth}
+%        % Empty slot
+%        % \includegraphics[width=\linewidth]{}
+%        \caption*{}
+%    \end{subfigure}
+%     \vspace{1em}
+%    \caption{Sky coverage maps showing the distribution of visits in each field, color coded by band. The images clearly show the focal plane chip gaps and dithering pattern. Only the detectors for which single frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields. }
+%    \label{fig:dp1_fields_coverage}
+%\end{figure*}
 % M5 coadded depths
-
+\begin{figure*}[ht]
+\centering
+ \includegraphics[width=\linewidth]{fieldSummaries}
+ \caption{Sky coverage maps showing the distribution of visits in each field, color coded by band. The images clearly show the focal plane chip gaps and dithering pattern. Only the detectors for which single frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields. }
+\label{fig:dp1_fields_coverage}
+\end{figure*}
 
 % PSF limiting magnitude
 % \figref{fig:dp1_fields_depth} shows the
@@ -283,7 +288,7 @@ Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 % \tabref{tab:image_quality} summarizes the delivered image quality expressed in terms of the PSF FWHM in arcseconds per band for the \nexposures in DP1.
 The DP1 median delivered image quality across all bands is \medianimagequalityallbands, as measured by the \gls{PSF} \gls{FWHM}.
 The best images achieved a \gls{PSF} \gls{FWHM} of approximately \bestimagequality.
-\begin{figure}[htb]
+\begin{figure}[htb!]
 \centering
 \plotone{image_quality_ecdf}
 \caption{Cumulative distribution of PSF FWHM (arcsec) over all \nvisitdetectorsummaries visits images in the DP1 dataset for each filter.
