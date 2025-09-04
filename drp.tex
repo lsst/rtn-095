@@ -55,7 +55,7 @@ Using multiple whole visits rather than a single detector also allows us to acco
 
 In order to perform the fit of the astrometric solution, isolated point sources are associated between overlapping visits and with the Gaia \gls{DR3} \citep{2023A&A...674A...1G} reference catalog where possible.
 The model used for \gls{DP1} consists of a static map from pixel space to an intermediate frame (the per-detector model), followed by a per-visit map from the intermediate frame to the plane tangent to the telescope boresight (the per-visit model), then finally a deterministic mapping from the tangent plane to the sky.
-The fit is done using the \texttt{gbdes} package \citep{2017PASP..129g4503B}, and a full description is given in \citet{dmtn-266}.
+The fit is done using the \texttt{gbdes} package \citep{2017PASP..129g4503B}, and a full description is given in \citet{DMTN-266}.
 
 The per-detector model is intended to capture quasi-static characteristics of the telescope and camera. 
 During \gls{Rubin Operations}, the astrometric solution will allow for separate epochs with different per-detector models, to account for changes in the camera due to warming and cooling and other discrete events.
@@ -98,7 +98,7 @@ For time-domain analysis, we recommend using the \gls{forced photometry} tables 
 \label{ssec:coaddition}
 Only exposures with a \gls{seeing} better than 1.7 arcseconds FWHM are included in the deep coadded images. For the template coadds, typically only the top third of visits with the best \gls{seeing} are used (although see \secref{ssec:science_images} for more details), resulting in an even tighter image quality cutoff for the template coadds. Exposures with poor \gls{PSF} model quality, identified using internal diagnostics, are excluded to prevent contamination of the coadds with unreliable \gls{PSF} estimates. The remaining exposures are combined using an inverse-variance weighted mean stacking \gls{algorithm}.
 
-To mitigate transient artifacts before coaddition, we apply the artifact rejection procedure described in \cite{dmtn-080} that identifies and masks features such as satellite trails, optical ghosts, and cosmic rays.
+To mitigate transient artifacts before coaddition, we apply the artifact rejection procedure described in \cite{DMTN-080} that identifies and masks features such as satellite trails, optical ghosts, and cosmic rays.
 It operates on a time series of \gls{PSF}-matched images resampled onto a common pixel grid (``warps'') and leverages their temporal behavior to distinguish persistent astrophysical sources from transient artifacts.
 
 Artifact rejection uses both direct (where no PSF-matching is performed) and PSF-matched warps, homogenized to a standard PSF of 1.8 arcseconds FWHM, broadly consistent with the 1.7 arcsecond FWHM \gls{seeing} threshold used in data screening.
@@ -137,7 +137,7 @@ Extendedness is a binary classifier that is set to 1 if the PSF model flux is le
 Additionally, the extendedness in the reference band is provided as a separate column for convenience as a multiband star-galaxy classification, and is recommended generally but also specifically for objects with low signal-to-noise ratio in some bands.
 
 Gaussian-Aperture-and-PSF \citep[\gls{GAaP}][]{2008A&A...482.1053K, DMTN-190} fluxes are provided to ensure consistent galaxy colors across bands.
-S\'ersic model \citep{1963BAAA....6...41S, 1968adga.book.....S} fits are run on all available bands simultaneously \cite[MultiProFit,][]{dmtn-312}.
+S\'ersic model \citep{1963BAAA....6...41S, 1968adga.book.....S} fits are run on all available bands simultaneously \cite[MultiProFit,][]{DMTN-312}.
 The resulting S\'ersic model fluxes are provided as an alternative to CModel and are intended to represent total galaxy fluxes.
 Like CModel, the S\'ersic model is a Gaussian mixture approximation to a true S\'ersic profile, convolved with a Gaussian mixture approximation to the \gls{PSF}.
 CModel measurements use a double ``shapelet'' \citep{2003ARA&A..41..645R} PSF with a single shared shape, while the S\'ersic fits use a double Gaussian with independent shape parameters for each component.
