@@ -56,14 +56,14 @@ Although the cryostat in \gls{LSSTComCam}, uses a different cooling system than 
 \figref{fig:comcam_raft_in_lsstcam_focal_plane} shows the single-raft \gls{LSSTComCam} positioned at the center of the full LSSTCam focal plane, corresponding to the central science \gls{raft} position.
 \gls{LSSTComCam} is designated as Raft 22 (R22).
 \begin{figure}[htb]
-\plotone{comcam_raft_in_lsstcam_focal_plane}
+\includegraphics[width=\linewidth]{comcam_raft_in_lsstcam_focal_plane}
 \caption{Schematic showing the single-raft LSSTComCam positioned at the center of the full LSSTCam focal plane. The perspective is from above, looking down through the LSSTComCam lenses onto the focal plane.
 Credit: RubinObs/NOIRLab/SLAC/NSF/DOE/AURA.}
 \label{fig:comcam_raft_in_lsstcam_focal_plane}
 \end{figure}
 
 \begin{figure}[htb!]
-\plotone{ComCam_focal_plane}
+\includegraphics[width=\linewidth]{ComCam_focal_plane}
 \caption{LSSTComCam focal plane layout illustrating the placement and numbering scheme of sensors (S) and amplifiers (C). The view is looking down from above the focal plane through the LSSTComCam lenses. Each sensor contains 16 amplifiers, and a group of nine sensors comprises one raft. LSSTComCam is Raft 22 (R22). The detector number for each sensor is shown in parentheses.}
 \label{fig:comcam_focal_plane}
 \end{figure}
@@ -76,7 +76,7 @@ Whereas the LSSTCam filter exchanger holds five filters, the LSSTComCam exchange
 The full-system throughput of the six LSSTComCam filters, which encompasses contributions from a standard atmosphere at airmass 1.2, telescope optics,
 camera surfaces, and the mean ITL detector quantum efficiency is shown in \figref{fig:comcam_standard_bandpasses}.
 \begin{figure}[htb!]
-\plotone{dp1_comcam_std_bandpasses}
+\includegraphics[width=\linewidth]{dp1_comcam_std_bandpasses}
 \caption{LSSTComCam standard bandpasses, illustrating full system throughput. The bandpasses include a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and mean ITL detector quantum efficiency.}
 \label{fig:comcam_standard_bandpasses}
 \end{figure}
@@ -122,7 +122,7 @@ These \nfields fields form the basis of the \gls{DP1} dataset.
 \figref{fig:dp1_fields_on_sky} shows the locations of these \nfields fields on the sky, overlaid on the LSST baseline survey footprint \citep{PSTN-051, PSTN-052, PSTN-053, PSTN-055, PSTN-056}, along with sky coverage of both the LSSTCam and \gls{LSSTComCam} focal planes.
 \begin{figure*}[bt!]
 \centering
-\plotone{dp1_fields_with_survey_fp}
+\includegraphics[width=\linewidth]{dp1_fields_with_survey_fp}
 \caption{Locations of the seven DP1 fields overlaid on the LSST baseline survey footprint \citep{PSTN-056}.
 NES: North Ecliptic Spur, SCP: South Celestial Pole, Low-Dust WFD: regions away from the Galactic Plane (GP) observed with a WFD cadence, GP/MC WFD: Galactic Plane and Magellanic Clouds regions observed with a WFD cadence.
 The fields of view covered by the LSSTCam and LSSTComCam focal planes are represented as outer and inner concentric circles, respectively, centered on the pointing center of each field.}
@@ -290,7 +290,7 @@ The DP1 median delivered image quality across all bands is \medianimagequalityal
 The best images achieved a \gls{PSF} \gls{FWHM} of approximately \bestimagequality.
 \begin{figure}[htb!]
 \centering
-\plotone{image_quality_ecdf}
+\includegraphics[width=\linewidth]{image_quality_ecdf}
 \caption{Cumulative distribution of PSF FWHM (arcsec) over all \nvisitdetectorsummaries visits images in the DP1 dataset for each filter.
 The vertical dashed lines represent the median PSF FWHM at 1.46, 1.36, 1.24, 1.18 and 1.20 arcsec for the $ugrizy$ wavebands, respectively.}
 \label{fig:delivered_image_quality_ecdf}
