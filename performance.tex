@@ -113,7 +113,7 @@ The offset is the difference between the positions of isolated point sources tha
 \end{figure*}
 The calculated values are almost all within $5$\xspace mas, well below the design requirement of $50$\xspace mas for the main survey.
 By examining the astrometric residuals, we can assess whether there are distortions not accounted for by the astrometric model. 
-In some cases, residuals from a single visit exhibit behavior consistent with atmospheric turbulence, as shown in \figref{fig:Astrometry_Emode}, which is characterized by a curl-free gradient field in the two-point correlation function of the residuals (E-mode),  \citet{Leget2021} and \citet{Fortino2021}. 
+In some cases, residuals from a single visit exhibit behavior consistent with atmospheric turbulence, as shown in \figref{fig:Astrometry_Emode}, which is characterized by a curl-free gradient field in the two-point correlation function of the residuals (E-mode),  \citet{2021A&A...650A..81L} and \citet{2021AJ....162..106F}. 
 \begin{figure*}[htb]
 \includegraphics[width=\linewidth]{Astrometry_2024120200359}
 \caption{Astrometric residuals in $u$ (left panel) and $v$ (center panel) directions with the E (blue) and B (orange) modes of the two-point correlation function (right panel) 
@@ -482,7 +482,7 @@ These fields were selected in part to stress-test the LSST Science Pipelines und
 While both exhibit high stellar densities, the nature and spatial extent of the crowding differ significantly.
 
 47\,Tuc presents extreme crowding across much of the field, encompassing its dense core and the eastern regions influenced by the Small Magellanic Cloud (SMC). 
-This pervasive crowding leads to persistent challenges for deblending and reliable source detection, exposing field-wide limitations in the current pipeline performance \citep{Choi2025}.
+This pervasive crowding leads to persistent challenges for deblending and reliable source detection, exposing field-wide limitations in the current pipeline performance \citep{2025arXiv250701343C}.
 In contrast, Fornax\,dSph shows significant crowding only in its central region, with outer areas remaining well resolved and easier to process. 
 
 In both 47\,Tuc and Fornax, extreme crowding led to the deblending step being skipped frequently when memory or runtime limits were exceeded, typically due to an excessive number of peaks, or large parent footprints.
@@ -490,9 +490,9 @@ However, the impact of these limitations differed: in 47\,Tuc, deblending was of
 In Fornax, these issues were largely confined to the central region, with much better recovery in the outskirts. 
 This contrast highlights how the pipeline’s limitations depend on the spatial extent of high-density regions: 47\,Tuc exposed systematic, field-wide challenges, whereas Fornax revealed more localized, density-driven limits.
 
-\citet{Wainer2025} explored the Rubin DP1 \texttt{DiaObject} catalog (\secref{ssec:catalogs}) in the 47\,Tuc field, which contains sources detected in difference images. 
+\citet{2025RNAAS...9..171W} explored the Rubin DP1 \texttt{DiaObject} catalog (\secref{ssec:catalogs}) in the 47\,Tuc field, which contains sources detected in difference images. 
 Because forced photometry is performed at these positions across all single-epoch images, this dataset bypasses the coadd-based detection and deblending stages that often fail in crowded regions. 
-By computing the median of the forced photometry for each  \texttt{DiaObject} across available visits, they recovered approximately three times more candidate cluster members than found in the standard \texttt{Object table} \citep{Choi2025}. 
+By computing the median of the forced photometry for each  \texttt{DiaObject} across available visits, they recovered approximately three times more candidate cluster members than found in the standard \texttt{Object table} \citep{2025arXiv250701343C}. 
 This result underscores the value of difference-imaging–based catalogs for probing dense stellar regions inaccessible to standard coadd processing in DP1.
 
 Although the DP1 pipeline was not optimized for crowded-field photometry, these early studies of 47\,Tuc and Fornax provide critical benchmarks. 
