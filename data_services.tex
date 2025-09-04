@@ -1,7 +1,7 @@
-\section{Rubin Science Platform}
+\section{Rubin Science Platform (RSP)}
 \label{sec:data_services}
 
-The \gls{RSP} \citep{LSE-319} is a powerful, cloud-based environment for scientific research and analysis of petascale-scale astronomical survey data.
+The Rubin Science Platform \citep[RSP;][]{LSE-319} is a powerful, cloud-based environment for scientific research and analysis of petascale-scale astronomical survey data.
 It serves as the primary interface for scientists to access, visualize, and conduct next-to-the-data analysis of Rubin and \gls{LSST} data.
 The  \gls{RSP} is designed around a  ``bring the compute to the data'' principle, eliminating the need for users to download massive datasets.
 Although \gls{DP1} is much smaller in size (\sizeinbytes) than many current survey datasets, future \gls{LSST} datasets will be far larger and more complex, making it crucial to co-locate data and analysis for effective scientific discovery.
@@ -186,7 +186,7 @@ Although the small \gls{DP1} dataset does not require Qserv’s full capabilitie
 \subsubsection{Consolidated Database}
 \label{sssec:consdb}
 
-The Consolidated Database (ConsDB) \citep{DMTN-227} is an SQL-compatible database designed to store and manage metadata for Rubin Observatory science and calibration images.
+The  Consolidated Database \citep[ConsDB;][]{DMTN-227} is an SQL-compatible database designed to store and manage metadata for Rubin Observatory science and calibration images.
 Metadata are recorded on a per-exposure basis and includes information such as the target name, pointing coordinates, observation time, physical filter and band, exposure duration, and environmental conditions (e.g., temperature, humidity, and wind speed).
 These key image metadata are also stored in the Butler Registry (\secref{sssec:data_butler}), however the ConsDB stores additional information  including derived metrics from image processing and information from the \gls{EFD} transformed from the time dimension to the exposure dimension.
 
