@@ -28,7 +28,7 @@ Both tracts and patches overlap with their neighboring regions.
 Since the \gls{LSSTComCam} only observed \totalarea of the sky during its campaign, only \ncoveredtracts out of the \ntotaltracts tracts have coverage in \gls{DP1}.
 The tract identification numbers and corresponding target names for these tracts are listed in \tabref{tab:dp1_tracts}.
 The size of a tract is larger than the LSSTCam field of view; however, since each observed field extends across more than one tract, each field covers multiple tracts.
-\input{tables/dp1_field_tracts}
+\input{./dp1_field_tracts}
 
 The skymap is integral to the production of co-added images.
 To create a coadded image, the processing pipeline selects all calibrated science images in a given field that meet specific quality thresholds (\secref{ssec:science_images} and \secref{ssec:coaddition}) for a given \gls{patch}, warps them onto a single consistent pixel grid for that \gls{patch}, as defined by the skymap, then coadds them.
@@ -57,7 +57,7 @@ In total, \gls{DP1} includes \nraws \texttt{raw} images.
 \tabref{tab:rawbreakdown} provides a summary by target and band.
 A \texttt{raw} contains \nrawpixx $\times$ \nrawpixy pixels, including prescan and overscan, and occupies around \rawhdd of disk space.\footnote{Each amplifier image contains 3 and 64 columns of serial prescan and overscan pixels, respectively, and 48 rows of parallel overscan pixels, meaning a \texttt{raw} contains \nvisitimagepixx$\times$\nvisitimagepixy exposed pixels.}
 The field of view of a single \texttt{raw}, excluding prescan and overscan regions, is roughly \visitimagefovx$\times$\visitimagefovy$\approx$\visitimagefov, corresponding to a plate scale of \rawplatescale.
-\input{tables/rawbreakdown}
+\input{./rawbreakdown}
 
 \item \texttt{visit\_image}s \citep{10.71929/rubin/2570311} are fully-calibrated processed images.
 They have undergone instrument signature removal (\secref{ssec:isr}) and all the single frame processing steps described in \secref{ssec:single_frame_processing} which are, in summary: \gls{PSF} modeling, \gls{background} subtraction, and astrometric and photometric \gls{calibration}.

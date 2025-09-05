@@ -118,7 +118,7 @@ For example, a dataset that represents a single raw image  in the $i$ band taken
 \texttt{dataId={'exposure':2024111100074, 'band':'i', 'instrument':'LSSTComCam'}} and is associated with the \texttt{raw} DatasetType.
 For a deep coadd on a \gls{patch} of sky in the Seagull field, there would be no exposure dimensions and instead the tract, \gls{patch} and band would be specified as  \texttt{dataId={'tract':7850, 'patch': 6, 'band':'g', 'instrument':'LSSTComCam', skymap='lsst\_cells\_v1'}} and is associated with the \texttt{deep\_coadd} DatasetType.
 
-\input{tables/dp1_dimension_summary}
+\input{./dp1_dimension_summary}
 
 The data coordinate is used to locate a dataset in multi-dimensional space, where dimensions are defined in terms of scientifically meaningful concepts, such as instrument, visit, detector or band.
 For example, a calibrated single-visit image (\secref{ssec:science_images}) has dimensions including band, instrument, and detector.
@@ -133,7 +133,7 @@ While the \gls{TAP} service contains entire catalogs, many of the same catalogs 
 This is partly due to how these catalogs are generated, but also because of the way data is stored within and retrieved from the Butler repository -- it is inefficient to retrieve the entire \texttt{Source} catalog, for example, from the file system. 
 Instead, because the \texttt{Source} catalog contains data for sources detected in the \texttt{visit\_image}s, there is one \texttt{Source} catalog in the Butler for each \texttt{visit\_image}. Similarly, there is one \texttt{Object} catalog for each \texttt{deep\_coadd}. 
 All the catalogs described in \secref{ssec:catalogs}, aside from the \texttt{CcdVisit}, \texttt{SSObject}, \texttt{SSSource}, and \texttt{Calibration} catalogs, are split within the Butler.
-\input{tables/dp1_butler_datasets}
+\input{./dp1_butler_datasets}
 
 A dataset is associated with one or more \emph{Collections}; logical groupings of  datasets within the \gls{Butler} system that were created or processed together by the same batch operation.
 Collections allow multiple datasets with the same data coordinate to coexist without conflict.

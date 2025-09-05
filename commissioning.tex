@@ -129,7 +129,7 @@ The fields of view covered by the LSSTCam and LSSTComCam focal planes are repres
 \label{fig:dp1_fields_on_sky}
 \end{figure*}
 
-\input{tables/dp1_fields.tex}
+\input{./dp1_fields.tex}
 Each of the \nfields target fields was observed repeatedly in multiple bands over  many nights.
 A typical observing \gls{epoch} on a given target field consisted of 5-20 visits in each of the three loaded filters (\secref{sssec:comcam_filters}).
 All DP1 images were captured as single 1$\times$30-second exposures for all bands, rather than as  2$\times$15-second ``snap" exposures.
@@ -150,7 +150,7 @@ As the campaign progressed, the temporal sampling became denser across all field
 
 It is important to note that the time sampling in the \gls{DP1} dataset differs significantly from what will be seen in the final \gls{LSST} data.
 \tabref{tab:dp1_m5_depths} lists the  5$\sigma$ point source depths for coadded images per field and per band, where coverage in a band is non-zero.
-\input{tables/dp1_m5_coadded_depths}
+\input{./dp1_m5_coadded_depths}
 
 % Spatial coverage  -- are these needed given figure 1?
 % \figref{fig:dp1_fields_coverage} shows the sky coverage for each of the \nfields DP1 fields.
@@ -228,17 +228,17 @@ The visits cycled between the grid's four pointing centers, using small random t
 %     \centering
 %     \begin{subfigure}[t]{0.3\textwidth}
 %         \centering
-%         \includegraphics[width=\linewidth]{figures/maglim/DP1_47_Tuc_psf_maglim_r.pdf}
+%         \includegraphics[width=\linewidth]{./DP1_47_Tuc_psf_maglim_r.pdf}
 %         \caption{47 Tucanae}
 %     \end{subfigure}\hfill
 %     \begin{subfigure}[t]{0.3\textwidth}
 %         \centering
-%         \includegraphics[width=\linewidth]{figures/maglim/DP1_Fornax_dSph_psf_maglim_r.pdf}
+%         \includegraphics[width=\linewidth]{./DP1_Fornax_dSph_psf_maglim_r.pdf}
 %         \caption{Fornax dwarf Spheroidal}
 %     \end{subfigure}\hfill
 %     \begin{subfigure}[t]{0.3\textwidth}
 %         \centering
-%         \includegraphics[width= \linewidth]{figures/maglim/DP1_ECDFS_psf_maglim_r.pdf}
+%         \includegraphics[width= \linewidth]{./DP1_ECDFS_psf_maglim_r.pdf}
 %         \caption{ECDFS}
 %     \end{subfigure}
 %     \vspace{1em}
@@ -246,17 +246,17 @@ The visits cycled between the grid's four pointing centers, using small random t
 %     % Row 2
 %     \begin{subfigure}[t]{0.3\textwidth}
 %         \centering
-%         \includegraphics[width=\linewidth]{figures/maglim/DP1_EDFS_comcam_psf_maglim_r.pdf}
+%         \includegraphics[width=\linewidth]{./DP1_EDFS_comcam_psf_maglim_r.pdf}
 %         \caption{EDFS}
 %     \end{subfigure}\hfill
 %     \begin{subfigure}[t]{0.3\textwidth}
 %         \centering
-%         \includegraphics[width=\linewidth]{figures/maglim/DP1_Rubin_SV_095_-25_psf_maglim_r.pdf}
+%         \includegraphics[width=\linewidth]{./DP1_Rubin_SV_095_-25_psf_maglim_r.pdf}
 %         \caption{RubinSV\_95\_-25}
 %     \end{subfigure}\hfill
 %     \begin{subfigure}[t]{0.3\textwidth}
 %         \centering
-%         \includegraphics[width=\linewidth]{figures/maglim/DP1_Seagull_psf_maglim_r.pdf}
+%         \includegraphics[width=\linewidth]{./DP1_Seagull_psf_maglim_r.pdf}
 %         \caption{Seagull}
 %     \end{subfigure}
 %     \vspace{1em}
@@ -265,7 +265,7 @@ The visits cycled between the grid's four pointing centers, using small random t
 %     \hspace{0.3\textwidth}
 %     \begin{subfigure}[t]{0.29\textwidth}
 %         \centering
-%         \includegraphics[width=\linewidth]{figures/maglim/DP1_Rubin_SV_38_7_psf_maglim_r.pdf}
+%         \includegraphics[width=\linewidth]{./DP1_Rubin_SV_38_7_psf_maglim_r.pdf}
 %         \caption{Rubin\_SV\_38\_7}
 %     \end{subfigure}
 %     \hspace*{0.3\textwidth}
@@ -284,7 +284,7 @@ As the pointing model was not fine-tuned, tracking errors could range from 0.2 t
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 
 % Not sure this is needed
-% \input{tables/image_quality_summary}
+% \input{./image_quality_summary}
 % \tabref{tab:image_quality} summarizes the delivered image quality expressed in terms of the PSF FWHM in arcseconds per band for the \nexposures in DP1.
 The DP1 median delivered image quality across all bands is \medianimagequalityallbands, as measured by the \gls{PSF} \gls{FWHM}.
 The best images achieved a \gls{PSF} \gls{FWHM} of approximately \bestimagequality.
