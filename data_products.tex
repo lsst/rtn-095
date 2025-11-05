@@ -21,13 +21,19 @@ At the highest level, the \gls{DP1} data products fall into one of five types:
 \end{itemize}
 While images and catalogs are expected to be the primary data products for scientific research, we also recognize the value of providing access to other data types to support investigations and ensure transparency.
 
-To facilitate processing, Rubin \gls{DP1} uses a single skymap\footnote{A skymap is a tiling of the celestial sphere, organizing large-scale sky coverage into manageable sections for processing and analysis.} that covers the entire sky area encompassing the seven \gls{DP1} fields.
+{\bf To facilitate processing, Rubin \gls{DP1} uses a single skymap\footnote{A skymap is a tiling of the celestial sphere, organizing large-scale sky coverage into manageable sections for processing and analysis.} that covers the entire sky area encompassing the seven \gls{DP1} fields.
 The \gls{DP1} skymap divides the entire celestial sphere into \ntotaltracts \gls{tract}s, each covering approximately \tractarea.
-Each \gls{tract} is further subdivided into \npatchx$times$\npatchy equally-sized patches, with each \gls{patch} covering roughly \innerpatcharea.
-Both tracts and patches overlap with their neighboring regions.
+The \gls{tract}s are arranged in rings of declination, ordered from south to north, then with increasing right ascension within a ring.  
+Each \gls{tract} is further subdivided into \npatchx$\times$\npatchy equally-sized patches.
+Both \gls{tract}s and patches overlap with their neighboring regions.
+The amount of overlap between \gls{tract}s changes with declination, with \gls{tract}s nearest the poles having the greatest degree of overlap; the minimum overlap between tracts is \tractoverlap.
+By contrast, the amount of overlap between patches is constant, with each \gls{patch} overlapping each of its neighbouring patches by \patchoverlap.
+As a consequence, each patch covers \outerpatcharea, which is slightly larger than the tract area divided by the number of patches in a tract.
+The aerial coverage of a patch is comparable to, but somewhat smaller than, the \rawfov field-of-view of a single LSSTComCam or LSSTCam detector, meaning each detector image covers multiple patches.}
+
 Since the \gls{LSSTComCam} only observed \totalarea of the sky during its campaign, only \ncoveredtracts out of the \ntotaltracts tracts have coverage in \gls{DP1}.
 The tract identification numbers and corresponding target names for these tracts are listed in \tabref{tab:dp1_tracts}.
-The size of a tract is larger than the LSSTCam field of view; however, since each observed field extends across more than one tract, each field covers multiple tracts.
+The size of a tract is larger than the LSSTComCam field of view; however, since each observed field extends across more than one tract, each field covers multiple tracts.
 \input{./dp1_field_tracts}
 
 The skymap is integral to the production of co-added images.

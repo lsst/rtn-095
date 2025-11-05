@@ -317,6 +317,11 @@ def skymapData(params):
     params = addParameter(params, 'tractarea',
                         f'{roughTractArea:.1f}', unit='deg$^2$')
 
+    # Tract overlap:
+    tractOverlap = skymap.config.tractOverlap * 60.
+    params = addParameter(params, 'tractoverlap',
+                          f'{tractOverlap:.1f}', unit='\\arcmin')
+    
     # Number of patches:
     numXPatches, numYPatches = skymap[0].getNumPatches()
     numPatches = numXPatches * numYPatches
@@ -337,7 +342,20 @@ def skymapData(params):
     roughOuterArea = round_sf(fovx * fovy, sig=2)
     params = addParameter(params, 'outerpatcharea',
                         f'{roughOuterArea:.3f}', unit='deg$^2$')
-
+    
+    # Patch overlap
+    # The amount of overlap is equal to the difference between the inner and outer
+    # patch dimensions:
+    wcs = tract.getWcs()
+    patchInfo = tract.getPatchInfo((5,5))
+    patchOverlap = (
+        (patchInfo.getOuterBBox().getWidth() -
+         patchInfo.getInnerBBox().getWidth()) 
+        * wcs.getPixelScale().asArcseconds()
+    )
+    params = addParameter(params, 'patchoverlap',
+                          f'{patchOverlap:.1f}', unit='\\arcsec')
+    
     return params
 
 #-------- Image selection criteria for deep_coadd -------#
