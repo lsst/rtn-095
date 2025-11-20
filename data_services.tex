@@ -34,14 +34,12 @@ This section outlines the RSP functionality available at the time of the DP1 rel
 The Rubin US Data Access Center (US DAC) utilizes a novel hybrid on-premises-\gls{cloud} architecture, which combines on-premises infrastructure at the \gls{USDF} at SLAC with flexible and scalable resources in the Google \gls{cloud}.
 This architecture has been deployed and tested using the larger simulated data set of DP0.2 \citep{2024SPIE13101E..2BO}.
 
-In this hybrid model, user-facing services are deployed in the \gls{cloud} to support
-dynamic scaling in response to user demand and to simplify the provisioning and management of large numbers of science user accounts.
+In this hybrid model, user-facing services are deployed in the \gls{cloud} to support dynamic scaling in response to user demand and to simplify the provisioning and management of large numbers of science user accounts.
 The majority of the static data products described in \secref{sec:data_products} are stored on-premises at the \gls{USDF} to benefit from cost-effective mass storage and close integration with Rubin data processing infrastructure, also located at the \gls{USDF}.
 For imaging data, the Data Butler (\secref{sssec:data_butler}) provides the interface between the \gls{cloud}-based users and data services, and the on-premises data.
 For catalog data, a \gls{cloud}-based \gls{TAP} client (\secref{sssec:ivoa_services}) submits queries to the on-premises \gls{Qserv} database cluster (\secref{ssec:databases}) and retrieves the results.
 In the initial DP1 deployment, catalog data is hosted at the \gls{USDF} while image data is stored in the cloud.
 The full hybrid model will be rolled out and further tested following the release of \gls{DP1}.
-
 The RSP features a single-sign-on authentication and authorization system to provide secure access for Rubin data rights holders \citep{rdo-013}.
 
 \subsection{API Aspect}
