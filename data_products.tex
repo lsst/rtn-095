@@ -80,7 +80,8 @@ To be included in a \gls{DP1} \texttt{deep\_coadd}, a \texttt{visit\_image} need
 
 There are a total of \ndeepcoadds \texttt{deep\_coadd}s in \gls{DP1}.
 As mentioned above, a single \texttt{deep\_coadd} covers one \gls{patch}, and includes a small amount of overlap with its neighboring \gls{patch}.
-The skymap used for \gls{DP1} defines a \gls{patch} as having an on-sky area of \innerpatcharea excluding overlap, and \outerpatcharea including overlap. A single \texttt{deep\_coadd} -- including overlap -- contains \ndeepcoaddpixx $\times$ \ndeepcoaddpixy equal-sized pixels, corresponding to a platescale of \rawplatescale.
+The skymap used for \gls{DP1} defines a \gls{patch} as having an on-sky area of \innerpatcharea excluding overlap, and \outerpatcharea including overlap. 
+A single \texttt{deep\_coadd} -- including overlap -- contains \ndeepcoaddpixx $\times$ \ndeepcoaddpixy equal-sized pixels, corresponding to a platescale of \rawplatescale.
 Each \texttt{deep\_coadd} contains the science image (i.e., the coadd), a variance image, and a pixel mask; all three contain the same number of pixels.
 Each \texttt{deep\_coadd} also contains a position-dependent \gls{PSF} model (which is the weighted sum of the \gls{PSF} models of the input \texttt{visit\_image}s), \gls{WCS} information, plus various \gls{metadata}.
 
