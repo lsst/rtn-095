@@ -49,12 +49,19 @@ Each sensor is subdivided into 16 segments arranged in a 2×8 layout, with each 
 To maintain uniform performance and \gls{calibration} each  \gls{raft} is populated with sensors from only one vendor.
 
 \gls{LSSTComCam} consists of a single science  \gls{raft} equipped exclusively with \gls{ITL} sensors.
+It is designated as Raft 22 (R22).
+\figref{fig:comcam_focal_plane} shows the LSSTComCam focal plane layout illustrating the placement and numbering scheme of sensors (S) and amplifiers (C) within  Raft 22 (R22).
 The sensors selected for \gls{LSSTComCam} represent  the best performing of the remaining ITL devices after the \gls{LSSTCam}  \gls{raft}s were fully populated.
-They  exhibit known issues such as high readout noise (e.g., Detector 8, S22 in \figref{fig:comcam_focal_plane}) and elevated \gls{CTI} (e.g., Detector 5, S12 in \figref{fig:comcam_focal_plane}).
+Some sensors exhibit known issues such as elevated readout noise (e.g., Detector 8, S22) and increased \gls{CTI} (e.g., Detector 5, S12).
+\begin{figure}[htb!]
+\includegraphics[width=\linewidth]{ComCam_focal_plane}
+\caption{LSSTComCam focal plane layout illustrating the placement and numbering scheme of sensors (S) and amplifiers (C). The view is looking down from above the focal plane through the LSSTComCam lenses. Each sensor contains 16 amplifiers, and a group of nine sensors comprises one raft. LSSTComCam is Raft 22 (R22). The detector number for each sensor is shown in parentheses.}
+\label{fig:comcam_focal_plane}
+\end{figure}
+
 As a result, certain image artifacts present in the \gls{DP1} dataset may be specific to LSSTComCam.
-Although the cryostat in \gls{LSSTComCam}, uses a different cooling system than that of \gls{LSSTCam}, \gls{LSSTComCam} incorporated a refrigeration pathfinder to validate the cryogenic refrigeration system intended for \gls{LSSTCam},.
+Although the cryostat in \gls{LSSTComCam}, uses a different cooling system than that of \gls{LSSTCam}, \gls{LSSTComCam} incorporated a refrigeration pathfinder to validate the cryogenic refrigeration system intended for \gls{LSSTCam}.
 \figref{fig:comcam_raft_in_lsstcam_focal_plane} shows the single-raft \gls{LSSTComCam} positioned at the center of the full LSSTCam focal plane, corresponding to the central science \gls{raft} position.
-\gls{LSSTComCam} is designated as Raft 22 (R22).
 \begin{figure}[htb]
 \includegraphics[width=\linewidth]{comcam_raft_in_lsstcam_focal_plane}
 \caption{Schematic showing the single-raft LSSTComCam positioned at the center of the full LSSTCam focal plane. The perspective is from above, looking down through the LSSTComCam lenses onto the focal plane.
@@ -62,11 +69,6 @@ Credit: RubinObs/NOIRLab/SLAC/NSF/DOE/AURA.}
 \label{fig:comcam_raft_in_lsstcam_focal_plane}
 \end{figure}
 
-\begin{figure}[htb!]
-\includegraphics[width=\linewidth]{ComCam_focal_plane}
-\caption{LSSTComCam focal plane layout illustrating the placement and numbering scheme of sensors (S) and amplifiers (C). The view is looking down from above the focal plane through the LSSTComCam lenses. Each sensor contains 16 amplifiers, and a group of nine sensors comprises one raft. LSSTComCam is Raft 22 (R22). The detector number for each sensor is shown in parentheses.}
-\label{fig:comcam_focal_plane}
-\end{figure}
 The \gls{LSSTCam} and \gls{LSSTComCam} focal planes are described in detail in \citet{CTN-001}.
 
 \subsubsection{Filter Complement}
@@ -109,7 +111,7 @@ As a result, flat fielding for \gls{DP1} relied entirely on twilight flats.
 While twilight flats pose challenges such as non-uniform illumination and star print-through, they were the only available option during \gls{LSSTComCam} commissioning and for DP1 processing.
 To mitigate these limitations, dithered, tracked exposures were taken over a broad range of azimuth and rotator angles to construct combined flat \gls{calibration} frames.
 Exposure times were dynamically adjusted to reach target signal levels of between 10,000 and 20,000 electrons.
-Future campaigns will benefit from more stable and uniform flat fielding using the Rubin flat field system, described in \citet{SITCOMTN-086}.
+Future campaigns with LSSTCam will benefit from more stable and uniform flat fielding using the Rubin flat field system, described in \citet{SITCOMTN-086}.
 
 \subsection{LSST Science Pipelines Commissioning}
 \label{ssec:pipelines_commissioning}

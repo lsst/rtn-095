@@ -85,7 +85,7 @@ The result set includes \gls{metadata} about the image, such as the sky position
 Users submit requests specifying sky coordinates and the cutout size as the radius from the coordinates, and the  service performs the operation on the full image and returns a result set.
 % For a YxY cutout, the typical size of the returned result set is <X>
 For \gls{DP1}, the  cutout service is a single cutout service only where N cutout requests will require $N$ independent synchronous calls.
-We expect some form of bulk cutout service by mid 2026, approximately contemporaneously with \gls{DP2}.
+We expect some form of bulk cutout service by mid 2026.
 
 \vspace{0.1cm}
 \item \textbf{HiPS Data Service}: An authenticated \gls{HiPS}
@@ -139,7 +139,7 @@ Collections support flexible, parallel processing by enabling repeated analyses 
 
 For \gls{DP1}, a subset of the consolidated database contents (\secref{sssec:consdb}) is accessible through the Data Butler.
 However, not all metadata from the \texttt{Visit} table (\secref{ssec:metadata}) are available.
-The \gls{DP1} Butler is read-only; a writeable Butler is expected by mid-2026, around the time of \gls{DP2}.
+The \gls{DP1} Butler is read-only; a writeable Butler is expected by mid-2026.
 
 \subsubsection{Remote Programmatic Access}
 \label{sssec:remote_api}
