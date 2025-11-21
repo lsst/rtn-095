@@ -299,11 +299,20 @@ It contains technical data for each visit, such as telescope pointing, camera ro
 
 \subsection{Ancillary Data Products}
 \label{subsec:ancilliary}
-DP1 also includes several ancillary data products. While we do not expect most users to need these, we describe them here for completeness. All the Data Products described in this section can only be accessed via the Data Butler (\secref{sssec:data_butler}).
+DP1 also includes several ancillary data products. 
+While we do not expect most users to need these, we describe them here for completeness. 
+All the Data Products described in this section can only be accessed via the Data Butler (\secref{sssec:data_butler}).
+
+\subsubsection{Standard Bandpasses}
+\label{sssec:transmission_curves}
+\figref{fig:comcam_standard_bandpasses} shows the full-system throughput of the six LSSTComCam filters. 
+The corresponding transmission curves are provided as a DP1 data product. 
+These datasets tabulate the full-system transmission of the six LSSTComCam filters as a function of wavelength and were used as a reference for the LSSTComCam DP1 photometry. The \texttt{standard\_passband} dataset is keyed by band and is stored in Astropy Table format.
 
 \subsubsection{Task configuration, log, and metadata}
 \gls{DP1} includes \gls{provenance}-related data products such as task logs, \gls{configuration} files, and task metadata.
-Configuration files record the parameters used in each processing task, while logs and \gls{metadata} contain information output during processing. These products help users understand the processing setup and investigate potential processing failures.
+Configuration files record the parameters used in each processing task, while logs and \gls{metadata} contain information output during processing. 
+These products help users understand the processing setup and investigate potential processing failures.
 
 \subsubsection{Calibration Data Products}
 \label{ssec:calibration_data}
