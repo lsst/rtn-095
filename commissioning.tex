@@ -83,7 +83,7 @@ The full-system throughput of the six LSSTComCam filters, which encompasses cont
 camera surfaces, and the mean ITL detector quantum efficiency is shown in \figref{fig:comcam_standard_bandpasses}.
 The corresponding transmission curves are provided as a DP1 data product and are described in \secref{sssec:transmission_curves}
 
-\begin{figure}[htb!]
+\begin{figure}[htb]
 \includegraphics[width=\linewidth]{dp1_comcam_std_bandpasses}
 \caption{LSSTComCam standard bandpasses, illustrating full system throughput. The bandpasses include a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and mean ITL detector quantum efficiency.}
 \label{fig:comcam_standard_bandpasses}
@@ -145,7 +145,7 @@ All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_20
 \tabref{tab:dp1_fields} lists the \nfields \gls{DP1} fields and their pointing centers, and provides a summary of the band coverage in each.
 
 The temporal sampling distribution of observations per band and per night is shown in \figref{fig:target_fields_temporal_sampling}.
-\begin{figure}[htb!]
+\begin{figure}[htb]
 \includegraphics[width=\linewidth]{visitDates}
 \caption{Distribution of DP1 observations by date grouped by field as a function of time over the \nnightscomcam nights of data taking with LSSTComCam.
 Each dot represents a single  exposure, color-coded by band.}
@@ -156,8 +156,6 @@ As the campaign progressed, the temporal sampling became denser across all field
 
 It is important to note that the time sampling in the \gls{DP1} dataset differs significantly from that of  \gls{LSST} survey cadence.
 \tabref{tab:dp1_m5_depths} reports the  5$\sigma$ point source depths for coadded images per field and per band, where coverage in a band is non-zero,  together with the expected 10-year LSST depths derived from the baseline simulated survey \citep{2022ApJS..258....1B}.
-
-
 \input{./dp1_m5_coadded_depths}
 
 % Spatial coverage  -- are these needed given figure 1?
@@ -281,7 +279,6 @@ The visits cycled between the grid's four pointing centers, using small random t
 %     \label{fig:dp1_fields_depth}
 % \end{figure*}
 
-% Reviewed by Elana
 \subsection{Delivered Image Quality}
 \label{ssec:image_quality}
 The delivered image quality is influenced by contributions from both the observing system (i.e., dome, telescope and camera) and the atmosphere.
@@ -294,13 +291,14 @@ Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 % Not sure this is needed
 % \input{./image_quality_summary}
 % \tabref{tab:image_quality} summarizes the delivered image quality expressed in terms of the PSF FWHM in arcseconds per band for the \nexposures in DP1.
-The DP1 median delivered image quality across all bands is \medianimagequalityallbands, as measured by the \gls{PSF} \gls{FWHM}.
-The best images achieved a \gls{PSF} \gls{FWHM} of approximately \bestimagequality.
-\begin{figure}[htb!]
+The DP1 median delivered image quality, quantified as the \gls{PSF} \gls{FWHM} across all bands, is \medianimagequalityallbands, with the best images achieving approximately \bestimagequality.
+\figref{fig:delivered_image_quality_ecdf} shows the cumulative distribution of PSF FWHM (arcsec) over all \nvisitdetectorsummaries individual sensors images, with separate curves for each filter.
+Vertical dashed lines indicate the median PSF FWHM values:  1.46, 1.36, 1.24, 1.18 and 1.20 arcsec for the $ugrizy$ bands respectively.
+\begin{figure}[htb]
 \centering
 \includegraphics[width=\linewidth]{image_quality_ecdf}
-\caption{Cumulative distribution of PSF FWHM (arcsec) over all \nvisitdetectorsummaries visits images in the DP1 dataset for each filter.
-The vertical dashed lines represent the median PSF FWHM at 1.46, 1.36, 1.24, 1.18 and 1.20 arcsec for the $ugrizy$ wavebands, respectively.}
+\caption{Cumulative distribution of PSF FWHM (arcsec) over all \nvisitdetectorsummaries individual sensors in the DP1 dataset for each filter.
+The vertical dashed lines represent the median PSF FWHM at 1.46, 1.36, 1.24, 1.18 and 1.20 arcsec for the $ugrizy$ bands  respectively.}
 \label{fig:delivered_image_quality_ecdf}
 \end{figure}
 Ongoing efforts aim to quantify all sources of image degradation,  including contributions from the camera system, static and dynamic optical components, telescope mount motion,  observatory-induced seeing from the dome and mirror, and atmospheric conditions.
