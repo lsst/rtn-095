@@ -181,13 +181,21 @@ As the pointing model was not fine-tuned, tracking errors could range from 0.2 t
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 
 The DP1 median delivered image quality, quantified as the \gls{PSF} \gls{FWHM} across all bands, is \medianimagequalityallbands, with the best images achieving approximately \bestimagequality. 
+It varies both by passband and   target field. 
 The per-band median PSF FWHM  values are: u = \umedianimagequality,  g = \gmedianimagequality, r = \rmedianimagequality, i = \imedianimagequality, z = \zmedianimagequality, y = \ymedianimagequality arcsecs.
 \figref{fig:delivered_image_quality} shows the  distribution of PSF FWHM (arcsec) over all \nvisitdetectorsummaries individual sensors images.
-\begin{figure}[hbt!]
-\centering
-\includegraphics[width=\linewidth]{image_quality_histo}
-\caption{Histogram showing the distribution of PSF FHWM for all \nvisitdetectorsummaries single-epoch individual sensors in the DP1 dataset.
-The median PSF FWHM  for each band is: u = \umedianimagequality,  g = \gmedianimagequality, r = \rmedianimagequality, i = \imedianimagequality, z = \zmedianimagequality, y = \ymedianimagequality arcsecs.}
+
+\begin{figure*}[hbt!]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\linewidth]{image_quality_histo}
+    \caption{Per band across all fields. } 
+ \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\linewidth]{image_quality_histo_per_field}
+    \caption{Per field for all bands}
+  \end{subfigure}\hfill
+\caption{Histograms showing the  distribution of PSF FHWM for all \nvisitdetectorsummaries single-epoch individual sensors in the DP1 dataset. The median values are given in the legend. }
 \label{fig:delivered_image_quality}
-\end{figure}
+\end{figure*}
 Ongoing efforts aim to quantify all sources of image degradation,  including contributions from the camera system, static and dynamic optical components, telescope mount motion,  observatory-induced seeing from the dome and mirror, and atmospheric conditions.
