@@ -241,6 +241,18 @@ def observingQuality(params):
     params = addParameter(params, 'medianimagequalityallbands',
                           medSeeing.item(), unit='\\arcsec', sig=3)
 
+    
+    # Median quality per band
+    df = visit_detector_table[visit_detector_table['nPsfStar']>100].to_pandas()
+    bandSeeing = df.groupby('band')['psfFwhm'].median()
+    bandSeeing = bandSeeing.reindex(bands)
+
+    # Add one parameter per band
+    for band in bandSeeing.index:
+        param_name = f'{band}medianimagequality'
+        params = addParameter(params, param_name,float(bandSeeing[band]), 
+                              unit='\\arcsec', sig=3)
+        
     return params
 
 #-------- Stats of different image datasets -------#
@@ -669,31 +681,29 @@ if __name__ == "__main__":
     instrument = 'LSSTComCam'
     collections = [
         'LSSTComCam/DP1',
-        'LSSTComCam/runs/DRP/DP1/v29_0_0/DM-50260',
         'skymaps',
         ]
     skymapName = 'lsst_cells_v1'
 
     # /repo/dp1 butler:
     butler = Butler(
-        "/repo/dp1",
+        "dp1",
         instrument=instrument,
         collections=[
             'LSSTComCam/DP1',
-            'LSSTComCam/runs/DRP/DP1/v29_0_0/DM-50260',
             'skymaps'],
             skymap=skymapName
         )
     registry = butler.registry
     skymap = butler.get('skyMap', skymap=skymapName)
 
-    # /repo/main Butler
-    mainButler = Butler(
-        "/repo/main",
-        instrument=instrument,
-        collections=['LSSTComCam/runs/DRP/DP1/v29_0_0_rc6/DM-50098'],
-        skymap=skymapName)
-    mainRegistry = mainButler.registry
+    # # /repo/main Butler
+    # mainButler = Butler(
+    #     "/repo/main",
+    #     instrument=instrument,
+    #     collections=['LSSTComCam/runs/DRP/DP1/v29_0_0_rc6/DM-50098'],
+    #     skymap=skymapName)
+    # mainRegistry = mainButler.registry
 
     params = (dict(), dict())
 
