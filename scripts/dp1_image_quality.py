@@ -1,6 +1,8 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.distributions.empirical_distribution import ECDF
+from matplotlib.ticker import MultipleLocator
 
 from lsst.daf.butler import Butler
 import lsst.geom
@@ -11,11 +13,9 @@ from lsst.utils.plotting import get_multiband_plot_colors, get_multiband_plot_sy
 
 
 instrument = 'LSSTComCam'
-collections = ['skymaps',
-               'LSSTComCam/DP1',
-               'LSSTComCam/runs/DRP/DP1/v29_0_0/DM-50260' ]
+collections = ['LSSTComCam/DP1']
 skymap = 'lsst_cells_v1'
-butler = Butler("/repo/dp1",
+butler = Butler("dp1",
                 instrument=instrument,
                 collections=collections,
                 skymap=skymap)
@@ -27,66 +27,75 @@ bands_dict = publication_plots.get_band_dicts()
 colors = get_multiband_plot_colors()
 bands = colors.keys()  # important to get the right order for plot legends
 
-t = butler.get("visit_detector_table")
+t = butler.get("visit_detector_table", storageClass = "DataFrame")
 
-# This is very low -- 0.135 arcsec seeing is not physical.
-# Should these and other such visits be excluded from the dataset?
-
-# This is clearly non-physical 
 # Put a lower cut on IQ at 0.6  to exclude non-physical values 
 # -- based on SITCOMTN report of 0.65 bing best IQ 
 t["psfFwhm"] = t["psfSigma"]*2.355*0.2 
 use = t["psfFwhm"] >= 0.6
 t = t[use]
 
-# Compute all band summary statistics
-# Extract data from visit table for plotting
+# Compute per- and all- band summary statistics
+df = t[['detectorId','visitId', 'band', 'psfFwhm']].copy()
+
+# Compute per-band and all-bands IQ
+iq_band = df.groupby('band')['psfFwhm'].quantile(0.5).round(2)
+iq_band.index.name = 'band'
+iq_band = iq_band.reindex(bands)
+
 data = {}
 for band in bands:
     bandMask = t["band"] == band
     data[band] = t["psfFwhm"][bandMask]
 
 
-# IQ histogram - not for inclusion in the paper but interesting
+##############  IQ histogram
 plt.figure()
-
 for label, d in data.items():
-    plt.hist(d, bins=20, alpha=0.5,
-             linestyle='-',
-             color = colors[label],
-             label=label)
+    lg_label = f"{label} ($\\tilde{{x}}$={iq_band[label]})" 
+    plt.hist(d, bins=60, linewidth=2.0,
+             linestyle='-', histtype='step',
+             color=colors[label],
+             label=lg_label)
 
-# Customize plot
+# Customize plot 
 plt.xlabel('PSF FWHM (arcsecs)')
 plt.ylabel('Fraction of Sensors')
-plt.legend()
+plt.legend(loc='upper right')
+plt.tight_layout()
+plt.savefig("../figures/image_quality_histo.pdf", 
+            bbox_inches='tight',
+            transparent=True,
+            format='pdf')
+plt.close()
 
-plt.savefig("image_quality_histo.pdf", 
-            bbox_inches='tight',  # Trim whitespace around the figure
-            transparent=True,     # Transparent background
-            format='png')         # Explicit format specification
-plt.show()
-
-# IQ ECDF
+################### IQ ECDF ############################
 plt.figure()
-
 for label, d in data.items():
     ecdf = ECDF(d)
     plt.plot(ecdf.x, ecdf.y, 
              linestyle='-',
              color = colors[label],
              label=label)
-
+    
 # Customize plot
+ax = plt.gca()
+ax.xaxis.set_major_locator(MultipleLocator(0.2))
+ax.xaxis.set_minor_locator(MultipleLocator(0.1))
+ax.yaxis.set_major_locator(MultipleLocator(0.2))
+ax.yaxis.set_minor_locator(MultipleLocator(0.1))
+plt.grid(True, which='both', alpha=0.3, linestyle='-', linewidth=0.5)
 plt.xlabel('PSF FWHM (arcsecs)')
-plt.ylabel('Fraction of Sensors')
-plt.xlim(0.4, 2.7)
-plt.legend(loc="lower right")
-plt.savefig("image_quality_ecdf.pdf", 
-            bbox_inches='tight',  # Trim whitespace around the figure
-            transparent=True,)     # Transparent background         # Explicit format specification
-plt.show()
+plt.ylabel('Cumulative Probability')
+plt.legend(loc='lower right')
+plt.tight_layout()
+plt.savefig("../figures/image_quality_ecdf.pdf", 
+            bbox_inches='tight',
+            transparent=True,
+            format='pdf')
 plt.close()
+
+############ Visit Dates ###############################
 
 names = ["47 Tucanae", "Fornax", "ECDFS", "EDFS", "Rubin SV 95 -25", "Seagull", "Rubin SV 38 7"]
 raMins = [3.8, 39.2, 52.3, 58, 94.2, 105.55, 36.75]
@@ -126,5 +135,5 @@ plt.legend(bbox_to_anchor=(0.93, 1.15), ncols=6)
 plt.xlim(60622, 60658)
 plt.xlabel("MJD")
 plt.subplots_adjust(left=0.22, right=0.99, top=0.85, bottom=0.15)
-plt.savefig("visitDates.pdf")
+plt.savefig("../figures/visitDates.pdf")
 plt.show()
