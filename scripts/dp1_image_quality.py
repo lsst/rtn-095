@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 from statsmodels.distributions.empirical_distribution import ECDF
 from matplotlib.ticker import MultipleLocator
 
+from collections import defaultdict
 from lsst.daf.butler import Butler
 import lsst.geom
 
 # Set a standard figure size to use
-from lsst.utils.plotting import publication_plots
+from lsst.utils.plotting import publication_plots, set_rubin_plotstyle
 from lsst.utils.plotting import get_multiband_plot_colors, get_multiband_plot_symbols, get_multiband_plot_linestyles
-
 
 instrument = 'LSSTComCam'
 collections = ['LSSTComCam/DP1']
@@ -47,7 +47,6 @@ data = {}
 for band in bands:
     bandMask = t["band"] == band
     data[band] = t["psfFwhm"][bandMask]
-
 
 ##############  IQ histogram
 plt.figure()
@@ -90,6 +89,39 @@ plt.ylabel('Cumulative Probability')
 plt.legend(loc='lower right')
 plt.tight_layout()
 plt.savefig("../figures/image_quality_ecdf.pdf", 
+            bbox_inches='tight',
+            transparent=True,
+            format='pdf')
+plt.close()
+
+############## IQ per target field
+registry = butler.registry
+exposures = registry.queryDimensionRecords('exposure')
+exp_df = pd.DataFrame(columns=['id', 'target', 'physical_filter','ra', 'dec'])
+for count, info in enumerate(exposures):
+    exp_df.loc[count] = [info.id, info.target_name, info.physical_filter, 
+                         info.tracking_ra, info.tracking_dec,]
+
+tdf = exp_df.merge(df, left_on='id', right_on='visitId', how='inner')
+tdf.loc[tdf['target'] == 'slew_icrs', 'target'] = 'ECDFS'
+tdf = tdf[['visitId', 'detectorId', 'target', 'band', 'psfFwhm']]
+
+set_rubin_plotstyle()
+plt.figure()
+for target in tdf['target'].unique():
+    data = tdf[tdf['target'] == target]['psfFwhm']
+    median_val = data.median()
+    lg_label = f"{target} ($\\tilde{{x}}$={median_val:.2f})"
+    plt.hist(data, bins=60, linewidth=2.0,
+             histtype='step',
+             label=lg_label)
+
+# Customize plot 
+plt.xlabel('PSF FWHM (arcsecs)')
+plt.ylabel('Fraction of Sensors')
+plt.legend(loc='upper right')
+plt.tight_layout()
+plt.savefig("../figures/image_quality_histo_per_field.pdf", 
             bbox_inches='tight',
             transparent=True,
             format='pdf')
