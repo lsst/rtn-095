@@ -125,37 +125,36 @@ Commissioning of the LSST Science Pipelines, \citep{PSTN-019},  began once the t
 The goals included testing the internal astrometric and photometric calibration across a range of observing conditions, validating the difference image analysis and Prompt Processing \citep{DMTN-219} framework, and accumulating over 200 visits per band to evaluate deep coadded images with integrated exposure times roughly equivalent to those of the planned LSST \gls{WFD} 10-year depth.
 To support these goals, \nfields target fields were selected that span a range of stellar densities, overlap with external reference datasets, and collectively span the full breadth of the four primary \gls{LSST} science themes.
 These \nfields fields form the basis of the \gls{DP1} dataset.
-\figref{fig:dp1_fields_on_sky} shows the locations of these \nfields fields on the sky, overlaid on the LSST baseline survey footprint \citep{PSTN-051, PSTN-052, PSTN-053, PSTN-055, PSTN-056}, along with sky coverage of both the LSSTCam and \gls{LSSTComCam} focal planes.
+\figref{fig:dp1_fields_on_sky} shows the locations of these \nfields fields on the sky, overlaid on the LSST baseline survey footprint \citep{PSTN-051, PSTN-052, PSTN-053, PSTN-055, PSTN-056}, as well as the area of sky covered by both the \gls{LSSTCam} and \gls{LSSTComCam} focal planes.
 \begin{figure*}[htb!]
 \centering
 \includegraphics[width=\linewidth]{dp1_fields_with_survey_fp}
 \caption{Locations of the seven DP1 fields overlaid on the LSST baseline survey footprint \citep{PSTN-056}.
 NES: North Ecliptic Spur, SCP: South Celestial Pole, Low-Dust WFD: regions away from the Galactic Plane (GP) observed with a WFD cadence, GP/MC WFD: Galactic Plane and Magellanic Clouds regions observed with a WFD cadence.
-The fields of view covered by the LSSTCam and LSSTComCam focal planes are represented as outer and inner concentric circles, respectively, centered on the pointing center of each field.}
+The fields of view covered by the \gls{LSSTCam} and \gls{LSSTComCam} focal planes are represented as outer and inner concentric circles, respectively, centered on the pointing center of each field.}
 \label{fig:dp1_fields_on_sky}
 \end{figure*}
 
+% Fields 
 \input{./dp1_fields.tex}
 Each of the \nfields target fields was observed repeatedly in multiple bands over  many nights.
 A typical observing \gls{epoch} on a given target field consisted of 5-20 visits in each of the three loaded filters (\secref{sssec:comcam_filters}).
 All DP1 images were captured as single 1$\times$30-second exposures for all bands, rather than as  2$\times$15-second ``snap" exposures.
-Additionally, some $u$-band exposures were taken as 38-second exposures.
+Additionally, some $u$-band exposures were taken as 1$\times$38-second exposures.
 The  exposure time for LSST images will be determined following further testing during the commissioning phase with  LSSTCam.
 All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_2019, peter_yoachim_2024_13985198}.
 \tabref{tab:dp1_fields} lists the \nfields \gls{DP1} fields and their pointing centers, and provides a summary of the band coverage in each.
 
+% Temporal sampling
 The temporal sampling distribution of observations per band and per night is shown in \figref{fig:target_fields_temporal_sampling}.
-\begin{figure}[htb]
+Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only hold three filters at a time (see \secref{sssec:comcam_filters}).
+As the campaign progressed, the temporal sampling became denser across all fields, reflecting improved efficiency and increased time allocated for science observations.
+It is important to note that the time sampling in the \gls{DP1} dataset differs significantly from that of  \gls{LSST} survey cadence.
+\begin{figure}[htb!]
 \includegraphics[width=\linewidth]{visitDates}
 \caption{Distribution of DP1 observations by date grouped by field as a function of time over the \nnightscomcam nights of data taking with LSSTComCam.Each dot represents a single  exposure, color-coded by band.}
 \label{fig:target_fields_temporal_sampling}
 \end{figure}
-Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only hold three filters at a time (see \secref{sssec:comcam_filters}).
-As the campaign progressed, the temporal sampling became denser across all fields, reflecting improved efficiency and increased time allocated for science observations.
-
-It is important to note that the time sampling in the \gls{DP1} dataset differs significantly from that of  \gls{LSST} survey cadence.
-\tabref{tab:dp1_m5_depths} reports the  5$\sigma$ point source depths for coadded images per field and per band, where coverage in a band is non-zero,  together with the expected 10-year LSST depths derived from the baseline simulated survey \citep{2022ApJS..258....1B}.
-\input{./dp1_m5_coadded_depths}
 
 % Dithering patters
 All fields except for the low ecliptic latitude field, Rubin\_SV\_38\_7, used a small random dithering pattern.
@@ -164,12 +163,18 @@ The rotational dithers of the camera rotator were typically approximately 1 degr
 The Rubin\_SV\_38\_7 field used a different dither pattern to optimize coverage of Solar System Objects and test Solar System Object linking across multiple nights.
 These observations used a 2$\times$2 grid of \gls{LSSTComCam} pointings to cover an area of about 1.3 degree$\times$1.3 degrees.
 The visits cycled between the grid's four pointing centers, using small random translational dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing epoch.
+
+\figref{fig:dp1_fields_coverage} shows sky coverage maps showing the distribution of visits in each field, color coded by band. 
+The images clearly show the focal plane chip gaps and dithering pattern. 
+Only the detectors for which single frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields.
 \begin{figure*}[ht]
 \centering
  \includegraphics[width=\linewidth]{fieldSummaries}
  \caption{Sky coverage maps showing the distribution of visits in each field, color coded by band. The images clearly show the focal plane chip gaps and dithering pattern. Only the detectors for which single frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields. }
 \label{fig:dp1_fields_coverage}
 \end{figure*}
+\tabref{tab:dp1_m5_depths} reports the  5$\sigma$ point source depths for coadded images per field and per band, where coverage in a band is non-zero,  together with the expected 10-year LSST depths derived from the baseline simulated survey \citep{2022ApJS..258....1B}.
+\input{./dp1_m5_coadded_depths}
 
 \subsection{Delivered Image Quality}
 \label{ssec:image_quality}
@@ -180,22 +185,23 @@ Mount encoder data were used to measure the mount jitter in every image, with a 
 As the pointing model was not fine-tuned, tracking errors could range from 0.2 to 0.4 arcseconds per image, depending on RA and Dec.
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 
-The DP1 median delivered image quality, quantified as the \gls{PSF} \gls{FWHM} across all bands, is \medianimagequalityallbands, with the best images achieving approximately \bestimagequality. 
-It varies both by passband and   target field. 
-The per-band median PSF FWHM  values are: u = \umedianimagequality,  g = \gmedianimagequality, r = \rmedianimagequality, i = \imedianimagequality, z = \zmedianimagequality, y = \ymedianimagequality arcsecs.
+The DP1 median delivered image quality, quantified as the \gls{PSF} at \gls{FWHM} across all filters and target fields, is \medianimagequalityallbands. 
+The best images achieve a \gls{PSF} \gls{FWHM}  of approximately \bestimagequality, with  per-band median  values of: u = \umedianimagequality,  g = \gmedianimagequality, r = \rmedianimagequality, i = \imedianimagequality, z = \zmedianimagequality, y = \ymedianimagequality arcsecs.
+Both the per-sensor \gls{PSF} \gls{FWHM} and the overall median vary by filter and  specific target field. 
 \figref{fig:delivered_image_quality} shows the  distribution of PSF FWHM (arcsec) over all \nvisitdetectorsummaries individual sensors images.
-
 \begin{figure*}[hbt!]
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\linewidth]{image_quality_histo}
-    \caption{Per band across all fields. } 
+    \caption{PSF FHWM (arcsecs) per passband across all DP1 target fields. } 
  \end{subfigure}\hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\linewidth]{image_quality_histo_per_field}
-    \caption{Per field for all bands}
+    \caption{PSF FHWM (arcsecs) per DP1 target field across all passbands}
   \end{subfigure}\hfill
-\caption{Histograms showing the  distribution of PSF FHWM for all \nvisitdetectorsummaries single-epoch individual sensors in the DP1 dataset. The median values are given in the legend. }
+\caption{Histograms showing the  distribution of delivered image quality for all \nvisitdetectorsummaries single-epoch individual sensors in the DP1 dataset per passband (a) and per field (b). The median values are given in the legend. }
 \label{fig:delivered_image_quality}
 \end{figure*}
-Ongoing efforts aim to quantify all sources of image degradation,  including contributions from the camera system, static and dynamic optical components, telescope mount motion,  observatory-induced seeing from the dome and mirror, and atmospheric conditions.
+Ongoing efforts aim to quantify all sources of image degradation, including contributions from the camera system; static and dynamic optical components; telescope mount motion; observatory-induced seeing from the dome and primary mirror; and atmospheric conditions.
+For the \gls{LSST}, the design specification for the median delivered image quality, referenced to the zenith and 550 nm, is 0\farcs7.  
+This value corresponds to the measured median atmospheric seeing at the Cerro Pach\' on site and a system contribution to delivered image quality of 0\farcs35 added in quadrature.
