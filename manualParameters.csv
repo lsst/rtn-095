@@ -11,4 +11,5 @@ nexposuresaoscommissioning,10000,
 nexposurescalibcommissioning,2000,
 nexposuresspcommissioning,2000,
 sciencepipelinesversion,v29.1,
-sciencepipelinesurl,https://pipelines.lsst.io/v/v29_1_1,
+sciencepipelinesurl,\url{https://pipelines.lsst.io/v/v29\_1\_1},
+maxdepthshalloweranyband,2.2,magnitudes
