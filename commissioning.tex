@@ -186,8 +186,10 @@ As the pointing model was not fine-tuned, tracking errors could range from 0.2 t
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 
 The DP1 median delivered image quality, quantified as the \gls{PSF} at \gls{FWHM} across all filters and target fields, is \medianimagequalityallbands. 
-The best images achieve a \gls{PSF} \gls{FWHM}  of approximately \bestimagequality, with  per-band median  values of: u = \umedianimagequality,  g = \gmedianimagequality, r = \rmedianimagequality, i = \imedianimagequality, z = \zmedianimagequality, y = \ymedianimagequality arcsecs.
-Both the per-sensor \gls{PSF} \gls{FWHM} and the overall median vary by filter and  specific target field. 
+The best images achieve a \gls{PSF} \gls{FWHM} of approximately \bestimagequality. 
+Both the per-sensor \gls{PSF} \gls{FWHM} and the overall median vary depending on the filter and the specific target field. 
+The median delivered image quality per band and target field is provided in \tabref{tab: iq_band_field}.
+\input{./dp1_iq_summary_target_band}
 \figref{fig:delivered_image_quality} shows the  distribution of PSF FWHM (arcsec) over all \nvisitdetectorsummaries individual sensors images.
 \begin{figure*}[hbt!]
   \centering
