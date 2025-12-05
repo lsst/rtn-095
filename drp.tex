@@ -162,9 +162,14 @@ Gaussian-Aperture-and-PSF \citep[\gls{GAaP}][]{2008A&A...482.1053K, DMTN-190} fl
 S\'ersic model \citep{1963BAAA....6...41S, 1968adga.book.....S} fits are run on all available bands simultaneously \cite[MultiProFit,][]{DMTN-312}.
 The resulting S\'ersic model fluxes are provided as an alternative to CModel and are intended to represent total galaxy fluxes.
 Like CModel, the S\'ersic model is a Gaussian mixture approximation to a true S\'ersic profile, convolved with a Gaussian mixture approximation to the \gls{PSF}.
-CModel measurements use a double ``shapelet'' \citep{2003ARA&A..41..645R} PSF with a single shared shape, while the S\'ersic fits use a double Gaussian with independent shape parameters for each component.
 S\'ersic model fits also include a free centroid, with all other structural parameters shared across all bands.
 That is, the intrinsic model has no color gradients, but the convolved model may have color gradients if the \gls{PSF} parameters vary significantly between bands.
+
+CModel measurements use a double ``shapelet'' \citep{2003ARA&A..41..645R} PSF model with a single shared shape.
+The S\'ersic fits are intended to use a double Gaussian with independent shape parameters for each component.
+Due to a pipeline misconfiguration, the S\'ersic fits actually used the shapelet PSF parameters, with the higher-order terms ignored (since MultiProFit does not support shapelet PSFs).
+This bug is not expected to impact the galaxy fluxes significantly, since the higher-order shapelet PSF parameters tend to be small, and the fix will be applied in future campaigns.
+Either way, the double Gaussian PSF parameters are included for each object.
 
 Further details on the performance of these algorithms are found in \secref{ssec:fluxes}.
 
