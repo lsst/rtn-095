@@ -542,6 +542,21 @@ def nDiaForced(params):
                         runningTotalObj/1e6, sig=2, unit='million')
     return params
 
+def nSSObjects(params):
+    print('Adding total number of SS objects...')
+
+    refs = list(registry.queryDatasets('ss_object'))
+
+    # There should only be one ss_object catalog, but just in case:
+    runningTotalObj = 0
+    for ref in refs:
+        catalog = butler.get(ref, parameters = {'columns':'ssObjectId'})
+        runningTotalObj += len(catalog)
+    params = addParameter(params, 'nssobjects',
+                          runningTotalObj, sig=3)
+    return params
+
+
 def nStarsGals(params):
     print('Adding total number of stars and gals...')
 
@@ -696,11 +711,8 @@ if __name__ == "__main__":
     butler = Butler(
         "/repo/dp1",
         instrument=instrument,
-        collections=[
-            'LSSTComCam/DP1',
-            'LSSTComCam/runs/DRP/DP1/v29_0_0/DM-50260',
-            'skymaps'],
-            skymap=skymapName
+        collections=collections,
+        skymap=skymapName
         )
     registry = butler.registry
     skymap = butler.get('skyMap', skymap=skymapName)
@@ -734,6 +746,7 @@ if __name__ == "__main__":
     params = nDiaSources(params)
     params = nForced(params)
     params = nDiaForced(params)
+    params = nSSObjects(params)
     params = nStarsGals(params)
     params = nDeepCoaddInputImages(params)
     params = nTemplateCoaddInputImages(params)
