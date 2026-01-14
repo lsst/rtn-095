@@ -76,33 +76,31 @@ The \gls{LSSTCam} and \gls{LSSTComCam} focal planes are described in detail in \
 
 \subsubsection{Filter Complement}
 \label{sssec:comcam_filters}
-LSSTComCam supports imaging with six broadband filters $ugrizy$ spanning 320--1050 nm, identical in design to LSSTCam.
-However, its filter exchanger can hold only three filters at a time, compared to five in LSSTCam.
-The full-system throughput of the six LSSTComCam filters, which encompasses contributions from a standard atmosphere at airmass 1.2, telescope optics, 
-camera surfaces, and the mean ITL detector quantum efficiency is shown in \figref{fig:comcam_standard_bandpasses}.
+\gls{LSSTComCam} supports imaging with six broadband filters $ugrizy$ spanning 320--1050 nm, identical in design to \gls{LSSTCam}.
+However, its filter exchanger can hold only three filters at a time, compared to five in \gls{LSSTCam}.
+The full-system throughput of the six \gls{LSSTComCam} filters, which encompasses contributions from a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and the mean \gls{ITL} detector quantum efficiency is shown in \figref{fig:comcam_standard_bandpasses}.
 \begin{figure}[htb!]
 \plotone{dp1_comcam_std_bandpasses}
-\caption{LSSTComCam standard bandpasses, illustrating full system throughput. The bandpasses include a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and mean ITL detector quantum efficiency.}
+\caption{LSSTComCam standard bandpasses, illustrating full system throughput. The bandpasses include a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and mean \gls{ITL} detector quantum efficiency.}
 \label{fig:comcam_standard_bandpasses}
 \end{figure}
 
 \subsubsection{Timing Calibration}
 \label{ssec:comcam_timing}
 
-The absolute time accuracy of data taken with LSSTComCam relies on the Network Time Protocol (NTP) for clock synchronization, which should be accurate to approximately 1 millisecond. 
+The absolute time accuracy of data taken with \gls{LSSTComCam} relies on the \gls{NTP} for clock synchronization, which should be accurate to approximately 1 millisecond. 
 In order to evaluate the absolute timing accuracy of the entire system we observed the geosynchronous satellite EUTELSAT 117 West B with a set of 10 usable 10-second exposures over two nights.  
-EUTELSAT 117 West B is part the GPS system and serves as one of WAAS (Wide Area Augmentation System) satellites operated for the U.S. Federal Aviation Administration (FAA) and used to broadcast GPS corrections to air traffic.
+EUTELSAT 117 West B is part the \gls{GPS} system and serves as one of \gls{WAAS} satellites operated for the  \gls{FAA} and used to broadcast \gls{GPS} corrections to air traffic.
 
-As these satellites are part of the GPS system, their positions are tracked very precisely and the record of their locations is published after the fact and can be downloaded.  
-Following the technique previously employed by other surveys, \citep{2018PASP..130f4505T},  we observed the satellite while tracking the sky and then downloaded the data-files 
-with its precise locations from the National Satellite Test Bed web site\footnote{\url{https://www.nstb.tc.faa.gov/nstbarchive.html}}.  
-By comparing the measured and predicted locations of the start of the satellite track on the sky, we determined that (relative to the start of integration-time recorded in the FITS headers) our time was accurate to 53.6 $\pm$ 11.0 milliseconds.
+As these satellites are part of the \gls{GPS} system, their positions are tracked very precisely and the record of their locations is published after the fact and can be downloaded.  
+Following the technique previously employed by other surveys, \citep{2018PASP..130f4505T},  we observed the satellite while tracking the sky and then downloaded the data-files with its precise locations from the National Satellite Test Bed web site\footnote{\url{https://www.nstb.tc.faa.gov/nstbarchive.html}}.  
+By comparing the measured and predicted locations of the start of the satellite track on the sky, we determined that (relative to the start of integration-time recorded in the \gls{FITS} headers) our time was accurate to 53.6 $\pm$ 11.0 milliseconds.
 
 This work continues to be an area of ongoing study, with the exact timing of when the shutter open command is issued, and the complete profile of the shutter movement not yet determined. 
 However the open command is on average near 29 milliseconds later. Incorporating the delays into the fit reduces the offset to 24.8 $\pm$ 11.0 milliseconds.
 
 The full shutter takes approximately 396 milliseconds to completely open.  
-As the LSSTComCam sensors are centered in the aperture, the center of the focal plane should be exposed about half-way through the shutter open procedure, 198 milliseconds after the open command. 
+As the \gls{LSSTComCam} sensors are centered in the aperture, the center of the focal plane should be exposed about half-way through the shutter open procedure, 198 milliseconds after the open command. 
 There are uncertainties on the full motion profile, and the blade direction motions are currently not known, but the fraction of the shutter aperture subtended by the focal plane is 52\%. 
 This implies that that the shutter will pass any pixel between 198 +/- 103 milliseconds.  
 Subtracting this from the fitted delay of 24.8 milliseconds and adding the fitted error of 11.0 milliseconds in quadrature, results in a current conservative estimate of the delay of -173.2 $\pm$ 104.1 milliseconds, consistent with and smaller than the constraints on the timing offset determined using astrometric residuals from known asteroid associations presented in \secref{ssec:asteroid_association}.
@@ -111,7 +109,7 @@ Subtracting this from the fitted delay of 24.8 milliseconds and adding the fitte
 \label{ssec:flat_field_system}
 During the on-sky campaign, key components of the Rubin calibration system ~\citep{2022SPIE12182E..0RI}, including the flat field screen, had not yet been installed.
 As a result, flat fielding for \gls{DP1} relied entirely on twilight flats.
-While twilight flats pose challenges such as non-uniform illumination and star print-through, they were the only available option during \gls{LSSTComCam} commissioning and for DP1 processing.
+While twilight flats pose challenges such as non-uniform illumination and star print-through, they were the only available option during \gls{LSSTComCam} commissioning and for \gls{DP1} processing.
 To mitigate these limitations, dithered, tracked exposures were taken over a broad range of azimuth and rotator angles to construct combined flat \gls{calibration} frames.
 Exposure times were dynamically adjusted to reach target signal levels of between 10,000 and 20,000 electrons.
 Future campaigns will benefit from more stable and uniform flat fielding using the Rubin flat field system, described in \citet{SITCOMTN-086}.
@@ -129,12 +127,12 @@ These \nfields fields form the basis of the \gls{DP1} dataset.
 \begin{figure*}[bt!]
 \centering
 \plotone{dp1_fields_with_survey_fp}
-\caption{Locations of the seven DP1 fields overlaid on the LSST baseline survey footprint. NES: North Ecliptic Spur, SCP: South Celestial Pole, Low-Dust WFD: regions away from the Galactic Plane (GP) observed with a WFD cadence, GP/MC WFD: Galactic Plane and Magellanic Clouds regions observed with a WFD cadence. The FOV covered by the LSSTCam and LSSTComCam focal planes is shown as concentric yellow circles about the pointing center of each field.}
+\caption{Locations of the seven \gls{DP1} fields overlaid on the LSST baseline survey footprint. NES: North Ecliptic Spur, SCP: South Celestial Pole, Low-Dust WFD: regions away from the Galactic Plane (GP) observed with a WFD cadence, GP/MC WFD: Galactic Plane and Magellanic Clouds regions observed with a WFD cadence. The FOV covered by the LSSTCam and LSSTComCam focal planes is shown as concentric yellow circles about the pointing center of each field.}
 \label{fig:dp1_fields_on_sky}
 \end{figure*}
 Each of the \nfields target fields was observed repeatedly in multiple bands over many nights.
 A typical observing \gls{epoch} on a given target field consisted of 5-20 visits in each of the three loaded filters.
-Only images taken as 1x30 second exposures have been included in DP1.
+Only images taken as 1x30 second exposures have been included in \gls{DP1}.
 All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_2019, peter_yoachim_2024_13985198}.
 \tabref{tab:dp1_fields} lists the \nfields \gls{DP1} fields and their pointing centers, and provides a summary of the band coverage in each.
 
@@ -145,7 +143,7 @@ The temporal sampling distribution of observations per band and per night is sho
 \begin{figure}[htb!]
 \centering
 \plotone{visitDates}
-\caption{Distribution of DP1 observations by date grouped by field as a function of MJD. Each dot represents a single 30-second exposure, color-coded by filter.}
+\caption{Distribution of \gls{DP1} observations by date grouped by field as a function of MJD. Each dot represents a single 30-second exposure, color-coded by filter.}
 \label{fig:target_fields_temporal_sampling}
 \end{figure}
 Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only accommodate three filters at a time (see \secref{ssec:comcam}).
@@ -162,8 +160,8 @@ observations used a 2x2 grid of LSSTComCam pointings to cover an area of about 1
 The visits cycled between the grid's four pointing centers, using small random translational dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing epoch.
 
 % m5 coadded depths  per field
-\figref{fig:dp1_fields_coverage_maps} shows sky coverage maps showing the distribution of visits in each of the \nfields DP1 fields, color coded by band. 
-The images clearly show the focal plane chip gaps and dithering pattern. 
+\figref{fig:dp1_fields_coverage_maps} shows sky coverage maps showing the distribution of visits in each of the \nfields \gls{DP1} fields, color coded by band. 
+The images clearly show the focal plane chip gaps and dithering pattern.  \gls{DP1} 
 Only the detectors for which single frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields. 
 \begin{figure*}[ht]
 \centering
@@ -185,7 +183,7 @@ Mount encoder data were used to measure the mount jitter in every image, with a 
 As the pointing model was not fine tuned, tracking errors could range from 0.2 to 0.4 arcseconds per image, depending on RA and Dec.
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 
-The DP1 median delivered image quality, quantified as the \gls{PSF} at \gls{FWHM} across all filters and target fields, is \medianimagequalityallbands. 
+The \gls{DP1} median delivered image quality, quantified as the \gls{PSF} at \gls{FWHM} across all filters and target fields, is \medianimagequalityallbands. 
 The best images achieve a \gls{PSF} \gls{FWHM} of approximately \bestimagequality. 
 Both the per-sensor \gls{PSF} \gls{FWHM} and the overall median vary depending on the filter and the specific target field. 
 The median delivered image quality per band and target field is provided in \tabref{tab:iq_band_field}.
@@ -197,13 +195,13 @@ The median delivered image quality per band and target field is provided in \tab
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\linewidth]{image_quality_histo}
-    \caption{PSF FHWM (arcsecs) per passband across all DP1 target fields. } 
+    \caption{PSF FHWM (arcsecs) per passband across all \gls{DP1} target fields. } 
  \end{subfigure}\hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\linewidth]{image_quality_histo_per_field}
-    \caption{PSF FHWM (arcsecs) per DP1 target field across all passbands}
+    \caption{PSF FHWM (arcsecs) per \gls{DP1} target field across all passbands}
   \end{subfigure}\hfill
-\caption{Histograms showing the  distribution of delivered image quality for all \nvisitdetectorsummaries single-epoch individual sensors in the DP1 dataset per passband (a) and per field (b). The median values are given in the legend. }
+\caption{Histograms showing the  distribution of delivered image quality for all \nvisitdetectorsummaries single-epoch individual sensors in the \gls{DP1} dataset per passband (a) and per field (b). The median values are given in the legend. }
 \label{fig:delivered_image_quality}
 \end{figure*}
 Ongoing efforts aim to quantify all sources of image degradation, including contributions from the camera system; static and dynamic optical components; telescope mount motion; observatory-induced seeing from the dome and primary mirror; and atmospheric conditions.
@@ -213,5 +211,5 @@ This value corresponds to the measured median atmospheric seeing at the Cerro Pa
 % Not sure this is needed
 % \input{tables/image_quality_summary}
 % \tabref{tab:image_quality} summarizes the delivered image quality expressed in terms of the PSF FWHM in arcseconds per band for the \nexposures in DP1.
-The DP1 median delivered image quality across all bands is \medianimagequalityallbands, as measured by the \gls{PSF} \gls{FWHM}.
+The \gls{DP1} median delivered image quality across all bands is \medianimagequalityallbands, as measured by the \gls{PSF} \gls{FWHM}.
 The best images achieved a \gls{PSF} \gls{FWHM} of approximately \bestimagequality.
