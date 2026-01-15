@@ -139,11 +139,12 @@ All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_20
 \input{./dp1_fields.tex}
 %
 % Temporal Sampling
-The temporal sampling distribution of observations per band and per night is shown in \figref{fig:target_fields_temporal_sampling}.
+Figure~\ref{fig:target_fields_temporal_sampling} shows the temporal sampling of observations by filter and by night.
+The figure indicates the dates on which each field was observed in a given band but does not convey the total number of observations obtained per filter on any individual night. 
 \begin{figure}[htb!]
 \centering
 \plotone{visitDates}
-\caption{Distribution of \gls{DP1} observations by date grouped by field as a function of MJD. Each dot represents a single 30-second exposure, color-coded by filter.}
+\caption{Temporal distribution of \gls{DP1} observations, grouped by field as a function of \gls{MJD} and color-coded by filter. Each point indicates that a given field was observed at least once in the corresponding filter on that date.}
 \label{fig:target_fields_temporal_sampling}
 \end{figure}
 Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only accommodate three filters at a time (see \secref{ssec:comcam}).
