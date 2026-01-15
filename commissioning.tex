@@ -77,11 +77,12 @@ The \gls{LSSTCam} and \gls{LSSTComCam} focal planes are described in detail in \
 \subsubsection{Filter Complement}
 \label{sssec:comcam_filters}
 \gls{LSSTComCam} supports imaging with six broadband filters $ugrizy$ spanning 320--1050 nm, identical in design to \gls{LSSTCam}.
-However, its filter exchanger can hold only three filters at a time, compared to five in \gls{LSSTCam}.
+However, its filter exchanger can hold only three filters at a time, comapared to five with \gls{LSSTCam}.
 The full-system throughput of the six \gls{LSSTComCam} filters, which encompasses contributions from a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and the mean \gls{ITL} detector quantum efficiency is shown in \figref{fig:comcam_standard_bandpasses}.
+The corresponding transmission curves are provided as a \gls{DP1} data product, see \secref{sssec:transmission_curves}
 \begin{figure}[htb!]
 \plotone{dp1_comcam_std_bandpasses}
-\caption{LSSTComCam standard bandpasses, illustrating full system throughput. The bandpasses include a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and mean \gls{ITL} detector quantum efficiency.}
+\caption{\gls{LSSTComCam} standard bandpasses, illustrating full system throughput. The bandpasses include a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and mean \gls{ITL} detector quantum efficiency. The corresponding transmission curves are provided as a \gls{DP1} data product.}
 \label{fig:comcam_standard_bandpasses}
 \end{figure}
 
