@@ -11,7 +11,7 @@ Data Release Production consists of four major stages: (1) single-frame processi
 \label{ssec:pipelines}
 The  LSST Science Pipelines software \citep{PSTN-019, LDM-151} will be used to generate all Rubin Observatory and LSST data products.
 It provides both the \glspl{algorithm} and \gls{middleware} frameworks necessary to process raw data into science-ready products, enabling analysis by the Rubin scientific community.
-Version \sciencepipelinesversion of the pipelines was used to produce \gls{DP1}\footnote{Documentation for this version is available at: \sciencepipelinesurl}.
+Version \sciencepipelinesversion of the pipelines was used to produce \gls{DP1}\footnote{Documentation for this version is available at:\sciencepipelinesurl}.
 
 %%%%%  %%%%%%%%%%%%%%%%%%%%%%
 \subsection{Single Frame Processing}
@@ -98,7 +98,7 @@ While proper motions and parallaxes are not released for \gls{DP1}, they are fit
 Photometric \gls{calibration} of the \gls{DP1} dataset is based on the \gls{FGCM} ~\citep[FGCM][]{2018AJ....155...41B}, adapted for the LSST Science Pipelines~\citep{2022PASJ...74..247A, SITCOMTN-086}.
 We used the \gls{FGCM} to calibrate the full \gls{DP1} dataset with a forward model that uses a parameterized model of the atmosphere as a function of airmass along with a model of the instrument throughput as a function of wavelength.
 The FGCM process typically begins with measurements of the instrumental throughput, including the mirrors, filters, and detectors.
-However, because full scans of the \gls{LSSTComCam} as-built filters and individual detectors were not available, we instead used the nominal reference throughputs for the Simonyi Survey Telescope and LSSTCam.\footnote{Available at: \url{https://github.com/lsst/throughputs/tree/1.9}}
+However, because full scans of the \gls{LSSTComCam} as-built filters and individual detectors were not available, we instead used the nominal reference throughputs for the Simonyi Survey Telescope and LSSTCam.\footnote{Available at: \nolinkurl{https://github.com/lsst/throughputs/tree/1.9}}
 These nominal throughputs were sufficient for the \gls{DP1} calibration, given the small and homogeneous focal plane consisting of only nine \gls{ITL} detectors.
 The FGCM atmosphere model, provided by MODTRAN~\citep{1999SPIE.3756..348B}, was used to generate a look-up table for atmospheric throughput as a function of zenith distance at Cerro Pachón.
 This model accounts for absorption and scattering by molecular constituents of the atmosphere, including $O_2$ and $O_3$; absorption by water vapor; and Mie scattering by airborne aerosol particulates.
@@ -214,7 +214,7 @@ Centroids used in the multi-epoch \gls{forced photometry} stage are taken either
 Solar system processing in \gls{DP1} consists of two key components: the association of observations (sources) with known solar system objects, and the discovery of previously unknown objects by linking sets of 
 {\em tracklets}\footnote{A tracklet is defined as two or more detections of a moving object candidate taken in close succession in a single night.}.
 
-To generate expected positions, ephemerides are computed for all objects found in the Minor Planet \gls{Center} orbit catalog using the \texttt{Sorcha} survey simulation toolkit (Merritt et al., in press)\footnote{Available at \url{https://github.com/dirac-institute/sorcha}}.
+To generate expected positions, ephemerides are computed for all objects found in the Minor Planet \gls{Center} orbit catalog using the \texttt{Sorcha} survey simulation toolkit (Merritt et al., in press)\footnote{Available at \nolinkurl{https://github.com/dirac-institute/sorcha}}.
 To enable fast lookup of objects potentially present in an observed visit, we use the {\tt mpsky} package \citep{mpsky}.
 In each image, the closest DiaSource within 1~arcsecond of a known solar system object's predicted position is associated to that object.
 

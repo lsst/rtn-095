@@ -157,9 +157,10 @@ It is important to note that the time sampling in the \gls{DP1} dataset differs 
 All fields except for the low ecliptic latitude field, Rubin\_SV\_38\_7, used a small random dithering pattern.
 The random translational dithers of the telescope boresight were applied for each visit, with offsets of up to 0.2 degrees around the pointing center (\tabref{tab:dp1_fields}). 
 The rotational dithers of the camera rotator were typically approximately 1 degree per visit, with larger random offsets at each filter change, which worked to keep operational efficiency high. 
-The Rubin\_SV\_38\_7 field used a different dither pattern to optimize coverage of Solar System Objects and test Solar System Object linking across multiple nights. These
-observations used a 2x2 grid of \gls{LSSTComCam} pointings to cover an area of about 1.3 degree x 1.3 degrees.
-The visits cycled between the grid's four pointing centers, using small random translational dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing epoch.
+The Rubin\_SV\_38\_7 field used a different dither pattern to optimize coverage of Solar System Objects and test Solar System Object linking across multiple nights. 
+These observations used a 2$\times$2 grid of \gls{LSSTComCam} pointings to cover an area of about 1.3 degree$\times$1.3 degrees.
+The visits cycled between the grid's four pointing centers, each separated by 0.65  degrees, and used small random translational dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing epoch.
+The ra/dec vale giving in table 1 for this field is approximately the center of the 4 fileds. 
 
 % m5 coadded depths  per field
 \figref{fig:dp1_fields_coverage_maps} shows sky coverage maps showing the distribution of visits in each of the \nfields \gls{DP1} fields, color coded by band. 
@@ -185,13 +186,11 @@ Mount encoder data were used to measure the mount jitter in every image, with a 
 As the pointing model was not fine tuned, tracking errors could range from 0.2 to 0.4 arcseconds per image, depending on RA and Dec.
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 
+\input{./dp1_iq_summary_target_band}
 The \gls{DP1} median delivered image quality, quantified as the \gls{PSF} at \gls{FWHM} across all filters and target fields, is \medianimagequalityallbands. 
 The best images achieve a \gls{PSF} \gls{FWHM} of approximately \bestimagequality. 
 Both the per-sensor \gls{PSF} \gls{FWHM} and the overall median vary depending on the filter and the specific target field. 
 The median delivered image quality per band and target field is provided in \tabref{tab:iq_band_field}.
-
-\input{./dp1_iq_summary_target_band}
-
 \figref{fig:delivered_image_quality} shows the  distribution of PSF FWHM (in arcsec) over all \nvisitdetectorsummaries individual sensors images.
 \begin{figure*}[hbt!]
   \centering
