@@ -1,12 +1,12 @@
-\section{Overview of the contents of Rubin DP1}
+\section{Overview of the contents of Rubin \gls{DP1}}
 \label{sec:data_products}
-Here we describe Rubin \gls{DP1} data products and provide summary statistics for each, but we also refer the reader to the DOI-registered DP1 release documentation available at \url{https://dp1.lsst.io} and the catalog schemas available at \url{https://sdm-schemas.lsst.io}.\footnote{Searchable catalog schemas are also available to Data Rights Holders via the Rubin Science Platform at \url{https://data.lsst.cloud}.}
+Here we describe Rubin \gls{DP1} data products and provide summary statistics for each, but we also refer the reader to the DOI-registered \gls{DP1} release documentation available at \url{https://dp1.lsst.io} and the catalog schemas available at \url{https://sdm-schemas.lsst.io}.\footnote{Searchable catalog schemas are also available to Data Rights Holders via the Rubin Science Platform at \url{https://data.lsst.cloud}.}
 The \gls{DP1} science data products are derived from the \nvisitimages individual \gls{CCD} images taken across \nexposures exposures in the \nfields \gls{LSSTComCam} commissioning fields (\secref{ssec:pipelines_commissioning}).
-To aid legibility, we have separated the descriptions of the data products from the description of the data release processing pipeline, a summary of which is provided in \secref{sec:drp}, with a full description provided in \cite{PSTN-019}.
+To aid legibility, we have separated the descriptions of the data products from the description of the data release processing pipeline, a summary of which is provided in \secref{sec:drp}.
 Similarly, because most of the data products described here can be accessed via either the \gls{IVOA} Services ( \secref{sssec:ivoa_services}) or the Data \gls{Butler} (\secref{sssec:data_butler}), we describe them in a manner that is agnostic to the means of access.
 
-The data products that comprise \gls{DP1} provide an early preview of future LSST data releases and are strongly dependent on the type and quality of the data that was collected during \gls{LSSTComCam} on-sky campaign (\secref{ssec:pipelines_commissioning}).
-Consequently not all anticipated  \gls{LSST} data products, as described in the \gls{DPDD} \citep{LSE-163} were produced for the \gls{DP1} dataset.
+The data products that comprise \gls{DP1} provide an early preview of future LSST data releases and are strongly dependent on the type and quality of the data that was collected during the \gls{LSSTComCam} on-sky campaign (\secref{ssec:pipelines_commissioning}).
+Consequently not all anticipated  \gls{LSST} data products, as described in the \gls{DPDD} \citep{LSE-163}, were produced for the \gls{DP1} dataset.
 
 Rubin Observatory has adopted the convention by which single-epoch detections are referred to as Sources.
 By contrast, the astrophysical object associated with a given detection is referred to as an Object
@@ -23,16 +23,16 @@ At the highest level, the \gls{DP1} data products fall into one of five types:
 \end{itemize}
 While images and catalogs are expected to be the primary data products for scientific research, we also recognize the value of providing access to other data types to support investigations and ensure transparency.
 
-To facilitate processing, Rubin \gls{DP1} uses a single skymap\footnote{A skymap is a tiling of the celestial sphere, organizing large-scale sky coverage into manageable sections for processing and analysis. {\bf While the skymap described here is specific to DP1, we do not anticipate major changes to the skymap in future data releases.}} that covers the entire sky area encompassing the seven \gls{DP1} fields.
+To facilitate processing, Rubin \gls{DP1} uses a single skymap\footnote{A skymap is a tiling of the celestial sphere, organizing large-scale sky coverage into manageable sections for processing and analysis. While the skymap described here is specific to \gls{DP1}, we do not anticipate major changes to the skymap in future data releases.} that covers the entire sky area encompassing the seven \gls{DP1} fields.
 The \gls{DP1} skymap divides the entire celestial sphere into \ntotaltracts \gls{tract}s, each covering approximately \tractarea.
 The \gls{tract}s are arranged in rings of declination, ordered from south to north, then with increasing right ascension within a ring.
 Each \gls{tract} is further subdivided into \npatchx$\times$\npatchy equally-sized patches.
 Both \gls{tract}s and patches overlap with their neighboring regions.
 The amount of overlap between \gls{tract}s changes with declination, with \gls{tract}s nearest the poles having the greatest degree of overlap; the minimum overlap between tracts is \tractoverlap.
 By contrast, the amount of overlap between patches is constant, with each \gls{patch} overlapping each of its neighbouring patches by \patchoverlap.
-As a consequence, each patch covers \outerpatcharea, which is slightly larger than the tract area divided by the number of patches in a tract.
-The aerial coverage of a patch is comparable to, but somewhat smaller than, the \rawfov field-of-view of a single LSSTComCam or LSSTCam detector, meaning each detector image spans multiple patches.
-The size of a tract is larger than the LSSTComCam field of view; however, since each observed field extends across more than one tract, each field covers multiple tracts.
+Each patch covers \outerpatcharea which, due to the patch overlap, is slightly larger than the tract area divided by the number of patches in a tract.
+The aerial coverage of a patch is comparable to, but somewhat smaller than, the \rawfov field-of-view of a single \gls{LSSTComCam} or \gls{LSSTCam} detector, meaning each detector image spans multiple patches.
+The size of a tract is larger than the \gls{LSSTComCam} field of view. However, since each observed field extends across more than one tract, each field covers multiple tracts.
 
 The skymap is integral to the production of co-added images.
 To create a coadded image, the processing pipeline selects all calibrated science images in a given field that meet specific quality thresholds (\secref{ssec:science_images} and \secref{ssec:coaddition}) for a given \gls{patch}, warps them onto a single consistent pixel grid for that \gls{patch}, as defined by the skymap, then coadds them.
@@ -44,7 +44,7 @@ Data products are accessed via either the \gls{IVOA} Services ( \secref{sssec:iv
 \subsection{Science Images}
 \label{ssec:science_images}
 Science images are exposures of the night sky, as distinct from \gls{calibration} images (\secref{ssec:calibration_data}).
-Although the release includes \gls{calibration} images, allowing users to reprocess the raw images if needed, this is expected to be necessary only in rare cases.
+Although the release includes \gls{calibration} images, thereby allowing users to reprocess the raw images if needed, this is expected to be necessary only in rare cases.
 Users are strongly encouraged to start from the \texttt{visit\_image} provided.
 The data product names shown here are those used by the Data \gls{Butler}, but the names used in the \gls{IVOA} Services differ only slightly in that they are prepended by ``\texttt{lsst.}''.
 
@@ -85,7 +85,7 @@ A plot showing the normalized cumulative histogram of the $5\sigma$ depths of al
 \item \texttt{deep\_coadd}s \citep{10.71929/rubin/2570313} are the product of warping and co-adding multiple \texttt{visit\_image}s covering a given \gls{patch}, as defined by the skymap.
 \texttt{deep\_coadd}s are created on a per-band basis, meaning only data from exposures taken with a common filter are coadded.
 As such, there are up to six \texttt{deep\_coadd}s covering each \gls{patch} -- one for each of the six \gls{LSSTComCam} bands.
-The process of producing \texttt{deep\_coadd}s is described in detail in \secref{ssec:coadd_processing} but, to summarize, it involves the selection of suitable \texttt{visit\_image}s (both in terms of \gls{patch} coverage, band, and image quality), the warping of those \texttt{visit\_image}s onto a common pixel grid, and the co-adding of the warped \texttt{visit\_image}s.
+The process of producing \texttt{deep\_coadd}s is described in \secref{ssec:coadd_processing} but, to summarize, it involves the selection of suitable \texttt{visit\_image}s (both in terms of \gls{patch} coverage, band, and image quality), the warping of those \texttt{visit\_image}s onto a common pixel grid, and the co-adding of the warped \texttt{visit\_image}s.
 To be included in a \gls{DP1} \texttt{deep\_coadd}, a \texttt{visit\_image} needed to have a \gls{PSF} \gls{FWHM} smaller than \deepcoaddmaxfwhm. Of the \nvisitimages \texttt{visit\_images}, \ndeepcoaddvisitimages satisfied this criterion and were therefore used to create \texttt{deep\_coadds}.
 
 There are a total of \ndeepcoadds \texttt{deep\_coadd}s in \gls{DP1}.
@@ -112,7 +112,7 @@ Of the \nvisitimages \texttt{visit\_image}s, \ntemplatecoaddvisitimages were use
 This selection strategy is designed to optimize for \gls{seeing} when a \gls{patch} is well-covered by \texttt{visit\_image}s, yet still enable the production of \texttt{template\_coadd}s for poorly-covered patches.
 As with \texttt{deep\_coadd}s, the number of \texttt{visit\_image}s that contributed to a \texttt{template\_coadd} varies across the patch.
 
-DP1 contains a total of \ntemplatecoadds \texttt{template\_coadd}s.\footnote{The difference in the number of \texttt{deep\_coadd}s and \texttt{template\_coadd}s is due to the difference in the \texttt{visit\_image} selection criteria for each coadd.}
+\gls{DP1} contains a total of \ntemplatecoadds \texttt{template\_coadd}s.\footnote{The difference in the number of \texttt{deep\_coadd}s and \texttt{template\_coadd}s is due to the difference in the \texttt{visit\_image} selection criteria for each coadd.}
 As with \texttt{deep\_coadd}s, a single \texttt{template\_coadd} covers a single \gls{patch}.
 Since the same \texttt{skymap} is used when creating both \texttt{deep\_coadd} and \texttt{template\_coadd}s, the on-sky area and pixel count of \texttt{template\_coadd}s are the same as that of a \texttt{deep\_coadd} (see above).
 Similarly, \texttt{template\_coadd}s contain the science image (i.e., the coadd), a variance image, and a pixel mask; all three contain the same number of pixels.
@@ -137,19 +137,19 @@ Background images are not available via the \gls{IVOA} Service; they can only be
 \subsection{Catalogs}
 \label{ssec:catalogs}
 Here we describe science-ready tables produced by the science pipelines.
-All but one of the catalogs described here contain data for detections in the images described in section \ref{ssec:science_images}, the exception being the \texttt{Calibration} catalog, which contains reference data obtained from previous surveys.
-Observatory-produced \gls{metadata} tables are described in \secref{ssec:metadata}
+All but one of the catalogs described here contain data for detections in the images described in \secref{ssec:science_images}, the exception being the \texttt{Calibration} catalog, which contains reference data obtained from previous surveys.
+Observatory-produced \gls{metadata} tables are described in \secref{ssec:metadata}.
 Each type of catalog contains measurements for either Sources  detected in  \texttt{visit\_image}s and \texttt{difference\_image}s, or Objects detected in \texttt{deep\_coadd}s.
 
 While the \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each differ in terms of their specific columns, in general they each contain: one or more unique identification numbers, positional information, one or more types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags (indicating, for example, whether the source/object is affected by saturated pixels, cosmic rays, etc.) for each source/object.
 The Solar System catalogs \texttt{SSObject} and \texttt{SSSource} deviate from this general structure in that they instead contain orbital parameters for all known asteroids.
 Where applicable, all measured properties are reported with their associated 1$\sigma$ uncertainties.
 
-Since \gls{DP1} is a preview, it doesn't include all the catalogs expected in a full \gls{LSST} \gls{Data Release}. Additionally, the catalogs it does include may be missing some columns planned for future releases.
-Where this is the case, we note what data are missing in the catalog descriptions that follow.
+Since \gls{DP1} is a preview, it does not include all the catalogs expected in a full \gls{LSST} \gls{Data Release}. Additionally, the catalogs it does include may be missing some columns planned for future releases.
+Where this is known to be the case, we note what data are missing in the catalog descriptions that follow.
 
 Catalog data are stored in the \gls{Qserv} database (\secref{sssec:qserv}) and are accessible via \gls{TAP}, and an online \gls{DP1} catalog \gls{schema} is available at \url{https://sdm-schemas.lsst.io/dp1.html}.
-Catalog data are also accessible via the Data \gls{Butler} (\secref{sssec:data_butler}).
+Catalog data are also accessible via the Data \gls{Butler} (see \secref{sssec:data_butler}).
 
 \begin{itemize}
 \item The \texttt{Source} catalog \citep{10.71929/rubin/2570323} contains data on all sources which are, prior to deblending (\secref{sssec:coadd_processing}), detected with a greater than 5$\sigma$ significance in each individual visit.
@@ -190,14 +190,14 @@ In addition to \gls{forced photometry} \gls{PSF} fluxes, a number of boolean fla
 
 The \texttt{ForcedSource} catalog contains a total of \nforcedsources entries across \nforcedobjects unique objects.
 
-\item The \texttt{DiaSource} catalogs \citep{10.71929/rubin/2570317} contains data on all the sources detected at a $>5\sigma$ significance --- including those associated with known Solar System objects --- in the \texttt{difference\_image}s.
-Unlike sources detected in \texttt{visit\_image}s, sources detected in difference images (hereafter, ``DiaSources'') have gone through an association step in which an attempt has been made to associate them into underlying objects called ``DiaObject''s.
+\item The \texttt{DiaSource} catalogs \citep{10.71929/rubin/2570317} contains data on all the sources detected at $>5\sigma$ significance --- including those associated with known Solar System objects --- in the \texttt{difference\_image}s.
+Unlike sources detected in \texttt{visit\_image}s, sources detected in difference images (hereafter, ``DiaSource'') have gone through an association step in which an attempt has been made to associate them into underlying objects called ``DiaObject''.
 The \texttt{DiaSource} catalog consolidates all this information across multiple visits and bands.
 The detections reported in the \texttt{DiaSource} catalog have not undergone deblending.
 
 The \texttt{DiaSource} catalog contains data for \ndiasources \texttt{DiaSources} in \gls{DP1}.
 
-\item The \texttt{DiaObject} catalog \citep{10.71929/rubin/2570319} contains the astrophysical objects that DiaSources are associated with (i.e., the ``DiaObjects'').
+\item The \texttt{DiaObject} catalog \citep{10.71929/rubin/2570319} contains the astrophysical objects that DiaSources are associated with (i.e., the DiaObjects).
 The \texttt{DiaObject} catalog contains only non-Solar System Objects; Solar System Objects are, instead, recorded in the \texttt{SSObject} catalog.
 When a DiaSource is identified, the \texttt{DiaObject} and \texttt{SSObject} catalogs are searched for objects to associate it with.
 If no association is found, a new DiaObject is created and the DiaSource is associated to it.
@@ -212,7 +212,7 @@ The \texttt{ForcedSourceOnDiaObject} catalog contains a total of \ndiaforcedsour
 
 \item The \texttt{SSObject} catalog \citep{10.71929/rubin/2570335}, \gls{MPCORB} and SSObject, carry information about solar system objects.
 The \gls{MPCORB} table provides the Minor Planet \gls{Center}-computed orbital elements for all known asteroids, including those that Rubin discovered.
-For DP1, the  \texttt{SSObject} catalog serves primarily to provide the mapping between the \gls{IAU} designation of an object (listed in \gls{MPCORB}), and the internal ssObjectId identifier, which is used as a key to find solar system object observations in the DiaSource and SSSource tables.
+For \gls{DP1}, the  \texttt{SSObject} catalog serves primarily to provide the mapping between the \gls{IAU} designation of an object (listed in \gls{MPCORB}), and the internal ssObjectId identifier, which is used as a key to find solar system object observations in the DiaSource and SSSource tables.
 The \texttt{SSObject} catalog contains data for \nssobjects SSObjects in \gls{DP1}.
 
 \item The \texttt{SSSource} catalog \citep{10.71929/rubin/2570333} contains data on all DiaSources that are either associated with previously-known Solar System Objects, or have been confirmed as newly-discovered Solar System Objects by confirmation of their orbital properties.
@@ -222,7 +222,7 @@ The \texttt{SSSource} catalog contains data for \nsolarsystemsources Solar Syste
 \item The \texttt{CcdVisit} catalog \citep{10.71929/rubin/2570331} contains data for each individual processed \texttt{visit\_image}.
 In addition to technical information, such as the on-sky coordinates of the central pixel and measured pixel scale, the \texttt{CcdVisit} catalog contains a range of data quality measurements, such as whole-image summary statistics for the \gls{PSF} size, zeropoint, sky \gls{background}, sky noise, and quality of astrometric solution.
 It provides an efficient method to access \texttt{visit\_image} properties without needing to access the image data.
-When combined with the data contained in the \texttt{Visit} table described in \secref{sec:metadata}, it provides a full picture of the telescope pointing and sky conditions at the time of observation.
+When combined with the data contained in the \texttt{Visit} table described in \secref{ssec:metadata}, it provides a full picture of the telescope pointing and sky conditions at the time of observation.
 
 The \texttt{CcdVisit} catalog contains entries summarizing data for all \nvisitdetectorsummaries \texttt{visit\_image}s.
 
@@ -230,7 +230,7 @@ The \texttt{CcdVisit} catalog contains entries summarizing data for all \nvisitd
 It is a whole-sky catalog built specifically for \gls{LSST}, as no single prior reference catalog had both the depth and coverage needed to calibrate \gls{LSST} data.
 It combines data from multiple previous reference catalogs and contains only stellar sources.
 Full details on how the \texttt{Calibration} catalog was built are provided in \cite{DMTN-277}
-\footnote{In \cite{DMTN-277},  the calibration reference catalog is referred to as ``The Monster". This terminology is also carried over to the DP1 Butler.}.
+\footnote{In \cite{DMTN-277},  the calibration reference catalog is referred to as ``The Monster". This terminology is also carried over to the \gls{DP1} Butler.}.
 We provide a brief summary here.
 
 For the \textit{grizy} bands, the input catalogs were (in order of decreasing priority): \gls{DES} Y6 Calibration Stars \citep{2023arXiv230501695R}; Gaia-\gls{XP} Synthetic Magnitudes \citep{2023A&A...674A..33G}; the \gls{Pan-STARRS}1 3PI Survey \citep{2016arXiv161205560C}; \gls{Data Release} 2 of the  SkyMapper survey \citep{2019PASA...36...33O}; and \gls{Data Release} 4 of the \gls{VST} \gls{ATLAS} survey \citep{2015MNRAS.451.4238S}.
@@ -246,20 +246,20 @@ This process generated a set of standard columns containing positional and flux 
 \end{itemize}
 
 \subsubsection{Source and Object Designations}\label{ssec:src_naming}
-To refer to individual sources or objects from the DP1 catalogs, one should follow the LSST DP1 naming convention that has been registered with the International Astronomical Union.
+To refer to individual sources or objects from the \gls{DP1} catalogs, one should follow the LSST \gls{DP1} naming convention that has been registered with the International Astronomical Union.
 Because the \texttt{Source}, \texttt{Object}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{SSObject} tables each have their own unique IDs, their designations should differ.
-In general, source designations should begin with the string ``LSST-DP1'' (denoting the Legacy Survey of Space and Time, Data Preview 1), followed by a string specifying the table from which the source was obtained.
+In general, source designations should begin with the string ``LSST-\gls{DP1}'' (denoting the Legacy Survey of Space and Time, Data Preview 1), followed by a string specifying the table from which the source was obtained.
 These strings should be ``O'' (for the \texttt{Object} table), ``S'' (\texttt{Source}), ``DO'' (\texttt{DiaObject}), ``DS'' (\texttt{DiaSource}), or ``SSO'' (\texttt{SSObject}).
 Following the table identifier, the designation should contain the full unique numeric identifier from the specified table (i.e., the objectId, sourceId, diaObjectId, diaSourceId, or ssObjectId).
-Each component of the identifier should be separated by dashes, resulting in a designation such as ``LSST-DP1-TAB-123456789012345678''.
+Each component of the identifier should be separated by dashes, resulting in a designation such as ``LSST-\gls{DP1}-TAB-123456789012345678''.
 In summary, source designations should adhere to the formats listed below:
 
 \begin{itemize}
-\item Object: LSST-DP1-O-609788942606161356 (for objectId 609788942606161356)
-\item Source: LSST-DP1-S-600408134082103129 (for sourceId 600408134082103129)
-\item DiaObject: LSST-DP1-DO-609788942606140532 (for diaObjectId 609788942606140532)
-\item DiaSource: LSST-DP1-DS-600359758253260853 (for diaSourceId 600359758253260853)
-\item SSObject: LSST-DP1-SSO-21163611375481943 (for ssObjectId 21163611375481943)
+\item Object: LSST-\gls{DP1}-O-609788942606161356 (for objectId 609788942606161356)
+\item Source: LSST-\gls{DP1}-S-600408134082103129 (for sourceId 600408134082103129)
+\item DiaObject: LSST-\gls{DP1}-DO-609788942606140532 (for diaObjectId 609788942606140532)
+\item DiaSource: LSST-\gls{DP1}-DS-600359758253260853 (for diaSourceId 600359758253260853)
+\item SSObject: LSST-\gls{DP1}-SSO-21163611375481943 (for ssObjectId 21163611375481943)
 \end{itemize}
 
 Tables that were not explicitly mentioned in the description above do not have their own unique IDs, but are instead linked to one of the five tables listed above via a unique ID.
@@ -274,18 +274,16 @@ Each map provides the spatial distribution of a specific quantity at a defined s
 Maps are initially created per-\gls{tract} and then combined to produce a final consolidated map.
 At each sky location, represented by a spatial pixel in the \gls{HEALPix}\citep{2005ApJ...622..759G} grid, values are derived using statistical operations, such as minimum, maximum, mean, weighted mean, or sum, depending on the property.
 
-DP1 contains \nsurveypropertymaps survey property maps.
-The available maps describe total exposure times, observation epochs, \gls{PSF} size and \gls{shape}, \gls{PSF} magnitude limits, sky \gls{background} and noise levels, as well as astrometric shifts and \gls{PSF} distortions due to wavelength-dependent atmospheric \gls{DCR} effects.
+\gls{DP1} contains \nsurveypropertymaps survey property maps.
+The available maps describe total exposure times, observation epochs (one each for the earliest, mean, and latest observation epoch), \gls{PSF} size and \gls{shape} (one for each of the $e^1$ and $e^2$ shape parameters; see \secref{ssec:psf_models}), \gls{PSF} magnitude limits, sky \gls{background} and noise levels, as well as astrometric shifts (one each for right ascension and declination) and \gls{PSF} distortions (one for each of the $e^1$ and $e^2$ shape parameters) due to wavelength-dependent atmospheric \gls{DCR} effects.
 They all use the dataset type  format \texttt{deep\_coadd\_<PROPERTY>\_consolidated\_map\_<STATISTIC>}.
 For example, \texttt{deep\_coadd\_exposure\_time\_consolidated\_map\_sum} provides a spatial map of the total exposure time accumulated per
 sky position in units of seconds.
-All maps are stored in \texttt{HealSparse}\footnote{A sparse \gls{HEALPix}
-representation that efficiently encodes data values on the celestial sphere. \url{https://healsparse.readthedocs.io}} format.
-Survey property maps are only available via the Data \gls{Butler} (\secref{sssec:data_butler}) and  have dimensions \texttt{band} and \texttt{skymap}.
+All maps are stored in \texttt{HealSparse}\footnote{A sparse \gls{HEALPix} representation that efficiently encodes data values on the celestial sphere. \url{https://healsparse.readthedocs.io}} format.
+Survey property maps are only available via the Data \gls{Butler} (\secref{sssec:data_butler}).
 
 Figure \ref{fig:survey_property_maps} presents three survey property maps for exposure time, \gls{PSF} magnitude limit, and sky noise, computed for representative tracts and bands.
 Because full consolidated maps cover widely separated tracts, we use clipped per-\gls{tract} views here to make the spatial patterns more discernible.
-Many more survey property maps are available in the DP1 repository.
 % \todo{Remove titles from plots  in figure \ref{fig:survey_property_maps}}
 \begin{figure*}[hbt!]
   \centering
@@ -323,15 +321,24 @@ All multi-band \gls{HiPS} images are provided in \gls{PNG} format.
 \gls{DP1} also includes \gls{metadata} about the observations, which are stored in the \texttt{Visit} table.
 We distinguish it from a catalog as the data it contains was produced by the observatory directly, rather than the science pipelines.
 The \texttt{Visit} table contains technical data for each visit, such as telescope pointing, camera rotation, \gls{airmass}, exposure start and end time, and total exposure time.
-Some of the information contained within the \texttt{Visit} table is also contained in the \texttt{CCDVisit} catalogue described in \secref{ssec:catalogs} (e.g., exposure time), although the latter also includes information produced by the processing pipelines at a per-detector level, such as the PSF size and limiting magnitudes.
+Some of the information contained within the \texttt{Visit} table is also contained in the \texttt{CCDVisit} catalogue described in \secref{ssec:catalogs} (e.g., exposure time), although the latter also includes information produced by the processing pipelines at a per-detector level, such as the PSF size and limiting magnitudes of a given \texttt{visit\_image}.
 
 \subsection{Ancillary Data Products}
 \label{ssec:ancilliary}
-DP1 also includes several ancillary data products. While we do not expect most users to need these, we describe them here for completeness. All the Data Products described in this section can only be accessed via the Data Butler (\secref{sssec:data_butler}).
+\gls{DP1} also includes several ancillary data products.
+While we do not expect most users to need these, we describe them here for completeness.
+All the Data Products described in this section can only be accessed via the Data Butler (\secref{sssec:data_butler}).
+
+\subsubsection{Standard Bandpasses}
+\label{sssec:transmission_curves}
+\figref{fig:comcam_standard_bandpasses} shows the full-system throughput of the six \gls{LSSTComCam} filters.
+The corresponding transmission curves are provided as a \gls{DP1} data product.
+These datasets tabulate the full-system transmission of the six \gls{LSSTComCam} filters as a function of wavelength and were used as a reference for the \gls{LSSTComCam} \gls{DP1} photometry. The \texttt{standard\_passband} dataset is keyed by band and is stored in Astropy Table format.
 
 \subsubsection{Task configuration, log, and metadata}
 \gls{DP1} includes \gls{provenance}-related data products such as task logs, \gls{configuration} files, and task metadata.
-Configuration files record the parameters used in each processing task, while logs and \gls{metadata} contain information output during processing. These products help users understand the processing setup and investigate potential processing failures.
+Configuration files record the parameters used in each processing task, while logs and \gls{metadata} contain information output during processing.
+These products help users understand the processing setup and investigate potential processing failures.
 
 \subsubsection{Calibration Data Products}
 \label{ssec:calibration_data}
