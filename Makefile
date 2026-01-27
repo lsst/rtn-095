@@ -20,10 +20,10 @@ $(DOCNAME).pdf: $(scripts) $(tex) local.bib authors.tex
 	# mv $(DOCNAME).tex orig.tex
 	# sed s/twocolumn,//1 orig.tex > $(DOCNAME).tex
 	latexmk -bibtex -xelatex -f $(DOCNAME)
-	#makeglossaries $(DOCNAME)
+	# makeglossaries $(DOCNAME)
 	# mv orig.tex $(DOCNAME).tex
 	latexmk -bibtex -xelatex -f $(DOCNAME)
-	# dont like it much ut this removes the error 
+	# dont like it much but this removes the error
 	echo "\@istfilename{RTN-095.ist}" >> RTN-095.aux
 	xelatex $(DOCNAME)
 

@@ -1,4 +1,4 @@
-In addition to the known detector features identified before LSSTComCam commissioning, most of which are handled by the ISR processing (see \secref{ssec:isr}), we discovered a number of new types of anomalies in the DP1 data. 
+In addition to the known detector features identified before \gls{LSSTComCam} commissioning, most of which are handled by the ISR processing (see \secref{ssec:isr}), we discovered a number of new types of anomalies in the \gls{DP1} data. 
 Since no corrections are currently available for these anomalies, they are masked and excluded from downstream data products.
 
 \subsubsection{Vampire Pixels}
@@ -19,7 +19,7 @@ We have found some similar features on the ITL detectors on LSSTCam, and will us
 \end{figure}
 
 \subsubsection{Phosphorescence}
-Some regions of the LSSTComCam CCD raft were seen to contain large numbers of bright defects.
+Some regions of the \gls{LSSTComCam} CCD raft were seen to contain large numbers of bright defects.
 An example is shown in \figref{fig:anomalies_phosphorescence}  in a $g$-band flat. 
 On further investigation, it appears that on some detectors a layer of photoresist wax was incompletely removed from the detector surface during production.
 As this wax is now trapped below the surface coatings, there is no way to physically clean these surfaces.
@@ -37,7 +37,7 @@ The worst of these regions were excluded with manual masks.
 \subsubsection{Crosstalk}
 Crosstalk refers to unwanted signal interference between adjacent pixels or amplifiers.
 We use an average inter-amp crosstalk correction based on laboratory measurements with LSSTCam.
-These average corrections proved satisfactory, and so have been used as-is for DP1 processing.
+These average corrections proved satisfactory, and so have been used as-is for \gls{DP1} processing.
 There are, however, some residual crosstalk features present post-correction, with a tendency towards over-subtraction.
 \figref{fig:crosstalk_residual} shows an example  of a bright star with over-subtracted crosstalk residuals visible on neighboring amplifiers to both sides on exposure 2024120600239, detector R22\_S02.
 \begin{figure}[htb!]
@@ -50,10 +50,10 @@ There are, however, some residual crosstalk features present post-correction, wi
 
 \subsubsection{Bleed Trails}
 Bleed trails are produced when charge from saturated pixels spills into adjacent pixels.
-Bleed trails were anticipated on LSSTComCam sensors, but they appear in more dramatic forms than had been expected.
+Bleed trails were anticipated on \gls{LSSTComCam} sensors, but they appear in more dramatic forms than had been expected.
 As a bleed trail nears the serial register, it fans out into a ``trumpet'' shaped feature.
 Although bright, these features do not have consistently saturated pixels.
-In DP1 these ``edge bleeds'' were  identified and masked.
+In \gls{DP1} these ``edge bleeds'' were  identified and masked.
 
 Saturated sources can create a second type of bleed, where the central bleed drops below the background level.
 The depressed columns along these trails extend across the entire readout column of the detector, crossing the detector mid-line.

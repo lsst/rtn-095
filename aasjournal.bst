@@ -1,8 +1,8 @@
 %% aasjournalv7.bst March 4, 2025
 %%
-%% Revision 1.19: Aptara 
+%% Revision 1.19: Aptara
 %% Modified to include first initials for inline citations.
-%% Full titles can be called via that "longbib" style option in 
+%% Full titles can be called via that "longbib" style option in
 %% aastex7.cls. This version should only be used with v7+.
 %%
 %% AASJournal.bst June 3, 2019
@@ -45,9 +45,9 @@
 %%
 %% Version number is added when author enters: version = {number}, only in `misc'
 %%
-%% Removed `format.doi output' in {article} because in 
-%% combination with { format.pid output } we could get double doi entries 
-%% in the bibliography. 
+%% Removed `format.doi output' in {article} because in
+%% combination with { format.pid output } we could get double doi entries
+%% in the bibliography.
 %%
 %% Rewrote format.pid so that we can check to see if we have a doi number; in
 %% which case we use that and suppress the arXiv and eprint combination. However,
@@ -63,7 +63,7 @@
 %% Changed bbl.version so that there is no longer a trailing `.'
 
 %% Revision 1.14 2016/9/14 Amy Hendrickson
-%% Added URL field 
+%% Added URL field
 
 %% Revision 1.13 2016/8/9 Amy Hendrickson
 %% Change to presort and bibsort to get multiple entries with same author/year
@@ -84,14 +84,14 @@
 %% access articles (no volume of page available, but online).
 %% Removed bibliography count from preamble since it seems to
 %% confuse some versions of latex.
-%% 
-%% Revision 1.9 2013/2/19 Erik Tollerud <erik.tollerud@yale.edu> 
+%%
+%% Revision 1.9 2013/2/19 Erik Tollerud <erik.tollerud@yale.edu>
 %% fixes for spurious error messages due to rev 1.8 changes
 %% also fixed missing publisher field printing in "book"
 %%
 %% Revision 1.8  2013/01/10 16:31:34  alberto
 %% Added proper formatting of arXiv eprint entries output by ADS
-%% (these are article records, but the eprint id is printed only 
+%% (these are article records, but the eprint id is printed only
 %% if no traditional page number is available).  Also added support
 %% for ASCL entries under the "misc" category.
 %%
@@ -133,7 +133,7 @@
 %% merlin.mbs  (with options: `,ay,nat,nm-rev,nmdash,dt-beg,yr-per,note-yr,atit-u,jtit-x,jttl-rm,thtit-a,vnum-x,volp-com,jpg-1,pp-last,btit-rm,add-pub,pub-par,pre-edn,edby,edbyx,blk-com,fin-bare,ppx,ed,abr,ord,jabr,amper,em-x')
 %% ----------------------------------------
 %% *** Bibliographic Style for ApJ ***
-%% 
+%%
  %-------------------------------------------------------------------
  % The original source file contains the following version information:
  % \ProvidesFile{merlin.mbs}[1998/02/25 3.85a (PWD)]
@@ -376,6 +376,12 @@ FUNCTION {bibinfo.check}
   if$
 }
 
+FUNCTION {add.space.if.nonempty}
+{ duplicate$ empty$
+    { pop$ "" }      % if top-of-stack is empty, push empty (no space)
+    { " " * }        % else append a space
+  if$
+}
 
 FUNCTION {emphasize}
 { skip$ }
@@ -520,7 +526,7 @@ FUNCTION {format.names}
   #1 'nameptr :=
   s num.names$ 'numnames :=
   numnames 'namesleft :=
-  numnames #5 > 
+  numnames #5 >
     { #3 'numtrunc := }
     {}
   if$
@@ -530,8 +536,8 @@ FUNCTION {format.names}
     't :=
     nameptr #1 >
       {
-	nameptr #1 - numtrunc = 
-	  { 
+	nameptr #1 - numtrunc =
+	  {
 	    #1 'namesleft :=
 	    "others" 't :=
 	  }
@@ -800,8 +806,8 @@ FUNCTION {format.doi}
 
 FUNCTION {format.pid}
 { doi empty$
-{eprint empty$ 
-     { url empty$ 
+{eprint empty$
+     { url empty$
        { "" }
        { format.url }
      if$}
@@ -1227,7 +1233,7 @@ FUNCTION {format.full.book.spec} % The title should be on the stack.
 	    { " No." number tie.or.space.connect * }
 	    if$
 	}
-	{ series ", Vol." volume tie.or.space.connect *  
+	{ series ", Vol." volume tie.or.space.connect *
           ", " * swap$ format.ed.booktitle *
 	  number empty$
 	    'skip$
@@ -1246,7 +1252,7 @@ FUNCTION {article}
   format.authors "author" output.check
   author format.key output
  % name.or.dash
-  format.date "year" output.check 
+  format.date "year" output.check
   format.title "title" output.check
   add.blank
   crossref missing$
@@ -1570,10 +1576,10 @@ FUNCTION {first.initial}
 { 'z :=
   ""
     { z empty$ not z #1 #1 substring$ "." = not and }
-    { z #1 #1 substring$ *  
+    { z #1 #1 substring$ *
       z #2 global.max$ substring$ 'z :=
     }
-  while$ 
+  while$
   z empty$
   'skip$
   { add.period$ "~" * }
@@ -1585,7 +1591,7 @@ FUNCTION {forname.format.string}
 { "{f.}"  }
 
 FUNCTION {surname.format.string}
-{ "{vv~}{ll}" } 
+{ "{vv~}{ll}" }
 
 
 FUNCTION {jnrname.format.string}
@@ -1596,8 +1602,8 @@ INTEGERS { labnameptr }
 FUNCTION {format.lab.names}
 { 's :=
   #1 'labnameptr :=
-  s labnameptr forname.format.string format.name$ add.blank%first.initial 
-  s labnameptr surname.format.string format.name$  *   
+  s labnameptr forname.format.string format.name$ add.space.if.nonempty
+  s labnameptr surname.format.string format.name$  *
   s num.names$ duplicate$
   #2 >
     { pop$
@@ -1609,10 +1615,10 @@ FUNCTION {format.lab.names}
             {
               " {et~al.}" *
             }
-            { " \& " * 
+            { " \& " *
 	      #2 'labnameptr :=
-	      s labnameptr forname.format.string format.name$ add.blank%first.initial  
-	      s labnameptr surname.format.string format.name$  *  
+	      s labnameptr forname.format.string format.name$ add.space.if.nonempty
+	      s labnameptr surname.format.string format.name$  *
               * }
           if$
         }

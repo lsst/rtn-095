@@ -3,7 +3,7 @@
 %
 In this section, we provide an assessment of the \gls{DP1} data quality and known issues.
 % A summary of the Rubin \gls{DP1} key numbers and data quality metrics  is found in PERFSUMMARYTABLE
-%\input{tables/dp1_key_numbers}
+%\input{./dp1_key_numbers}
 
 \subsection{Sensor Anomalies and ISR}
 \label{ssec:sensor_anomalies}
@@ -19,18 +19,18 @@ Measurements on the observed PSF stars are are denoted as  $T_{\text{PSF}}$, $e^
 We compare two PSF modeling approaches:
 \begin{itemize}
 \item Piff with second-order polynomial interpolation (Piff O2), the pipeline's default, and
-\item Piff with fourth-order polynomial interpolation (Piff O4), which serves as the final DP1 PSF model.	
+\item Piff with fourth-order polynomial interpolation (Piff O4), which serves as the final \gls{DP1} PSF model.	
 \end{itemize}
 \tabref{tab:psf-1d_stats} summarizes each model’s ability to reconstruct the mean $T$, $e^1$, and $e^2$ on  \gls{LSSTComCam}. 
 Both models exhibit a negative residual bias in the reconstructed PSF size, with Piff O4 providing improved performance over Piff O2.
-\input{tables/psf_1d_stat.tex}
+\input{./psf_1d_stat.tex}
 
 An alternative approach to evaluating the performance of the \gls{PSF} model is to examine the average $\delta T/T$, where $\delta T$ is $T_{\text{PSF}}$ - $T_{\text{model}}$, across visits, projected onto focal-plane coordinates, as shown in \figref{fig:psf_residuals_fov}. 
 Piff reveals strong spatial correlations in the residuals, including a systematic offset consistent with the results presented in \tabref{tab:psf-1d_stats}. 
 The presence of these spatial structures motivated the adoption of fourth-order polynomial interpolation in all bands except $u$-band. 
 Although not shown in \figref{fig:psf_residuals_fov}, residual patterns persist even with third-order interpolation, indicating that it is insufficient to capture the complexity of the PSF variation. 
 Increasing the interpolation order to five would nominally reduce the residuals further, but the limited number of stars available on some CCDs would not provide adequate constraints for such a model, while the resulting improvement would likely be minimal.
-Preliminary analysis of LSSTCam data in the laboratory at \gls{SLAC} shows that the \gls{ITL} sensors exhibit the same pattern as \gls{ITL} sensors on \gls{LSSTComCam}.
+Preliminary analysis of \gls{LSSTCam} data in the laboratory at \gls{SLAC} shows that the \gls{ITL} sensors exhibit the same pattern as \gls{ITL} sensors on \gls{LSSTComCam}.
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\columnwidth]{dT_T_Piff_poly_order_2}  % First image at full column width
@@ -64,15 +64,15 @@ We observe coherent patterns in both the \gls{PSF} moments and the residuals, th
 We also repeat this analysis in color bins to probe chromatic effects.
 Binning by color uncovers a clear color dependence, as was also seen in \gls{DES} \citep{DES:2020vau}.
 The residual is consistent with \tabref{tab:psf-1d_stats} and its cause is unknown.
-DP1 does not include the color correction implemented in the DES Year 6 analysis, \citet{2025OJAp....8E..26S}. 
+\gls{DP1} does not include the color correction implemented in the DES Year 6 analysis, \citet{2025OJAp....8E..26S}. 
 This will be included in processing of future data releases.
 \begin{figure}[htb!]
-\plotone{dT_T_Piff_poly_4_vs_mag}
+\includegraphics[width=\linewidth]{dT_T_Piff_poly_4_vs_mag}
 \caption{Binned $\delta T/T$ as a function of magnitude across all visits and filters and in bins of stellar colors.}
 \label{fig:psf_residuals_mag_color}
 \end{figure}
 
-As noted in  \cite{PSTN-019}, two key Piff features were not used in the DP1 processing.
+As noted in  \cite{PSTN-019}, two key Piff features were not used in the \gls{DP1} processing.
 PSF color dependence was not implemented, and, while Rubin software allows Piff to work with sky coordinates (including WCS transformations), 
 it does not yet correct for sensor-induced astrometric distortions such as tree rings \citep{2017JInst..12C5015P}.
 Both features are planned for upcoming releases.
@@ -87,7 +87,7 @@ The results indicate that the astrometric solution is already very good after th
 Global calibration yields only modest improvement, likely due to the short time span of \gls{DP1} and the minimal distortions in the LSSTComCam.
 In the main survey, the longer time baseline and greater distortions near the \gls{LSSTCam} field edges will make global calibration more impactful.
 \begin{figure}[htb!]
-\plotone{Astrometry_dmAstroErr}
+\includegraphics[width=\linewidth]{Astrometry_dmAstroErr}
 \caption{Mean per-tract astrometric repeatability of measurements of isolated point sources in RA in visits across all bands.}
 \label{fig:dmAstroErr}
 \end{figure}
@@ -97,7 +97,7 @@ The scatter in these separation measurements provides an indication of the inter
 \figref{fig:AM1} shows the median separation for pairs of objects separated by approximately 5 arcminutes, computed per tract after the final calibration.
 These values are already approaching the design requirement of $10$ mas.
 \begin{figure}[htb]
-\plotone{Astrometry_AM1}
+\includegraphics[width=\linewidth]{Astrometry_AM1}
  \caption{Median per-tract repeatability in separations between isolated point sources 5~arcmin apart in visits across all bands.}
  \label{fig:AM1}
  \end{figure}
@@ -106,16 +106,16 @@ To assess external consistency, we consider the median separation between source
 For this, we use the Gaia \gls{DR3} catalog, with the object positions shifted to the observation epoch using the Gaia proper motion parameters.
 \figref{fig:AA1} shows the median separation for each visit in the $r$-band in \gls{tract} 4849 in the ECDFS fields (\tabref{tab:dp1_tracts}).
 \begin{figure*}[htb]
-\plotone{Astrometry_AA1}
+\includegraphics[width=\linewidth]{Astrometry_AA1}
 \caption{Median absolute offset for all visits in $r$-band in \gls{tract} 4849 in the ECDFS field. 
 The offset is the difference between the positions of isolated point sources that were reserved from the astrometric fit and matched objects from the Gaia DR3 catalog.}
 \label{fig:AA1}
 \end{figure*}
 The calculated values are almost all within $5$\xspace mas, well below the design requirement of $50$\xspace mas for the main survey.
 By examining the astrometric residuals, we can assess whether there are distortions not accounted for by the astrometric model. 
-In some cases, residuals from a single visit exhibit behavior consistent with atmospheric turbulence, as shown in \figref{fig:Astrometry_Emode}, which is characterized by a curl-free gradient field in the two-point correlation function of the residuals (E-mode),  \citet{Leget2021} and \citet{Fortino2021}. 
+In some cases, residuals from a single visit exhibit behavior consistent with atmospheric turbulence, as shown in \figref{fig:Astrometry_Emode}, which is characterized by a curl-free gradient field in the two-point correlation function of the residuals (E-mode),  \citet{2021A&A...650A..81L} and \citet{2021AJ....162..106F}. 
 \begin{figure*}[htb]
-\plotone{Astrometry_2024120200359}
+\includegraphics[width=\linewidth]{Astrometry_2024120200359}
 \caption{Astrometric residuals in $u$ (left panel) and $v$ (center panel) directions with the E (blue) and B (orange) modes of the two-point correlation function (right panel) 
 seen in visit 2024120200359 in tract 2393 in $u$ band.
 The residuals show a wave-like pattern characteristic of atmospheric turbulence, and there is significant E-mode and negligible B-mode in the correlation function.}
@@ -124,7 +124,7 @@ The residuals show a wave-like pattern characteristic of atmospheric turbulence,
 However, as seen in \figref{fig:Astrometry_EBmode}, the residuals in many visits also have correlation functions with a non-negligible divergence-free B-mode,
 indicating that some of the remaining residuals are due to unmodeled instrumental effects, such as rotations between visits.
 \begin{figure*}[htb!]
-\plotone{Astrometry_2024120700527}
+\includegraphics[width=\linewidth]{Astrometry_2024120700527}
 \caption{Astrometric residuals in $u$ (left panel) and $v$ (center panel) directions, with the E (blue)  and B (orange) 
 modes of the two-point correlation function (right panel) seen in visit 2024120700527 in tract 2393 in $u$ band.
 There are coherent residuals, but without the wave-like pattern seen in \figref{fig:Astrometry_Emode}, and the correlation function has significant values for both E and B-modes.}
@@ -134,8 +134,8 @@ There are coherent residuals, but without the wave-like pattern seen in \figref{
 We can see unmodeled camera distortions by stacking the astrometric residuals over many visits as a function of the focal plane position.
 \figref{fig:Astrometry_FoV} shows the median residuals in $x$ and $y$ directions for \nvisits visits.
 \begin{figure}[htb!]
-\plotone{Astrometry_FoV}
-\caption{Median astrometric residuals  as a function of focal plane position, shown in the left panel for the $x$ direction and in the right panel for the $y$ direction, for all nine LSSTComCam CCDs independently.
+\includegraphics[width=\linewidth]{Astrometry_FoV}
+\caption{Median astrometric residuals  as a function of focal plane position, shown in the left panel for the $x$ direction and in the right panel for the $y$ direction, for all nine \gls{LSSTComCam} CCDs independently.
 The range of the color scale is $\pm$ 0.01 pixels, corresponding to 2 mas, showing that the effect is small. }
 \label{fig:Astrometry_FoV}
 \end{figure}
@@ -143,9 +143,9 @@ Spatial structures are evident at the \gls{CCD} level, as well as at the mid-lin
 Further stacking all the detectors makes certain effects particularly clear.
 \figref{fig:Astrometry_CCD} shows distortions very similar to those measured for an \gls{LSSTCam} \gls{ITL} sensor in a laboratory setting in \citet{2023PASP..135k5003E}.
 \begin{figure}[htb!]
-\plotone{Astrometry_CCD}
+\includegraphics[width=\linewidth]{Astrometry_CCD}
 \caption{Median residuals as a function of pixel position, shown in the left panel for the $x$ direction and in the right panel for the $y$ direction. 
-These residuals are aggregated across all nine CCDs that comprise the central LSSTComCam raft.
+These residuals are aggregated across all nine CCDs that comprise the central \gls{LSSTComCam} raft.
 The range of the color scale is $\pm$ 0.01 pixels, corresponding to 2 mas, showing that the effect is small.}
 \label{fig:Astrometry_CCD}
 \end{figure}
@@ -154,7 +154,7 @@ The range of the color scale is $\pm$ 0.01 pixels, corresponding to 2 mas, showi
 \label{sec:differential_chromatic_refraction}
 \gls{Differential Chromatic Refraction} (DCR) occurs when light passes through Earth’s atmosphere, refracting more for shorter wavelengths, which causes blue light to appear shifted closer to the zenith.
 This wavelength-dependent effect results in the smearing of point sources along the zenith direction, specifically parallel to the parallactic angle.
-The DCR effect is observable in LSSTComCam data, particularly in the angular offset versus $g-i$ band magnitude difference plots,  as shown in \figref{fig:dcr}. 
+The DCR effect is observable in \gls{LSSTComCam} data, particularly in the angular offset versus $g-i$ band magnitude difference plots,  as shown in \figref{fig:dcr}. 
 These plots contain 228 visits chosen to maximize the range of observed airmass.
 When looking at data perpendicular to the parallactic angle, sources exhibit no discernible DCR effect, which is expected, and form a clear vertical distribution on the two-dimensional density plots in \figref{fig:dcr}.
 
@@ -162,8 +162,8 @@ In contrast, sources aligned with the parallactic angle exhibit a tilted, linear
 The DCR effect will be addressed in future releases. 
 
 \begin{figure}[htb!]
-\plotone{dcrHexbin}
-\caption{Visualization of \gls{Differential Chromatic Refraction} (DCR) observed in the LSSTComCam commissioning campaign. The $g-i$ color is computed for every source in the reference catalog that is matched to a direct source in the science image, and the binned density for the full survey is plotted against the angular offset between the reference and detected positions. The angular offset is projected along coordinates parallel and perpendicular to the parallactic angle of the observation, and shows a characteristic correlation along the parallel axis with no correlation along the perpendicular axis. The orange vertical dashed line indicates the expected $g-i$ magnitude distribution at zero angular offset.}
+\includegraphics[width=\linewidth]{dcrHexbin}
+\caption{Visualization of \gls{Differential Chromatic Refraction} (DCR) observed in the \gls{LSSTComCam} commissioning campaign. The $g-i$ color is computed for every source in the reference catalog that is matched to a direct source in the science image, and the binned density for the full survey is plotted against the angular offset between the reference and detected positions. The angular offset is projected along coordinates parallel and perpendicular to the parallactic angle of the observation, and shows a characteristic correlation along the parallel axis with no correlation along the perpendicular axis. The orange vertical dashed line indicates the expected $g-i$ magnitude distribution at zero angular offset.}
 \label{fig:dcr}
 \end{figure}
 
@@ -172,33 +172,22 @@ The photometric repeatability for isolated bright unresolved sources following t
 For the 10\% of unresolved sources withheld from the fit and having signal-to-noise ratios greater than 100, the photometric repeatability 
 after applying chromatic correction was 7.1, 5.4, 5.4, 5.1, 5.9, and 6.5  mmag in the $ugrizy$ bands respectively, across all fields.
 After accounting for photometric noise, the intrinsic photometric repeatability was approximately 4.8, 2.7, 1.7, 1.0, 2.0, and 1.1 mmag in $ugrizy$.
-The DP1 processing does not yet include chromatic corrections in the final photometry. 
+The \gls{DP1} processing does not yet include chromatic corrections in the final photometry. 
 In this case  the delivered photometric repeatability was 3−8 mmag  for grizy.  
 
-In \figref{fig:stellarloci}, we show the stellar loci for $ugriz$ for unresolved sources in the DP1 \texttt{Object} table (\secref{ssec:catalogs}).
+In \figref{fig:stellarloci}, we show the stellar loci for $ugriz$ for unresolved sources in the \gls{DP1} \texttt{Object} table (\secref{ssec:catalogs}).
 These unresolved sources  were selected using the extendedness parameter (\secref{ssec:catalogs}) in the \texttt{Object} catalog. 
 This parameter is assigned a value of 0 (unresolved) or 1 (resolved) in each band based on the difference between the PSF and CModel magnitudes. 
 The extendedness is set to 1 when this magnitude difference exceeds 0.016 mag, as the PSF flux for extended sources is biased low relative to the CModel flux. 
-This method has been previously employed by SDSS pipelines, and its statistical properties, including the optimal combination of information from different bands and repeated measurements, are discussed in \cite{2020AJ....159...65S}.
-\begin{figure*}[hbt!]
-  \centering
-  \begin{subfigure}[t]{0.31\textwidth}
-\includegraphics[width=\linewidth]{dp1_stellar_locus_ugr}
-\caption{$ugr$ stellar locus containing 12,779 stars with signal-to-noise ratio $>$ 50 in the $u$ band.}
-\label{fig:stellarloci-ugr}
-  \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.31\textwidth}
-\includegraphics[width=\linewidth]{dp1_stellar_locus_gri}
- \caption{$gri$ stellar locus containing 63,236 stars with signal-to-noise ratio $>$ 200 in the $i$ band.}
-\label{fig:stellarloci-gri}
-  \end{subfigure}\hfill
-    \begin{subfigure}[t]{0.31\textwidth}
-\includegraphics[width=\linewidth]{dp1_stellar_locus_riz}
-  \caption{$riz$ stellar locus containing 46,760 stars with signal-to-noise ratio $>$ 200 in the $i$ band.}
-    \label{fig:stellarloci-riz}
-  \end{subfigure}\hfill
- \caption{Examples of stellar loci for unresolved sources from the DP1 dataset.}
- \label{fig:stellarloci}
+This method has been previously employed by the SDSS pipelines, and its statistical properties, including the optimal combination of information from different bands and repeated measurements, are discussed in \cite{2020AJ....159...65S}.
+
+\begin{figure*}[htb!]
+\includegraphics[width=\linewidth]{stellarLocusPlots}
+\caption{Examples of stellar loci for unresolved sources from the \gls{DP1} dataset. From left to right: 
+$gri$ stellar locus containing 63,236 stars with signal-to-noise ratio $>$ 200 in the $i$ band;
+$riz$ stellar locus containing 46,760 stars with signal-to-noise ratio $>$ 200 in the $i$ band
+$ugr$ stellar locus containing 12,779 stars with signal-to-noise ratio $>$ 50 in the $u$ band.}
+\label{fig:stellarloci}
 \end{figure*}
 
 \figref{fig:extendedness} illustrates the behavior of the extendness parameter. 
@@ -208,7 +197,7 @@ Resolved sources are found to the right and the dashed lines in the top panels s
 The morphology of the two color-magnitude diagrams in the bottom panels suggest that the unresolved sample suffers from increasing contamination by galaxies for $r>24$. 
 This behavior is consistent with simulation-based predictions from \cite{2020AJ....159...65S}.
 \begin{figure*}[t]
-\plotone{SG_DP1_ECDFS}
+\includegraphics[width=\linewidth]{SG_DP1_ECDFS}
 \caption{The top two panels shows the difference between the PSF and CModel magnitudes as a function of CModel magnitude in the
 $g$ and $r$ bands for 178,547 sources with $CModel_r < 25$ from the ECDFS field. The vertical dashed line in each panel
 marks the minimum value (0.016 mag) for setting the extendedness parameter to 1. The bottom two panels show the $r$ vs.
@@ -229,7 +218,7 @@ To avoid deblender failures from excessive increases in object density, stars wi
 Half of the remaining objects are selected for injection.
 Afterwards, individual bulge and disk components fainter than 29~${\rm mag}$ are also excluded, both for computational expediency and because their structural properties are less likely to be representative of real galaxies.
 \begin{figure}[htb]
-\plotone{injected_lsst_cells_v1_5063_i_completeness_any}
+\includegraphics[width=\linewidth]{injected_lsst_cells_v1_5063_i_completeness_any}
 \caption{Completeness and incorrect classification fraction as a function of $i$-band CModel magnitude (Reference Magnitude) for DC2-based injected objects into a portion of the ECDFS field. 
 The ``Incorrect Class'' line shows the proportion of objects that are matched but classified incorrectly by their reference-band extendedness, i.e. stars with extendedness of 1 or galaxies with extendedness of 0 in the reference band.}
 \label{fig:injected_lsst_cells_v1_5063_i_completeness_any}
@@ -260,7 +249,9 @@ We expect to remedy some of these shortcomings in future releases.
 Similar behavior is seen in other bands.
 S\'ersic fluxes show reduced scatter for galaxies with $i<22.5$, though CModel fluxes are less biased, with median residuals closer to zero and less magnitude-dependent.
 For fainter objects, S\'ersic fluxes are more biased and less accurate.
-The magnitude of this bias is considerably larger than previously seen in simulated data and is being investigated.
+The magnitude of this bias is considerably larger than previously seen in simulated data.
+Subsequent testing indicates that this bias can be (roughly) halved by fitting an exponential model first, and then using those parameters to initialize a free S\'ersic fit.
+This approach will be adopted in future releases.
 Aperture fluxes - including Kron and \gls{GAaP} - are not shown as they are not corrected to yield total fluxes.
 The correction for Kron fluxes can be derived from the S\'ersic index \citep{2005PASA...22..118G}, but this correction is not provided in object tables.
 
@@ -403,7 +394,7 @@ In \figref{fig:eff_snr_griz} we show the detection completeness as a function of
 We observe a completeness $>95\%$ for sources with \gls{SNR}$> 6$, with mean completeness $\simeq 99\%$ and standard deviation of $\simeq 0.7\%$.
 %
 \begin{figure}[htb!]
-\plotone{efficiency_snr_griz}
+\includegraphics[width=\linewidth]{efficiency_snr_griz}
 \caption{The difference image detection completeness for injected sources in the \gls{ECDFS} field, for filters \textit{griz}, as a function of the estimated signal to noise ratio SNR. 
 This completeness is the ratio between the found fake sources (shaded histogram) and all the sources (solid line). 
 The horizontal dashed line represents where the $50\%$ completeness level is reached, at approximately SNR $\simeq 5.07$.}
@@ -413,7 +404,7 @@ The horizontal dashed line represents where the $50\%$ completeness level is rea
 In \figref{fig:coordinate_offset_diffim_fakes} we show the distribution of the residuals of the recovered sky coordinates for the detected synthetic sources. The marginal distributions are both centered at zero, and for sources of SNR $>20$ the residuals are compatible with normal distributions $\mathcal{N}(\mu=0, \sigma^2=(0''.02)^2)$.
 %
 \begin{figure}[htb!]
-\plotone{coordinate_offsets_hexbin}
+\includegraphics[width=\linewidth]{coordinate_offsets_hexbin}
 \caption{Coordinate residuals for detected synthetic sources in difference images, between recovered and true position of the sources in the \gls{ECDFS} field. 
 In the top and right panels we include the distribution of these offsets, for all sources as well as for sources with SNR$>20$. 
 These high SNR sources show gaussian coordinate residual distributions with $\sigma=0\farcs02$ (black solid lines). 
@@ -436,7 +427,7 @@ For all sources with $m_i<21.5$ the running median is always $|\left<\delta\righ
 Extending to sources with $m_i<22.5$ then  hostless sources have  a robust mean pull below $0.02$, with a robust standard deviation $<1.15$, while these parameters increase to $0.2$ and $1.2$ for hosted sources, suggesting that we might have contamination from host background sources potentially biasing our fluxes.
 %
 \begin{figure}
-\plotone{hexbin_psf_magpull}
+\includegraphics[width=\linewidth]{hexbin_psf_magpull}
 \caption{Magnitude residuals and flux pulls for $i$-band \gls{PSF} photometry on difference images for ECDFS field in $i$ for detected injected sources.
 Top panel: Distribution of true magnitudes for injected sources (blue), and split  into hostless (black dash) and hosted (orange) sources, with detection completeness as a function of true magnitude (gray line). 
 Vertical dashed lines indicate the 90\% and 50\% completeness magnitude limits.
@@ -452,7 +443,7 @@ Bottom right panel: Marginalized distributions of PSF flux pulls for hostless (b
 
 \subsubsection{Asteroid Linking Performance}
 
-The evaluation of asteroid linking performance in DP1 focused on demonstrating discovery capability.
+The evaluation of asteroid linking performance in \gls{DP1} focused on demonstrating discovery capability.
 The solar system discovery pipeline produced 269,581 tracklets, 5,691 linkages, and 281 post-processed candidates.
 
 As described in \secref{sec:drp:solsys}, post-processing of the \texttt{heliolinc} output with \texttt{link\_purify} produced a final set of 281 candidate linkages, ranked with the most promising first. 
@@ -474,7 +465,7 @@ An additional 143 detections of these newly discovered objects were also recover
 These detections were not initially identified by the discovery pipelines, as they did not meet the required criteria for tracklet formation, specifically the minimum number of detections and/or the maximum allowed time span between observations.
 
 \begin{figure}[htb!]
-\plotone{sso_residuals}
+\includegraphics[width=\linewidth]{sso_residuals}
 \caption{Astrometric residuals between expected and observed positions of Solar System Objects in \gls{DP1}. 
 The median residuals are $0\farcs001$ and $-0\farcs016$ in R.A./Dec direction, with  standard deviations of $0.''19$ and $0.''10$, respectively. 
 No detectable systematic offset from zero indicates there are no major errors in either timing or astrometry delivered by the Rubin system. 
@@ -488,12 +479,13 @@ Taking the signed median residuals to search for biases, we find that previously
 These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion, which is consistent with the timing studies presented in Section~\ref{ssec:comcam_timing}.
 
 \subsection{Crowded Fields}
-Among the seven Rubin DP1 target fields, two stand out for their severe stellar crowding: the globular cluster 47\,Tucanae (47\_Tuc) and the Fornax dwarf spheroidal galaxy (Fornax dSph).
+\label{ssec:crowded_fields}
+Among the seven Rubin \gls{DP1} target fields, two stand out for their severe stellar crowding: the globular cluster 47\,Tucanae (47\_Tuc) and the Fornax dwarf spheroidal galaxy (Fornax dSph).
 These fields were selected in part to stress-test the LSST Science Pipelines under high-density conditions. 
 While both exhibit high stellar densities, the nature and spatial extent of the crowding differ significantly.
 
 47\,Tuc presents extreme crowding across much of the field, encompassing its dense core and the eastern regions influenced by the Small Magellanic Cloud (SMC). 
-This pervasive crowding leads to persistent challenges for deblending and reliable source detection, exposing field-wide limitations in the current pipeline performance \citep{Choi2025}.
+This pervasive crowding leads to persistent challenges for deblending and reliable source detection, exposing field-wide limitations in the current pipeline performance \citep{2025arXiv250701343C}.
 In contrast, Fornax\,dSph shows significant crowding only in its central region, with outer areas remaining well resolved and easier to process. 
 
 In both 47\,Tuc and Fornax, extreme crowding led to the deblending step being skipped frequently when memory or runtime limits were exceeded, typically due to an excessive number of peaks, or large parent footprints.
@@ -501,10 +493,10 @@ However, the impact of these limitations differed: in 47\,Tuc, deblending was of
 In Fornax, these issues were largely confined to the central region, with much better recovery in the outskirts. 
 This contrast highlights how the pipeline’s limitations depend on the spatial extent of high-density regions: 47\,Tuc exposed systematic, field-wide challenges, whereas Fornax revealed more localized, density-driven limits.
 
-\citet{Wainer2025} explored the Rubin DP1 \texttt{DiaObject} catalog (\secref{ssec:catalogs}) in the 47\,Tuc field, which contains sources detected in difference images. 
+\citet{2025RNAAS...9..171W} explored the Rubin \gls{DP1} \texttt{DiaObject} catalog (\secref{ssec:catalogs}) in the 47\,Tuc field, which contains sources detected in difference images. 
 Because forced photometry is performed at these positions across all single-epoch images, this dataset bypasses the coadd-based detection and deblending stages that often fail in crowded regions. 
-By computing the median of the forced photometry for each  \texttt{DiaObject} across available visits, they recovered approximately three times more candidate cluster members than found in the standard \texttt{Object table} \citep{Choi2025}. 
-This result underscores the value of difference-imaging–based catalogs for probing dense stellar regions inaccessible to standard coadd processing in DP1.
+By computing the median of the forced photometry for each  \texttt{DiaObject} across available visits, they recovered approximately three times more candidate cluster members than found in the standard \texttt{Object table} \citep{2025arXiv250701343C}. 
+This result underscores the value of difference-imaging–based catalogs for probing dense stellar regions inaccessible to standard coadd processing in \gls{DP1}.
 
-Although the DP1 pipeline was not optimized for crowded-field photometry, these early studies of 47\,Tuc and Fornax provide critical benchmarks. 
+Although the \gls{DP1} pipeline was not optimized for crowded-field photometry, these early studies of 47\,Tuc and Fornax provide critical benchmarks. 
 They highlight both the limitations and opportunities for science with Rubin data in crowded environments, and they inform future pipeline development aimed at robust source recovery in complex stellar fields.
