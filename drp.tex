@@ -239,7 +239,9 @@ About 10\% of all commissioning visits targeted the near-ecliptic field Rubin\_S
 Rubin\_SV\_38\_7 produced the vast majority of asteroid discoveries in \gls{DP1}, as expected, but a few were found in off-ecliptic fields as well.
 
 Tracklet creation with \texttt{make\_tracklets} used an upper limit angular velocity of 1.5 \gls{deg}/day, faster than any main belt asteroid and in the range of many \gls{NEO} discoveries.
-To minimize false tracklets from fields observed multiple times per night, the minimum \gls{tracklet} length was set to three detections, and a minimum on-sky motion of five arcseconds was required for a valid \gls{tracklet}.
+While no formal minimum angular velocity was imposed, in practice it would be unlikely to detect objects moving slower  than about 0.01~deg~day$^{-1}$.
+To minimize false \gls{tracklet}s from fields observed multiple times per night, the minimum \gls{tracklet} length was set to three detections, and a minimum on-sky motion of five arcseconds was required for a valid \gls{tracklet}.
+To claim a discovery candidate, we required tracklets to be linked across at least three nights. 
 
 Multi-night \gls{tracklet} linking is the heart of Solar system discovery,  which connects (``links") tracklets belonging to the same object over a series of nights.
 It employs the HelioLinC3D algorithm \citep{2020DPS....5221101E,2022DPS....5450404H}, a refinement of the original HelioLinC algorithm of \citet{2018AJ....156..135H}.
@@ -248,3 +250,5 @@ This range of distance encompasses all main belt asteroids and Jupiter Trojans, 
 Smaller heliocentric distances were not attempted here because nearby objects move rapidly across the sky and hence were not likely to remain long enough in an \gls{LSSTComCam} field to be discovered.
 Candidate linkages, groups of tracklets whose propagated orbits cluster within a radius of 1.33 $\times\,10^{3}$\,au at 1\,au, 
 are identified, then post-processed via \texttt{link\_purify} to yield a final, non‐overlapping set of high-confidence asteroid candidates, ranked by orbit-fit residuals and related metrics.
+
+The maximum angular velocity considered for tracklet detection was 1.5~deg~day$^{-1}$; 
