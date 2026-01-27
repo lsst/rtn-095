@@ -140,6 +140,9 @@ Here we describe science-ready tables produced by the science pipelines.
 All but one of the catalogs described here contain data for detections in the images described in \secref{ssec:science_images}, the exception being the \texttt{Calibration} catalog, which contains reference data obtained from previous surveys.
 Observatory-produced \gls{metadata} tables are described in \secref{ssec:metadata}.
 Each type of catalog contains measurements for either Sources  detected in  \texttt{visit\_image}s and \texttt{difference\_image}s, or Objects detected in \texttt{deep\_coadd}s.
+All catalogs store fluxes rather than magnitudes, with fluxes measured in nanojansky (1 nJy = $10^{−35}$ Wm$^{−2}$Hz$^{−1}$).
+Flux measurements are more appropriate for multi-epoch observations, as fluxes should be averaged across epochs rather than magnitudes.
+Additionally, flux measurements on difference images (\secref{ssec:science_images}) are performed against a template, representing a flux difference. As a result, the measured flux of a source on a difference image can be negative, particularly for faint sources in the presence of noise.
 
 While the \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each differ in terms of their specific columns, in general they each contain: one or more unique identification numbers, positional information, one or more types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags (indicating, for example, whether the source/object is affected by saturated pixels, cosmic rays, etc.) for each source/object.
 The Solar System catalogs \texttt{SSObject} and \texttt{SSSource} deviate from this general structure in that they instead contain orbital parameters for all known asteroids.
