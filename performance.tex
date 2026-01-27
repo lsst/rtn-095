@@ -475,8 +475,16 @@ The wider scatter in the RA direction is due to objects whose measured orbital e
 
 The astrometric residuals of known asteroid associations are shown in \figref{fig:sso_residuals}.
 The astrometric precision for solar system sources is excellent, with the majority of objects detected within $0\farcs1$ of their expected positions.
-Taking the signed median residuals to search for biases, we find that previously-known objects have mean residuals of $0\farcs001$ and $-0\farcs016$ in the RA and Dec directions respectively, while newly-discovered objects have mean residuals of $-0\farcs035$ and $-0\farcs010$ in the RA and Dec directions, respectively.
-These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion, which is consistent with the timing studies presented in Section~\ref{ssec:comcam_timing}.
+
+By analyzing the signed median residuals to search for biases, we find that previously-known objects have mean residuals of $0\farcs001$ and $-0\farcs016$ in the RA and Dec directions respectively, whereas newly-discovered objects have mean residuals of $-0\farcs035$ and $-0\farcs010$ in the RA and Dec directions, respectively.
+These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion, which is consistent with the timing studies presented in \secref{ssec:comcam_timing}.
+
+The wider scatter in the RA residuals is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions
+Observations of objects with large residuals are the most valuable ones from the point of view of improving the orbit, which is why we kept a generous matching radius.
+However, in future releases we are likely to couple this with either orbit fitting to verify the "singleton" match, or require two near-in-time observations (a tracklet) that match the expected motion vector as well.
+
+Optimal moving source attribution is an area of  active work that we expect to fully converge in time of \gls{DR1}.
+In the meantime, for \gls{DP1} we've opted to start with simple, more easily understandable, criteria.
 
 \subsection{Crowded Fields}
 \label{ssec:crowded_fields}
