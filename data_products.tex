@@ -1,16 +1,17 @@
 \section{Overview of the contents of Rubin \gls{DP1}}
 \label{sec:data_products}
-Here we describe Rubin \gls{DP1} data products and provide summary statistics for each, but we also refer the reader to the DOI-registered \gls{DP1} release documentation available at \url{https://dp1.lsst.io} and the catalog schemas available at \url{https://sdm-schemas.lsst.io}.\footnote{Searchable catalog schemas are also available to Data Rights Holders via the Rubin Science Platform at \url{https://data.lsst.cloud}.}
+In this section we describe the Rubin \gls{DP1} data products and provide summary statistics for each. 
+For more detailed information, we refer the reader to the DOI-registered \gls{DP1} release documentation available at \url{https://dp1.lsst.io} and the catalog schemas available at \url{https://sdm-schemas.lsst.io}.\footnote{Searchable catalog schemas are also available to Data Rights Holders via the Rubin Science Platform at \nolinkurl{https://data.lsst.cloud}.}
+
 The \gls{DP1} science data products are derived from the \nvisitimages individual \gls{CCD} images taken across \nexposures exposures in the \nfields \gls{LSSTComCam} commissioning fields (\secref{ssec:pipelines_commissioning}).
-To aid legibility, we have separated the descriptions of the data products from the description of the data release processing pipeline, a summary of which is provided in \secref{sec:drp}.
-Similarly, because most of the data products described here can be accessed via either the \gls{IVOA} Services ( \secref{sssec:ivoa_services}) or the Data \gls{Butler} (\secref{sssec:data_butler}), we describe them in a manner that is agnostic to the means of access.
+To aid legibility, we have separated the descriptions of the data products from the description of the data release processing pipeline (\secref{sec:drp}).
+Similarly, as the \gls{DP1} data products can be accessed via one or both of \gls{IVOA} Services (\secref{sssec:ivoa_services}) or the Data \gls{Butler} (\secref{sssec:data_butler}), we describe them here in a manner that is agnostic to the means of access.
 
 The data products that comprise \gls{DP1} provide an early preview of future LSST data releases and are strongly dependent on the type and quality of the data that was collected during the \gls{LSSTComCam} on-sky campaign (\secref{ssec:pipelines_commissioning}).
 Consequently not all anticipated  \gls{LSST} data products, as described in the \gls{DPDD} \citep{LSE-163}, were produced for the \gls{DP1} dataset.
 
-Rubin Observatory has adopted the convention by which single-epoch detections are referred to as Sources.
-By contrast, the astrophysical object associated with a given detection is referred to as an Object
-\footnote{We caution that this nomenclature is not universal; for example, some surveys call ``detections'' what we call ``sources'', and use the term ``sources'' for what we call ``objects''.}.
+Rubin Observatory has adopted the convention by which single-epoch detections are referred to as ``Sources", and the astrophysical object associated with a given detection is referred to as an ``Object"
+\footnote{We caution that this nomenclature is not universal; for example, some surveys use ``detections'' for what we call ``sources'', and ``sources'' for what we call ``objects''.}.
 As such, a given Object will likely have multiple associated  Sources, since it will be observed in multiple epochs.
 
 At the highest level, the \gls{DP1} data products fall into one of five types:
@@ -136,22 +137,30 @@ Background images are not available via the \gls{IVOA} Service; they can only be
 
 \subsection{Catalogs}
 \label{ssec:catalogs}
-Here we describe science-ready tables produced by the science pipelines.
-All but one of the catalogs described here contain data for detections in the images described in \secref{ssec:science_images}, the exception being the \texttt{Calibration} catalog, which contains reference data obtained from previous surveys.
+In this section  we describe science-ready tables produced by the science pipelines.
+All catalogs contain data for detections in the images described in \secref{ssec:science_images}, except  the  \texttt{Calibration} catalog, which contains reference data obtained from previous surveys.
 Observatory-produced \gls{metadata} tables are described in \secref{ssec:metadata}.
-Each type of catalog contains measurements for either Sources  detected in  \texttt{visit\_image}s and \texttt{difference\_image}s, or Objects detected in \texttt{deep\_coadd}s.
+
+The catalogs contains measurements for either Sources  detected in  \texttt{visit\_image}s and \texttt{difference\_image}s, or Objects detected in \texttt{deep\_coadd}s.
 All catalogs store fluxes rather than magnitudes, with fluxes measured in nanojansky (1 nJy = $10^{−35}$ Wm$^{−2}$Hz$^{−1}$).
-Flux measurements are more appropriate for multi-epoch observations, as fluxes should be averaged across epochs rather than magnitudes.
-Additionally, flux measurements on difference images (\secref{ssec:science_images}) are performed against a template, representing a flux difference. As a result, the measured flux of a source on a difference image can be negative, particularly for faint sources in the presence of noise.
+Fluxes are preferred for multi-epoch observations, as they can be averaged across epochs, unlike magnitudes.
+Additionally, flux measurements on difference images (\secref{ssec:science_images}) are computed against a template, representing a flux difference. 
+As a result, flux measurements on difference images can be negative, particularly for faint sources in the presence of noise.
 
-While the \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each differ in terms of their specific columns, in general they each contain: one or more unique identification numbers, positional information, one or more types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags (indicating, for example, whether the source/object is affected by saturated pixels, cosmic rays, etc.) for each source/object.
-Fluxes for various apertures are provided and named in the format \texttt{[band]\_ap[size]Flux}, where \texttt{[size]} represents the aperture diameter in pixels. For example, \texttt{g\_ap03Flux} refers to the flux measured within a 3.0-pixel aperture in the g-band.
+The \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each vary in terms of their specific columns but generally contain: one or more unique identification numbers, positional information, multiple types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags indicating characteristics such as saturation or cosmic ray contamination for each source/object.
 The Solar System catalogs \texttt{SSObject} and \texttt{SSSource} deviate from this general structure in that they instead contain orbital parameters for all known asteroids.
-A full set of columns  with description and units in all table in DP1 can be found at \nolinkurl{https://sdm-schemas.lsst.io/dp1.html}
-Where applicable, all measured properties are reported with their associated 1$\sigma$ uncertainties.
 
-Since \gls{DP1} is a preview, it does not include all the catalogs expected in a full \gls{LSST} \gls{Data Release}. Additionally, the catalogs it does include may be missing some columns planned for future releases.
-Where this is known to be the case, we note what data are missing in the catalog descriptions that follow.
+Where applicable, quantities are prefixed with the band in which they were measured, and all measured properties are reported with their associated 1$\sigma$ uncertainties. 
+For example, \texttt{g\_ra} and \texttt{g\_raErr} refer to right ascension and its uncertainty, measured in the g-band.
+
+Fluxes for various apertures are provided together with an uncertainty and  a flag, and named in the format \texttt{[band]\_ap[size]Flux}, where \texttt{[size]} is the aperture diameter in pixels. 
+For example, \texttt{g\_ap03Flux}, \texttt{g\_ap03FluxErr}, \texttt{g\_ap03Flux\_flag} provide the flux, uncertainty and flag measured within a 3.0-pixel aperture in the g-band.
+Similarly for flux measurements using difference algorithms, e.g. \texttt{g\_psfFlux} provides the flux derived using the PSF model as a weight function, forced on g-band. 
+
+A complete list of columns  with description and units for all tables in DP1 is available at \nolinkurl{https://sdm-schemas.lsst.io/dp1.html}
+Since \gls{DP1} is a preview release, it does not include all the catalogs expected in a full \gls{LSST} \gls{Data Release}. 
+Additionally, some catalogs may be missing columns, as not all quantities have been computed yet. 
+These quantities will be included in future releases, and, where it is known to be the case,  missing data are noted in the catalog descriptions that follow.
 
 Catalog data are stored in the \gls{Qserv} database (\secref{sssec:qserv}) and are accessible via \gls{TAP}, and an online \gls{DP1} catalog \gls{schema} is available at \url{https://sdm-schemas.lsst.io/dp1.html}.
 Catalog data are also accessible via the Data \gls{Butler} (see \secref{sssec:data_butler}).
