@@ -69,7 +69,7 @@ The field of view of a single \texttt{raw}, excluding prescan and overscan regio
 They have undergone instrument signature removal (\secref{ssec:isr}) and all the single frame processing steps described in \secref{ssec:single_frame_processing} which are, in summary: \gls{PSF} modeling, \gls{background} subtraction, and astrometric and photometric \gls{calibration}.
 As with \texttt{raw}s, a \texttt{visit\_image} contains processed data from a single \gls{CCD} resulting from a single \exposuretime \gls{LSSTComCam} exposure.
 As a consequence, a single \gls{LSSTComCam} exposure typically results in nine \texttt{visit\_image}s.
-The handful of exposures with fewer than nine \texttt{raw} images also have fewer than nine \texttt{visit\_images}, but there are an additional \nsfpfails \texttt{raw} that failed processing and for which there is thus no corresponding \texttt{visit\_image}.
+The handful of exposures with fewer than nine \texttt{raw} images also have fewer than nine \texttt{visit\_images}, but there are an additional \nsfpfails \texttt{raw} images that failed processing and for which there is thus no corresponding \texttt{visit\_image}.
 The majority of failures -- 131 in total -- were due to challenges with astrometric fits or \gls{PSF} models in the 47\_Tuc crowded field. The other failures were in the Rubin\_SV\_095\_-25 (9 failures), ECDFS (8), Fornax\_dSph (3), and EDFS\_comcam (2) fields.
 
 In total, there are \nvisitimages \texttt{visit\_image}s in \gls{DP1}.
