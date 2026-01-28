@@ -102,7 +102,7 @@ These values are already approaching the design requirement of $10$ mas.
  \label{fig:AM1}
  \end{figure}
 
-To assess external consistency, we consider the median separation between sources not included in the astrometric fit and associated objects from a reference catalog.
+To assess external consistency, we consider the median separation between sources not included in the astrometric fit and associated objects from a reference catalog (\secref{sssec:monster}).
 For this, we use the Gaia \gls{DR3} catalog, with the object positions shifted to the observation epoch using the Gaia proper motion parameters.
 \figref{fig:AA1} shows the median separation for each visit in the $r$-band in \gls{tract} 4849 in the ECDFS fields (\tabref{tab:dp1_tracts}).
 \begin{figure*}[htb]
@@ -163,7 +163,8 @@ The DCR effect will be addressed in future releases.
 
 \begin{figure}[htb!]
 \includegraphics[width=\linewidth]{dcrHexbin}
-\caption{Visualization of \gls{Differential Chromatic Refraction} (DCR) observed in the \gls{LSSTComCam} commissioning campaign. The $g-i$ color is computed for every source in the reference catalog that is matched to a direct source in the science image, and the binned density for the full survey is plotted against the angular offset between the reference and detected positions. The angular offset is projected along coordinates parallel and perpendicular to the parallactic angle of the observation, and shows a characteristic correlation along the parallel axis with no correlation along the perpendicular axis. The orange vertical dashed line indicates the expected $g-i$ magnitude distribution at zero angular offset.}
+\caption{Visualization of \gls{Differential Chromatic Refraction} (DCR) observed in the \gls{LSSTComCam} commissioning campaign. 
+The $g-i$ color is computed for every source in the reference catalog (\secref{sssec:monster}) that is matched to a direct source in the science image, and the binned density for the full survey is plotted against the angular offset between the reference and detected positions. The angular offset is projected along coordinates parallel and perpendicular to the parallactic angle of the observation, and shows a characteristic correlation along the parallel axis with no correlation along the perpendicular axis. The orange vertical dashed line indicates the expected $g-i$ magnitude distribution at zero angular offset.}
 \label{fig:dcr}
 \end{figure}
 
@@ -237,7 +238,7 @@ This analysis has several caveats.
 The selection of objects for matching in any catalog is not trivial.
 Some fraction of the detections are spurious, particularly close to bright stars and their diffraction spikes.
 Additionally, some objects lie in masked regions of one survey but not another, which has not been accounted for. 
-For injected source matching, the reference catalog does not include real on-sky objects.
+For injected source matching, the reference catalog (\secref{sssec:monster}) does not include real on-sky objects.
 Based on prior analyses of the \gls{DC2} simulations, purity is generally greater than completeness at any given magnitude.
 Similarly, for bright ($i<23$) objects classified as stars by reference band extendedness, $<5\%$ are either unmatched to a Euclid or HST object, or misclassified - that is, selecting on extendedness alone yields a fairly pure but incomplete sample of stars.
 We expect to remedy some of these shortcomings in future releases.
