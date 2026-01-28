@@ -211,7 +211,7 @@ suffers from increasing contamination by galaxies for $r>24$.}
 \subsection{Detection Completeness on Coadds}
 \label{ssec:detection_completeness}
 We characterize completeness by injecting synthetic sources into coadded images, and by comparing source detections to external catalogs.
-In both cases, we use a greedy, probabilistic matching \gls{algorithm} that matches reference objects, in order of descending brightness, to the most likely target within a $0.5''$ radius.
+In both cases, we use a greedy, probabilistic matching \gls{algorithm} that matches reference objects, in order of descending brightness, to the most likely target within a $0\farc5$ radius.
 
 We inject sources in 12 of the patches of the \gls{ECDFS} region with the deepest coverage.
 The input catalog contains stars and galaxies from part of the \gls{DC2} simulations \citep{2021ApJS..253...31L}, where the galaxies consist of an exponential disk and de Vaucouleurs \citep{1948AnAp...11..247D,1953MNRAS.113..134D} bulge.
@@ -482,7 +482,7 @@ These mean residuals are small enough to eliminate the possibility of a timing o
 
 The wider scatter in the RA residuals is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions
 Observations of objects with large residuals are the most valuable ones from the point of view of improving the orbit, which is why we kept a generous matching radius.
-However, in future releases we are likely to couple this with either orbit fitting to verify the "singleton" match, or require two near-in-time observations (a tracklet) that match the expected motion vector as well.
+However, in future releases we are likely to couple this with either orbit fitting to verify the ``singleton" match, or require two near-in-time observations (a tracklet) that match the expected motion vector as well.
 
 Optimal moving source attribution is an area of  active work that we expect to fully converge in time of \gls{DR1}.
 In the meantime, for \gls{DP1} we've opted to start with simple, more easily understandable, criteria.
