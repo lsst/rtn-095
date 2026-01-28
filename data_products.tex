@@ -292,7 +292,7 @@ This process generated a set of standard columns containing positional and flux 
 \subsubsection{Source and Object Designations}\label{ssec:src_naming}
 To refer to individual sources or objects from the \gls{DP1} catalogs, one should follow the LSST \gls{DP1} naming convention that has been registered with the International Astronomical Union.
 Because the \texttt{Source}, \texttt{Object}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{SSObject} tables each have their own unique IDs, their designations should differ.
-In general, source designations should begin with the string ``LSST-\gls{DP1}'' (denoting the Legacy Survey of Space and Time, Data Preview 1), followed by a string specifying the table from which the source was obtained.
+In general, source and object designations should begin with the string ``LSST-\gls{DP1}'' (denoting the Legacy Survey of Space and Time, Data Preview 1), followed by a string specifying the table from which the source was obtained.
 These strings should be ``O'' (for the \texttt{Object} table), ``S'' (\texttt{Source}), ``DO'' (\texttt{DiaObject}), ``DS'' (\texttt{DiaSource}), or ``SSO'' (\texttt{SSObject}).
 Following the table identifier, the designation should contain the full unique numeric identifier from the specified table (i.e., the objectId, sourceId, diaObjectId, diaSourceId, or ssObjectId).
 Each component of the identifier should be separated by dashes, resulting in a designation such as ``LSST-\gls{DP1}-TAB-123456789012345678''.
