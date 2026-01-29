@@ -2,13 +2,11 @@
 \label{sec:performance}
 %
 In this section, we provide an assessment of the \gls{DP1} data quality and known issues.
-% A summary of the Rubin \gls{DP1} key numbers and data quality metrics  is found in PERFSUMMARYTABLE
-%\input{./dp1_key_numbers}
-
+%
 \subsection{Sensor Anomalies and ISR}
 \label{ssec:sensor_anomalies}
 \input{sensor_anomalies}
-
+%
 
 \subsection{PSF Models}
 \label{ssec:psf_models}
@@ -102,7 +100,7 @@ These values are already approaching the design requirement of $10$ mas.
  \label{fig:AM1}
  \end{figure}
 
-To assess external consistency, we consider the median separation between sources not included in the astrometric fit and associated objects from a reference catalog.
+To assess external consistency, we consider the median separation between sources not included in the astrometric fit and associated objects from a reference catalog (\secref{sssec:monster}).
 For this, we use the Gaia \gls{DR3} catalog, with the object positions shifted to the observation epoch using the Gaia proper motion parameters.
 \figref{fig:AA1} shows the median separation for each visit in the $r$-band in \gls{tract} 4849 in the ECDFS fields (\tabref{tab:dp1_tracts}).
 \begin{figure*}[htb]
@@ -163,7 +161,8 @@ The DCR effect will be addressed in future releases.
 
 \begin{figure}[htb!]
 \includegraphics[width=\linewidth]{dcrHexbin}
-\caption{Visualization of \gls{Differential Chromatic Refraction} (DCR) observed in the \gls{LSSTComCam} commissioning campaign. The $g-i$ color is computed for every source in the reference catalog that is matched to a direct source in the science image, and the binned density for the full survey is plotted against the angular offset between the reference and detected positions. The angular offset is projected along coordinates parallel and perpendicular to the parallactic angle of the observation, and shows a characteristic correlation along the parallel axis with no correlation along the perpendicular axis. The orange vertical dashed line indicates the expected $g-i$ magnitude distribution at zero angular offset.}
+\caption{Visualization of \gls{Differential Chromatic Refraction} (DCR) observed in the \gls{LSSTComCam} commissioning campaign. 
+The $g-i$ color is computed for every source in the reference catalog (\secref{sssec:monster}) that is matched to a direct source in the science image, and the binned density for the full survey is plotted against the angular offset between the reference and detected positions. The angular offset is projected along coordinates parallel and perpendicular to the parallactic angle of the observation, and shows a characteristic correlation along the parallel axis with no correlation along the perpendicular axis. The orange vertical dashed line indicates the expected $g-i$ magnitude distribution at zero angular offset.}
 \label{fig:dcr}
 \end{figure}
 
@@ -210,7 +209,7 @@ suffers from increasing contamination by galaxies for $r>24$.}
 \subsection{Detection Completeness on Coadds}
 \label{ssec:detection_completeness}
 We characterize completeness by injecting synthetic sources into coadded images, and by comparing source detections to external catalogs.
-In both cases, we use a greedy, probabilistic matching \gls{algorithm} that matches reference objects, in order of descending brightness, to the most likely target within a $0.5''$ radius.
+In both cases, we use a greedy, probabilistic matching \gls{algorithm} that matches reference objects, in order of descending brightness, to the most likely target within a $0\farcs5$ radius.
 
 We inject sources in 12 of the patches of the \gls{ECDFS} region with the deepest coverage.
 The input catalog contains stars and galaxies from part of the \gls{DC2} simulations \citep{2021ApJS..253...31L}, where the galaxies consist of an exponential disk and de Vaucouleurs \citep{1948AnAp...11..247D,1953MNRAS.113..134D} bulge.
@@ -237,7 +236,7 @@ This analysis has several caveats.
 The selection of objects for matching in any catalog is not trivial.
 Some fraction of the detections are spurious, particularly close to bright stars and their diffraction spikes.
 Additionally, some objects lie in masked regions of one survey but not another, which has not been accounted for. 
-For injected source matching, the reference catalog does not include real on-sky objects.
+For injected source matching, the reference catalog (\secref{sssec:monster}) does not include real on-sky objects.
 Based on prior analyses of the \gls{DC2} simulations, purity is generally greater than completeness at any given magnitude.
 Similarly, for bright ($i<23$) objects classified as stars by reference band extendedness, $<5\%$ are either unmatched to a Euclid or HST object, or misclassified - that is, selecting on extendedness alone yields a fairly pure but incomplete sample of stars.
 We expect to remedy some of these shortcomings in future releases.
@@ -364,22 +363,38 @@ This may be partly due to the fact that S\'ersic parameter uncertainties are est
 
 Efforts are underway to investigate and quantify the origin of uncertainty underestimates and future releases will, at the least, provide recommendations for mitigations.
 
-\subsection{Difference Imaging Purity} 
-\label{sec:performance:dia}
+\subsection{Difference Imaging} 
+\label{ssec:performance_dia}
+%
+We assessed the performance of image differencing using both human vetting (\secref{sssec:perf_dia_purity}) and source injection (\secref{sssec:perf_dia_completeness}).
 
-We assessed the performance of image differencing using human vetting and source injection (\S \ref{sec:perf:dia_completeness}).
-Members of the \gls{DP1} team labeled more than 9500 DIASource image triplets consisting of cutouts from the science, template, and difference images.
-We classified these into various real and artifact categories.
-The raw artifact to real ratio without filtering was roughly 9:1.
-Bright stars are the main source of artifacts.
-Correlated noise, primarily in $u$ and $g$ bands, also leads to spurious detections near the flux threshold.
-We expect to be able to mitigate these effects for \gls{LSSTCam}.
+\subsubsection{Difference Imaging Purity} 
+\label{sssec:perf_dia_purity}
+Members of the \gls{DP1} team labeled more than 9,500 DIASource image triplets, each consisting of cutouts from the science, template, and difference images. 
+An internal labeling service (TASSO) was deployed within the USDF environment. 
+A random subset of approximately 500,000 DIASources was selected and uploaded to the service, which remained active for roughly three months. 
+Access to the labeling service was granted to all individuals with commissioning data access. 
+Each DIASource was classified exactly once, with a total of 35 volunteers contributing labels. 
+Volunteers reviewed PNG images displaying the template, science, and difference stamps; each stamp had dimensions of 51$\times$51 pixels, matching the input size required by the machine-learning model.
+\figref{fig:sample_dia_labelling} show an example of one of the image triplets consisting of cutouts from the science, template, and difference images that volunteers were asked to label.
+\begin{figure}[htb!]
+\includegraphics[width=\linewidth]{sample_dia_labelling}
+\caption{An example an image triplet consisting of cutouts showing, from left to right,  he science, template, and difference images that volunteers were asked to label.}
+\label{fig:sample_dia_labelling}
+\end{figure}
 
-Applying a reliability threshold improves the purity of transients but not variable stars; technical limitations at the time of model training prevented injection of variable stars into the synthetic training set.
-Reliability models, described in \secref{ssec:diffim_analysis},  for \gls{LSSTCam} data will be trained on a wider range of input data.
+The labeled sources were classified into multiple categories representing real astrophysical events and artifacts.
+Prior to any filtering, the raw artifact-to-real ratio was approximately 9:1. 
+Bright stars were identified as the dominant source of artifacts, while correlated noise, particularly in the $u$ and $g$ bands, also produced spurious detections near the flux threshold. 
+We expect to be able to mitigate these effects in futyre \gls{LSSTCam} data.
 
-\subsection{Difference Imaging Detection Completeness} \label{sec:perf:dia_completeness}
+Applying a reliability threshold improves the purity of transient detections but has limited impact on variable stars. 
+This limitation arises from technical constraints at the time of model training, which prevented the injection of variable stars into the synthetic training set. 
+Future reliability models for \gls{LSSTCam} data, described in \secref{ssec:diffim_analysis}, will be trained using a broader and more representative range of input data.
 
+\subsubsection{Difference Imaging Detection Completeness} 
+\label{sssec:perf_dia_completeness}
+%
 We assess the performance of our difference imaging \gls{pipeline} using synthetic source injection on the science images prior to differencing.
 We construct a catalog of injected sources by joining two different samples of point sources, a set of hosted sources to emulate transients in galaxies and second set of hostless sources.
 The hosts are selected from the pipeline source catalog that is produced upstream by imposing a cut on their extendedness measurement and selecting $N_{\rm src}={\rm min}(100, N\times0.05)$ of the $N$ available sources per detector.
@@ -459,8 +474,8 @@ The remaining \nnewasteroiddiscoveries were submitted to the Minor Planet Center
 \subsubsection{Asteroid Association Performance}
 \label{ssec:asteroid_association}
 
-During the Solar System association step,  \nsolarsystemsources \textit{DiaSources} were linked to \nsolarsystemobjects  unique Solar System objects, 
-These include 3,934 \textit{DiaSources} with 338 previously known objects cataloged by the \gls{MPC}, and 2,054 \textit{DiaSources} with the \nnewasteroiddiscoveries  newly-discovered objects. 
+During the Solar System association step,  \nsolarsystemsources DiaSources were linked to \nsolarsystemobjects  unique Solar System objects, 
+These include 3,934 DiaSources with 338 previously known objects cataloged by the \gls{MPC}, and 2,054 DiaSources with the \nnewasteroiddiscoveries  newly-discovered objects. 
 An additional 143 detections of these newly discovered objects were also recovered. 
 These detections were not initially identified by the discovery pipelines, as they did not meet the required criteria for tracklet formation, specifically the minimum number of detections and/or the maximum allowed time span between observations.
 
@@ -475,8 +490,16 @@ The wider scatter in the RA direction is due to objects whose measured orbital e
 
 The astrometric residuals of known asteroid associations are shown in \figref{fig:sso_residuals}.
 The astrometric precision for solar system sources is excellent, with the majority of objects detected within $0\farcs1$ of their expected positions.
-Taking the signed median residuals to search for biases, we find that previously-known objects have mean residuals of $0\farcs001$ and $-0\farcs016$ in the RA and Dec directions respectively, while newly-discovered objects have mean residuals of $-0\farcs035$ and $-0\farcs010$ in the RA and Dec directions, respectively.
-These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion, which is consistent with the timing studies presented in Section~\ref{ssec:comcam_timing}.
+
+By analyzing the signed median residuals to search for biases, we find that previously-known objects have mean residuals of $0\farcs001$ and $-0\farcs016$ in the RA and Dec directions respectively, whereas newly-discovered objects have mean residuals of $-0\farcs035$ and $-0\farcs010$ in the RA and Dec directions, respectively.
+These mean residuals are small enough to eliminate the possibility of a timing offset greater than the second-scale shutter motion, which is consistent with the timing studies presented in \secref{ssec:comcam_timing}.
+
+The wider scatter in the RA residuals is due to objects whose measured orbital elements are less well constrained, translating to larger along-track positional errors in the predicted positions
+Observations of objects with large residuals are the most valuable ones from the point of view of improving the orbit, which is why we kept a generous matching radius.
+However, in future releases we are likely to couple this with either orbit fitting to verify the ``singleton" match, or require two near-in-time observations (a tracklet) that match the expected motion vector as well.
+
+Optimal moving source attribution is an area of  active work that we expect to fully converge in time of \gls{DR1}.
+In the meantime, for \gls{DP1} we've opted to start with simple, more easily understandable, criteria.
 
 \subsection{Crowded Fields}
 \label{ssec:crowded_fields}

@@ -107,6 +107,8 @@ These fluxes include a local \gls{background} subtraction (see \secref{ssec:back
 The model fitting process incorporates all six bands ($ugrizy$) but does not include any gray (achromatic) terms, except for a linear assumption of mirror reflectance degradation, which is minimal over the short duration of the \gls{DP1} observation campaign.
 As an additional constraint on the fit, we use a subset of stars from the reference catalog~\citep{DMTN-277}, primarily to constrain the system's overall throughput and establish the ``absolute'' calibration.
 
+Photometric transformation relations between \gls{LSSTCam} and \gls{LSSTComCam} systems and other photometric systems are under development and are provided  in \citep{RTN-099}
+
 \subsection{Visit Images and Source Catalogs}
 \label{sssec:visit_images_source_catalogs}
 With the final \gls{PSF} models, \gls{WCS} solutions, and photometric calibrations in place, we reprocess each single-epoch image to produce a final set of calibrated visit images and source catalogs.
@@ -178,12 +180,12 @@ Further details on the performance of these algorithms are found in \secref{ssec
 \label{ssec:diffim_analysis}
 Difference Image Analysis (DIA) uses the decorrelated Alard \& Lupton image differencing algorithm \citep{DMTN-021}.
 We detected both positive and negative \texttt{DIASource}s at $5\sigma$ in the difference image.
-Sources with footprints containing both positive and negative peaks due to offsets from the template position or blending were fit with a dipole centroid code, , which simultaneously fits offset positive and negative PSFs.
+Sources with footprints containing both positive and negative peaks due to offsets from the template position or blending were fit with a dipole centroid code, which simultaneously fits offset positive and negative PSFs.
+We filter the resulting \texttt{DIASource} catalog to remove detections with pixel flags indicative of artifacts, non-astrophysical trail lengths, or unphysically negative direct fluxes. 
+Finally, we perform a simple spatial association of \texttt{DIASource}s into \texttt{DIAObject}s using a one-arcsecond matching radius.
 
-We filter a subset of \texttt{DIASource}s that have pixel flags characteristic of artifacts, non-astrophysical trail lengths, and unphysically negative direct fluxes.
-We performed a simple spatial association of \texttt{DIASources} into \texttt{DIAObjects} with a one arcsecond matching radius.
-
-The Machine Learning reliability model applied to \gls{DP1} was developed with the aim to meet the latency requirements for Rubin \gls{Alert Production} when executed on CPUs. Accordingly we developed a relatively simple model: a Convolutional Neural Network with three convolutional layers, and two fully connected layers.
+The Machine Learning reliability model applied to \gls{DP1} was developed with the aim to meet the latency requirements for Rubin \gls{Alert Production} when executed on CPUs. 
+Accordingly we developed a relatively simple model: a Convolutional Neural Network with three convolutional layers, and two fully connected layers.
 The convolutional layers have a $5\times5$ kernel size, with 16, 32, and 64 filters, respectively.
 A max-pooling layer of size 2 is applied at the end of each convolutional layer, followed by a dropout layer of 0.4 to reduce overfitting.
 The last fully connected layers have sizes of 32 and 1.
@@ -199,7 +201,8 @@ The model was initially trained using simulated data from the second DESC Data C
 The same number of bogus sources were selected at random from non-injected DIASources.
 Once the  \gls{LSSTComCam} data were available, the model was fine-tuned on a subset of the data containing 183,046 sources with PSF injections.
 On the \gls{LSSTComCam} test set, the model achieved an accuracy of 98.06\%, purity of 97.87\%, and completeness of 98.27\%.
-As discussed in \secref{sec:performance:dia}, the injections used to train this model version do not capture all types of astrophysical variability, so performance on the test set will not be representative for variable stars, comets, and other types of variable objects. 
+As discussed in \secref{ssec:performance_dia}, the injections used to train this model version do not capture all types of astrophysical variability, so performance on the test set will not be representative for variable stars, comets, and other types of variable objects. 
+The machine-learning reliability score, reported in the \texttt{reliability} column of the \texttt{DIASource} catalog, is a scalar value between 0 and 1 that quantifies the model’s confidence that a given detection is astrophysical.
 
 \subsubsection{Light Curves}
 \label{sssec:lightcurves}
@@ -214,31 +217,41 @@ Centroids used in the multi-epoch \gls{forced photometry} stage are taken either
 Solar system processing in \gls{DP1} consists of two key components: the association of observations (sources) with known solar system objects, and the discovery of previously unknown objects by linking sets of 
 {\em tracklets}\footnote{A tracklet is defined as two or more detections of a moving object candidate taken in close succession in a single night.}.
 
-To generate expected positions, ephemerides are computed for all objects found in the Minor Planet \gls{Center} orbit catalog using the \texttt{Sorcha} survey simulation toolkit (Merritt et al., in press)\footnote{Available at \nolinkurl{https://github.com/dirac-institute/sorcha}}.
-To enable fast lookup of objects potentially present in an observed visit, we use the {\tt mpsky} package \citep{mpsky}.
-In each image, the closest DiaSource within 1~arcsecond of a known solar system object's predicted position is associated to that object.
+The association component begins by generating expected positions for all objects in the Minor Planet Center orbit catalog, using ephemerides computed with the \texttt{Sorcha} survey simulation toolkit (Merritt et al., in press)\footnote{Available at \nolinkurl{https://github.com/dirac-institute/sorcha}}.
+To enable fast lookup of objects potentially present in an observed visit, we use the \texttt{mpsky} package \citep{mpsky}. 
+In each image, the closest \texttt{DiaSource} within 1~arcsecond of a known solar system object's predicted position is associated to that object.
+In \gls{DP1} we used a simple positional association to tag DiaSources that are likely observations of known asteroids. 
+The 1~arcsecond radius is intentionally generous;  we did not see evidence of mismatches at DP1 depth and volume. 
+This radius will be tuned for future processing campaigns.
 
-Solar system discovery uses the {\tt heliolinx} package of asteroid identification and linking tools \citep{heliolinx}.
-The suite consists of the following tasks:
+The discovery component of Solar System processing uses the \texttt{heliolinx} package\footnote{\nolinkurl{https://github.com/heliolinx/heliolinx}}, which provides tools for asteroid identification and linking \citep{heliolinx}. 
+The repository contains code for the following tasks:
 \begin{itemize}
-    \item Tracklet creation with {\tt make\_tracklets}
-    \item Multi-night \gls{tracklet} linking with {\tt heliolinc}
-    \item Linkage post processing (orbit fitting, outlier rejection, and de-duplication) with {\tt link\_purify}
+    \item Tracklet creation with \texttt{make\_tracklets}
+    \item Multi-night \gls{tracklet} linking with an algorithm
+    \item Linkage post processing (orbit fitting, outlier rejection, and de-duplication) with \texttt{link\_purify}
 \end{itemize}
 
-The inputs to the \texttt{heliolinx} suite included all sources detected in difference images produced by an early processing of the \gls{LSSTComCam} commissioning data,  including some that were later rejected as part of \gls{DP1} processing and hence are not part of \gls{DP1}.
+The inputs to the discovery processing comprised all sources detected in difference images, regardless of whether they were tagged in the association step. 
+These inputs were produced by an early processing of \gls{LSSTComCam} commissioning data, some of which were later rejected during \gls{DP1} processing and therefore do not appear in the final \gls{DP1} data products.
 
-About 10\% of all commissioning visits targeted the near-ecliptic field Rubin\_SV\_38\_7 chosen to facilitate asteroid discovery.
+About 10\% of all commissioning visits targeted the near-ecliptic field Rubin\_SV\_38\_7, chosen to facilitate asteroid discovery.
 Rubin\_SV\_38\_7 produced the vast majority of asteroid discoveries in \gls{DP1}, as expected, but a few were found in off-ecliptic fields as well.
 
 Tracklet creation with \texttt{make\_tracklets} used an upper limit angular velocity of 1.5 \gls{deg}/day, faster than any main belt asteroid and in the range of many \gls{NEO} discoveries.
-To minimize false tracklets from fields observed multiple times per night, the minimum \gls{tracklet} length was set to three detections, and a minimum on-sky motion of five arcseconds was required for a valid \gls{tracklet}.
+While no formal minimum angular velocity was imposed, in practice it would be unlikely to detect objects moving slower  than about 0.01~deg~day$^{-1}$.
+To minimize false \gls{tracklet}s from fields observed multiple times per night, the minimum \gls{tracklet} length was set to three detections, and a minimum on-sky motion of five arcseconds was required for a valid \gls{tracklet}.
+To claim a discovery candidate, we required tracklets to be linked across at least three nights. 
 
-The heart of the discovery \gls{pipeline} is the \texttt{heliolinc} task, which connects (``links") tracklets belonging to the same object over a series of nights.
+Multi-night \gls{tracklet} linking is the heart of Solar system discovery,  which connects (``links") tracklets belonging to the same object over a series of nights.
 It employs the HelioLinC3D algorithm \citep{2020DPS....5221101E,2022DPS....5450404H}, a refinement of the original HelioLinC algorithm of \citet{2018AJ....156..135H}.
-
-The \texttt{heliolinc} run tested each \gls{tracklet} with 324 different hypotheses spanning heliocentric distances from 1.5 to 9.8 \gls{au} and radial velocities spanning the full range of possible bound orbits (eccentricity 0.0 to nearly 1.0).
+Each processing run tested each \gls{tracklet} with 324 different hypotheses spanning heliocentric distances from 1.5 to 9.8 \gls{au} and radial velocities spanning the full range of possible bound orbits (eccentricity 0.0 to nearly 1.0).
+The upper limit of 10~\gls{au} was chosen because searches targeting more distant populations require different parameter choices.
 This range of distance encompasses all main belt asteroids and Jupiter Trojans, as well as many comets and Mars-crossers and some \glspl{NEO}.
+A dedicated search for objects at heliocentric distances out to 50~\gls{au} was also conducted; no distant objects were detected, consistent with expectations for the size of the \gls{DP1} data set.
 Smaller heliocentric distances were not attempted here because nearby objects move rapidly across the sky and hence were not likely to remain long enough in an \gls{LSSTComCam} field to be discovered.
-Candidate linkages, groups of tracklets whose propagated orbits cluster within a radius of 1.33 $\times\,10^{3}$\,au at 1\,au, 
+
+Candidate linkages, defined as groups of tracklets whose propagated orbits cluster within a radius of 1.33 $\times\,10^{3}$\,au at 1\,au, 
 are identified, then post-processed via \texttt{link\_purify} to yield a final, non‐overlapping set of high-confidence asteroid candidates, ranked by orbit-fit residuals and related metrics.
+While heliolinx can produce false-positive or redundant raw linkages by design, these are filtered during post-processing by \texttt{link\_purify}, which applies a Rubin-specific, more stringent version of the MPC validation rules\footnote{\nolinkurl{https://minorplanetcenter.net/mpcops/documentation/identifications/additional/}}. 
+This step both rejects spurious linkages and deduplicates multiple hypotheses for the same object, ensuring that only the highest-quality, non-redundant linkages are carried forward for orbit determination and for distinguishing new discoveries from rediscoveries of known objects.

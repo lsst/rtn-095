@@ -139,9 +139,6 @@ All the catalogs described in \secref{ssec:catalogs}, aside from the \texttt{Ccd
 A dataset is associated with one or more \emph{Collections}; logical groupings of  datasets within the \gls{Butler} system that were created or processed together by the same batch operation.
 Collections allow multiple datasets with the same data coordinate to coexist without conflict.
 Collections support flexible, parallel processing by enabling repeated analyses of the same input data using different configurations.
-
-For \gls{DP1}, a subset of the consolidated database contents (\secref{sssec:consdb}) is accessible through the Data Butler.
-However, not all metadata from the \texttt{Visit} table (\secref{ssec:metadata}) are available.
 The \gls{DP1} Butler is read-only; a writeable Butler is expected by mid-2026.
 
 \subsubsection{Remote Programmatic Access}
@@ -184,18 +181,3 @@ This enables catalog-based analysis through both the \gls{RSP} Portal and Notebo
 Although the small \gls{DP1} dataset does not require Qserv’s full capabilities, we nevertheless chose to use it for \gls{DP1} to accurately reflect the future data access environment and to gain experience with scientifically-motivated queries ahead of full-scale deployment.
 \gls{Qserv} is open-source and available on GitHub: \url{https://github.com/lsst/qserv}.
 
-\subsubsection{Consolidated Database}
-\label{sssec:consdb}
-
-The Consolidated Database (ConsDB) \citep{DMTN-227} is an SQL-compatible database designed to store and manage metadata for Rubin Observatory science and calibration images.
-Metadata are recorded on a per-exposure basis and includes information such as the target name, pointing coordinates, observation time, physical filter and band, exposure duration, and environmental conditions (e.g., temperature, humidity, and wind speed).
-These key image metadata are also stored in the Butler Registry (\secref{sssec:data_butler}), however the ConsDB stores additional information  including derived metrics from image processing and information from the \gls{EFD} transformed from the time dimension to the exposure dimension.
-
-The ConsDB schema is organized into instrument-specific tables, e.g., \gls{LSSTComCam} and LSSTCam, facilitating instrument-specific queries.
-Within the \gls{LSSTComCam} schema, data is further structured into tables for individual exposures and detectors.
-An example query on the \gls{DP1} dataset might retrieve all visits within a specified time range in the r-band for a given \gls{DP1} target.
-
-The ConsDB is hosted at the \gls{USDF}.
-Following the initial release of \gls{DP1}, a release of the \gls{DP1} exposure-specific ConsDB data will be made available through the \gls{RSP}, and accessible externally via TAP.
-The detailed \gls{LSSTComCam} schema can be found at:
-\url{https://sdm-schemas.lsst.io/cdb_lsstcomcam.html}

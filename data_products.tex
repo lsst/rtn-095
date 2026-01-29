@@ -1,21 +1,22 @@
 \section{Overview of the contents of Rubin \gls{DP1}}
 \label{sec:data_products}
-Here we describe Rubin \gls{DP1} data products and provide summary statistics for each, but we also refer the reader to the DOI-registered \gls{DP1} release documentation available at \url{https://dp1.lsst.io} and the catalog schemas available at \url{https://sdm-schemas.lsst.io}.\footnote{Searchable catalog schemas are also available to Data Rights Holders via the Rubin Science Platform at \url{https://data.lsst.cloud}.}
+In this section we describe the Rubin \gls{DP1} data products and provide summary statistics for each. 
+For more detailed information, we refer the reader to the DOI-registered \gls{DP1} release documentation available at \url{https://dp1.lsst.io} and the catalog schemas available at \url{https://sdm-schemas.lsst.io}.\footnote{Searchable catalog schemas are also available to Data Rights Holders via the Rubin Science Platform at \nolinkurl{https://data.lsst.cloud}.}
+
 The \gls{DP1} science data products are derived from the \nvisitimages individual \gls{CCD} images taken across \nexposures exposures in the \nfields \gls{LSSTComCam} commissioning fields (\secref{ssec:pipelines_commissioning}).
-To aid legibility, we have separated the descriptions of the data products from the description of the data release processing pipeline, a summary of which is provided in \secref{sec:drp}.
-Similarly, because most of the data products described here can be accessed via either the \gls{IVOA} Services ( \secref{sssec:ivoa_services}) or the Data \gls{Butler} (\secref{sssec:data_butler}), we describe them in a manner that is agnostic to the means of access.
+To aid legibility, we have separated the descriptions of the data products from the description of the data release processing pipeline (\secref{sec:drp}).
+Similarly, as the \gls{DP1} data products can be accessed via one or both of \gls{IVOA} Services (\secref{sssec:ivoa_services}) or the Data \gls{Butler} (\secref{sssec:data_butler}), we describe them here in a manner that is agnostic to the means of access.
 
 The data products that comprise \gls{DP1} provide an early preview of future LSST data releases and are strongly dependent on the type and quality of the data that was collected during the \gls{LSSTComCam} on-sky campaign (\secref{ssec:pipelines_commissioning}).
 Consequently not all anticipated  \gls{LSST} data products, as described in the \gls{DPDD} \citep{LSE-163}, were produced for the \gls{DP1} dataset.
 
-Rubin Observatory has adopted the convention by which single-epoch detections are referred to as Sources.
-By contrast, the astrophysical object associated with a given detection is referred to as an Object
-\footnote{We caution that this nomenclature is not universal; for example, some surveys call ``detections'' what we call ``sources'', and use the term ``sources'' for what we call ``objects''.}.
+Rubin Observatory has adopted the convention by which single-epoch detections are referred to as ``Sources", and the astrophysical object associated with a given detection is referred to as an ``Object"
+\footnote{We caution that this nomenclature is not universal; for example, some surveys use ``detections'' for what we call ``sources'', and ``sources'' for what we call ``objects''.}.
 As such, a given Object will likely have multiple associated  Sources, since it will be observed in multiple epochs.
 
 At the highest level, the \gls{DP1} data products fall into one of five types:
 \begin{itemize}
-\item \textbf{Images}, including single-\gls{epoch} images, deep and template coadded images, and difference images (\secref{ssec:science_images});
+\item \textbf{Science Images}, including single-\gls{epoch} images, deep and template coadded images, and difference images (\secref{ssec:science_images});
 \item \textbf{Catalogs} of astrophysical Sources and Objects detected and measured in the aforementioned images. We also provide the astrometric and photometric reference catalog generated from external sources that was used during processing to generate the \gls{DP1} data products (\secref{ssec:catalogs});
 \item \textbf{Maps}, which provide non-science-level visualizations of the data within the release. They include, for example, zoomable multi-band images and coverage maps (\secref{ssec:survey_property_maps});
 \item \textbf{Ancillary data products}, including, for example, the parameters used to configure the data processing pipelines, log and processing performance files,  and \gls{calibration} data products (\secref{ssec:ancilliary});
@@ -48,19 +49,23 @@ Although the release includes \gls{calibration} images, thereby allowing users t
 Users are strongly encouraged to start from the \texttt{visit\_image} provided.
 The data product names shown here are those used by the Data \gls{Butler}, but the names used in the \gls{IVOA} Services differ only slightly in that they are prepended by ``\texttt{lsst.}''.
 
-\begin{itemize}
-\item \texttt{raw} images \citep{10.71929/rubin/2570310} are unprocessed data received directly from the camera.
+% \begin{itemize}
+%\item 
+\subsubsection{Raw Image}
+\texttt{raw} images \citep{10.71929/rubin/2570310} are unprocessed data received directly from the camera.
 Each \texttt{raw} corresponds to a single \gls{CCD} from a single \gls{LSSTComCam} exposure of \exposuretime duration.
 Each \gls{LSSTComCam} exposure typically produces up to nine \texttt{raw}s, one per sensor in the focal plane.
 However, a small number of exposures resulted in fewer than nine \texttt{raw} images due to temporary hardware issues or readout faults.
 
-In total, \gls{DP1} includes \nraws \texttt{raw} images.
+In total, \gls{DP1} includes \nraws raw images.
 \tabref{tab:rawbreakdown} provides a summary by target and band.
 A \texttt{raw} contains \nrawpixx $\times$ \nrawpixy pixels, including prescan and overscan, and occupies around \rawhdd of disk space.\footnote{Each amplifier image contains 3 and 64 columns of serial prescan and overscan pixels, respectively, and 48 rows of parallel overscan pixels, meaning a \texttt{raw} contains \nvisitimagepixx$\times$\nvisitimagepixy exposed pixels.}
 The field of view of a single \texttt{raw}, excluding prescan and overscan regions, is roughly \visitimagefovx$\times$\visitimagefovy$\approx$\visitimagefov, corresponding to a plate scale of \rawplatescale.
 \input{./rawbreakdown}
 
-\item \texttt{visit\_image}s \citep{10.71929/rubin/2570311} are fully-calibrated processed images.
+\subsubsection{Visit Image}
+%\item 
+\texttt{visit\_image}s \citep{10.71929/rubin/2570311} are fully-calibrated processed images.
 They have undergone instrument signature removal (\secref{ssec:isr}) and all the single frame processing steps described in \secref{ssec:single_frame_processing} which are, in summary: \gls{PSF} modeling, \gls{background} subtraction, and astrometric and photometric \gls{calibration}.
 As with \texttt{raw}s, a \texttt{visit\_image} contains processed data from a single \gls{CCD} resulting from a single \exposuretime \gls{LSSTComCam} exposure.
 As a consequence, a single \gls{LSSTComCam} exposure typically results in nine \texttt{visit\_image}s.
@@ -81,8 +86,9 @@ A plot showing the normalized cumulative histogram of the $5\sigma$ depths of al
   \label{fig:visit_image_depths}
 \end{figure}
 
-
-\item \texttt{deep\_coadd}s \citep{10.71929/rubin/2570313} are the product of warping and co-adding multiple \texttt{visit\_image}s covering a given \gls{patch}, as defined by the skymap.
+\subsubsection{Deep Coadd}
+%\item
+%\texttt{deep\_coadd}s \citep{10.71929/rubin/2570313} are the product of warping and co-adding multiple \texttt{visit\_image}s covering a given \gls{patch}, as defined by the skymap.
 \texttt{deep\_coadd}s are created on a per-band basis, meaning only data from exposures taken with a common filter are coadded.
 As such, there are up to six \texttt{deep\_coadd}s covering each \gls{patch} -- one for each of the six \gls{LSSTComCam} bands.
 The process of producing \texttt{deep\_coadd}s is described in \secref{ssec:coadd_processing} but, to summarize, it involves the selection of suitable \texttt{visit\_image}s (both in terms of \gls{patch} coverage, band, and image quality), the warping of those \texttt{visit\_image}s onto a common pixel grid, and the co-adding of the warped \texttt{visit\_image}s.
@@ -100,7 +106,9 @@ Similarly, since coadds always cover an entire \gls{patch}, it is common for a \
 By the nature of how coadds are produced, such regions may contain seemingly valid \gls{flux} values (i.e., not necessarily zeros or \texttt{NaNs}), but will instead be flagged with the \texttt{NO\_DATA} flag in the pixel mask.
 It is therefore crucial that the pixel mask be referred to when analyzing \texttt{deep\_coadds}.
 
-\item \texttt{template\_coadd}s \citep{10.71929/rubin/2570314} are those created to use as templates for difference imaging, i.e., the process of subtracting a template image from a \texttt{visit\_image} to identify either variable or \gls{transient} objects. It should be noted, however, that \texttt{template\_coadd}s are not themselves subtracted from \texttt{visit\_image}s but are, instead, warped to match the \gls{WCS} of a \texttt{visit\_image}.
+\subsubsection{Template Coadd}
+%\item 
+\texttt{template\_coadd}s \citep{10.71929/rubin/2570314} are those created to use as templates for difference imaging, i.e., the process of subtracting a template image from a \texttt{visit\_image} to identify either variable or \gls{transient} objects. It should be noted, however, that \texttt{template\_coadd}s are not themselves subtracted from \texttt{visit\_image}s but are, instead, warped to match the \gls{WCS} of a \texttt{visit\_image}.
 It is this warped template that is subtracted from the \texttt{visit\_image} to create a difference image.
 \footnote{For storage space reasons, warped templates are not retained for \gls{DP1}, as they can be readily and reliably recreated from the \texttt{template\_coadd}s.}
 As with \texttt{deep\_coadd}s, \texttt{template\_coadd}s are produced by warping and co-adding multiple \texttt{visit\_image}s covering a given skymap-defined \gls{patch}.
@@ -119,40 +127,58 @@ Similarly, \texttt{template\_coadd}s contain the science image (i.e., the coadd)
 Also included are the \gls{PSF} model, \gls{WCS} information, and \gls{metadata}.
 As is the case for \texttt{deep\_coadd}, those pixels within \texttt{template\_coadd}s that are not covered by any of the selected \texttt{visit\_image}s may still have seemingly valid values, but are indicated with the \texttt{NO\_DATA} flag within the pixel mask.
 
-
-\item \texttt{difference\_image}s \citep{10.71929/rubin/2570312} are generated by the subtraction of the warped, scaled, and \gls{PSF}-matched \texttt{template\_coadd} from the \texttt{visit\_image} (see \secref{ssec:diffim_analysis}). In principle, only those sources whose \gls{flux} has changed relative to the \texttt{template\_coadd} should be apparent (at a significant level) within a \texttt{difference\_image}. In practice, however, there are numerous spurious sources present in \texttt{difference\_image}s due to unavoidably imperfect template matching.
+\subsubsection{Difference Image}
+%\item 
+\texttt{difference\_image}s \citep{10.71929/rubin/2570312} are generated by the subtraction of the warped, scaled, and \gls{PSF}-matched \texttt{template\_coadd} from the \texttt{visit\_image} (see \secref{ssec:diffim_analysis}). In principle, only those sources whose \gls{flux} has changed relative to the \texttt{template\_coadd} should be apparent (at a significant level) within a \texttt{difference\_image}. In practice, however, there are numerous spurious sources present in \texttt{difference\_image}s due to unavoidably imperfect template matching.
 
 In total, there are \ndifferenceimages \texttt{difference\_image}s in \gls{DP1}, one for each \texttt{visit\_image}.
 
 Like \texttt{visit\_image}s, \texttt{difference\_image}s contain the science (i.e., difference) image, a variance image, and a pixel mask; all three contain the same number of pixels, which is the same as that of the input \texttt{visit\_image}.
 Also included is the \gls{PSF} model, \gls{WCS} information, and \gls{metadata}.
 
-\item Background images contain the model \gls{background} that has been generated and removed from a science image.
+\subsubsection{Background Images}
+%\item 
+Background images contain the model \gls{background} that has been generated and removed from a science image.
 \texttt{visit\_image}s, \texttt{deep\_coadd}s and \texttt{template\_coadd}s all have associated \gls{background} images.\footnote{In future data releases, \gls{background} images may be included as part of their respective science image data product.} Background images contain the same number of pixels as their respective science image, and there is one \gls{background} image for each \texttt{visit\_image}, \texttt{deep\_coadd}, and \texttt{template\_coadd}.
 Difference imaging analysis also measures and subtracts a \gls{background} model, but the \texttt{difference\_background} data product is not written out by default and is not part of \gls{DP1}.
 
 Background images are not available via the \gls{IVOA} Service; they can only be accessed via the \gls{Butler} Data Service.
-\end{itemize}
+%\end{itemize}
 
 \subsection{Catalogs}
 \label{ssec:catalogs}
-Here we describe science-ready tables produced by the science pipelines.
-All but one of the catalogs described here contain data for detections in the images described in \secref{ssec:science_images}, the exception being the \texttt{Calibration} catalog, which contains reference data obtained from previous surveys.
+In this section  we describe science-ready tables produced by the science pipelines.
+All catalogs contain data for detections in the images described in \secref{ssec:science_images}, except  the  \texttt{Calibration} catalog, which contains reference data obtained from previous surveys.
 Observatory-produced \gls{metadata} tables are described in \secref{ssec:metadata}.
-Each type of catalog contains measurements for either Sources  detected in  \texttt{visit\_image}s and \texttt{difference\_image}s, or Objects detected in \texttt{deep\_coadd}s.
 
-While the \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each differ in terms of their specific columns, in general they each contain: one or more unique identification numbers, positional information, one or more types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags (indicating, for example, whether the source/object is affected by saturated pixels, cosmic rays, etc.) for each source/object.
+The catalogs contains measurements for either Sources  detected in  \texttt{visit\_image}s and \texttt{difference\_image}s, or Objects detected in \texttt{deep\_coadd}s.
+All catalogs store fluxes rather than magnitudes, with fluxes measured in nanojansky (1 nJy = $10^{−35}$ Wm$^{−2}$Hz$^{−1}$).
+Fluxes are preferred for multi-epoch observations, as they can be averaged across epochs, unlike magnitudes.
+Additionally, flux measurements on difference images (\secref{ssec:science_images}) are computed against a template, representing a flux difference. 
+As a result, flux measurements on difference images can be negative, particularly for faint sources in the presence of noise.
+
+The \texttt{Source}, \texttt{Object}, \texttt{ForcedSource}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{ForcedSourceOnDiaObject} catalogs described below each vary in terms of their specific columns but generally contain: one or more unique identification numbers, positional information, multiple types of \gls{flux} measurements (e.g., aperture fluxes, \gls{PSF} fluxes, Gaussian fluxes, etc.), and a series of boolean flags indicating characteristics such as saturation or cosmic ray contamination for each source/object.
 The Solar System catalogs \texttt{SSObject} and \texttt{SSSource} deviate from this general structure in that they instead contain orbital parameters for all known asteroids.
-Where applicable, all measured properties are reported with their associated 1$\sigma$ uncertainties.
 
-Since \gls{DP1} is a preview, it does not include all the catalogs expected in a full \gls{LSST} \gls{Data Release}. Additionally, the catalogs it does include may be missing some columns planned for future releases.
-Where this is known to be the case, we note what data are missing in the catalog descriptions that follow.
+Where applicable, quantities are prefixed with the band in which they were measured, and all measured properties are reported with their associated 1$\sigma$ uncertainties. 
+For example, \texttt{g\_ra} and \texttt{g\_raErr} refer to right ascension and its uncertainty, measured in the g-band.
+
+Fluxes for various apertures are provided together with an uncertainty and  a flag, and named in the format \texttt{[band]\_ap[size]Flux}, where \texttt{[size]} is the aperture diameter in pixels. 
+For example, \texttt{g\_ap03Flux}, \texttt{g\_ap03FluxErr}, \texttt{g\_ap03Flux\_flag} provide the flux, uncertainty and flag measured within a 3.0-pixel aperture in the g-band.
+Similarly for flux measurements using difference algorithms, e.g. \texttt{g\_psfFlux} provides the flux derived using the PSF model as a weight function, forced on g-band. 
+
+A complete list of columns  with description and units for all tables in DP1 is available at \nolinkurl{https://sdm-schemas.lsst.io/dp1.html}
+Since \gls{DP1} is a preview release, it does not include all the catalogs expected in a full \gls{LSST} \gls{Data Release}. 
+Additionally, some catalogs may be missing columns, as not all quantities have been computed yet. 
+These quantities will be included in future releases, and, where it is known to be the case,  missing data are noted in the catalog descriptions that follow.
 
 Catalog data are stored in the \gls{Qserv} database (\secref{sssec:qserv}) and are accessible via \gls{TAP}, and an online \gls{DP1} catalog \gls{schema} is available at \url{https://sdm-schemas.lsst.io/dp1.html}.
 Catalog data are also accessible via the Data \gls{Butler} (see \secref{sssec:data_butler}).
 
-\begin{itemize}
-\item The \texttt{Source} catalog \citep{10.71929/rubin/2570323} contains data on all sources which are, prior to deblending (\secref{sssec:coadd_processing}), detected with a greater than 5$\sigma$ significance in each individual visit.
+%\begin{itemize}
+\subsubsection{Source Catalog}
+%\item 
+The \texttt{Source} catalog \citep{10.71929/rubin/2570323} contains data on all sources which are, prior to deblending (\secref{sssec:coadd_processing}), detected with a greater than 5$\sigma$ significance in each individual visit.
 The detections reported in the \texttt{Source} catalog have undergone deblending; in the case of blended detections, only the deblended sources are included in the \texttt{Source} catalog.
 It is important to note that while the criterion for inclusion in a \texttt{Source} catalog is a $>5\sigma$ detection in a \texttt{visit\_image} prior to deblending, the positions and fluxes are reported post-deblending.
 Hence, it is possible for the \texttt{Source} catalog to contain sources whose \gls{flux}-to-error ratios -- potentially of all types (i.e., aperture \gls{flux}, \gls{PSF} \gls{flux}, etc.) -- are less than $5$.
@@ -170,8 +196,9 @@ A cumulative histogram showing the PSF magnitudes of all \texttt{sources} contai
   \label{fig:mag_hists}
 \end{figure}
 
-
-\item The \texttt{Object} catalog \citep{10.71929/rubin/2570325} contains data on all objects detected with a greater than $5\sigma$ significance in the \texttt{deep\_coadd}s.
+\subsubsection{Object Catalog}
+%\item 
+The \texttt{Object} catalog \citep{10.71929/rubin/2570325} contains data on all objects detected with a greater than $5\sigma$ significance in the \texttt{deep\_coadd}s.
 With coadd images produced on a per-band basis, a $>5\sigma$ detection in one or more of the bands will result in an object being included in the \texttt{Object} catalog.
 For cases where an object is detected at $>5\sigma$ in more than one band, a cross-matching has been performed between bands to associate an object in one band with its counterpart(s) in the other bands.
 As such, unlike the \texttt{Source} catalog, the \texttt{Object} catalog contains data from multiple bands.
@@ -184,20 +211,26 @@ While they may be included in future data releases, no photometric redshifts, Pe
 
 The \texttt{Object} catalog contains data for \nobjects objects in \gls{DP1}.
 
-\item The \texttt{ForcedSource} catalog \citep{10.71929/rubin/2570327} contains forced \gls{PSF} photometry measurements performed on both \texttt{difference\_image}s (i.e., the \texttt{psfDiffFlux} column) and \texttt{visit\_image}s (i.e., the \texttt{psfFlux} column) at the positions of all the objects in the \texttt{Object} catalog, to allow assessment of the time variability of the fluxes.
+%\item 
+\subsubsection{ForcedSource Catalog}
+The \texttt{ForcedSource} catalog \citep{10.71929/rubin/2570327} contains forced \gls{PSF} photometry measurements performed on both \texttt{difference\_image}s (i.e., the \texttt{psfDiffFlux} column) and \texttt{visit\_image}s (i.e., the \texttt{psfFlux} column) at the positions of all the objects in the \texttt{Object} catalog, to allow assessment of the time variability of the fluxes.
 We recommend using the \texttt{psfDiffFlux} column when generating light curves because this quantity is less sensitive to \gls{flux} from neighboring sources than \texttt{psfFlux}.
 In addition to \gls{forced photometry} \gls{PSF} fluxes, a number of boolean flags are also included in the \texttt{ForcedSource} catalog.
 
 The \texttt{ForcedSource} catalog contains a total of \nforcedsources entries across \nforcedobjects unique objects.
 
-\item The \texttt{DiaSource} catalogs \citep{10.71929/rubin/2570317} contains data on all the sources detected at $>5\sigma$ significance --- including those associated with known Solar System objects --- in the \texttt{difference\_image}s.
+\subsubsection{DiaSource Catalog}
+%\item 
+The \texttt{DiaSource} catalogs \citep{10.71929/rubin/2570317} contains data on all the sources detected at $>5\sigma$ significance --- including those associated with known Solar System objects --- in the \texttt{difference\_image}s.
 Unlike sources detected in \texttt{visit\_image}s, sources detected in difference images (hereafter, ``DiaSource'') have gone through an association step in which an attempt has been made to associate them into underlying objects called ``DiaObject''.
 The \texttt{DiaSource} catalog consolidates all this information across multiple visits and bands.
 The detections reported in the \texttt{DiaSource} catalog have not undergone deblending.
 
 The \texttt{DiaSource} catalog contains data for \ndiasources \texttt{DiaSources} in \gls{DP1}.
 
-\item The \texttt{DiaObject} catalog \citep{10.71929/rubin/2570319} contains the astrophysical objects that DiaSources are associated with (i.e., the DiaObjects).
+\subsubsection{DiaObject Catalog}
+%\item 
+The \texttt{DiaObject} catalog \citep{10.71929/rubin/2570319} contains the astrophysical objects that DiaSources are associated with (i.e., the DiaObjects).
 The \texttt{DiaObject} catalog contains only non-Solar System Objects; Solar System Objects are, instead, recorded in the \texttt{SSObject} catalog.
 When a DiaSource is identified, the \texttt{DiaObject} and \texttt{SSObject} catalogs are searched for objects to associate it with.
 If no association is found, a new DiaObject is created and the DiaSource is associated to it.
@@ -206,27 +239,39 @@ Since DiaObjects are typically \gls{transient} or variable (by the nature of the
 
 The \texttt{DIAObject} catalog contains data for \ndiaobjects DiaObjects in \gls{DP1}.
 
-\item The \texttt{ForcedSourceOnDiaObject} catalog \citep{10.71929/rubin/2570321} is equivalent to the \texttt{ForcedSource} catalog, but contains \gls{forced photometry} measurements obtained at the positions of all the DiaObjects in the \texttt{DiaObject} catalog.
+\subsubsection{ForcedSourceOnDiaObject Catalog}
+%\item
+The \texttt{ForcedSourceOnDiaObject} catalog \citep{10.71929/rubin/2570321} is equivalent to the \texttt{ForcedSource} catalog, but contains \gls{forced photometry} measurements obtained at the positions of all the DiaObjects in the \texttt{DiaObject} catalog.
 
 The \texttt{ForcedSourceOnDiaObject} catalog contains a total of \ndiaforcedsources entries across \ndiaforcedobjects unique DiaObjects.
 
-\item The \texttt{SSObject} catalog \citep{10.71929/rubin/2570335}, \gls{MPCORB} and SSObject, carry information about solar system objects.
+
+\subsection{SSObject Catalog}
+%\item 
+The \texttt{SSObject} catalog \citep{10.71929/rubin/2570335}, \gls{MPCORB} and SSObject, carry information about solar system objects.
 The \gls{MPCORB} table provides the Minor Planet \gls{Center}-computed orbital elements for all known asteroids, including those that Rubin discovered.
 For \gls{DP1}, the  \texttt{SSObject} catalog serves primarily to provide the mapping between the \gls{IAU} designation of an object (listed in \gls{MPCORB}), and the internal ssObjectId identifier, which is used as a key to find solar system object observations in the DiaSource and SSSource tables.
 The \texttt{SSObject} catalog contains data for \nssobjects SSObjects in \gls{DP1}.
 
-\item The \texttt{SSSource} catalog \citep{10.71929/rubin/2570333} contains data on all DiaSources that are either associated with previously-known Solar System Objects, or have been confirmed as newly-discovered Solar System Objects by confirmation of their orbital properties.
+%\item 
+\subsubsection{SSSource Catalog}
+The \texttt{SSSource} catalog \citep{10.71929/rubin/2570333} contains data on all DiaSources that are either associated with previously-known Solar System Objects, or have been confirmed as newly-discovered Solar System Objects by confirmation of their orbital properties.
 As entries in the \texttt{SSSource} catalog stem from the \texttt{DiaSource} catalog, they have all been detected at $>5\sigma$ significance in at least one band.
 The \texttt{SSSource} catalog contains data for \nsolarsystemsources Solar System Sources.
 
-\item The \texttt{CcdVisit} catalog \citep{10.71929/rubin/2570331} contains data for each individual processed \texttt{visit\_image}.
+\subsubsection{CcdVisit Catalog}
+%\item 
+The \texttt{CcdVisit} catalog \citep{10.71929/rubin/2570331} contains data for each individual processed \texttt{visit\_image}.
 In addition to technical information, such as the on-sky coordinates of the central pixel and measured pixel scale, the \texttt{CcdVisit} catalog contains a range of data quality measurements, such as whole-image summary statistics for the \gls{PSF} size, zeropoint, sky \gls{background}, sky noise, and quality of astrometric solution.
 It provides an efficient method to access \texttt{visit\_image} properties without needing to access the image data.
 When combined with the data contained in the \texttt{Visit} table described in \secref{ssec:metadata}, it provides a full picture of the telescope pointing and sky conditions at the time of observation.
 
 The \texttt{CcdVisit} catalog contains entries summarizing data for all \nvisitdetectorsummaries \texttt{visit\_image}s.
 
-\item The \texttt{Calibration} catalog is the reference catalog that was used to perform astrometric and photometric \gls{calibration}.
+\subsubsection{Calibration Catalog}
+\label{sssec:monster}
+%\item 
+The \texttt{Calibration} catalog is the reference catalog that was used to perform astrometric and photometric \gls{calibration}.
 It is a whole-sky catalog built specifically for \gls{LSST}, as no single prior reference catalog had both the depth and coverage needed to calibrate \gls{LSST} data.
 It combines data from multiple previous reference catalogs and contains only stellar sources.
 Full details on how the \texttt{Calibration} catalog was built are provided in \cite{DMTN-277}
@@ -243,7 +288,7 @@ All sources from the input catalogs are matched to \textit{Gaia}-\gls{DR3} sourc
 
 After collating the input catalogs and transforming the fluxes to the standard DES/SDSS bandpasses, the catalog was used to identify sources within a specific region of the sky.
 This process generated a set of standard columns containing positional and flux information, along with their associated uncertainties.
-\end{itemize}
+%\end{itemize}
 
 \subsubsection{Source and Object Designations}\label{ssec:src_naming}
 To refer to individual sources or objects from the \gls{DP1} catalogs, one should follow the LSST \gls{DP1} naming convention that has been registered with the International Astronomical Union.
@@ -265,10 +310,12 @@ In summary, source designations should adhere to the formats listed below:
 Tables that were not explicitly mentioned in the description above do not have their own unique IDs, but are instead linked to one of the five tables listed above via a unique ID.
 For example, the \texttt{ForcedSource} table is keyed on objectId, \texttt{ForcedSourceOnDiaObject} uses diaObjectId, \texttt{SSSource} is linked to diaSourceId and ssObjectId, and \texttt{MPCORB} uses ssObjectId.
 
-\subsection{Survey Property Maps}
-\label{ssec:survey_property_maps}
+\subsection{Maps}
 Maps are two-dimensional visualizations of survey data.
 In \gls{DP1}, these fall into two categories: Survey Property Maps and \gls{HiPS} Maps \citep{2015A&A...578A.114F}.
+
+\subsubsection{Survey Property Maps}
+\label{ssec:survey_property_maps}
 Survey Property Maps \citep{10.71929/rubin/2570315} summarize how properties such as observing conditions or exposure time vary across the observed sky.
 Each map provides the spatial distribution of a specific quantity at a defined sky position for each band by aggregating information from the images used to make the \texttt{deep\_coadd}.
 Maps are initially created per-\gls{tract} and then combined to produce a final consolidated map.
@@ -304,7 +351,7 @@ Because full consolidated maps cover widely separated tracts, we use clipped per
 \end{figure*}
 
 % HiPS maps
-\subsection{HiPS Maps}
+\subsubsection{HiPS Maps}
 \gls{HiPS} Maps \citep{2015A&A...578A.114F}, offer an interactive way to explore seamless, multi-band tiles of the sky regions covered by \gls{DP1}, allowing for smooth panning and zooming.
 \gls{DP1} provides multi-band \gls{HiPS} images created by combining data from individual bands of \texttt{deep\_coadd} and \texttt{template\_coadd} images, using an improved version (Lust et al. in prep) of the algorithm presented in \cite{2004PASP..116..133L}.
 These images are false-color representations generated using various filter combinations for the red, green, and blue channels.
