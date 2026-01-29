@@ -2,13 +2,11 @@
 \label{sec:performance}
 %
 In this section, we provide an assessment of the \gls{DP1} data quality and known issues.
-% A summary of the Rubin \gls{DP1} key numbers and data quality metrics  is found in PERFSUMMARYTABLE
-%\input{./dp1_key_numbers}
-
+%
 \subsection{Sensor Anomalies and ISR}
 \label{ssec:sensor_anomalies}
 \input{sensor_anomalies}
-
+%
 
 \subsection{PSF Models}
 \label{ssec:psf_models}
@@ -365,22 +363,38 @@ This may be partly due to the fact that S\'ersic parameter uncertainties are est
 
 Efforts are underway to investigate and quantify the origin of uncertainty underestimates and future releases will, at the least, provide recommendations for mitigations.
 
-\subsection{Difference Imaging Purity} 
-\label{sec:performance:dia}
+\subsection{Difference Imaging} 
+\label{ssec:performance_dia}
+%
+We assessed the performance of image differencing using both human vetting (\secref{sssec:perf_dia_purity}) and source injection (\secref{sssec:perf_dia_completeness}).
 
-We assessed the performance of image differencing using human vetting and source injection (\S \ref{sec:perf:dia_completeness}).
-Members of the \gls{DP1} team labeled more than 9500 DIASource image triplets consisting of cutouts from the science, template, and difference images.
-We classified these into various real and artifact categories.
-The raw artifact to real ratio without filtering was roughly 9:1.
-Bright stars are the main source of artifacts.
-Correlated noise, primarily in $u$ and $g$ bands, also leads to spurious detections near the flux threshold.
-We expect to be able to mitigate these effects for \gls{LSSTCam}.
+\subsubsection{Difference Imaging Purity} 
+\label{sssec:perf_dia_purity}
+Members of the \gls{DP1} team labeled more than 9,500 DIASource image triplets, each consisting of cutouts from the science, template, and difference images. 
+An internal labeling service (TASSO) was deployed within the USDF environment. 
+A random subset of approximately 500,000 DIASources was selected and uploaded to the service, which remained active for roughly three months. 
+Access to the labeling service was granted to all individuals with commissioning data access. 
+Each DIASource was classified exactly once, with a total of 35 volunteers contributing labels. 
+Volunteers reviewed PNG images displaying the template, science, and difference stamps; each stamp had dimensions of 51$\times$51 pixels, matching the input size required by the machine-learning model.
+\figref{fig:sample_dia_labelling} show an example of one of the image triplets consisting of cutouts from the science, template, and difference images that volunteers were asked to label.
+\begin{figure}[htb!]
+\includegraphics[width=\linewidth]{sample_dia_labelling}
+\caption{An example an image triplet consisting of cutouts showing, from left to right,  he science, template, and difference images that volunteers were asked to label.}
+\label{fig:sample_dia_labelling}
+\end{figure}
 
-Applying a reliability threshold improves the purity of transients but not variable stars; technical limitations at the time of model training prevented injection of variable stars into the synthetic training set.
-Reliability models, described in \secref{ssec:diffim_analysis},  for \gls{LSSTCam} data will be trained on a wider range of input data.
+The labeled sources were classified into multiple categories representing real astrophysical events and artifacts.
+Prior to any filtering, the raw artifact-to-real ratio was approximately 9:1. 
+Bright stars were identified as the dominant source of artifacts, while correlated noise, particularly in the $u$ and $g$ bands, also produced spurious detections near the flux threshold. 
+We expect to be able to mitigate these effects in futyre \gls{LSSTCam} data.
 
-\subsection{Difference Imaging Detection Completeness} \label{sec:perf:dia_completeness}
+Applying a reliability threshold improves the purity of transient detections but has limited impact on variable stars. 
+This limitation arises from technical constraints at the time of model training, which prevented the injection of variable stars into the synthetic training set. 
+Future reliability models for \gls{LSSTCam} data, described in \secref{ssec:diffim_analysis}, will be trained using a broader and more representative range of input data.
 
+\subsubsection{Difference Imaging Detection Completeness} 
+\label{sssec:perf_dia_completeness}
+%
 We assess the performance of our difference imaging \gls{pipeline} using synthetic source injection on the science images prior to differencing.
 We construct a catalog of injected sources by joining two different samples of point sources, a set of hosted sources to emulate transients in galaxies and second set of hostless sources.
 The hosts are selected from the pipeline source catalog that is produced upstream by imposing a cut on their extendedness measurement and selecting $N_{\rm src}={\rm min}(100, N\times0.05)$ of the $N$ available sources per detector.
