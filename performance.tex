@@ -2,7 +2,7 @@
 \label{sec:performance}
 %
 In this section, we provide an assessment of the \gls{DP1} data quality and known issues.
-%
+
 \subsection{Sensor Anomalies and ISR}
 \label{ssec:sensor_anomalies}
 \input{sensor_anomalies}
@@ -21,6 +21,7 @@ We compare two PSF modeling approaches:
 \end{itemize}
 \tabref{tab:psf-1d_stats} summarizes each model’s ability to reconstruct the mean $T$, $e^1$, and $e^2$ on  \gls{LSSTComCam}. 
 Both models exhibit a negative residual bias in the reconstructed PSF size, with Piff O4 providing improved performance over Piff O2.
+
 \input{./psf_1d_stat.tex}
 
 An alternative approach to evaluating the performance of the \gls{PSF} model is to examine the average $\delta T/T$, where $\delta T$ is $T_{\text{PSF}}$ - $T_{\text{model}}$, across visits, projected onto focal-plane coordinates, as shown in \figref{fig:psf_residuals_fov}. 
