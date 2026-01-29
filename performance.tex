@@ -371,27 +371,54 @@ We assessed the performance of image differencing using both human vetting (\sec
 
 \subsubsection{Difference Imaging Purity} 
 \label{sssec:perf_dia_purity}
+<<<<<<< HEAD
 Members of the \gls{DP1} team labeled more than 11,000 DIASource image triplets, each consisting of cutouts from the science, template, and difference images. 
 An internal labeling service (\texttt{tasso}) was deployed within the USDF environment. 
-A random subset of approximately 16,000 DIASources was selected and uploaded to the service, which remained active for roughly three months. 
+A random subset of approximately 16,000 DIASources was selected and uploaded to the service, which remained active for roughly three months and labeled by members of the \gls{DP1} team. 
+Users labeled  DIASource PNG images triplets, each consisting of cutouts from the science, template, and difference images. Each stamp had dimensions of 51$\times$51 pixels, matching the input size required by the machine-learning model.
 Access to the labeling service was granted to all individuals with commissioning data access. 
 Each DIASource was classified exactly once, with a total of 35 volunteers contributing labels. 
-Volunteers reviewed PNG images displaying the template, science, and difference stamps; each stamp had dimensions of 51$\times$51 pixels, matching the input size required by the machine-learning model.
 \figref{fig:sample_dia_labelling} show an example of one of the image triplets consisting of cutouts from the science, template, and difference images that volunteers were asked to label.
 \begin{figure}[htb!]
 \includegraphics[width=\linewidth]{sample_dia_labelling}
-\caption{An example an image triplet consisting of cutouts showing, from left to right,  he science, template, and difference images that volunteers were asked to label.}
+\caption{An example an image triplet consisting of cutouts showing, from left to right,  the template, science, and difference images that volunteers were asked to label.}
 \label{fig:sample_dia_labelling}
 \end{figure}
 
 The labeled sources were classified into multiple categories representing real astrophysical events and artifacts.
 Prior to any filtering, the raw artifact-to-real ratio was approximately 9:1. 
 Bright stars were identified as the dominant source of artifacts, while correlated noise, particularly in the $u$ and $g$ bands, also produced spurious detections near the flux threshold. 
-We expect to be able to mitigate these effects in futyre \gls{LSSTCam} data.
+We expect to be able to mitigate these effects in future \gls{LSSTCam} data.
 
-Applying a reliability threshold improves the purity of transient detections but has limited impact on variable stars. 
-This limitation arises from technical constraints at the time of model training, which prevented the injection of variable stars into the synthetic training set. 
+Applying a reliability threshold based on the Machine Learning reliability model described in \autoref{ssec:diffim_analysis}
+improved the purity of transient detections but had limited impact on variable stars. 
+This limitation arises from technical constraints at the time of model training, which prevented the injection of variable stars into the synthetic training set.
 Future reliability models for \gls{LSSTCam} data, described in \secref{ssec:diffim_analysis}, will be trained using a broader and more representative range of input data.
+
+The performance of the reliability model on the test data (see \autoref{ssec:diffim_analysis}) is shown in \aturef{completenessvpurity}.
+The rate of true positives and false negatives obtained by thresholding the reliability score at 0.5 is reported for transients (99 stamps), and variable stars (316 stamps) vetted in TASSO in \autoref{tab:mlreliability}. Additionally we crossmatched stamps with Solar System Objects with known orbits retriving 5,988 Solar System Objects stamps.
+
+\figref{fig:mlreliability_pc} Purity and Completness as a function of machine learning reliability threshold for test data.
+\begin{figure}[htb!]
+\includegraphics[width=\linewidth]{mlreliability_test_performance.pdf}
+\caption{The Purity and Completness of the reliability score is shown as a function of reliability threshold based on the testing data. A vertical line marks the threshold where the highest F1-score is obtained. The F1 score is the harmonic mean of completeness and purity.
+  See \aturef{ssec:diffim_analysis} for details on the model and model training.}
+\label{fig:completenessvpurity}
+\end{figure}
+
+\setlength{\tabcolsep}{6pt}  % spacing between columns
+\begin{deluxetable}{lccc}
+  \tablecaption{Recovery rate for transients, variables, and Solar System objects with a reliability threshold set to 0.5.
+\label{tab:mlreliability}}
+\tablehead{
+  \colhead{\textbf{Object type}} & \colhead{\textbf{Number of objects}} & \colhead{\textbf{True Positive Rate}} & \colhead{\textbf{False Negative Rate}} 
+}
+\startdata
+Solar System Objects & \parbox{0.3cm}{5,988} & \parbox{0.3cm}{93.5\%} & \parbox{0.3cm}{6.5\%}\\
+Transients & \parbox{0.3cm}{99} & \parbox{0.3cm}{73.7\%} & \parbox{0.3cm}{26.3\%}\\
+Variables & \parbox{0.3cm}{316} & \parbox{0.3cm}{3.5\%} & \parbox{0.3cm}{96.5\%}\\
+\enddata
+\end{deluxetable}
 
 \subsubsection{Difference Imaging Detection Completeness} 
 \label{sssec:perf_dia_completeness}
