@@ -69,7 +69,7 @@ The field of view of a single \texttt{raw}, excluding prescan and overscan regio
 They have undergone instrument signature removal (\secref{ssec:isr}) and all the single frame processing steps described in \secref{ssec:single_frame_processing} which are, in summary: \gls{PSF} modeling, \gls{background} subtraction, and astrometric and photometric \gls{calibration}.
 As with \texttt{raw}s, a \texttt{visit\_image} contains processed data from a single \gls{CCD} resulting from a single \exposuretime \gls{LSSTComCam} exposure.
 As a consequence, a single \gls{LSSTComCam} exposure typically results in nine \texttt{visit\_image}s.
-The handful of exposures with fewer than nine \texttt{raw} images also have fewer than nine \texttt{visit\_images}, but there are an additional \nsfpfails \texttt{raw} that failed processing and for which there is thus no corresponding \texttt{visit\_image}.
+The handful of exposures with fewer than nine \texttt{raw} images also have fewer than nine \texttt{visit\_images}, but there are an additional \nsfpfails \texttt{raw} images that failed processing and for which there is thus no corresponding \texttt{visit\_image}.
 The majority of failures -- 131 in total -- were due to challenges with astrometric fits or \gls{PSF} models in the 47\_Tuc crowded field. The other failures were in the Rubin\_SV\_095\_-25 (9 failures), ECDFS (8), Fornax\_dSph (3), and EDFS\_comcam (2) fields.
 
 In total, there are \nvisitimages \texttt{visit\_image}s in \gls{DP1}.
@@ -125,7 +125,7 @@ As with \texttt{deep\_coadd}s, a single \texttt{template\_coadd} covers a single
 Since the same \texttt{skymap} is used when creating both \texttt{deep\_coadd} and \texttt{template\_coadd}s, the on-sky area and pixel count of \texttt{template\_coadd}s are the same as that of a \texttt{deep\_coadd} (see above).
 Similarly, \texttt{template\_coadd}s contain the science image (i.e., the coadd), a variance image, and a pixel mask; all three contain the same number of pixels.
 Also included are the \gls{PSF} model, \gls{WCS} information, and \gls{metadata}.
-As is the case for \texttt{deep\_coadd}, those pixels within \texttt{template\_coadd}s that are not covered by any of the selected \texttt{visit\_image}s may still have seemingly valid values, but are indicated with the \texttt{NO\_DATA} flag within the pixel mask.
+As is the case for \texttt{deep\_coadd}s, those pixels within \texttt{template\_coadd}s that are not covered by any of the selected \texttt{visit\_image}s may still have seemingly valid values, but are indicated with the \texttt{NO\_DATA} flag within the pixel mask.
 
 \subsubsection{Difference Image}
 %\item 
@@ -245,10 +245,9 @@ The \texttt{ForcedSourceOnDiaObject} catalog \citep{10.71929/rubin/2570321} is e
 
 The \texttt{ForcedSourceOnDiaObject} catalog contains a total of \ndiaforcedsources entries across \ndiaforcedobjects unique DiaObjects.
 
-
 \subsection{SSObject Catalog}
 %\item 
-The \texttt{SSObject} catalog \citep{10.71929/rubin/2570335}, \gls{MPCORB} and SSObject, carry information about solar system objects.
+The \texttt{SSObject} catalog \citep{10.71929/rubin/2570335} and the \gls{MPCORB} carry information about solar system objects.
 The \gls{MPCORB} table provides the Minor Planet \gls{Center}-computed orbital elements for all known asteroids, including those that Rubin discovered.
 For \gls{DP1}, the  \texttt{SSObject} catalog serves primarily to provide the mapping between the \gls{IAU} designation of an object (listed in \gls{MPCORB}), and the internal ssObjectId identifier, which is used as a key to find solar system object observations in the DiaSource and SSSource tables.
 The \texttt{SSObject} catalog contains data for \nssobjects SSObjects in \gls{DP1}.
@@ -293,7 +292,7 @@ This process generated a set of standard columns containing positional and flux 
 \subsubsection{Source and Object Designations}\label{ssec:src_naming}
 To refer to individual sources or objects from the \gls{DP1} catalogs, one should follow the LSST \gls{DP1} naming convention that has been registered with the International Astronomical Union.
 Because the \texttt{Source}, \texttt{Object}, \texttt{DiaSource}, \texttt{DiaObject}, and \texttt{SSObject} tables each have their own unique IDs, their designations should differ.
-In general, source designations should begin with the string ``LSST-\gls{DP1}'' (denoting the Legacy Survey of Space and Time, Data Preview 1), followed by a string specifying the table from which the source was obtained.
+In general, source and object designations should begin with the string ``LSST-\gls{DP1}'' (denoting the Legacy Survey of Space and Time, Data Preview 1), followed by a string specifying the table from which the source was obtained.
 These strings should be ``O'' (for the \texttt{Object} table), ``S'' (\texttt{Source}), ``DO'' (\texttt{DiaObject}), ``DS'' (\texttt{DiaSource}), or ``SSO'' (\texttt{SSObject}).
 Following the table identifier, the designation should contain the full unique numeric identifier from the specified table (i.e., the objectId, sourceId, diaObjectId, diaSourceId, or ssObjectId).
 Each component of the identifier should be separated by dashes, resulting in a designation such as ``LSST-\gls{DP1}-TAB-123456789012345678''.
@@ -308,7 +307,7 @@ In summary, source designations should adhere to the formats listed below:
 \end{itemize}
 
 Tables that were not explicitly mentioned in the description above do not have their own unique IDs, but are instead linked to one of the five tables listed above via a unique ID.
-For example, the \texttt{ForcedSource} table is keyed on objectId, \texttt{ForcedSourceOnDiaObject} uses diaObjectId, \texttt{SSSource} is linked to diaSourceId and ssObjectId, and \texttt{MPCORB} uses ssObjectId.
+For example, the \texttt{ForcedSource} table uses objectId, \texttt{ForcedSourceOnDiaObject} uses diaObjectId, \texttt{SSSource} uses diaSourceId and ssObjectId, and \texttt{MPCORB} uses ssObjectId.
 
 \subsection{Maps}
 Maps are two-dimensional visualizations of survey data.
@@ -336,15 +335,15 @@ Because full consolidated maps cover widely separated tracts, we use clipped per
   \centering
   \begin{subfigure}[t]{0.31\textwidth}
   \includegraphics[width=\linewidth, height=5.8cm]{deepCoadd_exposure_time_map_sum_tract10463_rband}
-  \caption{Exposure time sum map for \texttt{deep\_coadd} \gls{tract} 10463, r-band in field Rubin\_SV\_38\_7}
+  \caption{Exposure time sum map for \texttt{deep\_coadd} \gls{tract} 10463, $r$-band in field Rubin\_SV\_38\_7}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.31\textwidth}
   \includegraphics[width=\linewidth, height=5.8cm]{deepCoadd_psf_maglim_map_weighted_mean_tract5063_zband}
-  \caption{5$\sigma$ \gls{PSF} magnitude limit weighted mean map for \texttt{deep\_coadd} \gls{tract} 5063, z-band in field ECDFS}
+  \caption{5$\sigma$ \gls{PSF} magnitude limit weighted mean map for \texttt{deep\_coadd} \gls{tract} 5063, $z$-band in field ECDFS}
   \end{subfigure}\hfill
     \begin{subfigure}[t]{0.31\textwidth}
   \includegraphics[width=\linewidth, height=5.8cm]{deepCoadd_sky_noise_map_weighted_mean_tract5063_gband}
-  \caption{Sky noise weighted mean map for \texttt{deep\_coadd} \gls{tract} 5063, z-band in field ECDFS}
+  \caption{Sky noise weighted mean map for \texttt{deep\_coadd} \gls{tract} 5063, $z$-band in field ECDFS}
   \end{subfigure}\hfill
 \caption{Examples of survey property maps from Rubin \gls{DP1} across different bands, clipped to the boundary of a single \gls{tract} for visual clarity.}
   \label{fig:survey_property_maps}
