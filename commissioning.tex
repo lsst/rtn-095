@@ -122,7 +122,7 @@ validating the difference image analysis and prompt processing \citep{dmtn-219} 
 deep coadded images with integrated exposure times roughly equivalent to those of the planned LSST \gls{WFD} 10-year depth.
 To support these goals, \nfields target fields were selected that span a range of stellar densities, overlap with external reference datasets, and collectively span the full breadth of the four primary \gls{LSST} science themes.
 These \nfields fields form the basis of the \gls{DP1} dataset.
-\figref{fig:dp1_fields_on_sky} shows the locations of these \nfields fields on the sky, overlaid on the LSST baseline survey footprint \citep{PSTN-051, PSTN-052, PSTN-053, PSTN-055, PSTN-056}, along with sky coverage of both the \gls{LSSTCam} and \gls{LSSTComCam} focal planes.
+\figref{fig:dp1_fields_on_sky} shows the locations of these \nfields fields on the sky, overlaid on the LSST baseline survey footprint \citep{PSTN-051, PSTN-052, PSTN-053, PSTN-055, PSTN-056}, along with the sky coverage of both the \gls{LSSTCam} and \gls{LSSTComCam} focal planes.
 \begin{figure*}[bt!]
 \centering
 \plotone{dp1_fields_with_survey_fp}
@@ -153,16 +153,16 @@ It is important to note that the time sampling in the \gls{DP1} dataset differs 
 %
 % Dithering pattern
 All fields except for the low ecliptic latitude field, Rubin\_SV\_38\_7, used a small random dithering pattern.
-The random translational dithers of the telescope boresight were applied for each visit, with offsets of up to 0.2 degrees around the pointing center (\tabref{tab:dp1_fields}). 
+The random translational dithers of the telescope boresight were applied for each visit, with offsets of up to 0.2 degrees around the pointing center. 
 The rotational dithers of the camera rotator were typically approximately 1 degree per visit, with larger random offsets at each filter change, which worked to keep operational efficiency high. 
 The Rubin\_SV\_38\_7 field used a different dither pattern to optimize coverage of Solar System Objects and test Solar System Object linking across multiple nights. 
 These observations used a 2$\times$2 grid of \gls{LSSTComCam} pointings to cover an area of about 1.3 degree$\times$1.3 degrees.
 The visits cycled between the grid's four pointing centers, each separated by 0.65  degrees, and used small random translational dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing epoch.
-The ra/dec vale giving in table 1 for this field is approximately the center of the 4 fileds. 
+The RA and Dec values provided in \tabref{tab:dp1_fields} for this field represent approximately the center of the four fields.
 
 % m5 coadded depths  per field
 \figref{fig:dp1_fields_coverage_maps} shows sky coverage maps showing the distribution of visits in each of the \nfields \gls{DP1} fields, color coded by band. 
-The images clearly show the focal plane chip gaps and dithering pattern.  \gls{DP1} 
+The images clearly show the focal plane chip gaps and dithering pattern.
 Only the detectors for which single frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields (see \secref{ssec:crowded_fields}). 
 \begin{figure*}[ht]
 \centering
