@@ -57,7 +57,7 @@ We observe coherent patterns in both the \gls{PSF} moments and the residuals, th
     \includegraphics[scale=0.33]{psf_second_whisker}
     \caption{Whisker plots for the  \gls{ECDFS} field for $e$, $e^{(4)}$ and $\delta e$, $\delta e^{(4)}$.}
     \label{fig:psf_residuals_whisker_ECDFS}
-\end{figure}›
+\end{figure}
 
 \figref{fig:psf_residuals_mag_color} shows a plot of  $\delta T/T$ versus stellar magnitude, which can reveal any dependencies between \gls{PSF} size and flux.
 We also repeat this analysis in color bins to probe chromatic effects.
@@ -173,7 +173,7 @@ For the 10\% of unresolved sources withheld from the fit and having signal-to-no
 after applying chromatic correction was 7.1, 5.4, 5.4, 5.1, 5.9, and 6.5  mmag in the $ugrizy$ bands respectively, across all fields.
 After accounting for photometric noise, the intrinsic photometric repeatability was approximately 4.8, 2.7, 1.7, 1.0, 2.0, and 1.1 mmag in $ugrizy$.
 The \gls{DP1} processing does not yet include chromatic corrections in the final photometry. 
-In this case  the delivered photometric repeatability was 3−8 mmag  for grizy.  
+In this case  the delivered photometric repeatability was 3-8 mmag  for grizy.  
 
 In \figref{fig:stellarloci}, we show the stellar loci for $ugriz$ for unresolved sources in the \gls{DP1} \texttt{Object} table (\secref{ssec:catalogs}).
 These unresolved sources  were selected using the extendedness parameter (\secref{ssec:catalogs}) in the \texttt{Object} catalog. 
@@ -364,7 +364,7 @@ This may be partly due to the fact that S\'ersic parameter uncertainties are est
 
 Efforts are underway to investigate and quantify the origin of uncertainty underestimates and future releases will, at the least, provide recommendations for mitigations.
 
-subsection{Difference Imaging} 
+\subsection{Difference Imaging} 
 \label{ssec:performance_dia}
 %
 We assessed the performance of image differencing using both human vetting (\secref{sssec:perf_dia_purity}) and source injection (\secref{sssec:perf_dia_completeness}).
@@ -395,15 +395,14 @@ Future reliability models for \gls{LSSTCam} data, described in \secref{ssec:diff
 
 The performance of the reliability model on the test data (\secref{ssec:diffim_analysis}) is shown in \figref{fig:completenessvpurity}.
 The rate of true positives and false negatives obtained by thresholding the reliability score at 0.5 is reported for transients (99 stamps), and variable stars (316 stamps) vetted in \texttt{tasso} in \tabref{tab:mlreliability}. 
-%
 \input{dp1_mlreliability}
-%
 Additionally we crossmatched stamps with Solar System Objects with known orbits retrieving 5,988 Solar System Objects stamps.
-\begin{figure}[htb!]
+\begin{figure}[htb]
 \includegraphics[width=\linewidth]{mlreliability_test_performance}
 \caption{The purity and completness of the reliability score is shown as a function of reliability threshold based on the testing data. A vertical line marks the threshold where the highest F1-score is obtained. The F1 score is the harmonic mean of completeness and purity. See \secref{ssec:diffim_analysis} for details on the model and model training.}
 \label{fig:completenessvpurity}
 \end{figure}
+
 
 %
 \subsubsection{Difference Imaging Detection Completeness} 

@@ -152,7 +152,7 @@ All catalogs contain data for detections in the images described in \secref{ssec
 Observatory-produced \gls{metadata} tables are described in \secref{ssec:metadata}.
 
 The catalogs contains measurements for either Sources  detected in  \texttt{visit\_image}s and \texttt{difference\_image}s, or Objects detected in \texttt{deep\_coadd}s.
-All catalogs store fluxes rather than magnitudes, with fluxes measured in nanojansky (1 nJy = $10^{−35}$ Wm$^{−2}$Hz$^{−1}$).
+All catalogs store fluxes rather than magnitudes, with fluxes measured in nanojansky (1 nJy = $10^{-35}$ Wm$^{-2}$Hz$^{-1}$ ).
 Fluxes are preferred for multi-epoch observations, as they can be averaged across epochs, unlike magnitudes.
 Additionally, flux measurements on difference images (\secref{ssec:science_images}) are computed against a template, representing a flux difference. 
 As a result, flux measurements on difference images can be negative, particularly for faint sources in the presence of noise.
@@ -325,7 +325,7 @@ The available maps describe total exposure times, observation epochs (one each f
 They all use the dataset type  format \texttt{deep\_coadd\_<PROPERTY>\_consolidated\_map\_<STATISTIC>}.
 For example, \texttt{deep\_coadd\_exposure\_time\_consolidated\_map\_sum} provides a spatial map of the total exposure time accumulated per
 sky position in units of seconds.
-All maps are stored in \texttt{HealSparse}\footnote{A sparse \gls{HEALPix} representation that efficiently encodes data values on the celestial sphere. \url{https://healsparse.readthedocs.io}} format.
+All maps are stored in \texttt{HealSparse}\footnote{A sparse \gls{HEALPix} representation that efficiently encodes data values on the celestial sphere. \nolinkurl{https://healsparse.readthedocs.io}} format.
 Survey property maps are only available via the Data \gls{Butler} (\secref{sssec:data_butler}).
 
 Figure \ref{fig:survey_property_maps} presents three survey property maps for exposure time, \gls{PSF} magnitude limit, and sky noise, computed for representative tracts and bands.
