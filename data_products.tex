@@ -260,12 +260,12 @@ The \texttt{SSSource} catalog contains data for \nsolarsystemsources Solar Syste
 
 \subsubsection{CcdVisit Catalog}
 %\item
-The \texttt{CcdVisit} catalog \citep{10.71929/rubin/2570331} contains data for each individual processed \texttt{visit\_image}.
+The \texttt{CcdVisit} catalog \citep{10.71929/rubin/2570331} contains data for all \gls{CCD} images from a single visit. In princple, this means nine entries per visit, however due to a variety of technical reasons, not all \gls{CCD}s have data for each visit, and so the catalog may contain fewer than nine entries per visit.
 In addition to technical information, such as the on-sky coordinates of the central pixel and measured pixel scale, the \texttt{CcdVisit} catalog contains a range of data quality measurements, such as whole-image summary statistics for the \gls{PSF} size, zeropoint, sky \gls{background}, sky noise, and quality of astrometric solution.
 It provides an efficient method to access \texttt{visit\_image} properties without needing to access the image data.
 When combined with the data contained in the \texttt{Visit} table described in \secref{ssec:metadata}, it provides a full picture of the telescope pointing and sky conditions at the time of observation.
 
-The \texttt{CcdVisit} catalog contains entries summarizing data for all \nvisitdetectorsummaries \texttt{visit\_image}s.
+The \texttt{CcdVisit} catalog contains \nvisitdetectorsummaries entries (nine entries for each of the \nvisitsummaries visits, minus three entries for one incomplete visit). This differs from the number of \texttt{visit\_image}s due to the more stringent requirements imposed to generate a science-ready image.
 
 \subsubsection{Calibration Catalog}
 \label{sssec:monster}
