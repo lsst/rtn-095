@@ -1,36 +1,12 @@
-%\documentclass[twocolappendix, trackchanges]{aastex7}
-\documentclass[ twocolumn,twocolappendix, linenumbers, twocolappendix,trackchanges]{aastex7}
-
-% line numbers must be on for submission
+\documentclass[ twocolumn,twocolappendix, linenumbers ,trackchanges]{aastex7}
 
 % Package imports go here.
-\usepackage{glossaries}  % Overriding \label
-% not allowed ! \usepackage{glossary-mcols}
-\usepackage{amsmath}
-\usepackage{textcomp}
-\usepackage{gensymb}
-\usepackage{graphicx}
-\usepackage{mathtools, nccmath}
 \usepackage{hyperref}
 \usepackage[htt]{hyphenat} % Hyphenate texttt blocks
 \usepackage{xspace} % grids of plots
 \usepackage{subcaption}
 \captionsetup{compatibility=false}
-
-% Todo notes
-\usepackage[colorinlistoftodos]{todonotes}
-\let\Oldtodo\todo
-\renewcommand{\todo}[1]{\Oldtodo[inline]{#1}}
-\newcommand{\eric}[2][]{\Oldtodo[inline,color=blue, #1]{Eric: #2}}
-\newcommand{\bri}[2][]{\Oldtodo[inline,color=purple, #1]{Bri: #2}}
-\newcommand{\eli}[2][]{\Oldtodo[inline,color=red, #1]{Eli: #2}}
-\newcommand{\james}[2][]{\Oldtodo[inline,color=cyan, #1]{James: #2}}
-\newcommand{\leanne}[2][]{\Oldtodo[inline,color=teal, #1]{Leanne: #2}}
-\newcommand{\gregory}[2][]{\Oldtodo[inline,color=yellow, #1]{Gregory: #2}}
-\newcommand{\jake}[2][]{\Oldtodo[inline,color=orange, #1]{Jake: #2}}
-\newcommand{\yusra}[2][]{\Oldtodo[inline,color=green, #1]{Yusra: #2}}
-
-\newcommand{\TODO}[1]{\textcolor{red}{\textbf{TODO:} #1}}
+\usepackage{glossaries}  
 
 % All graphics paths here 
 \graphicspath{./}
@@ -38,14 +14,12 @@
 % Local commands go here.
 \newcommand{\docRef}{RTN-095}
 \newcommand{\docUpstreamLocation}{\url{https://github.com/lsst/rtn-095}}
-%\providecommand{\secref}[1]{\hyperref[#1]{\autoref{#1}}}
 \providecommand{\secref}[1]{\hyperref[#1]{\S\ref{#1}}}
 \providecommand{\appref}[1]{\hyperref[#1]{Appendix \ref{#1}}}
 \providecommand{\tabref}[1]{\hyperref[#1]{\autoref{#1}}}
 \providecommand{\figref}[1]{\hyperref[#1]{\autoref{#1}}}
 \providecommand{\eqnref}[1]{\hyperref[#1]{Eq.~\ref{#1}}}
 \providecommand{\recref}[1]{\hyperref[#1]{REC-\ref{#1}}}
-
 \newcommand{\degsq}{$\rm deg^{2}$}
 
 \input{aglossary.tex}
@@ -53,8 +27,8 @@
 
 % Include the parameters file with the data
 \input{parameters.tex}
-
 \begin{document}
+\setcounter{footnote}{0}
 \doi{10.71929/rubin/2570536}
 \date{\today}
 \title{The Vera C. Rubin Observatory Data Preview 1}
@@ -73,7 +47,6 @@
 \input{abstract}
 
 \keywords{Rubin Observatory -- LSST}
-
 \input{introduction}
 \input{commissioning}
 \input{data_products}
@@ -83,7 +56,7 @@
 \input{community_science}
 \input{summary}
 
-%% Modify acknowledgements as needed.
+%Modify acknowledgements as needed.
 \begin{acknowledgments}.
 This material is based upon work supported in part by the National Science Foundation through Cooperative Agreements AST-1258333 and AST-2241526 and Cooperative Support Agreements AST-1202910 and AST-2211468 managed by the Association of Universities for Research in Astronomy (AURA), and the Department of Energy under Contract No.\ DE-AC02-76SF00515 with the SLAC National Accelerator Laboratory managed by Stanford University.
 Additional Rubin Observatory funding comes from private donations, grants to universities, and in-kind support from LSST-DA Institutional Members.
