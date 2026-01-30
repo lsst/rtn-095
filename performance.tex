@@ -151,10 +151,10 @@ The range of the color scale is $\pm$ 0.01 pixels, corresponding to 2 mas, showi
 
 \subsection{Differential Chromatic Refraction}
 \label{sec:differential_chromatic_refraction}
-\gls{Differential Chromatic Refraction} (DCR) occurs when light passes through Earth’s atmosphere, refracting more for shorter wavelengths, which causes blue light to appear shifted closer to the zenith.
+\gls{DCR} occurs when light passes through Earth’s atmosphere, refracting more for shorter wavelengths, which causes blue light to appear shifted closer to the zenith.
 This wavelength-dependent effect results in the smearing of point sources along the zenith direction, specifically parallel to the parallactic angle.
 The DCR effect is observable in \gls{LSSTComCam} data, particularly in the angular offset versus $g-i$ band magnitude difference plots,  as shown in \figref{fig:dcr}. 
-These plots contain 228 visits chosen to maximize the range of observed airmass.
+These plots include 228 visits selected to maximize the range of observed airmass, which spans 1.01–1.30 with a mean value of 1.13.
 When looking at data perpendicular to the parallactic angle, sources exhibit no discernible DCR effect, which is expected, and form a clear vertical distribution on the two-dimensional density plots in \figref{fig:dcr}.
 
 In contrast, sources aligned with the parallactic angle exhibit a tilted, linear distribution, clearly demonstrating that the relationship between angular offset and the $g-i$ band magnitude difference, thereby providing a visual indication of the \gls{DCR} effect.
@@ -364,7 +364,7 @@ This may be partly due to the fact that S\'ersic parameter uncertainties are est
 
 Efforts are underway to investigate and quantify the origin of uncertainty underestimates and future releases will, at the least, provide recommendations for mitigations.
 
-\subsection{Difference Imaging} 
+subsection{Difference Imaging} 
 \label{ssec:performance_dia}
 %
 We assessed the performance of image differencing using both human vetting (\secref{sssec:perf_dia_purity}) and source injection (\secref{sssec:perf_dia_completeness}).
@@ -393,26 +393,10 @@ Applying a reliability threshold based on the Machine Learning reliability model
 This limitation arises from technical constraints at the time of model training, which prevented the injection of variable stars into the synthetic training set.
 Future reliability models for \gls{LSSTCam} data, described in \secref{ssec:diffim_analysis}, will be trained using a broader and more representative range of input data.
 
-
 The performance of the reliability model on the test data (\secref{ssec:diffim_analysis}) is shown in \figref{fig:completenessvpurity}.
 The rate of true positives and false negatives obtained by thresholding the reliability score at 0.5 is reported for transients (99 stamps), and variable stars (316 stamps) vetted in \texttt{tasso} in \tabref{tab:mlreliability}. 
 %
-\setlength{\tabcolsep}{6pt}  
-\begin{deluxetable}{lccc}
-\tablecaption{The rate of true positives (TP) and false negatives (FN) obtained by thresholding the reliability score at 0.5  for Solar system objects, transients and  variable stars.}
-\label{tab:mlreliability}
-\tablehead{
-  \colhead{\textbf{Type}} & 
-  \colhead{\textbf{Number}} & 
-  \colhead{\textbf{TP Rate}} & 
-  \colhead{\textbf{FN Rate} }
-}
-\startdata
-Solar System  & 5,988 & 93.5\% & 6.5\%\\
-Transients & 99 & 73.7\% & 26.3\% \\
-Variables & 316 & 3.5\% &. 96.5\% \\
-\enddata 
-\end{deluxetable}
+\input{dp1_mlreliability}
 %
 Additionally we crossmatched stamps with Solar System Objects with known orbits retrieving 5,988 Solar System Objects stamps.
 \begin{figure}[htb!]
@@ -431,7 +415,7 @@ For each host we pick a random position angle and radius using its light profile
 
 The hostless sources instead have random positions in the \gls{CCD} focal plane, and magnitudes chosen 
 from a random uniform distribution with $20 \geq m \geq m_{lim} + 1$,  where $m_{lim}$ is the limiting magnitude of the image.
-We used the \gls{LSST}  \texttt{source\_injection} package\footnote{\url{https://pipelines.lsst.io/modules/lsst.source.injection/index.html}} to include these sources in our test images.
+We used the \gls{LSST}  \texttt{source\_injection} package\footnote{\nolinkurl{https://pipelines.lsst.io/modules/lsst.source.injection/index.html}} to include these sources in our test images.
 We performed a coordinate cross-match task, with a threshold of $0\farcs5$ to find which of these sources were detected and which were lost, enabling the calculation of a set of performance metrics.
 
 In \figref{fig:eff_snr_griz} we show the detection completeness as a function of the \gls{SNR}, for sources in the \gls{ECDFS} field, for filters $griz$. 
@@ -463,8 +447,7 @@ On the right panels we include the marginal distribution for sources brighter th
 %
 From this figure we can see that our \gls{flux} measurements are accurate within a wide range of magnitudes, for both hosted and hostless synthetic sources. 
 We find that the median offset is below $0.002$ mag for true magnitudes below $21$, and with a maximum $\sigma_{MAD}$ scatter of about $0.02$ mag in this range.
-For true $m_i < 22.5$, the robust running median PSF magnitudes residuals are $<0.02$ mag, and when splitting into hosted and hostless both robust median
-are well below $0.01$, and robust $\sigma$, i.e. $\sigma_{MAD}$ are also well below $0.05$.
+For true $m_i < 22.5$, the robust running median PSF magnitudes residuals are $<0.02$ mag, and when splitting into hosted and hostless both robust median are well below $0.01$, and robust $\sigma$, i.e. $\sigma_{MAD}$ are also well below $0.05$.
 %
 For all sources with $m_i<21.5$ the running median is always $|\left<\delta\right>| <0.1$, and MAD $\sigma_\delta < 1$. 
 Extending to sources with $m_i<22.5$ then  hostless sources have  a robust mean pull below $0.02$, with a robust standard deviation $<1.15$, while these parameters increase to $0.2$ and $1.2$ for hosted sources, suggesting that we might have contamination from host background sources potentially biasing our fluxes.
@@ -481,6 +464,7 @@ Bottom right panel: Marginalized distributions of PSF flux pulls for hostless (b
 \label{fig:phot_residual_diffim_fakes}
 \end{figure}
 %
+
 \subsection{Solar System}
 \label{sec:performance:solsys}
 
