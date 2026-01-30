@@ -79,7 +79,7 @@ In order to perform the fit of the astrometric solution, isolated point sources 
 The model used for \gls{DP1} consists of a static map from pixel space to an intermediate frame (the per-detector model), followed by a per-visit map from the intermediate frame to the plane tangent to the telescope boresight (the per-visit model), then finally a deterministic mapping from the tangent plane to the sky.
 The fit is done using the \texttt{gbdes} package \citep{2017PASP..129g4503B}, and a full description is given in \citet{DMTN-266}.
 
-The per-detector model is intended to capture quasi-static characteristics of the telescope and camera. 
+The per-detector model is intended to capture quasi-static characteristics of the telescope and camera.
 During \gls{Rubin Operations}, the astrometric solution will allow for separate epochs with different per-detector models, to account for changes in the camera due to warming and cooling and other discrete events.
 However, for \gls{DP1}, \gls{LSSTComCam} was assumed to be stable enough that all visits use the same per-detector model. The model itself is a separate two-dimensional polynomial for each detector.
 For \gls{DP1}, a degree 4 polynomial was used; the degree of the polynomial mapping is tuned for each instrument and may be different for LSSTCam.
@@ -181,10 +181,10 @@ Further details on the performance of these algorithms are found in \secref{ssec
 Difference Image Analysis (DIA) uses the decorrelated Alard \& Lupton image differencing algorithm \citep{DMTN-021}.
 We detected both positive and negative \texttt{DIASource}s at $5\sigma$ in the difference image.
 Sources with footprints containing both positive and negative peaks due to offsets from the template position or blending were fit with a dipole centroid code, which simultaneously fits offset positive and negative PSFs.
-We filter the resulting \texttt{DIASource} catalog to remove detections with pixel flags indicative of artifacts, non-astrophysical trail lengths, or unphysically negative direct fluxes. 
+We filter the resulting \texttt{DIASource} catalog to remove detections with pixel flags indicative of artifacts, non-astrophysical trail lengths, or unphysically negative direct fluxes.
 Finally, we perform a simple spatial association of \texttt{DIASource}s into \texttt{DIAObject}s using a one-arcsecond matching radius.
 
-The Machine Learning reliability model applied to \gls{DP1} was developed with the aim to meet the latency requirements for Rubin \gls{Alert Production} when executed on CPUs. 
+The Machine Learning reliability model applied to \gls{DP1} was developed with the aim to meet the latency requirements for Rubin \gls{Alert Production} when executed on CPUs.
 Accordingly we developed a relatively simple model: a Convolutional Neural Network with three convolutional layers, and two fully connected layers.
 The convolutional layers have a $5\times5$ kernel size, with 16, 32, and 64 filters, respectively.
 A max-pooling layer of size 2 is applied at the end of each convolutional layer, followed by a dropout layer of 0.4 to reduce overfitting.
@@ -201,30 +201,30 @@ The model was initially trained using simulated data from the second DESC Data C
 The same number of bogus sources were selected at random from non-injected DIASources.
 Once the  \gls{LSSTComCam} data were available, the model was fine-tuned on a subset of the data containing 183,046 sources with PSF injections.
 On the \gls{LSSTComCam} test set, the model achieved an accuracy of 98.06\%, purity of 97.87\%, and completeness of 98.27\%.
-As discussed in \secref{ssec:performance_dia}, the injections used to train this model version do not capture all types of astrophysical variability, so performance on the test set will not be representative for variable stars, comets, and other types of variable objects. 
+As discussed in \secref{ssec:performance_dia}, the injections used to train this model version do not capture all types of astrophysical variability, so performance on the test set will not be representative for variable stars, comets, and other types of variable objects.
 The machine-learning reliability score, reported in the \texttt{reliability} column of the \texttt{DIASource} catalog, is a scalar value between 0 and 1 that quantifies the model’s confidence that a given detection is astrophysical.
 
 \subsubsection{Light Curves}
 \label{sssec:lightcurves}
 To produce light curves, we perform multi-epoch \gls{forced photometry} on both the direct visit images and the difference images.
-For light curves we recommend the \gls{forced photometry} on the difference images (\texttt{psDiffFlux} on the ForcedSource Table), as it isolates the variable component of the flux and avoids contamination from static sources.
+For light curves we recommend the \gls{forced photometry} on the difference images (\texttt{psfDiffFlux} on the ForcedSource Table), as it isolates the variable component of the flux and avoids contamination from static sources.
 In contrast, \gls{forced photometry} on direct images includes flux from nearby or blended static objects, and this contamination can vary with seeing.
 Centroids used in the multi-epoch \gls{forced photometry} stage are taken either from object positions measured on the coadds or from the DIAObjects (the associated DIASources detected on difference images).
 
 \subsubsection{Solar System Processing}
 \label{sec:drp:solsys}
 
-Solar system processing in \gls{DP1} consists of two key components: the association of observations (sources) with known solar system objects, and the discovery of previously unknown objects by linking sets of 
+Solar system processing in \gls{DP1} consists of two key components: the association of observations (sources) with known solar system objects, and the discovery of previously unknown objects by linking sets of
 {\em tracklets}\footnote{A tracklet is defined as two or more detections of a moving object candidate taken in close succession in a single night.}.
 
 The association component begins by generating expected positions for all objects in the Minor Planet Center orbit catalog, using ephemerides computed with the \texttt{Sorcha} survey simulation toolkit (Merritt et al., in press)\footnote{Available at \nolinkurl{https://github.com/dirac-institute/sorcha}}.
-To enable fast lookup of objects potentially present in an observed visit, we use the \texttt{mpsky} package \citep{mpsky}. 
+To enable fast lookup of objects potentially present in an observed visit, we use the \texttt{mpsky} package \citep{mpsky}.
 In each image, the closest \texttt{DiaSource} within 1~arcsecond of a known solar system object's predicted position is associated to that object.
-In \gls{DP1} we used a simple positional association to tag DiaSources that are likely observations of known asteroids. 
-The 1~arcsecond radius is intentionally generous;  we did not see evidence of mismatches at DP1 depth and volume. 
+In \gls{DP1} we used a simple positional association to tag DiaSources that are likely observations of known asteroids.
+The 1~arcsecond radius is intentionally generous;  we did not see evidence of mismatches at DP1 depth and volume.
 This radius will be tuned for future processing campaigns.
 
-The discovery component of Solar System processing uses the \texttt{heliolinx} package\footnote{\nolinkurl{https://github.com/heliolinx/heliolinx}}, which provides tools for asteroid identification and linking \citep{heliolinx}. 
+The discovery component of Solar System processing uses the \texttt{heliolinx} package\footnote{\nolinkurl{https://github.com/heliolinx/heliolinx}}, which provides tools for asteroid identification and linking \citep{heliolinx}.
 The repository contains code for the following tasks:
 \begin{itemize}
     \item Tracklet creation with \texttt{make\_tracklets}
@@ -232,7 +232,7 @@ The repository contains code for the following tasks:
     \item Linkage post processing (orbit fitting, outlier rejection, and de-duplication) with \texttt{link\_purify}
 \end{itemize}
 
-The inputs to the discovery processing comprised all sources detected in difference images, regardless of whether they were tagged in the association step. 
+The inputs to the discovery processing comprised all sources detected in difference images, regardless of whether they were tagged in the association step.
 These inputs were produced by an early processing of \gls{LSSTComCam} commissioning data, some of which were later rejected during \gls{DP1} processing and therefore do not appear in the final \gls{DP1} data products.
 
 About 10\% of all commissioning visits targeted the near-ecliptic field Rubin\_SV\_38\_7, chosen to facilitate asteroid discovery.
@@ -241,7 +241,7 @@ Rubin\_SV\_38\_7 produced the vast majority of asteroid discoveries in \gls{DP1}
 Tracklet creation with \texttt{make\_tracklets} used an upper limit angular velocity of 1.5 \gls{deg}/day, faster than any main belt asteroid and in the range of many \gls{NEO} discoveries.
 While no formal minimum angular velocity was imposed, in practice it would be unlikely to detect objects moving slower  than about 0.01~deg~day$^{-1}$.
 To minimize false \gls{tracklet}s from fields observed multiple times per night, the minimum \gls{tracklet} length was set to three detections, and a minimum on-sky motion of five arcseconds was required for a valid \gls{tracklet}.
-To claim a discovery candidate, we required tracklets to be linked across at least three nights. 
+To claim a discovery candidate, we required tracklets to be linked across at least three nights.
 
 Multi-night \gls{tracklet} linking is the heart of Solar system discovery,  which connects (``links") tracklets belonging to the same object over a series of nights.
 It employs the HelioLinC3D algorithm \citep{2020DPS....5221101E,2022DPS....5450404H}, a refinement of the original HelioLinC algorithm of \citet{2018AJ....156..135H}.
@@ -251,7 +251,7 @@ This range of distance encompasses all main belt asteroids and Jupiter Trojans, 
 A dedicated search for objects at heliocentric distances out to 50~\gls{au} was also conducted; no distant objects were detected, consistent with expectations for the size of the \gls{DP1} data set.
 Smaller heliocentric distances were not attempted here because nearby objects move rapidly across the sky and hence were not likely to remain long enough in an \gls{LSSTComCam} field to be discovered.
 
-Candidate linkages, defined as groups of tracklets whose propagated orbits cluster within a radius of 1.33 $\times\,10^{3}$\,au at 1\,au, 
+Candidate linkages, defined as groups of tracklets whose propagated orbits cluster within a radius of 1.33 $\times\,10^{3}$\,au at 1\,au,
 are identified, then post-processed via \texttt{link\_purify} to yield a final, non‐overlapping set of high-confidence asteroid candidates, ranked by orbit-fit residuals and related metrics.
-While heliolinx can produce false-positive or redundant raw linkages by design, these are filtered during post-processing by \texttt{link\_purify}, which applies a Rubin-specific, more stringent version of the MPC validation rules\footnote{\nolinkurl{https://minorplanetcenter.net/mpcops/documentation/identifications/additional/}}. 
+While heliolinx can produce false-positive or redundant raw linkages by design, these are filtered during post-processing by \texttt{link\_purify}, which applies a Rubin-specific, more stringent version of the MPC validation rules\footnote{\nolinkurl{https://minorplanetcenter.net/mpcops/documentation/identifications/additional/}}.
 This step both rejects spurious linkages and deduplicates multiple hypotheses for the same object, ensuring that only the highest-quality, non-redundant linkages are carried forward for orbit determination and for distinguishing new discoveries from rediscoveries of known objects.
