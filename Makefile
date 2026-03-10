@@ -30,8 +30,12 @@ $(DOCNAME).pdf: $(scripts) $(tex) local.bib authors.tex
 authors.tex:  authors.yaml
 	python3 $(TEXMFHOME)/../bin/db2authors.py -m aas7 > authors.tex
 
-authors.txt:  authors.txt
+authors.txt:  authors.yaml
 	python3 $(TEXMFHOME)/../bin/db2authors.py -m arxiv > authors.txt
+
+authors.csv: authors.yaml
+	python3 $(TEXMFHOME)/../bin/db2authors.py -m aascsv > authors.csv
+
 
 aglossary.tex :$(tex) myacronyms.txt
 	python3 $(TEXMFHOME)/../bin/generateAcronyms.py -t"Sci DM Gen" -g $(tex)
