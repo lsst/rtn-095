@@ -1,0 +1,155 @@
+We thank the referee for the thorough and constructive review. Below we respond point-by-point. All changes are marked in bold in the revised manuscript.
+
+Section 1 - Introduction
+==========================
+
+Clarified that, after the two-year proprietary period, DP1 will be publicly available through the Rubin Science Platform.
+
+Section 2 – Observations and Dataset Description
+===================================================
+
+We have revised Section 2 to improve clarity regarding the observing campaign, field selection, and data characteristics:
+
+The exact observing dates (2024-10-24 to 2024-12-11) are now explicitly stated early in the paper.
+
+We expanded the description of the field selection rationale, clarifying that the seven DP1 fields were chosen to span a range of stellar densities, overlap with external reference datasets, and collectively probe the four primary LSST science themes.
+
+We added clearer language describing the commissioning context, emphasizing that LSSTComCam data were obtained during early commissioning and are not representative of final LSSTCam performance.
+
+Figure 6 is now explicitly referenced and described, including sky coverage, dithering patterns, chip gaps, and reduced central coverage in 47 Tuc due to processing failures.
+
+Figure 7 is now referenced and discussed, including the full PSF FWHM distribution and comparison to the LSST median delivered image quality specification (0.7″ at zenith, 550 nm).
+
+The median 5σ single-visit depths are now shown (Figure 8).
+
+The expected 10-year Wide-Fast-Deep depths have been added to Table 2 for comparison with DP1 coadds.
+
+The Figure 3 caption now clarifies that the transmission curves are provided with DP1.
+
+We believe these changes substantially improve clarity regarding observing strategy, image quality, and scientific context.
+
+Section 3 – Data Products
+
+Section 3 has been revised to clarify data structure, sky tessellation, and catalog content:
+
+We now explicitly state that Section 3 focuses on data products, with pipeline description deferred to Section 4. We provide links to the DOI-registered DP1 documentation and catalog schema website.
+
+We added a detailed description of the DP1 skymap, including:
+
+18,938 tracts (~2.8 deg² each),
+
+10×10 patch subdivision,
+
+Patch area (~0.036 deg sq),
+
+1′ minimum tract overlap,
+
+80″ patch overlap,
+
+Clarification that detector images span multiple patches.
+
+Text incorrectly referring to LSSTCam has been corrected to LSSTComCam where appropriate.
+
+We clarified processing granularity:
+
+Instrument signature removal and calibration occur per visit per detector.
+
+Coadds and template generation occur at patch level.
+
+Difference images are created per visit using patch-level templates.
+
+We explicitly report the distribution of 153 raw image processing failures by field.
+
+Template selection criteria are now clearly described (best one-third by PSF FWHM, minimum 12 visits).
+
+The total number of SSObjects (431) is now stated.
+
+All available Survey Property Maps are now explicitly listed in the text.
+
+We clarified the relationship between the Visit table and the CCDVisit catalog.
+
+We removed high-level references to CTI and brighter-fatter kernels and replaced them with forward references.
+
+We added:
+
+A normalized histogram of cumulative source/object counts by magnitude and band.
+
+A normalized histogram of cumulative visit images as a function of 5σ depth and band.
+
+We retained tract ID information in the main text, as it is necessary for Butler-based access.
+
+We did not add per-field object count tables or reproduce full catalog schemas, as these are available via DOI-registered documentation and the Rubin Science Platform.
+
+Section 4 – Data Processing
+=================================
+
+Section 4 has been revised primarily to clarify Solar System processing and catalog definitions:
+
+We now explicitly state that the machine-learning reliability column ranges from 0 to 1 and provide guidance on its interpretation.
+
+We clarified that the heliolinc run described was configured to search out to ~10 au and that different configurations are required for more distant objects.
+
+We expanded the explanation of associating DiaSources to known Solar System objects.
+
+We clarified that discovery criteria (≥3 nights of linked tracklets) apply to DP1.
+
+We rewrote text to distinguish clearly between the heliolinc algorithm and individual heliolinc runs.
+
+We clarified the role of link_purify in producing the final high-confidence candidate set and its relationship to SSObject and SSSource tables.
+
+We clarified that larger RA residual scatter reflects poorly constrained orbits.
+
+We state that DP1 resulted in 93 new main-belt asteroid discoveries, and that all newly identified objects are main-belt asteroids.
+
+We explicitly state that catalog fluxes are stored in nJy.
+
+We clarified that trail quantities are in the DiaSource table, not DiaObject.
+
+We referenced RTN-099 for photometric transformation relations.
+
+We elected not to add photometry usage guidance tables or pixel flag summary tables, as these are better suited to tutorials and future releases.
+
+Section 5 – Performance
+=========================
+
+Section 5 revisions improve clarity of performance characterization:
+
+Section 5.4 (DCR analysis): We added a statement giving the range and mean airmass of the 228 visits used.
+
+Figure 24: We clarified which reference catalog was used and how g–i color was computed.
+
+Section 5.8: We added a description of the DIASource labeling workflow and reviewer methodology.
+
+Section 5.9: We clarify that all newly discovered Solar System objects are main-belt asteroids (93 total).
+
+Section 5.11 (crowded-field deblending): No changes were made. DP1 represents an early pipeline testing ground; limitations in extremely crowded fields (e.g., 47 Tuc) are diagnostic and inform future pipeline development.
+
+
+Section 6 – Data Access and Services
+=====================================
+
+We carefully considered the referee’s comments regarding scope, level of detail, and clarity of Section 6. Our revisions and decisions are as follows:
+
+Section 6.2 (Data Access Overview):
+The referee found the description of the Butler system, S3 object storage, and data dimensions difficult to follow and potentially too detailed for a data release paper. We reviewed this section extensively. While we understand the concern, we have elected to retain the material largely as written.
+We have received feedback from other readers indicating that this level of detail is necessary to understand how DP1 data services operate and how to access the data effectively. Given that this is a Data Preview paper intended to introduce the community to Rubin data infrastructure, we believe this contextual information is appropriate.
+We will evaluate community response and consider adjustments for future releases.
+
+Dedicated Rubin Science Platform (RSP) Paper:
+We agree that a standalone software/infrastructure paper would be valuable. A dedicated RSP paper is planned and will provide a more detailed and focused treatment of the platform and services.
+
+Section 6.5.1 (Qserv):
+Although the referee suggested moving this content to an appendix, we elected to retain it in the main text. The section is brief (~¼ page), and feedback from other readers indicates that this information is useful and interesting in the context of DP1.
+
+Section 6.5.2 (Consolidated Database):
+The Consolidated Database (ConsDB) is not currently available to the Data Rights community. As such, this section has been removed from the paper and will be reconsidered for inclusion in a future release (e.g., DP2).
+
+Minor editorial comment:
+The noted paragraph structure issue (Line 2535) has been corrected.
+
+Overall, we have ensured that Section 6 accurately reflects the services and infrastructure that are actually available in DP1, while retaining sufficient detail to help users understand how to access and query the data.
+
+Section 7 - Support for Community Access
+==========================================
+
+All Section 7 comments have been addressed. The section has been revised to focus specifically on DP1 engagement activities and clarified where appropriate.

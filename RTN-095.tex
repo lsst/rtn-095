@@ -1,5 +1,4 @@
-\documentclass[ twocolumn,twocolappendix, linenumbers ,trackchanges]{aastex7}
-
+\documentclass[twocolumn,twocolappendix, linenumbers ,trackchanges]{aastex7}
 % Package imports go here.
 \usepackage{hyperref}
 \usepackage[htt]{hyphenat} % Hyphenate texttt blocks
@@ -8,8 +7,13 @@
 \captionsetup{compatibility=false}
 \usepackage{glossaries}  
 
-% All graphics paths here 
-\graphicspath{./}
+% ---- Input paths for sections and tables
+\makeatletter
+\def\input@path{{sections/}{tables/}}
+\makeatother
+
+% ---- Graphics paths
+\graphicspath{{figures/}}
 
 % Local commands go here.
 \newcommand{\docRef}{RTN-095}

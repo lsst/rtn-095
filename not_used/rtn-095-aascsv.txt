@@ -1,0 +1,330 @@
+Is Corresponding Author (enter Yes),Author Order,Title,Given Name/First Name,Middle Initial(s) or Name,Family Name/Surname,Email,Telephone,Institution,Department,Address Line 1,Address Line 2,City,State/Province,Zip/Postal Code,Country
+,1,,,,Vera C. Rubin Observatory Team,pubboard@lists.lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,2,,Tatiana,,Acero-Cuellar,taceroc@udel.edu,,University of Delaware,Department of Physics and Astronomy,,,Newark,DE,19716-2570,USA
+,3,,Emily,,Acosta,eacosta@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,4,,Christina,L.,Adair,cadair@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,5,,Prakruth,,Adari,prakruth.adari@stonybrook.edu,,Stony Brook University,Department of Physics and Astronomy,,,Stony Brook,NY,11794,USA
+,6,,Jennifer,K.,Adelman-McCarthy,jen_a@fnal.gov,,Fermi National Accelerator Laboratory,,P. O. Box 500,,Batavia,IL,60510,USA
+,7,,Anastasia,,Alexov,aalexov@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,8,,Russ,,Allbery,rra@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,9,,Robyn,,Allsman,robynallsman@gmail.com,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,10,,Yusra,,AlSayyad,yusra@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,11,,Jhonatan,,Amado,jhonatanamadov@gmail.com,,Fermi National Accelerator Laboratory,,P. O. Box 500,,Batavia,IL,60510,USA
+,12,,Nathan,,Amouroux,amouroux@lapp.in2p3.fr,,"Université Savoie Mont-Blanc, CNRS/IN2P3, LAPP",,9 Chemin de Bellevue,,Annecy,,F-74940,France
+,13,,Pierre,,Antilogus,p.antilogus@in2p3.fr,,"Sorbonne Université, Université Paris Cité, CNRS/IN2P3, LPNHE",,4 place Jussieu,,Paris,,F-75005,France
+,14,,Alexis,,Aracena Alcayaga,aaracena@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,15,,Gonzalo,,Aravena-Rojas,garavena@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,16,,Claudio,H.,Araya Cortes,carayac@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,17,,Éric,,Aubourg,eric@aubourg.net,,"Université Paris Cité, CNRS/IN2P3, CEA, APC",,4 rue Elsa Morante,,Paris,,F-75013,France
+,18,,Tim,S.,Axelrod,taxelrod@gmail.com,,University of Arizona,Steward Observatory,933 N. Cherry Ave.,,Tucson,AZ,85721,USA
+,19,,John,,Banovetz,jdbanovetz@lbl.gov,,Brookhaven National Laboratory,,,,Upton,NY,11973,USA
+,20,,Carlos,,Barría,cbarria@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,21,,Amanda,E.,Bauer,abauer@yerkesobservatory.org,,Yerkes Observatory,,373 W. Geneva St.,,Williams Bay,WI,53191,USA
+,22,,Brian,J.,Bauman,bauman3@llnl.gov,,Lawrence Livermore National Laboratory,,7000 East Avenue,,Livermore,CA,94550,USA
+,23,,Ellen,,Bechtol,ebechtol@wisc.edu,,University of Wisconsin-Madison,Wisconsin IceCube Particle Astrophysics Center,,,Madison,WI,53706,USA
+,24,,Keith,,Bechtol,KBechtol@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,25,,Andrew,C.,Becker,acbecker@gmail.com,,Amazon Web Services,,,,Seattle,WA,98121,USA
+,26,,Valerie,R.,Becker,vbecker@lsst.org,,NSF NOIRLab,Vera C. Rubin Observatory,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,27,,Mark,G.,Beckett,george.beckett@ed.ac.uk,,University of Edinburgh,Institute for Astronomy,Blackford Hill,,Edinburgh,,EH9 3HJ,UK
+,28,,Eric,C.,Bellm,ecbellm@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,29,,Pedro,H.,Bernardinelli,phbern@uw.edu,,University of Washington,Institute for Data-intensive Research in Astrophysics and Cosmology,3910 15th Avenue NE,,Seattle,WA,98195,USA
+,30,,Federica,Bettina,Bianco,Fbianco@udel.edu,,University of Delaware,Department of Physics and Astronomy,,,Newark,DE,19716-2570,USA
+,31,,Robert,D.,Blum,bob.blum@noirlab.edu,,NSF NOIRLab,Vera C. Rubin Observatory,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,32,,Joanne,,Bogart,jrb@slac.stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,33,,Adam,,Bolton,adam.bolton@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,34,,Michael,T.,Booth,michaeltuckerbooth@gmail.com,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,35,,James,F.,Bosch,jbosch@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,36,,Alexandre,,Boucaud,aboucaud@apc.in2p3.fr,,"Université Paris Cité, CNRS/IN2P3, APC",,4 rue Elsa Morante,,Paris,,F-75013,France
+,37,,Dominique,,Boutigny,boutigny@cc.in2p3.fr,,"Université Savoie Mont-Blanc, CNRS/IN2P3, LAPP",,9 Chemin de Bellevue,,Annecy,,F-74940,France
+,38,,Robert,A.,Bovill,rbovill@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,39,,Andrew,,Bradshaw,andrewkbradshaw@gmail.com,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,40,,Johan,,Bregeon,bregeon@in2p3.fr,,"Université Grenoble Alpes, CNRS/IN2P3, LPSC",,53 avenue des Martyrs,,Grenoble,,F-38026,France
+,41,,Massimo,,Brescia,unknown@none.com,,University Federico II of Napoli,"Department of Physics ""E. Pancini""",Via Cintia,,Napoli,,80126,Italy
+,42,,Brian,J.,Brondel,bbrondel@lsst.org,,Vera C. Rubin Observatory/NSF NOIRLab,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,43,,Alexander,,Broughton,abrought@stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,44,,Audrey,,Budlong,abudlong@uw.edu,,University of Washington,Dept. of Physics,P.O. Box 351580,,Seattle,WA,98195,USA
+,45,,Dimitri,,Buffat,dimitri.buffat@etu.univ-lyon1.fr,,"Université Grenoble Alpes, CNRS/IN2P3, LPSC",,53 avenue des Martyrs,,Grenoble,,F-38026,France
+,46,,Rodolfo,,Canestrari,rodolfo.canestrari@inaf.it,,INAF Istituto di Astrofisica Spaziale e Fisica Cosmica di Palermo,,Via Ugo la Malfa 153,,Palermo,,90146,Italy
+,47,,Neven,,Caplar,ncaplar@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,48,,Jeffrey,L.,Carlin,jcarlin@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,49,,Ross,,Ceballo,ross.ceballo@noirlab.edu,,NSF NOIRLab,Vera C. Rubin Observatory,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,50,,Colin,Orion,Chandler,coc123@uw.edu,,LSST Interdisciplinary Network for Collaboration and Computing,,933 North Cherry Avenue,,Tucson,AZ,85721,USA
+,51,,Chihway,,Chang,chihway@uchicago.edu,,University of Chicago,Department of Astronomy and Astrophysics,5640 South Ellis Avenue,,Chicago,IL,60637,USA
+,52,,Glenaver,,Charles-Emerson,glenaver@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,53,,Hsin-Fang,,Chiang,hfc@stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,54,,James,,Chiang,jchiang@slac.stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,55,,Yumi,,Choi,yumi.choi@noirlab.edu,,NSF NOIRLab,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,56,,Eric,J.,Christensen,eric.christensen@noirlab.edu,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,57,,Charles,F.,Claver,cclaver@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,58,,Andy,W.,Clements,aclements@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,59,,Joseph,J.,Cockrum,jcockrum@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,60,,Johann,,Cohen-Tanugi,johann.cohentanugi@gmail.com,,"Université Clermont-Auvergne, CNRS/IN2P3, LPCA",,4 Avenue Blaise Pascal,,Clermont-Ferrand,,F-63000,France
+,61,,Franco,,Colleoni,fcolleoni@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,62,,Céline,,Combet,celine.combet@lpsc.in2p3.fr,,"Université Grenoble Alpes, CNRS/IN2P3, LPSC",,53 avenue des Martyrs,,Grenoble,,F-38026,France
+,63,,Andrew,J.,Connolly,ajc26@uw.edu,,University of Washington,Institute for Data-intensive Research in Astrophysics and Cosmology,3910 15th Avenue NE,,Seattle,WA,98195,USA
+,64,,Julio,Eduardo,Constanzo Córdova,jconstanzo@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,65,,Hans,E,Contreras,hanscon51@gmail.com,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,66,,John,Franklin,Crenshaw,jfc20@uw.edu,,University of Washington,Institute for Data-intensive Research in Astrophysics and Cosmology,3910 15th Avenue NE,,Seattle,WA,98195,USA
+,67,,Sylvie,,Dagoret-Campagne,sylvie.dagoret-campagne@ijclab.in2p3.fr,,"Université Paris-Saclay, CNRS/IN2P3, IJCLab",,15 Rue Georges Clemenceau,,Orsay,,F-91405,France
+,68,,Scott,F.,Daniel,scottvalscott@gmail.com,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,69,,Felipe,,Daruich,fdaruich@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,70,,Guillaume,,Daubard,daubard@lpnhe.in2p3.fr,,"Sorbonne Université, Université Paris Cité, CNRS/IN2P3, LPNHE",,4 place Jussieu,,Paris,,F-75005,France
+,71,,Greg,,Daues,daues@illinois.edu,,University of Illinois at Urbana-Champaign,National Center for Supercomputing Applications,1205 W. Clark St.,,Urbana,IL,61801,USA
+,72,,Erik,,Dennihy,edennihy@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,73,,Stephanie,J. H.,Deppe,stephanie.deppe@noirlab.edu,,NSF NOIRLab,Vera C. Rubin Observatory,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,74,,Seth,W.,Digel,digel@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,75,,Peter,E.,Doherty,peter.doherty@cfa.harvard.edu,,Smithsonian Astrophysical Observatory,,60 Garden St.,,Cambridge,MA,02138,USA
+,76,,Cyrille,,Doux,doux@lpsc.in2p3.fr,,"Université Grenoble Alpes, CNRS/IN2P3, LPSC",,53 avenue des Martyrs,,Grenoble,,F-38026,France
+,77,,Alex,,Drlica-Wagner,kadrlica@fnal.gov,,Fermi National Accelerator Laboratory,,P. O. Box 500,,Batavia,IL,60510,USA
+,78,,Gregory,P.,Dubois-Felsmann,gpdf@ipac.caltech.edu,,California Institute of Technology,Caltech/IPAC,MS 100-22,,Pasadena,CA,91125-2200,USA
+,79,,Frossie,,Economou,frossie@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,80,,Orion,,Eiger,eiger@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,81,,Lukas,,Eisert,eisert@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,82,,Alan,M.,Eisner,eisner@slac.stanford.edu,,"University of California, Santa Cruz",Santa Cruz Institute for Particle Physics and Physics Department,1156 High St.,,Santa Cruz,CA,95064,USA
+,83,,Anthony,,Englert,anthony_englert@brown.edu,,Brown University,Department of Physics,182 Hope Street,,Providence,RI,02912,USA
+,84,,Baden,,Erb,berb@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,85,,Juan,A.,Fabrega,jfabrega@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,86,,Parker,,Fagrelius,pfagrelius@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,87,,Kevin,,Fanning,fanning@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,88,,Angelo,,Fausti Neto,afausti@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,89,,Peter,S.,Ferguson,pferguso@uw.edu,,University of Washington,Institute for Data-intensive Research in Astrophysics and Cosmology,3910 15th Avenue NE,,Seattle,WA,98195,USA
+,90,,Agnès,,Ferté,ferte@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,91,,Krzysztof,,Findeisen,kfindeis@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,92,,Merlin,,Fisher-Levine,merlin.fisherlevin@gmail.com,,D4D CONSULTING LTD.,,"Suite 1 Second Floor, Everdene House, Deansleigh Road",,Bournemouth,,BH7 7DU,UK
+,93,,Gloria,,Fonseca Alvarez,GFonsecaAlvarez@lsst.org,,NSF NOIRLab,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,94,,Michael,D.,Foss,mikefoss39@gmail.com,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,95,,Dominique,,Fouchez,fouchez@cppm.in2p3.fr,,"Aix Marseille Université, CNRS/IN2P3, CPPM",,163 avenue de Luminy,,Marseille,,F-13288,France
+,96,,Dan,C.,Fuchs,danfuchs@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,97,,Shenming,,Fu,unknown@slac.stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,98,,Emmanuel,,Gangler,emmanuel.gangler@clermont.in2p3.fr,,"Université Clermont-Auvergne, CNRS/IN2P3, LPCA",,4 Avenue Blaise Pascal,,Clermont-Ferrand,,F-63000,France
+,99,,Igor,,Gaponenko,gapon@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,100,,Julen,,Garcia,julen.garcia@tekniker.es,,Tekniker,,"C. Iñaki Goenaga, 5",,Guipiúzcoa,,20600,Spain
+,101,,John,H,Gates,jgates@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,102,,Ranpal,K.,Gill,rgill@lsst.org,,Vera C. Rubin Observatory/NSF NOIRLab,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,103,,Enrico,,Giro,enrico.giro@inaf.it,,INAF Osservatorio Astronomico di Trieste,,Via Giovan Battista Tiepolo 11,,Trieste,,34143,Italy
+,104,,Thomas,,Glanzman,dragon@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,105,,Robinson,,Godoy,RGodoy@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,106,,Iain,,Goodenow,igoodenow@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,107,,Miranda,R.,Gorsuch,mrgorsuch@wisc.edu,,University of Wisconsin-Madison,Department of Physics,,,Madison,WI,53706,USA
+,108,,Michelle,,Gower,mgower@illinois.edu,,University of Illinois at Urbana-Champaign,National Center for Supercomputing Applications,1205 W. Clark St.,,Urbana,IL,61801,USA
+,109,,Melissa,L.,Graham,mlg3k@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,110,,Mikael,,Granvik,mgranvik@iki.fi,,University of Helsinki,Department of Physics,P.O. Box 64,,Helsinki,,00014,Finland
+,111,,Sarah,,Greenstreet,sarah.greenstreet@noirlab.edu,,NSF NOIRLab,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,112,,Wen,,Guan,wguan2@bnl.gov,,Brookhaven National Laboratory,,,,Upton,NY,11973,USA
+,113,,Thibault,,Guillemin,thibault.guillemin@lapp.in2p3.fr,,"Université Savoie Mont-Blanc, CNRS/IN2P3, LAPP",,9 Chemin de Bellevue,,Annecy,,F-74940,France
+,114,,Leanne,P.,Guy,leanne.guy@noirlab.edu,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,115,,Diane,,Hascall,dhascall@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,116,,Patrick,A.,Hascall,hascallp@gmail.com,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,117,,Aren,Nathaniel,Heinze,aheinze@uw.edu,,University of Washington,Institute for Data-intensive Research in Astrophysics and Cosmology,3910 15th Avenue NE,,Seattle,WA,98195,USA
+,118,,Fabio,,Hernandez,fabio@in2p3.fr,,"CNRS/IN2P3, CC-IN2P3",,21 avenue Pierre de Coubertin,,Villeurbanne,,F-69627,France
+,119,,Kenneth,,Herner,kherner@fnal.gov,,Fermi National Accelerator Laboratory,,P. O. Box 500,,Batavia,IL,60510,USA
+,120,,Ardis,,Herrold,aherrold@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,121,,Clare,R.,Higgs,clare.higgs@noirlab.edu,,NSF NOIRLab,Vera C. Rubin Observatory,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,122,,Joshua,,Hoblitt,jhoblitt@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,123,,Erin,Leigh,Howard,elhoward@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,124,,Minhee,,Hyun,minhee51@stanford.edu,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,125,,Amanda,,Ibsen,amanda.ibsen@noirlab.edu,,Vera C. Rubin Observatory/NSF NOIRLab,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,126,,Patrick,,Ingraham,pingraham@arizona.edu,,University of Arizona,Steward Observatory,933 N. Cherry Ave.,,Tucson,AZ,85721,USA
+,127,,David,H.,Irving,david.irving@noirlab.edu,,NSF NOIRLab,Vera C. Rubin Observatory,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,128,,Željko,,Ivezić,zivezic@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,129,,Suzanne,H.,Jacoby,sjacobygm@gmail.com,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,130,,Buell,T.,Jannuzi,buelljannuzi@arizona.edu,,University of Arizona,Department of Astronomy and Steward Observatory,933 N. Cherry Ave,,Tucson,AZ,85721,USA
+,131,,Sreevani,,Jarugula,jarugula@fnal.gov,,Fermi National Accelerator Laboratory,,P. O. Box 500,,Batavia,IL,60510,USA
+,132,,M.,James,Jee,mkjee@yonsei.ac.kr,,Yonsei University,Department of Astronomy,50 Yonsei-ro,,Seoul,,03722,Republic of Korea
+,133,,Tim,,Jenness,tjenness@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,134,,Toby,C.,Jennings,tobyj@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,135,,Andrea,,Jeremie,andrea@lapp.in2p3.fr,,"Université Savoie Mont-Blanc, CNRS/IN2P3, LAPP",,9 Chemin de Bellevue,,Annecy,,F-74940,France
+,136,,Garrett,,Jernigan,deceased@lsst.org,,"University of California, Berkeley",Space Sciences Lab,7 Gauss Way,,Berkeley,CA,94720-7450,USA
+,137,,David,,Jiménez Mejías,djimenez@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,138,,Anthony,S.,Johnson,tony_johnson@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,139,,R.,Lynne,Jones,ljones.uw@gmail.com,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,140,,Roger,William Lewis,Jones,Roger.Jones@cern.ch,,Lancaster University,,,,Lancaster,,,UK
+,141,,Claire,,Juramy-Gilles,juramy@lpnhe.in2p3.fr,,"Sorbonne Université, Université Paris Cité, CNRS/IN2P3, LPNHE",,4 place Jussieu,,Paris,,F-75005,France
+,142,,Mario,,Jurić,mjuric@uw.edu,,University of Washington,Institute for Data-intensive Research in Astrophysics and Cosmology,3910 15th Avenue NE,,Seattle,WA,98195,USA
+,143,,Steven,M.,Kahn,stevkahn@berkeley.edu,,"University of California, Berkeley",Physics  Department,"366 Physics North, MC 7300",,Berkeley,CA,94720,USA
+,144,,J.,Bryce,Kalmbach,jbkalmbach@gmail.com,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,145,,Yijung,,Kang,ykang@slac.stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,146,,Arun,,Kannawadi,arunkannawadi@astro.princeton.edu,,Duke University,Department of Physics,,,Durham,NC,27708,USA
+,147,,Jeffrey,P.,Kantor,jeffkant@me.com,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,148,,Edward,,Karavakis,edward.karavakis@cern.ch,,Brookhaven National Laboratory,,,,Upton,NY,11973,USA
+,149,,Kshitija,,Kelkar,kkelkar@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,150,,Lee,S.,Kelvin,lkelvin@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,151,,Scot,J.,Kleinman,sjkleinman@astromanager.net,,Astromanager LLC,,63 Halai St,,Hilo,Hawaii,96720 HI,USA
+,152,,Ivan,V.,Kotov,kotov@bnl.gov,,Brookhaven National Laboratory,,,,Upton,NY,11973,USA
+,153,,Gábor,,Kovács,kgabor79@gmail.com,,University of Washington,Institute for Data-intensive Research in Astrophysics and Cosmology,3910 15th Avenue NE,,Seattle,WA,98195,USA
+,154,,Mikolaj,,Kowalik,mxk@illinois.edu,,University of Illinois at Urbana-Champaign,National Center for Supercomputing Applications,1205 W. Clark St.,,Urbana,IL,61801,USA
+,155,,Victor,L.,Krabbendam,VKrabbendam@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,156,,K.,Simon,Krughoff,skrughoff@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,157,,Petr,,Kubánek,pkubanek@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,158,,Jacob,A.,Kurlander,jkurla@uw.edu,,University of Washington,Institute for Data-intensive Research in Astrophysics and Cosmology,3910 15th Avenue NE,,Seattle,WA,98195,USA
+,159,,Mile,,Kusulja,kusulja@lpsc.in2p3.fr,,"Université Grenoble Alpes, CNRS/IN2P3, LPSC",,53 avenue des Martyrs,,Grenoble,,F-38026,France
+,160,,Craig,S.,Lage,cslage@ucdavis.edu,,"University of California, Davis",Department of Physics & Astronomy,One Shields Avenue,,Davis,CA,95616,USA
+,161,,Paulo,J. A.,Lago,plago@lsst.org,,Vera C. Rubin Observatory/NSF NOIRLab,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,162,,Katherine,,Laliotis,laliotis.2@osu.edu,,The Ohio State University,Center for Cosmology and Astro-Particle Physics,,,Columbus,OH,43210,USA
+,163,,Travis,,Lange,tlange@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,164,,Didier,,Laporte,didier.laporte@lpnhe.in2p3.fr,,"Sorbonne Université, Université Paris Cité, CNRS/IN2P3, LPNHE",,4 place Jussieu,,Paris,,F-75005,France
+,165,,Ryan,M.,Lau,ryan.lau@noirlab.edu,,NSF NOIRLab,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,166,,Juan,Carlos,Lazarte,juanlazarte3msk@gmail.com,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,167,,Quentin,,Le Boulc'h,quentin.leboulch@cc.in2p3.fr,,"CNRS/IN2P3, CC-IN2P3",,21 avenue Pierre de Coubertin,,Villeurbanne,,F-69627,France
+,168,,Pierre-François,,Léget,leget@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,169,,Laurent,,Le Guillou,llg@lpnhe.in2p3.fr,,"Sorbonne Université, Université Paris Cité, CNRS/IN2P3, LPNHE",,4 place Jussieu,,Paris,,F-75005,France
+,170,,Benjamin,,Levine,benjamin.c.levine@stonybrook.edu,,Stony Brook University,Department of Physics and Astronomy,,,Stony Brook,NY,11794,USA
+,171,,Ming,,Liang,liangming@gmail.com,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,172,,Shuang,,Liang,sliang92@stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,173,,Kian-Tat,,Lim,ktl@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,174,,Anja,,von der Linden,anja.vonderlinden@stonybrook.edu,,Stony Brook University,Department of Physics and Astronomy,,,Stony Brook,NY,11794,USA
+,175,,Huan,,Lin,hlin@fnal.gov,,Fermi National Accelerator Laboratory,,P. O. Box 500,,Batavia,IL,60510,USA
+,176,,Margaux,,Lopez,margaux@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,177,,Juan,J.,Lopez Toro,jlopeztoro@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,178,,Peter,,Love,p.love@lancaster.ac.uk,,Lancaster University,,,,Lancaster,,,UK
+,179,,Robert,H.,Lupton,rhl@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,180,,Nate,B.,Lust,nlust@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,181,,Lauren,A.,MacArthur,lauren@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,182,,Sean,Patrick,MacBride,sean.macbride@physik.uzh.ch,,University of Zurich,Physik-Institut,Winterthurerstrasse 190,,Zurich,,8057,Switzerland
+,183,,Greg,M.,Madejski,madejski@slac.stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,184,,Gabriele,,Mainetti,gabriele.mainetti@in2p3.fr,,"CNRS/IN2P3, CC-IN2P3",,21 avenue Pierre de Coubertin,,Villeurbanne,,F-69627,France
+,185,,Steven,J.,Margheim,steven.margheim@noirlab.edu,,Vera C. Rubin Observatory/NSF NOIRLab,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,186,,Thomas,W.,Markiewicz,twmark@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,187,,Phil,,Marshall,pjm@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,188,,Stuart,,Marshall,marshall@slac.stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,189,,Guido,,Maulen,gmaulen@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,190,,Sidney,,Mau,sidney.mau@duke.edu,,Duke University,Department of Physics,,,Durham,NC,27708,USA
+,191,,Morgan,,May,mm21@columbia.edu,,Columbia University,Department of Physics,533 W. 218th St.,,New York,NY,10027,USA
+,192,,Jeremy,,McCormick,jeremym@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,193,,David,,McKay,d.mckay@epcc.ed.ac.uk,,University of Edinburgh,EPCC,47 Potterrow,,Edinburgh,,EH8 9BT,UK
+,194,,Robert,,McKercher,rmckercher@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,195,,Guillem,,Megias Homar,gmegias@caltech.edu,,California Institute of Technology,"Division of Physics, Mathematics and Astronomy",,,Pasadena,CA,91125,USA
+,196,,Aaron,M.,Meisner,aaron.meisner@noirlab.edu,,NSF NOIRLab,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,197,,Felipe,,Menanteau,felipe@illinois.edu,,University of Illinois at Urbana-Champaign,National Center for Supercomputing Applications,1205 W. Clark St.,,Urbana,IL,61801,USA
+,198,,Heather,R.,Mentzer,hmentzer@ucsc.edu,,"University of California, Santa Cruz",Santa Cruz Institute for Particle Physics and Physics Department,1156 High St.,,Santa Cruz,CA,95064,USA
+,199,,Kristen,,Metzger,kristen.metzger@noirlab.edu,,NSF NOIRLab,Vera C. Rubin Observatory,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,200,,Joshua,E.,Meyers,jmeyers314@gmail.com,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,201,,Michelle,,Miller,michellemiller.miller@gmail.com,,NSF NOIRLab,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,202,,David,J.,Mills,dmills@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,203,,Joachim,,Moeyens,moeyensj@uw.edu,,University of Washington,Institute for Data-intensive Research in Astrophysics and Cosmology,3910 15th Avenue NE,,Seattle,WA,98195,USA
+,204,,Marc,,Moniez,marc.moniez@ijclab.in2p3.fr,,"Université Paris-Saclay, CNRS/IN2P3, IJCLab",,15 Rue Georges Clemenceau,,Orsay,,F-91405,France
+,205,,Fred,E.,Moolekamp,fred.moolekamp@gmail.com,,soZen Inc.,,105 Clearview Dr,,Penfield,NY,14526,USA
+,206,,C.,A. L.,Morales Marín,cmorales@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,207,,Fritz,,Mueller,fritzm@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,208,,James,R.,Mullaney,j.mullaney@sheffield.ac.uk,,University of Sheffield,"Astrophysics Research Cluster, School of Mathematical and Physical Sciences",,,Sheffield,,S3 7RH,UK
+,209,,Freddy,,Muñoz Arancibia,fmunoz@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,210,,Kate,,Napier,kanapier@slac.stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,211,,Homer,,Neal,homer@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,212,,Eric,H.,"Neilsen, Jr.",neilsen@fnal.gov,,Fermi National Accelerator Laboratory,,P. O. Box 500,,Batavia,IL,60510,USA
+,213,,Jeremy,,Neveu,jeremy.neveu@ijclab.in2p3.fr,,"Université Paris-Saclay, CNRS/IN2P3, IJCLab",,15 Rue Georges Clemenceau,,Orsay,,F-91405,France
+,214,,Timothy,,Noble,timothy.noble@stfc.ac.uk,,Science and Technology Facilities Council,Rutherford Appleton Laboratory,,,Harwell,,,UK
+,215,,Erfan,,Nourbakhsh,erfan@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,216,,Knut,,Olsen,knut.olsen@noirlab.edu,,NSF NOIRLab,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,217,,William,,O'Mullane,womullan@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,218,,Dmitry,,Onoprienko,onoprien@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,219,,Marco,,Oriunno,oriunno@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,220,,Shawn,,Osier,sosier@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,221,,Russell,E.,Owen,rowen@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,222,,Aashay,,Pai,pai@uchicago.edu,,University of Chicago,Department of Astronomy and Astrophysics,5640 South Ellis Avenue,,Chicago,IL,60637,USA
+,223,,John,K.,Parejko,parejkoj@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,224,,Hye,Yun,Park,hp175@duke.edu,,Duke University,Department of Physics,,,Durham,NC,27708,USA
+,225,,James,B.,Parsons,parsons-deceased@lsst.org,,University of Illinois at Urbana-Champaign,National Center for Supercomputing Applications,1205 W. Clark St.,,Urbana,IL,61801,USA
+,226,,Maria,T.,Patterson,maria.t.patterson@gmail.com,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,227,,Marina,S.,Pavlovic,mpavlovic@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,228,,Karla,,Peña Ramírez,kpena@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,229,,John,R.,Peterson,peters11@purdue.edu,,Purdue University,Department of Physics and Astronomy,525 Northwestern Ave.,,West Lafayette,IN,47907,USA
+,230,,Stephen,R.,Pietrowicz,srp@illinois.edu,,University of Illinois at Urbana-Champaign,National Center for Supercomputing Applications,1205 W. Clark St.,,Urbana,IL,61801,USA
+,231,,Andrés,A.,Plazas Malagón,plazas@stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,232,,Rebekah,,Polen,bekah.polen@duke.edu,,Duke University,Department of Physics,,,Durham,NC,27708,USA
+,233,,Hannah,Mary Margaret,Pollek,pollek@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,234,,Paul,A.,Price,price@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,235,,Bruno,C.,Quint,bquint@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,236,,José,Miguel,Quintero Marin,jquintero@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,237,,Markus,,Rabus,mrabus@ucsc.cl,,Universidad Católica de la Santísima Concepción,Departamento de Matemática y Física Aplicadas,"Facultad de Ingeniería, Alonso de Rivera 2850, Concepción",,Concepción,,,Chile
+,238,,Benjamin,,Racine,racine@cppm.in2p3.fr,,"Aix Marseille Université, CNRS/IN2P3, CPPM",,163 avenue de Luminy,,Marseille,,F-13288,France
+,239,,Veljko,,Radeka,radeka@bnl.gov,,Brookhaven National Laboratory,,,,Upton,NY,11973,USA
+,240,,Manon,,Ramel,manon.ramel@lpsc.in2p3.fr,,"Université Grenoble Alpes, CNRS/IN2P3, LPSC",,53 avenue des Martyrs,,Grenoble,,F-38026,France
+,241,,Arianna,,Ranabhat,arianna.ranabhat@mq.edu.au,,Macquarie University,Australian Astronomical Optics,105 Delhi Rd,,North Ryde,NSW,2113,Australia
+,242,,Andrew,P.,Rasmussen,arasmus@slac.stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,243,,David,A.,Rathfelder,drathfelder@lsst.org,,Association of Universities for Research in Astronomy (AURA),,950 N. Cherry Ave.,,Tucson,,85719,USA
+,244,,Meredith,L.,Rawls,mrawls@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,245,,Sophie,L.,Reed,sophiereed@princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,246,,Kevin,A.,Reil,reil@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,247,,David,J.,Reiss,reiss@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,248,,Michael,A.,Reuter,mareuter@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,249,,Tiago,,Ribeiro,tribeiro@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,250,,Mickael,,Rigault,m.rigault@ip2i.in2p3.fr,,"Université Claude Bernard Lyon 1, CNRS/IN2P3, IP2I",,4 Rue Enrico Fermi,,Villeurbanne,,F-69622,France
+,251,,Vincent,J.,Riot,riot1@llnl.gov,,Lawrence Livermore National Laboratory,,7000 East Avenue,,Livermore,CA,94550,USA
+,252,,Steven,M.,Ritz,sritz@ucsc.edu,,"University of California, Santa Cruz",Santa Cruz Institute for Particle Physics and Physics Department,1156 High St.,,Santa Cruz,CA,95064,USA
+,253,,Mario,F.,Rivera Rivera,mrivera@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,254,,Brant,E.,Robertson,brant@ucsc.edu,,"University of California, Santa Cruz",Department of Astronomy and Astrophysics,1156 High St.,,Santa Cruz,CA,95064,USA
+,255,,William,,Roby,roby@ipac.caltech.edu,,California Institute of Technology,Caltech/IPAC,MS 100-22,,Pasadena,CA,91125-2200,USA
+,256,,Gabriele,,Rodeghiero,gabriele.rodeghiero@inaf.it,,INAF Osservatorio di Astrofisica e Scienza dello Spazio Bologna,,Via P. Gobetti 93/3,,Bologna,,40129,Italy
+,257,,Aaron,,Roodman,roodman@slac.stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,258,,Luca,,Rosignoli,luca.rosignoli@inaf.it,,University of Bologna,Department of Physics and Astronomy (DIFA),Via P. Gobetti 93/2,,Bologna,,40129,Italy
+,259,,Cécile,,Roucelle,roucelle@apc.in2p3.fr,,"Université Paris Cité, CNRS/IN2P3, APC",,4 rue Elsa Morante,,Paris,,F-75013,France
+,260,,Matthew,R.,Rumore,mrumore@bnl.gov,,Brookhaven National Laboratory,,,,Upton,NY,11973,USA
+,261,,Stefano,,Russo,srusso@lpnhe.in2p3.fr,,"Sorbonne Université, Université Paris Cité, CNRS/IN2P3, LPNHE",,4 place Jussieu,,Paris,,F-75005,France
+,262,,Eli,S.,Rykoff,erykoff@stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,263,,Andrei,,Salnikov,salnikov@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,264,,Bruno,O.,Sánchez,bsanchez@cppm.in2p3.fr,,"Aix Marseille Université, CNRS/IN2P3, CPPM",,163 avenue de Luminy,,Marseille,,F-13288,France
+,265,,David,,Sanmartim,dsanmartim@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,266,,Clare,,Saunders,cmsaunders@princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,267,,Rafe,H.,Schindler,rafe@slac.stanford.edu,,SLAC National Accelerator Laboratory,Kavli Institute for Particle Astrophysics and Cosmology,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,268,,Samuel,J.,Schmidt,samschmidt@ucdavis.edu,,"University of California, Davis",Department of Physics & Astronomy,One Shields Avenue,,Davis,CA,95616,USA
+,269,,Jacques,,Sebag,jsebag@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,270,,Nima,,Sedaghat,nimaseda@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,271,,Brian,,Selvy,brianselvy@gmail.com,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,272,,Edgard,Esteban,Sepulveda Valenzuela,esepulveda2@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,273,,Gonzalo,,Seriche,gseriche@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,274,,Jacqueline,C.,Seron-Navarrete,jseron@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,275,,Ignacio,,Sevilla-Noarbe,ignacio.sevilla@ciemat.es,,"Centro de Investigaciones Energéticas, Medioambientales y Tecnológicas",,Av. Complutense 40,,Madrid,,28040,Spain
+,276,,Alysha,B.,Shugart,alysha.shugart@noirlab.edu,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,277,,Jonathan,,Sick,jsick@lsst.org,,J.Sick Codes Inc.,,,,Penetanguishene,Ontario,,Canada
+,278,,Cristián,,Silva,csilva@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,279,,Mathew,C.,Sims,mathew.sims@stfc.ac.uk,,"Science and Technology Facilities Council, UK Research and Innovation",,"Polaris House, North Star Avenue",,Swindon,,SN2 1SZ,UK
+,280,,Jaladh,,Singhal,jsinghal@ipac.caltech.edu,,California Institute of Technology,Caltech/IPAC,MS 100-22,,Pasadena,CA,91125-2200,USA
+,281,,Kevin,Benjamin,Siruno,ksiruno@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,282,,Colin,T.,Slater,ctslater@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,283,,Brianna,M.,Smart,drbsmart@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,284,,Adam,,Snyder,aksnyder@ucdavis.edu,,"University of California, Davis",Department of Physics & Astronomy,One Shields Avenue,,Davis,CA,95616,USA
+,285,,Christine,,Soldahl,csoldahl@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,286,,Ioana,,Sotuela Elorriaga,isotuela@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,287,,Brian,,Stalder,bstalder@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,288,,Hernan,,Stockebrand,hstockebrand@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,289,,Alan,L.,Strauss,alan.strauss@noirlab.edu,,NSF NOIRLab,Vera C. Rubin Observatory,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,290,,Michael,A.,Strauss,strauss@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,291,,Krzysztof,,Suberlak,suberlak@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,292,,Ian,S.,Sullivan,sullii@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,293,,John,D.,Swinbank,swinbank@astron.nl,,ASTRON,,Oude Hoogeveensedijk 4,,Dwingeloo,,7991 PD,The Netherlands
+,294,,Diego,,Tapia,dtapia@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,295,,Alessio,,Taranto,alessio.taranto@inaf.it,,INAF Osservatorio di Astrofisica e Scienza dello Spazio Bologna,,Via P. Gobetti 93/3,,Bologna,,40129,Italy
+,296,,Dan,S.,Taranu,dtaranu@princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,297,,John,Gregg,Thayer,jgt@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,298,,Sandrine,,Thomas,sandrine.thomas@noirlab.edu,,NSF NOIRLab,Vera C. Rubin Observatory,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,299,,Adam,J.,Thornton,athornton@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,300,,Roberto,,Tighe,rtighe@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,301,,Laura,,Toribio San Cipriano,laura.toribio@ciemat.es,,"Centro de Investigaciones Energéticas, Medioambientales y Tecnológicas",,Av. Complutense 40,,Madrid,,28040,Spain
+,302,,Te-Wei,,Tsai,ttsai@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,303,,Douglas,L.,Tucker,dtucker@fnal.gov,,Fermi National Accelerator Laboratory,,P. O. Box 500,,Batavia,IL,60510,USA
+,304,,Max,,Turri,turri@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,305,,J.,Anthony,Tyson,tyson@lsst.org,,"University of California, Davis",Department of Physics & Astronomy,One Shields Avenue,,Davis,CA,95616,USA
+,306,,Elana,K.,Urbach,eurbach@g.harvard.edu,,Harvard University,Department of Physics,17 Oxford St.,,Cambridge,MA,02138,USA
+,307,,Yousuke,,Utsumi,yousuke.utsumi@nao.ac.jp,,National Astronomical Observatory of Japan,,"Los Abedules 3085, Vitacura",,Santiago,,,Chile
+,308,,Brian,,Van Klaveren,bvan@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,309,,Wouter,,van Reeven,wvanreeven@lsst.org,,Vera C. Rubin Observatory,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,310,,Peter,Anthony,Vaucher,pav@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,311,,Paulina,,Venegas,paulina.venegas@noirlab.edu,,Vera C. Rubin Observatory/NSF NOIRLab,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+,312,,Aprajita,,Verma,aprajita.verma@physics.ox.ac.uk,,University of Oxford,Department of Physics,"Denys Wilkinson Building, Keble Road",,Oxford,,OX1 3RH,UK
+,313,,Antonia,Sierra,Villarreal,sierrav@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,314,,Stelios,,Voutsinas,svoutsinas@lsst.org,,Vera C. Rubin Observatory Project Office,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,315,,Christopher,W.,Walter,chris.walter@duke.edu,,Duke University,Department of Physics,,,Durham,NC,27708,USA
+,316,,Yuankun,(David),Wang,ykwang@uw.edu,,University of Washington,Institute for Data-intensive Research in Astrophysics and Cosmology,3910 15th Avenue NE,,Seattle,WA,98195,USA
+,317,,Christopher,Z.,Waters,czw@astro.princeton.edu,,Princeton University,Department of Astrophysical Sciences,,,Princeton,NJ,08544,USA
+,318,,Christina,C.,Williams,christina.williams@noirlab.edu,,NSF NOIRLab,,950 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,319,,Beth,,Willman,bwillman@lsst-da.org,,LSST Discovery Alliance,,933 N. Cherry Ave.,,Tucson,AZ,85719,USA
+,320,,Matthias,,Wittgen,wittgen@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,321,,W.,M.,Wood-Vasey,wmwv@pitt.edu,,University of Pittsburgh,Department of Physics and Astronomy,3941 O'Hara Street,,Pittsburgh,PA,15260,USA
+,322,,Wei,,Yang,yangw@slac.stanford.edu,,SLAC National Accelerator Laboratory,,2575 Sand Hill Rd.,,Menlo Park,CA,94025,USA
+,323,,Zhaoyu,,Yang,zyang2@bnl.gov,,Brookhaven National Laboratory,,,,Upton,NY,11973,USA
+,324,,Brian,P.,Yanny,yanny@fnal.gov,,Fermi National Accelerator Laboratory,,P. O. Box 500,,Batavia,IL,60510,USA
+,325,,Peter,,Yoachim,yoachim@uw.edu,,University of Washington,Dept. of Astronomy,P.O. Box 351580,,Seattle,WA,98195,USA
+,326,,Tianqing,,Zhang,tq.zhang@pitt.edu,,University of Pittsburgh,Department of Physics and Astronomy,3941 O'Hara Street,,Pittsburgh,PA,15260,USA
+,327,,Conghao,,Zhou,czhou64@ucsc.edu,,"University of California, Santa Cruz",Santa Cruz Institute for Particle Physics and Physics Department,1156 High St.,,Santa Cruz,CA,95064,USA
+,328,,Danica,,Žilková,danica.zilkova@noirlab.edu,,Vera C. Rubin Observatory/NSF NOIRLab,,Avenida Juan Cisternas #1500,,La Serena,,,Chile
+

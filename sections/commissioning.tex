@@ -126,7 +126,7 @@ These \nfields fields form the basis of the \gls{DP1} dataset.
 \begin{figure*}[bt!]
 \centering
 \plotone{dp1_fields_with_survey_fp}
-\caption{Locations of the seven \gls{DP1} fields overlaid on the \gls{LSST} baseline survey footprint. NES: North Ecliptic Spur, SCP: South Celestial Pole, Low-Dust \gls{WFD}: regions away from the Galactic Plane (GP) observed with a \gls{WFD} cadence, GP/MC \gls{WFD}: Galactic Plane and Magellanic Clouds regions observed with a \gls{WFD} cadence. The field of view covered by the \gls{LSSTCam} and \gls{LSSTComCam} focal planes is shown as concentric yellow circles about the pointing center of each field.}
+\caption{Locations of the seven \gls{DP1} fields overlaid on the \gls{LSST} baseline survey footprint. NES: North Ecliptic Spur; SCP: South Celestial Pole; Low-Dust \gls{WFD}: regions away from the Galactic Plane (GP) observed with a \gls{WFD} cadence; GP/MC \gls{WFD}: Galactic Plane and Magellanic Clouds regions observed with a \gls{WFD} cadence. The fields of view of the \gls{LSSTCam} and \gls{LSSTComCam} focal planes are shown as concentric yellow circles about the pointing center of each field. The background Milky Way dust map is based on the FDS model \citep{Finkbeiner1999}.}
 \label{fig:dp1_fields_on_sky}
 \end{figure*}
 Each of the \nfields target fields was observed repeatedly in multiple bands over many nights.
@@ -143,7 +143,7 @@ The figure indicates the dates on which each field was observed in a given band 
 \begin{figure}[htb!]
 \centering
 \plotone{visitDates}
-\caption{Temporal distribution of \gls{DP1} observations, grouped by field as a function of \gls{MJD} and color-coded by filter. Each point indicates that a given field was observed at least once in the corresponding filter on that date.}
+\caption{Temporal distribution of DP1 observations, grouped by field as a function of MJD and color-coded by filter. Each point indicates that a given field was observed at least once in the corresponding filter on that date.}
 \label{fig:target_fields_temporal_sampling}
 \end{figure}
 Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only accommodate three filters at a time (see \secref{ssec:comcam}).
@@ -172,7 +172,7 @@ Only the detectors for which single frame processing succeeded are included in t
 \end{figure*}
 \tabref{tab:dp1_m5_depths} reports the 5$\sigma$ point source depths for coadded images per field and per band, where coverage in a band is non-zero, together with the expected 10-year LSST depths derived from the baseline simulated survey \citep[][]{2022ApJS..258....1B}.
 
-\input{./dp1_m5_coadded_depths}
+\input{dp1_m5_coadded_depths}
 
 % Image Quality
 \subsection{Delivered Image Quality}
