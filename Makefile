@@ -2,7 +2,7 @@ DOCTYPE = RTN
 DOCNUMBER = 095
 DOCNAME = $(DOCTYPE)-$(DOCNUMBER)
 FLATDIR = forAAS
-SUBDIRS = figures sections tables
+SUBDIRS = figures
 
 tex = $(filter-out $(wildcard *aglossary.tex) , $(wildcard *.tex))
 
