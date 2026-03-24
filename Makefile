@@ -1,6 +1,8 @@
 DOCTYPE = RTN
 DOCNUMBER = 095
 DOCNAME = $(DOCTYPE)-$(DOCNUMBER)
+FLATDIR = forAAS
+SUBDIRS = figures sections tables
 
 tex = $(filter-out $(wildcard *aglossary.tex) , $(wildcard *.tex))
 
@@ -39,13 +41,40 @@ authors.csv: authors.yaml
 
 aglossary.tex :$(tex) myacronyms.txt
 	python3 $(TEXMFHOME)/../bin/generateAcronyms.py -t"Sci DM Gen" -g $(tex)
+	
+flat:
+	if [ ! -d $(FLATDIR) ]; then \
+		mkdir $(FLATDIR) ; \
+	fi
+	latexpand --keep-comments -o $(FLATDIR)/$(DOCNAME).tex $(DOCNAME).tex
+	@for dir in $(SUBDIRS); do \
+		if [ -d "$$dir" ] && [ -n "$$(ls -A $$dir 2>/dev/null)" ]; then \
+			cp $$dir/* $(FLATDIR); \
+			echo "  ✓ Copied $$dir"; \
+		fi; \
+	done
+	cp aas*.* $(FLATDIR)
+	cp *.bib $(FLATDIR)
+	cd $(FLATDIR) &&\
+	latexmk -bibtex -xelatex -f $(DOCNAME) &&\
+	makeglossaries $(DOCNAME) &&\
+	latexmk -bibtex -xelatex -f $(DOCNAME) &&\
+	latexmk -c &&\
+	rm -f *.gls *.xdv *.glg *.glo *.ist *.bib &&\
+	if [ -f README.txt ]; then rm README.txt; fi && \
+	echo "Flat files in $(FLATDIR)."
 
+aglossary.tex :$(tex) myacronyms.txt
+	python3 $(TEXMFHOME)/../bin/generateAcronyms.py -t"Sci DM Gen" -g $(tex)
 
 .PHONY: clean
 clean:
 	latexmk -c
-	rm -f $(DOCNAME).{bbl,glsdefs,pdf}
+	rm -f $(DOCNAME).bbl
+	rm -f $(DOCNAME).pdf
+	rm -f meta.tex
 	rm -f authors.tex
+	rm -f $(FLATDIR)/*
 
 .FORCE:
 
@@ -58,13 +87,12 @@ authors.yaml:
 skip: .FORCE
 	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py --skip `cat skip.count` --builder -p 1yMRqNdPVoAtjBMEPve2WEyt3V_73o4uIv-ZuHvzpeJM "A2:L1000"
 	
-	
 merge: new_authors.yaml
-	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py -m new_authors.yaml 
+	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py -m new_authors.yaml
 	cp skip skip.count
 
 merge_affil: new_affiliations.yaml
-	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py -a new_affiliations.yaml 
+	python3 $(TEXMFHOME)/../bin/makeAuthorListsFromGoogle.py -a new_affiliations.yaml
 
 scripts:
 	@echo "Running Python scripts..."
