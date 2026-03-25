@@ -135,7 +135,7 @@ Only images taken as 1x30 second exposures have been included in \gls{DP1}.
 All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{Naghib_2019, peter_yoachim_2024_13985198}.
 \tabref{tab:dp1_fields} lists the \nfields \gls{DP1} fields and their pointing centers, and provides a summary of the band coverage in each.
 
-\input{./dp1_fields.tex}
+\input{tables/dp1_fields.tex}
 %
 % Temporal Sampling
 Figure~\ref{fig:target_fields_temporal_sampling} shows the temporal sampling of observations by filter and by night.
@@ -172,7 +172,7 @@ Only the detectors for which single frame processing succeeded are included in t
 \end{figure*}
 \tabref{tab:dp1_m5_depths} reports the 5$\sigma$ point source depths for coadded images per field and per band, where coverage in a band is non-zero, together with the expected 10-year LSST depths derived from the baseline simulated survey \citep[][]{2022ApJS..258....1B}.
 
-\input{./dp1_m5_coadded_depths}
+\input{tables/dp1_m5_coadded_depths}
 
 % Image Quality
 \subsection{Delivered Image Quality}
@@ -184,7 +184,7 @@ Mount encoder data were used to measure the mount jitter in every image, with a 
 As the pointing model was not fine tuned, tracking errors could range from 0.2 to 0.4 arcseconds per image, depending on RA and Dec.
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 
-\input{./dp1_iq_summary_target_band}
+\input{tables/dp1_iq_summary_target_band}
 The \gls{DP1} median delivered image quality, quantified as the \gls{PSF} at \gls{FWHM} across all filters and target fields, is \medianimagequalityallbands. 
 The best images achieve a \gls{PSF} \gls{FWHM} of approximately \bestimagequality. 
 Both the per-sensor \gls{PSF} \gls{FWHM} and the overall median vary depending on the filter and the specific target field. 

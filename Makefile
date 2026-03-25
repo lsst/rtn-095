@@ -44,7 +44,7 @@ aglossary.tex :$(tex) myacronyms.txt
 .PHONY: clean
 clean:
 	latexmk -c
-	rm -f $(DOCNAME).{bbl,glsdefs,pdf}
+	rm -f $(DOCNAME).{bbl,glsdefs,pdf,ist}
 	rm -f authors.tex
 
 .FORCE:
