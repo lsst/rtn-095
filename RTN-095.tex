@@ -1,4 +1,4 @@
-\documentclass[ twocolumn,twocolappendix, linenumbers ,trackchanges]{aastex7}
+\documentclass[ twocolumn,twocolappendix]{aastex7}
 
 % Package imports go here.
 \usepackage{hyperref}
@@ -9,7 +9,12 @@
 \usepackage{glossaries}  
 
 % All graphics paths here 
-\graphicspath{./}
+\graphicspath{{figures}}
+
+% ---- Input paths for sections and tables
+\makeatletter
+\def\input@path{{sections}{tables}}
+\makeatother
 
 % Local commands go here.
 \newcommand{\docRef}{RTN-095}
@@ -25,8 +30,6 @@
 \input{aglossary.tex}
 \makeglossaries
 
-% Include the parameters file with the data
-\input{parameters.tex}
 \begin{document}
 \setcounter{footnote}{0}
 \doi{10.71929/rubin/2570536}
@@ -43,6 +46,9 @@
 }
 \input{authors}
 \correspondingauthor{Leanne P. Guy; Tim Jenness; James Mullaney}
+
+% Include the parameters file with the data
+\input{parameters}
 
 \input{abstract}
 
