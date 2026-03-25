@@ -5,7 +5,7 @@ In this section, we provide an assessment of the \gls{DP1} data quality and desc
 
 \subsection{Sensor Anomalies and ISR}
 \label{ssec:sensor_anomalies}
-\input{sensor_anomalies}
+\input{sections/sensor_anomalies}
 %
 
 \subsection{PSF Models}
@@ -22,7 +22,7 @@ We compare two PSF modeling approaches:
 \tabref{tab:psf-1d_stats} summarizes each model’s ability to reconstruct the mean $T$, $e^1$, and $e^2$ on  \gls{LSSTComCam}. 
 Both models exhibit a negative residual bias in the reconstructed PSF size, with Piff O4 providing improved performance over Piff O2.
 
-\input{./psf_1d_stat.tex}
+\input{tables/psf_1d_stat.tex}
 
 An alternative approach to evaluating the performance of the \gls{PSF} model is to examine the average $\delta T/T$, where $\delta T$ is $T_{\text{PSF}}$ - $T_{\text{model}}$, across visits, projected onto focal-plane coordinates, as shown in \figref{fig:psf_residuals_fov}. 
 Piff reveals strong spatial correlations in the residuals, including a systematic offset consistent with the results presented in \tabref{tab:psf-1d_stats}. 
@@ -395,7 +395,7 @@ Future reliability models for \gls{LSSTCam} data, described in \secref{ssec:diff
 
 The performance of the reliability model on the test data (\secref{ssec:diffim_analysis}) is shown in \figref{fig:completenessvpurity}.
 The rate of true positives and false negatives obtained by thresholding the reliability score at 0.5 is reported for transients (99 stamps), and variable stars (316 stamps) vetted in \texttt{tasso} in \tabref{tab:mlreliability}. 
-\input{dp1_mlreliability}
+\input{tables/dp1_mlreliability}
 Additionally we crossmatched stamps with Solar System Objects with known orbits retrieving 5,988 Solar System Objects stamps.
 \begin{figure}[htb]
 \includegraphics[width=\linewidth]{mlreliability_test_performance}
