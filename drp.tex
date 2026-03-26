@@ -25,7 +25,7 @@ The \gls{ISR} pipeline aims to recover the original astrophysical signal as best
 A detailed description of the \gls{ISR} procedures can be found in \citet{SITCOMTN-086} and \citet{2025JATIS..11a1209P}.
 \figref{fig:isr_signal_chain} illustrates the model of detector components and readout electronics and their impact on the signal, tracing the process from photons incident on the detector surface to the final quantized values\footnote{The images written to disk by the camera have values that are integers that come from the ADC converting an analog voltage.} recorded in the image files.
 The \gls{ISR} \gls{pipeline} essentially ``works backward'' through the signal chain, correcting the integer analog-to-digital units (ADU) raw camera output back to a floating-point number of photoelectrons created in the silicon.
-The physical detector, represented on the left in  \figref{fig:isr_signal_chain}, is the source of effects that arise from the silicon itself, such as the dark current and the brighter-fatter effect \citep{doi:10.1088/1538-3873/aab820,2024PASP..136d5003B}.
+The physical detector, represented on the left in  \figref{fig:isr_signal_chain}, is the source of effects that arise from the silicon itself, such as the dark current and the brighter-fatter effect \citep{2018PASP..130f5004P,2024PASP..136d5003B}.
 After the integration time has elapsed, the charge is shifted  to the serial register and read out, which can introduce charge transfer inefficiencies and a clock-injected offset level.
 The signals for all amplifiers are transferred via cables to the \gls{REB}, during which crosstalk between the amplifiers may occur.
 The \gls{ASPIC} on the \gls{REB} converts the analog signal from the detector into a digital signal, adding both quantization and a bias level to the image.
@@ -64,7 +64,7 @@ These preliminary solutions are subsequently replaced by more accurate fits, as 
 
 \subsubsection{PSF Modeling}
 \label{ssec:psf_modelling}
-\gls{PSF} modeling in \gls{DP1} uses the Piff \citep{DES:2020vau} package.
+\gls{PSF} modeling in \gls{DP1} uses the Piff \citep{2021MNRAS.501.1282J} package.
 Our configuration of Piff utilizes its \texttt{PixelGrid} model with a fourth-order polynomial interpolation per \gls{CCD}, except in the $u$-band, where star counts are insufficient to support a fourth-order fit.
 In this case, a second-order polynomial is used instead.
 Details on the choice of polynomial order, overall \gls{PSF} modeling performance, and known issues are discussed in \secref{ssec:psf_models}.
