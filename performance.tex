@@ -212,7 +212,7 @@ In both cases, we use a greedy, probabilistic matching \gls{algorithm} that matc
 
 We inject sources in 12 of the patches of the \gls{ECDFS} region with the deepest coverage.
 The input catalog contains stars and galaxies from part of the \gls{DC2} simulations \citep[][]{2021ApJS..253...31L}, where the galaxies consist of an exponential disk and a de Vaucouleurs bulge\citep[][]{1948AnAp...11..247D,1953MNRAS.113..134D}.
-To avoid deblender failures from excessive increases in object density, stars with a total \gls{magnitude} brighter than 17.5~${\rm mag}$  (i.e., derived from flux summed across all six bands) are excluded, as are galaxies whose \gls{magnitude} is brighter than 15\,${\rm mag}$ or fainter than 26.5\,${\rm mag}$.
+To avoid deblender failures from excessive increases in object density, stars with a total magnitude brighter than 17.5~${\rm mag}$  (i.e., derived from flux summed across all six bands) are excluded, as are galaxies whose magnitude is brighter than 15\,${\rm mag}$ or fainter than 26.5\,${\rm mag}$.
 One-half of the remaining objects are selected for injection.
 Afterward, individual bulge and disk components fainter than 29\,${\rm mag}$ are also excluded, both for computational expediency and because their structural properties are less likely to be representative of real galaxies.
 \begin{figure}[htb]
@@ -251,7 +251,7 @@ The magnitude of this bias is considerably larger than previously seen in simula
 Subsequent testing indicates that this bias can be (roughly) halved by fitting an exponential model first, and then using those parameters to initialize a free S\'ersic fit.
 This approach will be adopted in future releases.
 Aperture fluxes,  including Kron and \gls{GAaP},  are not shown as they are not corrected to yield total fluxes.
-The correction for Kron fluxes can be derived from the S\'ersic index \citep[][]{2005PASA...22..118G}, but this correction is not provided in \textt{Object} tables.
+The correction for Kron fluxes can be derived from the S\'ersic index \citep[][]{2005PASA...22..118G}, but this correction is not provided in \texttt{Object} tables.
 
 \begin{figure*}[hbt!]
   \centering
