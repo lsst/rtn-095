@@ -11,7 +11,7 @@ ifneq "$(GITSTATUS)" ""
 	GITDIRTY = -dirty
 endif
 
-export TEXMFHOME ?= lsst-texmf/texmf
+export TEXMFHOME = lsst-texmf/texmf
 
 SCRIPTS_DIR=scripts
 PYTHON_SCRIPTS=$(wildcard $(SCRIPTS_DIR)/*.py)
