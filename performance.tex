@@ -60,7 +60,7 @@ We observe coherent patterns in both the \gls{PSF} moments and the residuals, th
 
 \figref{fig:psf_residuals_mag_color} shows a plot of  $\delta\,T/T$ vs. stellar magnitude, which can reveal any dependencies between \gls{PSF} size and flux.
 We also repeat this analysis in color bins to probe chromatic effects.
-Binning by color uncovers a clear color dependence, as was also seen in \gls{DES} \citep[][]{DES:2020vau}.
+Binning by color uncovers a clear color dependence, as was also seen in \gls{DES} \citep[][]{2021MNRAS.501.1282J}.
 The residuals are consistent with \tabref{tab:psf-1d_stats} and its cause is unknown.
 \gls{DP1} does not include the color correction implemented in the DES Year 6 analysis, \citep[][]{2025OJAp....8E..26S}. 
 This will be included in processing of future data releases.
@@ -291,7 +291,7 @@ Any of these color measurements is suitable for use for deriving quantities like
 \end{figure*}
 In addition to photometry, some algorithms include measurements of structural parameters like size, ellipticity, and S\'ersic index.
 One particular known issue is that many (truly) faint objects have significantly overestimated sizes and fluxes.
-This was also seen in the \gls{DES} \citep[][]{2025arXiv250105739B}, who dubbed such objects ``super-spreaders''.
+This was also seen in the \gls{DES} \citep[][]{2026ApJS..282...62B}, who dubbed such objects ``super-spreaders''.
 These super-spreaders contribute significantly to overestimated fluxes at the faint end (see e.g. \figref{fig:injected_lsst_cells_v1_5063_i_mag}), and are particularly problematic for the Kron algorithm \citep[][]{1980ApJS...43..305K}, which should only be used with caution.
 
 As mentioned in \secref{ssec:coadd_processing}, the S\'ersic fits include a free centroid, which is initialized from the fiducial centroid of the object.
