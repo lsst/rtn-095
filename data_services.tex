@@ -169,7 +169,7 @@ The \gls{schema} for \gls{DP1} and other Rubin databases are available online at
 \subsubsection{Qserv}
 \label{sssec:qserv}
 The final 10 yr \gls{LSST} catalog is expected to reach \tenyearcatalogsize and contain measurements for billions of stars and galaxies across trillions of detections.
-To support efficient storage, querying, and analysis of this dataset,  Rubin Observatory developed Qserv \citep[][]{Wang:2011:QDS:2063348.2063364, C15_adassxxxii} -- a scalable, parallel, distributed SQL database system.
+To support efficient storage, querying, and analysis of this dataset,  Rubin Observatory developed Qserv \citep[][]{Wang:2011:QDS:2063348.2063364, 2025ASPC..538..114M} -- a scalable, parallel, distributed SQL database system.
 \gls{Qserv} partitions data over approximately equal-area regions of the celestial sphere, replicates data to ensure resilience and high availability, and uses shared scanning to reduce overall I/O load.
 It also supports a package of scientific user-defined functions (SciSQL\footnote{\url{https://smonkewitz.github.io/scisql/}}) simplifying complex queries involving spherical geometry, statistics, and photometry.
 \gls{Qserv} is built on robust production-quality components, including MariaDB\footnote{\url{https://www.mariadb.org/}} and XRootD\footnote{\url{https://xrootd.org/}}.
