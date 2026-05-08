@@ -219,7 +219,7 @@ Centroids used in the multi-epoch \gls{forced photometry} stage are taken either
 Solar system processing in \gls{DP1} consists of two key components: the association of observations (sources) with known solar system objects, and the discovery of previously unknown objects by linking sets of
 {\em tracklets}\footnote{A tracklet is defined as two or more detections of a moving object candidate taken in close succession in a single night.}.
 
-The association component begins by generating expected positions for all objects in the \gls{MPC} orbit catalog, using ephemerides computed with the \texttt{Sorcha} survey simulation toolkit \citep[][]{Merritt_2025} \footnote{Available at \nolinkurl{https://github.com/dirac-institute/sorcha}}.
+The association component begins by generating expected positions for all objects in the \gls{MPC} orbit catalog, using ephemerides computed with the \texttt{Sorcha} survey simulation toolkit \citep[][]{2025AJ....170..100M} \footnote{Available at \nolinkurl{https://github.com/dirac-institute/sorcha}}.
 To enable fast lookup of objects potentially present in an observed visit, we use the \texttt{mpsky} package \citep[][]{mpsky}.
 In each image, the closest \texttt{DiaSource} within 1\farcs of a known solar system object's predicted position is associated to that object.
 In \gls{DP1} we used a simple positional association to tag DiaSources that are likely observations of known asteroids.
