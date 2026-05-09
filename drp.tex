@@ -120,8 +120,8 @@ For time-domain analysis, we recommend using the \gls{forced photometry} tables 
 \label{ssec:coadd_processing}
 \subsubsection{Coaddition}
 \label{ssec:coaddition}
-Only exposures with a \gls{seeing} better than 1\farcs7 FWHM are included in the \texttt{deep\_coadd} images. 
-For the \texttt{template\_coadd}s, typically only the top third of visits with the best \gls{seeing} are used (although see \secref{ssec:science_images} for more details), resulting in an even tighter image quality cutoff for the \texttt{template\_coadd}s. 
+Only exposures with a \gls{seeing} better than 1\farcs7 FWHM are included in the \texttt{deep\_coadd} images.
+For the \texttt{template\_coadd}s, typically only the top third of visits with the best \gls{seeing} are used (although see \secref{ssec:science_images} for more details), resulting in an even tighter image quality cutoff for the \texttt{template\_coadd}s.
 Exposures with poor \gls{PSF} model quality, identified using internal diagnostics, are excluded to prevent contamination of the coadds with unreliable \gls{PSF} estimates. The remaining exposures are combined using an inverse-variance weighted mean stacking \gls{algorithm}.
 
 To mitigate transient artifacts before coaddition, we apply the artifact rejection procedure described in \cite{DMTN-080}, which identifies and masks features such as satellite trails, optical ghosts, and cosmic rays.
@@ -219,7 +219,7 @@ Centroids used in the multi-epoch \gls{forced photometry} stage are taken either
 Solar system processing in \gls{DP1} consists of two key components: the association of observations (sources) with known solar system objects, and the discovery of previously unknown objects by linking sets of
 {\em tracklets}\footnote{A tracklet is defined as two or more detections of a moving object candidate taken in close succession in a single night.}.
 
-The association component begins by generating expected positions for all objects in the \gls{MPC} orbit catalog, using ephemerides computed with the \texttt{Sorcha} survey simulation toolkit \citep[][]{2025AJ....170..100M} \footnote{Available at \nolinkurl{https://github.com/dirac-institute/sorcha}}.
+The association component begins by generating expected positions for all objects in the \gls{MPC} orbit catalog, using ephemerides computed with the \texttt{Sorcha} survey simulation toolkit \citep[][]{2025AJ....170..100M2} \footnote{Available at \nolinkurl{https://github.com/dirac-institute/sorcha}}.
 To enable fast lookup of objects potentially present in an observed visit, we use the \texttt{mpsky} package \citep[][]{mpsky}.
 In each image, the closest \texttt{DiaSource} within 1\farcs of a known solar system object's predicted position is associated to that object.
 In \gls{DP1} we used a simple positional association to tag DiaSources that are likely observations of known asteroids.
