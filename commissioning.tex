@@ -1,13 +1,13 @@
 \section{On-Sky Commissioning Campaign}
 \label{sec:on_sky_campaign}
 %
-The primary objective of the first Rubin on-sky commissioning campaign was to optically align the Simonyi Survey Telescope and verify its ability to deliver acceptable image quality using the Commissioning Camera, \gls{LSSTComCam}.
-Additionally, the campaign provided valuable operational experience to support commissioning the LSST Science Camera, \gls{LSSTCam} \citep{2024SPIE13096E..1OL,2024SPIE13096E..1SR}.
+The primary objective of the first Rubin on-sky commissioning campaign was to optically align the Simonyi Survey Telescope and verify its ability to deliver acceptable image quality using \gls{LSSTComCam}.
+Additionally, the campaign provided valuable operational experience to support commissioning  \gls{LSSTCam} \citep[][]{2024SPIE13096E..1OL,2024SPIE13096E..1SR}.
 We note that commissioning \gls{LSSTComCam} was not an objective of the campaign; rather \gls{LSSTComCam} was used as a tool to support broader observatory commissioning, including early testing of the \gls{AOS} (\secref{ssec:simonyi}) and the LSST Science Pipelines (\secref{ssec:pipelines_commissioning}).
 As a result, many artifacts present in the data are specific to \gls{LSSTComCam} and will be addressed only if they persist with \gls{LSSTCam}.
 Accordingly, the image quality achieved during this campaign, and in the \gls{DP1} data, may not reflect the performance ultimately expected from \gls{LSSTCam}.
 
-Approximately 16,000 exposures\footnote{We define an exposure as the process of exposing all \gls{LSSTComCam} detectors. It is synonymous with visit in \gls{DP1}. By contrast, an image is the output of a single \gls{LSSTComCam} detector following an exposure.} were collected during this campaign, the majority in support of \gls{AOS} commissioning, system-level verification, and end-to-end testing of the telescope’s hardware and software.
+Approximately 16,000 exposures were collected during this campaign, the majority in support of \gls{AOS} commissioning, system-level verification, and end-to-end testing of the telescope’s hardware and software.
 This included over \nexposuresaoscommissioning exposures for \gls{AOS} commissioning, more than \nexposurescalibcommissioning bias and dark calibration frames, and over \nexposuresspcommissioning exposures dedicated to commissioning the LSST Science Pipelines.
 For \gls{DP1}, we have selected a subset of \nexposures science-grade exposures from this campaign that are most useful for the community to begin preparing for early science.
 
@@ -17,46 +17,46 @@ Despite these limitations, the campaign successfully demonstrated system integra
 
 \subsection{Simonyi Survey Telescope}
 \label{ssec:simonyi}
-The Simonyi Survey Telescope \citep{2024SPIE13094E..09S} features a unique three-mirror design, including an 8.4-meter \gls{M1M3} fabricated from a single substrate and a 3.5-meter \gls{M2}.
-This compact \gls{configuration} supports a wide 3.5-degree field of view while enabling exceptional stability, allowing the telescope to slew and settle in under five seconds.
-To achieve the scientific goals of the 10-year \gls{LSST}, the Observatory must maintain high image quality across its wide field of view \citep{2008arXiv0805.2366I}.
-This is accomplished through the \gls{AOS} \citep{2015ApOpt..54.9045X,2024ApJ...974..108M}, which corrects, between successive exposures, wavefront distortions caused by optical misalignments and mirror surface deformations, primarily due to the effect of gravitational and thermal loads.
+The Simonyi Survey Telescope \citep[][]{2024SPIE13094E..09S} features a unique three-mirror design, including an 8.4-meter \gls{M1M3} fabricated from a single substrate and a 3.5 m \gls{M2}.
+This compact \gls{configuration} supports a wide 3.\degree 5 field of view while enabling exceptional stability, allowing the telescope to slew and settle in under 5 s.
+To achieve the scientific goals of the 10-yr \gls{LSST}, the Observatory must maintain high image quality across its wide field of view \citep[][]{2008arXiv0805.2366I}.
+This is accomplished through the \gls{AOS} \citep[][]{2015ApOpt..54.9045X,2024ApJ...974..108M}, which corrects, between successive exposures, wave front distortions caused by optical misalignments and mirror surface deformations, primarily due to the effect of gravitational and thermal loads.
 
 The \gls{AOS}, which comprises an open-loop component and a closed-loop component, optimizes image quality by aligning the camera and \gls{M2} relative to \gls{M1M3}, as well as adjusting the shapes of all three mirrors to nanometer precision.
-The \gls{AOS} open-loop component corrects for predictable distortions and misalignments, while the closed-loop component addresses unpredictable or slowly varying aberrations using feedback from the corner wavefront sensors.
-The closed-loop wavefront sensing technique is curvature wavefront sensing, which infers wavefront errors in the optical system by analyzing extra- and intra-focal star images \citep{2023aoel.confE..67T}.
-Since \gls{LSSTComCam} lacks dedicated wavefront sensors, wavefront errors were instead estimated by defocusing the telescope $\pm$1.5 mm on either side of focus and applying the curvature wavefront sensing pipeline to the resulting images.
-Each night began with an initial alignment correction using a laser tracker to position the system within the capture range of the closed-loop \gls{algorithm} \citep{2024SPIE13094E..3CM}.
+The \gls{AOS} open-loop component corrects for predictable distortions and misalignments, while the closed-loop component addresses unpredictable or slowly varying aberrations using feedback from the corner wave front sensors.
+The closed-loop wave front sensing technique is curvature wave front sensing, which infers wave front errors in the optical system by analyzing extra- and intrafocal star images \citep[][]{2023aoel.confE..67T}.
+Since \gls{LSSTComCam} lacks dedicated wave front sensors, wave front errors were instead estimated by defocusing the telescope $\pm$1.5 mm on either side of focus and applying the curvature wave front sensing pipeline to the resulting images.
+Each night began with an initial alignment correction using a laser tracker to position the system within the capture range of the closed-loop \gls{algorithm} \citep[][]{2024SPIE13094E..3CM}.
 Once this coarse alignment was complete, the \gls{AOS} refined the optical alignment and applied mirror surfaces corrections to optimize the image quality across the \gls{LSSTComCam} field of view.
 
 During LSST \gls{Science Pipelines} commissioning (\secref{ssec:pipelines_commissioning}),  observations were conducted using the AOS in open-loop mode only, without closed-loop corrections between exposures.
-Closed-loop operation, which requires additional intra- and extra-focal images with LSSTComCam, was not compatible with the continuous data acquisition needed by the pipelines.
+Closed-loop operation, which requires additional intra- and extrafocal images with LSSTComCam, was not compatible with the continuous data acquisition needed by the pipelines.
 The image quality for these data was monitored by measuring the \gls{PSF} at \gls{FWHM}, and closed-loop sequences were periodically run when image quality degradation was observed.
 
-\subsection{The LSST Commissioning Camera}
+\subsection{LSSTComCam}
 \label{ssec:comcam}
-\gls{LSSTComCam} \citep{2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH, 10.71929/rubin/2561361} is a 144-megapixel version of the 3.2-gigapixel \gls{LSSTCam}.
-It covers approximately 5\% of the \gls{LSSTCam} focal plane area, with a field of view of $\sim$0.5\,deg$^2$   (40\arcmin$\times$40\arcmin), compared to LSSTCam's 9.6\,deg$^2$.
+\gls{LSSTComCam} \citep[][]{2022SPIE12184E..0JS,2020SPIE11447E..0LS,2018SPIE10700E..3DH, 10.71929/rubin/2561361} is a 144-megapixel version of the 3.2-gigapixel \gls{LSSTCam}.
+It covers approximately 5\% of the \gls{LSSTCam} focal plane area, with a field of view of $\sim$0.5\,deg$^2$   (40\arcmin$\xspace\times\xspace$40\arcmin), compared to LSSTCam's 9.6\,deg$^2$.
 It was developed to validate camera interfaces with other observatory components and evaluate overall system performance prior to the start of \gls{LSSTCam} commissioning.
 Although \gls{LSSTComCam} has a smaller imaging area, it shares the same plate scale of \rawplatescale and is housed in a support structure that replicates the mass, center of gravity, and physical dimensions of \gls{LSSTCam}.
 All mechanical and utility interfaces to the telescope are implemented identically, enabling full end-to-end testing of observatory systems, including readout electronics, image acquisition, and data pipelines.
 Although the \gls{LSSTComCam} cryostat employs a different cooling system (Cryotels) to that of \gls{LSSTCam}, it included a refrigeration pathfinder to validate the cryogenic system intended for \gls{LSSTCam}.
 
 % LSSTCam/ComCam focal plane layout
-The \gls{LSSTCam} focal plane comprises 25 modular rafts arranged in a 5$\times$5 grid, of which 21 are science rafts dedicated to imaging and 4 are corner rafts used for guiding and wavefront sensing.
+The \gls{LSSTCam} focal plane comprises 25 modular rafts arranged in a 5$\xspace\times\xspace$5 grid, of which 21 are science rafts dedicated to imaging and four are corner rafts used for guiding and wave front sensing.
 \gls{LSSTCam} employs CCD sensors from two vendors: \gls{ITL} and \gls{E2V}.
 In contrast, \gls{LSSTComCam} contains only a single science raft equipped exclusively with \gls{ITL} sensors.
 \figref{fig:comcam_raft_in_lsstcam_focal_plane} presents a schematic of the \gls{LSSTCam} focal plane, with the \gls{LSSTComCam} raft positioned at the center, corresponding to the \gls{LSSTCam} central science raft location.
 The perspective is from above, looking down through the \gls{LSSTComCam} lenses onto the focal plane.
 \begin{figure}[htb!]
 \includegraphics[width=\linewidth]{comcam_raft_in_lsstcam_focal_plane}
-\caption{LSSTComCam focal plane layout illustrating the placement of its nine sensors, shown in gray, which form a raft. The view is looking down from above the focal plane through the \gls{LSSTComCam} lenses. \gls{LSSTComCam} is Raft 22 (R22). We also indicate the location of the LSSTCam sensors (open squares) to highlight the field-of-view of LSSTComCam in relation to that of LSSTCam.}
+\caption{LSSTComCam focal plane layout illustrating the placement of its nine sensors, shown in gray, which form a raft. The view is looking down from above the focal plane through the \gls{LSSTComCam} lenses. \gls{LSSTComCam} is Raft 22 (R22). We also indicate the location of the LSSTCam sensors (open squares) to highlight the field of view of LSSTComCam in relation to that of LSSTCam.}
 \label{fig:comcam_raft_in_lsstcam_focal_plane}
 \end{figure}
 
 % Rafts
-Each science raft is a self-contained unit comprising nine 4K$\times$4K \gls{CCD} \citep{2010RvMP...82.2307S} sensors arranged in a 3$\times$3 mosaic, complete with integrated readout electronics and cooling systems.
-Each sensor is subdivided into 16 segments arranged in a 2$\times$8 layout, with each segment consisting of 512$\times$2048 pixels and read out in parallel using individual amplifiers.
+Each science raft is a self-contained unit comprising nine 4K$\xspace\times\xspace$4K \gls{CCD} \citep[][]{2010RvMP...82.2307S} sensors arranged in a 3$\xspace\times\xspace$3 mosaic, complete with integrated readout electronics and cooling systems.
+Each sensor is subdivided into 16 segments arranged in a 2$\xspace\times\xspace$8 layout, with each segment consisting of 512$\xspace\times\xspace$2048 pixels and read out in parallel using individual amplifiers.
 This design is identical across all science rafts.
 To maintain uniform performance and \gls{calibration}, each raft is populated exclusively with sensors from a single vendor.
 
@@ -64,75 +64,77 @@ To maintain uniform performance and \gls{calibration}, each raft is populated ex
 These sensors were selected from the best-performing  remaining \gls{ITL} devices after the \gls{LSSTCam} rafts were fully populated.
 Some exhibit known issues such as high readout noise (e.g., Detector 8) and elevated \gls{CTI} (e.g., Detector 5).
 Consequently, certain image artifacts present in the \gls{DP1} dataset may be specific to \gls{LSSTComCam}.
-\figref{fig:raft_schematic} shows the \gls{LSSTComCam} R22 focal plane layout  and the placement and numbering scheme of sensors (S) and amplifiers (C).
+\figref{fig:raft_schematic} shows the \gls{LSSTComCam} R22 focal plane layout  and the placement and numbering scheme of sensors (``S") and amplifiers (``C").
 This configuration is identical across all science rafts in \gls{LSSTCam}.
-The \gls{LSSTCam} and \gls{LSSTComCam} focal planes are described in detail in \cite{CTN-001}.
+The \gls{LSSTCam} and \gls{LSSTComCam} focal planes are described in detail in \citep[][]{CTN-001}.
 \begin{figure}[htb!]
 \plotone{raft_schematic}
-\caption{\gls{LSSTComCam} focal plane layout, showing Raft 22 (R22) and the placement and numbering scheme of sensors (S) and amplifiers (C). The view is from above, looking through the \gls{LSSTComCam} lenses onto the focal plane. Each sensor contains 16 amplifiers, and the raft is composed of a 3$\times$3 array of sensors. The detector number for each sensor is indicated in parentheses.}
+\caption{\gls{LSSTComCam} focal plane layout, showing R22 and the placement and numbering scheme of sensors (``S") and amplifiers (``C"). The view is from above, looking through the \gls{LSSTComCam} lenses onto the focal plane. Each sensor contains 16 amplifiers, and the raft is composed of a 3$\xspace\times\xspace$3 array of sensors. The detector number for each sensor is indicated in parentheses.}
 \label{fig:raft_schematic}
 \end{figure}
 
 \subsubsection{Filter Complement}
 \label{sssec:comcam_filters}
 \gls{LSSTComCam} supports imaging with six broadband filters $ugrizy$ spanning 320--1050 nm, identical in design to \gls{LSSTCam}.
-However, its filter exchanger can hold only three filters at a time, comapared to five with \gls{LSSTCam}.
-The full-system throughput of the six \gls{LSSTComCam} filters, which encompasses contributions from a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and the mean \gls{ITL} detector quantum efficiency is shown in \figref{fig:comcam_standard_bandpasses}.
+However, its filter exchanger can hold only three filters at a time, compared to five with \gls{LSSTCam}.
+The full-system throughput of the six \gls{LSSTComCam} filters, which encompasses contributions from a standard atmosphere at an airmass of 1.2, telescope optics, camera surfaces, and the mean \gls{ITL} detector quantum efficiency is shown in \figref{fig:comcam_standard_bandpasses}.
 The corresponding transmission curves are provided as a \gls{DP1} data product (\secref{sssec:transmission_curves}).
 \begin{figure}[htb!]
 \plotone{dp1_comcam_std_bandpasses}
-\caption{\gls{LSSTComCam} standard bandpasses, illustrating full system throughput. The bandpasses include a standard atmosphere at airmass 1.2, telescope optics, camera surfaces, and mean \gls{ITL} detector quantum efficiency. The corresponding transmission curves are provided as a \gls{DP1} data product.}
+\caption{\gls{LSSTComCam} standard bandpasses, illustrating full-system throughput. The bandpasses include a standard atmosphere at an airmass of 1.2, telescope optics, camera surfaces, and mean \gls{ITL} detector quantum efficiency. The corresponding transmission curves are provided as a \gls{DP1} data product.}
 \label{fig:comcam_standard_bandpasses}
 \end{figure}
 
 \subsubsection{Timing Calibration}
 \label{ssec:comcam_timing}
-The absolute time accuracy of data taken with \gls{LSSTComCam} relies on the \gls{NTP} for clock synchronization, which should be accurate to approximately 1 millisecond.
-In order to evaluate the absolute timing accuracy of the entire system we observed the geosynchronous satellite EUTELSAT 117 West B with a set of 10 usable 10-second exposures over two nights.
-EUTELSAT 117 West B is part the \gls{GPS} system and serves as one of the \gls{WAAS} satellites operated for the \gls{FAA} and used to broadcast \gls{GPS} corrections to air traffic.
+The absolute time accuracy of data taken with \gls{LSSTComCam} relies on the \gls{NTP} for clock synchronization, which should be accurate to approximately 1 ms.
+In order to evaluate the absolute timing accuracy of the entire system we observed the geosynchronous satellite EUTELSAT 117 West B with a set of 10 usable 10 s exposures over two nights.
+EUTELSAT 117 West B is part the \gls{GPS} and serves as one of the \gls{WAAS} satellites operated for the \gls{FAA} and used to broadcast \gls{GPS} corrections to air traffic.
 
-As these satellites are part of the \gls{GPS} system, their positions are tracked very precisely and the record of their locations is published after the fact and can be downloaded.
-Following the technique previously employed by other surveys, \citep{2018PASP..130f4505T},  we observed the satellite while tracking the sky and then downloaded the data-files with its precise locations from the National Satellite Test Bed web site\footnote{\nolinkurl{https://www.nstb.tc.faa.gov/nstbarchive.html}}.
-By comparing the measured and predicted locations of the start of the satellite track on the sky, we determined that (relative to the start of integration-time recorded in the \gls{FITS} headers) our time was accurate to 53.6 $\pm$ 11.0 milliseconds.
+As these satellites are part of the \gls{GPS}, their positions are tracked very precisely and a record of their locations is published after the fact and can be downloaded.
+Following a technique previously employed by other surveys, \citep[][]{2018PASP..130f4505T},  we observed the satellite while tracking the sky and then downloaded the data files with its precise locations from the National Satellite Test Bed website\footnote{\nolinkurl{https://www.nstb.tc.faa.gov/nstbarchive.html}}.
+By comparing the measured and predicted locations of the start of the satellite track on the sky, we determined that (relative to the start of integration time recorded in the \gls{FITS} headers) our time was accurate to 53.6$\xspace\pm\xspace$11.0 ms.
 
 This work continues to be an area of ongoing study, with the exact timing of when the shutter open command is issued, and the complete profile of the shutter movement not yet determined.
-However the open command is on average near 29 milliseconds later. Incorporating the delays into the fit reduces the offset to 24.8 $\pm$ 11.0 milliseconds.
+However the open command is on average near 29 ms later. 
+Incorporating the delays into the fit reduces the offset to 24.8$\xspace\pm\xspace$11.0 milliseconds.
 
-The full shutter takes approximately 396 milliseconds to completely open.
-As the \gls{LSSTComCam} sensors are centered in the aperture, the center of the focal plane should be exposed about half-way through the shutter open procedure, 198 milliseconds after the open command.
+The full shutter takes approximately 396 ms to completely open.
+As the \gls{LSSTComCam} sensors are centered in the aperture, the center of the focal plane should be exposed about half--way through the shutter open procedure, 198 ms after the open command.
 There are uncertainties on the full motion profile, and the blade direction motions are currently not known, but the fraction of the shutter aperture subtended by the focal plane is 52\%.
-This implies that that the shutter will pass any pixel between 198 +/- 103 milliseconds.
-Subtracting this from the fitted delay of 24.8 milliseconds and adding the fitted error of 11.0 milliseconds in quadrature, results in a current conservative estimate of the delay of -173.2 $\pm$ 104.1 milliseconds, consistent with and smaller than the constraints on the timing offset determined using astrometric residuals from known asteroid associations presented in \secref{ssec:asteroid_association}.
+This implies that that the shutter will pass any pixel between 198$\xspace\pm\xspace$103 ms.
+Subtracting this from the fitted delay of 24.8 ms and adding the fitted error of 11.0 ms in quadrature, results in a current conservative estimate of the delay of -173.2$\xspace\pm\xspace$104.1 ms, consistent with and smaller than the constraints on the timing offset determined using astrometric residuals from known asteroid associations presented in \secref{ssec:asteroid_association}.
 
-\subsection{Flat Field System}
+\subsection{Flat--field System}
 \label{ssec:flat_field_system}
-During the on-sky campaign, key components of the Rubin calibration system ~\citep{2022SPIE12182E..0RI}, including the flat field screen, had not yet been installed.
-As a result, flat fielding for \gls{DP1} relied entirely on twilight flats.
-While twilight flats pose challenges such as non-uniform illumination and star print-through, they were the only available option during \gls{LSSTComCam} commissioning and for \gls{DP1} processing.
+During the on-sky campaign, key components of the Rubin calibration system ~\citep[][]{2022SPIE12182E..0RI}, including the flat--field screen, had not yet been installed.
+As a result, flat--fielding for \gls{DP1} relied entirely on twilight flats.
+While twilight flats pose challenges such as nonuniform illumination and star print through, they were the only available option during \gls{LSSTComCam} commissioning and for \gls{DP1} processing.
 To mitigate these limitations, dithered, tracked exposures were taken over a broad range of azimuth and rotator angles to construct combined flat \gls{calibration} frames.
 Exposure times were dynamically adjusted to reach target signal levels of between 10,000 and 20,000 electrons.
-Future campaigns with \gls{LSSTCam} will benefit from more stable and uniform flat fielding using the Rubin flat field system, described in \citet{SITCOMTN-086}.
+Future campaigns with \gls{LSSTCam} will benefit from more stable and uniform flat--fielding using the Rubin flat--field system, described in \citet{SITCOMTN-086}.
 %
 % Science Pipelines
 \subsection{LSST Science Pipelines Commissioning}
 \label{ssec:pipelines_commissioning}
-Commissioning of the LSST Science Pipelines, \citep{PSTN-019},  began once the telescope was able to routinely deliver sub-arcsecond image quality.
+Commissioning of the LSST Science Pipelines, \citep[][]{PSTN-019},  began once the telescope was able to routinely deliver subarcsecond image quality.
 The goals included testing the internal astrometric and photometric calibration across a range of observing conditions,
-validating the difference image analysis and prompt processing \citep{dmtn-219} framework, and accumulating over 200 visits per band to evaluate
-deep coadded images with integrated exposure times roughly equivalent to those of the planned LSST \gls{WFD} 10-year depth.
+validating the difference image analysis and prompt processing \citep[][]{dmtn-219} framework, and accumulating over 200 visits per band to evaluate
+deep coadded images with integrated exposure times roughly equivalent to those of the planned LSST \gls{WFD} 10-yr depth.
 To support these goals, \nfields target fields were selected that span a range of stellar densities, overlap with external reference datasets, and collectively span the full breadth of the four primary \gls{LSST} science themes.
 These \nfields fields form the basis of the \gls{DP1} dataset.
-\figref{fig:dp1_fields_on_sky} shows the locations of these \nfields fields on the sky, overlaid on the LSST baseline survey footprint \citep{PSTN-051, PSTN-052, PSTN-053, PSTN-055, PSTN-056}, along with the sky coverage of both the \gls{LSSTCam} and \gls{LSSTComCam} focal planes.
+\figref{fig:dp1_fields_on_sky} shows the locations of these \nfields fields on the sky, overlaid on the LSST baseline survey footprint \citep[][]{PSTN-051, PSTN-052, PSTN-053, PSTN-055, PSTN-056}, along with the sky coverage of both the \gls{LSSTCam} and \gls{LSSTComCam} focal planes.
 \begin{figure*}[bt!]
 \centering
 \plotone{dp1_fields_with_survey_fp}
-\caption{Locations of the seven \gls{DP1} fields overlaid on the \gls{LSST} baseline survey footprint. NES: North Ecliptic Spur; SCP: South Celestial Pole; Low-Dust \gls{WFD}: regions away from the Galactic Plane (GP) observed with a \gls{WFD} cadence; GP/MC \gls{WFD}: Galactic Plane and Magellanic Clouds regions observed with a \gls{WFD} cadence. The fields of view of the \gls{LSSTCam} and \gls{LSSTComCam} focal planes are shown as concentric yellow circles about the pointing center of each field. The background Milky Way dust map is based on the FDS model \citep{1999ApJ...524..867F}.}
+\caption{Locations of the seven \gls{DP1} fields overlaid on the \gls{LSST} baseline survey footprint. 
+Shown are the north ecliptic spur (NES); south celestial pole (SCP); low-dust \gls{WFD}: regions away from the Galactic plane (GP) observed with a \gls{WFD} cadence; and GP and Magellanic Clouds (MCs) regions observed with a \gls{WFD} cadence. The fields of view of the \gls{LSSTCam} and \gls{LSSTComCam} focal planes are shown as concentric yellow circles about the pointing center of each field. The background Milky Way dust map is based on the model of Finkbeiner, Davis, and Schlegel (hereafter FDS model)\citep[][]{1999ApJ...524..867F}.}
 \label{fig:dp1_fields_on_sky}
 \end{figure*}
 Each of the \nfields target fields was observed repeatedly in multiple bands over many nights.
 A typical observing \gls{epoch} on a given target field consisted of 5-20 visits in each of the three loaded filters.
-Only images taken as 1x30 second exposures have been included in \gls{DP1}.
-All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep{2019AJ....157..151N, peter_yoachim_2024_13985198}.
+Only images taken as 1$\xspace\times\xspace$30 second exposures have been included in \gls{DP1}.
+All images were acquired using the Rubin \gls{FBS}, version 3.0 \citep[][]{2019AJ....157..151N, peter_yoachim_2024_13985198}.
 \tabref{tab:dp1_fields} lists the \nfields \gls{DP1} fields and their pointing centers, and provides a summary of the band coverage in each.
 
 \input{./dp1_fields.tex}
@@ -143,7 +145,7 @@ The figure indicates the dates on which each field was observed in a given band 
 \begin{figure}[htb!]
 \centering
 \plotone{visitDates}
-\caption{Temporal distribution of \gls{DP1} observations, grouped by field as a function of \gls{MJD} and color-coded by filter. Each point indicates that a given field was observed at least once in the corresponding filter on that date.}
+\caption{Temporal distribution of \gls{DP1} observations, grouped by field as a function of \gls{MJD} and color coded by filter. Each point indicates that a given field was observed at least once in the corresponding filter on that date.}
 \label{fig:target_fields_temporal_sampling}
 \end{figure}
 Gaps in coverage across some bands arise from the fact that \gls{LSSTComCam} can only accommodate three filters at a time (see \secref{ssec:comcam}).
@@ -153,24 +155,24 @@ It is important to note that the time sampling in the \gls{DP1} dataset differs 
 %
 % Dithering pattern
 All fields except for the low ecliptic latitude field, Rubin\_SV\_38\_7, used a small random dithering pattern.
-The random translational dithers of the telescope boresight were applied for each visit, with offsets of up to 0.2 degrees around the pointing center.
-The rotational dithers of the camera rotator were typically approximately 1 degree per visit, with larger random offsets at each filter change, which worked to keep operational efficiency high.
-The Rubin\_SV\_38\_7 field used a different dither pattern to optimize coverage of Solar System Objects and test Solar System Object linking across multiple nights.
-These observations used a 2$\times$2 grid of \gls{LSSTComCam} pointings to cover an area of about 1.3 degree$\times$1.3 degrees.
-The visits cycled between the grid's four pointing centers, each separated by 0.65  degrees, and used small random translational dithers to fill chip gaps with the goal of acquiring 3-4 visits per pointing center per band in each observing epoch.
-The RA and Dec values provided in \tabref{tab:dp1_fields} for this field represent approximately the center of the four fields.
+The random translational dithers of the telescope boresight were applied for each visit, with offsets of up to 0$\degree$2 around the pointing center.
+The rotational dithers of the camera rotator were typically approximately 1$\degree$ per visit, with larger random offsets at each filter change, which worked to keep operational efficiency high.
+The Rubin\_SV\_38\_7 field used a different dither pattern to optimize coverage of solar system objects and test solar system object linking across multiple nights.
+These observations used a 2$\xspace\times\xspace$2 grid of \gls{LSSTComCam} pointings to cover an area of about 1$\degree$3 $\xspace\times\xspace$1$\degree$3.
+The visits cycled between the grid's four pointing centers, each separated by 0$\degree$65  degrees, and used small random translational dithers to fill chip gaps with the goal of acquiring 3--4 visits per pointing center per band in each observing epoch.
+The R.A. and Decl values provided in \tabref{tab:dp1_fields} for this field represent approximately the centers of the four fields.
 
 % m5 coadded depths  per field
 \figref{fig:dp1_fields_coverage_maps} shows sky coverage maps showing the distribution of visits in each of the \nfields \gls{DP1} fields, color coded by band.
 The images clearly show the focal plane chip gaps and dithering pattern.
-Only the detectors for which single frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields (see \secref{ssec:crowded_fields}).
+Only the detectors for which single-frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields (see \secref{ssec:crowded_fields}).
 \begin{figure*}[ht]
 \centering
  \includegraphics[width=\linewidth]{fieldSummaries}
- \caption{Sky coverage maps showing the distribution of visits in each field, color coded by band. The images clearly show the focal plane chip gaps and dithering pattern. Only the detectors for which single frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields. }
+ \caption{Sky coverage maps showing the distribution of visits in each field, color coded by band. The images clearly show the focal plane chip gaps and dithering pattern. Only the detectors for which single-frame processing succeeded are included in the plots, which explains why the central region of 47\_Tuc looks thinner than the other fields. }
 \label{fig:dp1_fields_coverage_maps}
 \end{figure*}
-\tabref{tab:dp1_m5_depths} reports the 5$\sigma$ point source depths for coadded images per field and per band, where coverage in a band is non-zero, together with the expected 10-year LSST depths derived from the baseline simulated survey \citep[][]{2022ApJS..258....1B}.
+\tabref{tab:dp1_m5_depths} reports the 5$\sigma$ point--source depths for coadded images per field and per band, where coverage in a band is nonzero, together with the expected 10 yr LSST depths derived from the baseline simulated survey \citep[][]{2022ApJS..258....1B}.
 
 \input{./dp1_m5_coadded_depths}
 
@@ -179,9 +181,9 @@ Only the detectors for which single frame processing succeeded are included in t
 \label{ssec:image_quality}
 The delivered image quality is influenced by contributions from both the observing system (i.e., dome, telescope and camera) and the atmosphere.
 During the campaign, the Rubin \gls{DIMM} was not operational, so atmospheric seeing was estimated using live data from the \gls{SOAR} \gls{RINGSS} seeing monitor, also located on Cerro Pach\'on.
-Although accelerometers mounted on the mirror cell and top-end assembly were available to track dynamic optics effects, such as mirror oscillations that can degrade optical alignment, this data was not used during the campaign.
-Mount encoder data were used to measure the mount jitter in every image, with a measured median contribution of 0.004 arcseconds to image degradation.
-As the pointing model was not fine tuned, tracking errors could range from 0.2 to 0.4 arcseconds per image, depending on RA and Dec.
+Although accelerometers mounted on the mirror cell and top-end assembly were available to track dynamic optics effects, such as mirror oscillations that can degrade optical alignment, these data were not used during the campaign.
+Mount encoder data were used to measure the mount jitter in every image, with a measured median contribution of 0\farcs004  to image degradation.
+As the pointing model was not fine-tuned, tracking errors could range from 0\farcs2 to 0\farcs4 per image, depending on R.A. and decl..
 Dome and mirror-induced \gls{seeing} were not measured during the campaign.
 
 \input{./dp1_iq_summary_target_band}
@@ -189,7 +191,7 @@ The \gls{DP1} median delivered image quality, quantified as the \gls{PSF} at \gl
 The best images achieve a \gls{PSF} \gls{FWHM} of approximately \bestimagequality.
 Both the per-sensor \gls{PSF} \gls{FWHM} and the overall median vary depending on the filter and the specific target field.
 The median delivered image quality per band and target field is provided in \tabref{tab:iq_band_field}.
-\figref{fig:delivered_image_quality} shows the  distribution of PSF FWHM (in arcsec) over all \nvisitdetectorsummaries individual sensors images.
+\figref{fig:delivered_image_quality} shows the  distribution of PSF FWHM (in arcseconds) over all \nvisitdetectorsummaries individual sensors images.
 \begin{figure*}[hbt!]
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
@@ -204,7 +206,7 @@ The median delivered image quality per band and target field is provided in \tab
 \label{fig:delivered_image_quality}
 \end{figure*}
 Ongoing efforts aim to quantify all sources of image degradation, including contributions from the camera system; static and dynamic optical components; telescope mount motion; observatory-induced seeing from the dome and primary mirror; and atmospheric conditions.
-For the \gls{LSST}, the design specification for the median delivered image quality, referenced to the zenith and 550 nm, is 0\farcs7.
+For the \gls{LSST}, the design specification for the median delivered image quality, referenced to the zenith and 550$\xspace$nm, is 0\farcs7.
 This value corresponds to the measured median atmospheric seeing at the Cerro Pach\' on site and a system contribution to delivered image quality of 0\farcs35 added in quadrature.
 
 % Not sure this is needed

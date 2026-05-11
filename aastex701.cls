@@ -1,99 +1,35 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  AASTEX7.cls                                   %%
-%%  March, 2024                                   %% 
+%%  AASTEX701.cls                                 %%
+%%  2025/05/09                                    %% 
 %%                                                %%
-%%  Copyright 2024 American Astronomical Society  %%
+%%  Copyright 2025 American Astronomical Society  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \def\currversion{7}
 %
-%%
 %%    These files are distributed
 %%    WITHOUT ANY WARRANTY; without even the implied warranty of
 %%    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 %% 
-%% \CharacterTable
-%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
-%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
-%%   Digits        \0\1\2\3\4\5\6\7\8\9
-%%   Exclamation   \!     Double quote  \"     Hash (number) \#
-%%   Dollar        \$     Percent       \%     Ampersand     \&
-%%   Acute accent  \'     Left paren    \(     Right paren   \)
-%%   Asterisk      \*     Plus          \+     Comma         \,
-%%   Minus         \-     Point         \.     Solidus       \/
-%%   Colon         \:     Semicolon     \;     Less than     \<
-%%   Equals        \=     Greater than  \>     Question mark \?
-%%   Commercial at \@     Left bracket  \[     Backslash     \\
-%%   Right bracket \]     Circumflex    \^     Underscore    \_
-%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%%   Right brace   \}     Tilde         \~}%
-%%
-%%%     date            = "9/19/2016",
-%%%     author          = "Amy Hendrickson (mailto:amyh@texnology.com)" 
-%%%                            including 
-%%%                       1) code from emulateapj.cls, version 01/23/15(marked below)
-%%%                            written by Alexey Vikhlinin, which relies on RevTeX4-1
-%%%                            for much functionality;
-%%%                       2) some code from aastex (marked below)
-%%%                       3) Original work by Amy Hendrickson (marked below) for
-%%%                       extensive table tools, including easy decimal entry and splitting
-%%%                       tables horizontally into 2 or 3 pieces, for tabular and deluxetable
-%%%                       environments; rotate tables; gridlines for use in positioning figures, 
-%%%                       track changes.
-
 %%% This work may be distributed and/or modified under the 
 %%% conditions of the LaTeX Project Public License, either version 1.3c 
 %%% of this license or (at your option) any later version.
 %%% The latest version of this license is in
 %%%  http://www.latex-project.org/lppl.txt
 %%% and version 1.3 or later is part of all distributions of LaTeX 
-%%% version 2005/12/01 or later.
-%
-%%% This work has the LPPL maintenance status `maintained'.
-%
-%%% The Current Maintainer of this work is Greg Schwarz <greg.schwarz@aas.org> 
-%%% This work consists of the file aastex.cls
-%
-%%%     copyright       = "Copyright (C) 2016--2020 American Astronomical Society
-%%%
-%%%                        This work may be distributed and/or modified under the
-%%%                        conditions of the LaTeX Project Public License, either version 1.3
-%%%                        of this license or (at your option) any later version.
-%%%                        The latest version of this license is in
-%%%                        http://www.latex-project.org/lppl.txt
-%%%                        and version 1.3 or later is part of all distributions of LaTeX
-%%%                        version 2003/12/01 or later.
-%%%
-%%%                        This work has the LPPL maintenance status "maintained".
-%%%
-%%%                        The Current Maintainer of this work is the American Astronomical Society.
-%%%
-%%%                        This work consists of all files listed in the document README.
-%%%
-%%%     address         = "American Astronomical Society
-%%%                        USA",
-%%%     telephone       = "+1 ???",
-%%%     FAX             = "",
-%%%     email           = "aastex-help@aas.org",
-%%%     codetable       = "ISO/ASCII",
-%%%     keywords        = "latex, AAS, journal",
-%%%     supported       = "yes",
-%%%     abstract        = "formatter for AAS journal submissions",
-%%%  }
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%     date            = "04/27/2024",
+%%
+%%%     date            = "2025/05/09",
 %%%     author          = "Aptara Technology Team" including 
-%%%                       1) Based on aastex631.cls, version 01/23/15(marked below)
-%%%                            written by Amy Hendrickson, which relies on RevTeX4-1
-%%%                            for much functionality;
-%%%                       2) To support the existing functionalities utilized the RevTeX4-2 macros 
+%%%                       1) Based on aastex631.cls, written by 
+%%%                          Amy Hendrickson, which relies on RevTeX4-1
+%%%                          for much functionality;
+%%%                       2) To support the existing functionalities 
+%%%                          utilized the RevTeX4-2 macros 
 %%%
-\ProvidesClass{aastex7}%%%
- [2025/02/06 Version 7/AAS markup document class]%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{aastex701}[2025/05/09 Version 7.0.1/AAS markup document class]%
 {}
-\ClassInfo{aastex}{%
+\ClassInfo{aastex701}{%
 ^^J^^J
  Original \protect\LaTeX2.09 style
  by Chris Biemesderfer (chris@seagoat.com).
@@ -101,7 +37,7 @@
  Adapted to \protect\LaTeXe\space
  by A. Ogawa (ogawa@teleport.com)%
 ^^J
-emulateapj.cls included, Copyright 2000-2015 Alexey Vikhlinin
+emulateapj.cls included, Copyright Alexey Vikhlinin.
 ^^J
 Rewrite and update of emulateapj.cls,
 revised and enhanced with table macros, gridlines, draft watermark,^^J
@@ -109,15 +45,11 @@ track changes, new `modern' style and much more, by Amy Hendrickson,%
 ^^J
  (amyh@texnology.com, http://www.texnology.com)
 ^^J
+Updated by Aptara. No longer depends on Revtex4-1 classfile^^J
 ^^J
 }%
 
 \let\class@name\@gtempa
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% aastex.cls version 2.0 is a based on emulateapj.cls, version January 23, 2015,
-%% and an older version of aastex.cls, with many additional functionalities.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Options. Document style options, and additional feature options.
 
@@ -156,7 +88,6 @@ track changes, new `modern' style and much more, by Amy Hendrickson,%
 %%   anonymous       :   to not list authors/affiliations be listed
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
 %%
 \newif\iftwelvepoint
 \newif\ifmodern
@@ -5566,7 +5497,7 @@ ltxgrid%
 \DeclareOption{noeprint}{\@booleanfalse\eprint@enable@sw}%
 \@booleantrue\eprint@enable@sw
 \DeclareOption{onecolumn}{\@booleanfalse\twocolumn@sw\onecolstyletrue}%
-\DeclareOption{twocolumn}{\@booleantrue\twocolumn@sw\onecolstylefalse\@twocolumntrue\@two@coltrue\twelvepointfalse}%
+\DeclareOption{twocolumn}{\onecolstylefalse\@twocolumntrue\@two@coltrue\twelvepointfalse}%
 \@booleanfalse\twocolumn@sw
 \def\select@column@grid{%
  \twocolumn@sw{%
@@ -7197,7 +7128,7 @@ ltxgrid%
 \def\IfUnDef#1{\expandafter\ifx\csname#1\endcsname\relax}
 % Null command needed to eat its argument
 \def\NullCom#1{}
-\def\begin#1{%
+\protected\def\begin#1{%
 % if defined \BeforeBeg for this environment, execute it
 \IfUnDef{BeforeBeg#1}\else\csname BeforeBeg#1\endcsname\fi%
 \IfUnDef{AfterBeg#1}% This is done to skip the command for environments
@@ -7317,7 +7248,7 @@ ltxgrid%
 \raggedright
 {\sc Draft version \today}\\[2pt]
 {\footnotesize
-Typeset using \LaTeX\ {\bf modern} style in AASTeX7}
+Typeset using \LaTeX\ {\bf modern} style in AASTeX7.0.1}
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 }
 \else
@@ -7326,7 +7257,7 @@ Typeset using \LaTeX\ {\bf modern} style in AASTeX7}
 \vspace*{-\headsep}\vspace*{\headheight}
 \footnotesize
 {\footnotesize\textsc{\@journalinfo}}\par
-{\footnotesize Typeset using \LaTeX\ {\bf preprint2} style in AASTeX7}
+{\footnotesize Typeset using \LaTeX\ {\bf preprint2} style in AASTeX7.0.1}
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 \else
 %%
@@ -7335,28 +7266,28 @@ Typeset using \LaTeX\ {\bf modern} style in AASTeX7}
 \vspace*{-\headsep}\vspace*{\headheight}
 \footnotesize
 {\footnotesize\textsc{\@journalinfo}}\par
-{\footnotesize Typeset using \LaTeX\ {\bf twocolumn} style in AASTeX7}
+{\footnotesize Typeset using \LaTeX\ {\bf twocolumn} style in AASTeX7.0.1}
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 \else
 \preprintsty@sw{
 \vspace*{-\headsep}\vspace*{\headheight}
 \footnotesize
 {\footnotesize\textsc{\@journalinfo}}\par
-{\footnotesize Typeset using \LaTeX\ {\bf preprint} style in AASTeX7}
+{\footnotesize Typeset using \LaTeX\ {\bf preprint} style in AASTeX7.0.1}
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 }{
   \manuscriptsty@sw{%
     \vspace*{-\headsep}\vspace*{\headheight}
     \footnotesize
         {\footnotesize\textsc{\@journalinfo}}\par
-        {\footnotesize Typeset using \LaTeX\ {\bf manuscript} style in AASTeX7}
+        {\footnotesize Typeset using \LaTeX\ {\bf manuscript} style in AASTeX7.0.1}
         \par\vspace*{-\baselineskip}\vspace*{0.625in}
   }{
 %% Default
 \vspace*{-\headsep}\vspace*{\headheight}
 \footnotesize
 {\footnotesize\textsc{\@journalinfo}}\par
-{\footnotesize Typeset using \LaTeX\ {\bf default} style in AASTeX7}%% default style
+{\footnotesize Typeset using \LaTeX\ {\bf default} style in AASTeX7.0.1}%% default style
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 }}
 \fi\fi\fi
@@ -7436,9 +7367,9 @@ Typeset using \LaTeX\ {\bf modern} style in AASTeX7}
 \newcounter{front@matter@foot@note}\setcounter{front@matter@foot@note}{0}
 
 
-\def\affil@error#1{\@latex@error{^^J^^J^^J^^JThe compiler quit because AASTeX v7 requires all authors to have an affiliation. Please edit your latex file to include a \string\affiliation\space command with  author "#1".^^J^^J^^J^^J}\@ehc\stop}
+\def\affil@error#1{\@latex@error{^^J^^J^^J^^JThe compiler quit because AASTeX v7.0.1 requires all authors to have an affiliation. Please edit your latex file to include a \string\affiliation\space command with  author "#1".^^J^^J^^J^^J}\@ehc\stop}
 
-\def\email@error#1{\@latex@error{^^J^^J^^J^^JThe compiler quit because AASTeX v7 requires all authors to have an email address. Please edit your latex file to include a \string\email\space command with author "#1".^^J^^J^^J^^J}\@ehc\stop}
+\def\email@error#1{\@latex@error{^^J^^J^^J^^JThe compiler quit because AASTeX v7.0.1 requires all authors to have an email address. Please edit your latex file to include a \string\email\space command with author "#1".^^J^^J^^J^^J}\@ehc\stop}
 
 
 \iflongauthor%
@@ -7674,6 +7605,7 @@ Typeset using \LaTeX\ {\bf modern} style in AASTeX7}
 \fi%
    \if@two@col%
    \twocolumngrid%
+   \@booleantrue\twocolumn@sw%
    \fi%
 \fi%
 \tempsectnum=\the\c@section%
@@ -12759,12 +12691,12 @@ changenum\the\refchangenumber\endcsname{\bf
  \else%
 \ifthenelse{\equal{#3}{yes}}{%
   \expandafter\gdef\csname author@data@\romannumeral\the\allauthorcnt\endcsname{#2}%
- \protected@xdef\@author{{\href{http://orcid.org/#1}{#2\protect\IfFileExists{Orcid-ID.png}{\hskip2pt\protect\includegraphics[width=9pt]{Orcid-ID.png}}{}}{\protect\IfFileExists{CoFirstAuthor.png}{\hskip2pt\leavevmode\protect\includegraphics[width=9pt]{CoFirstAuthor}}{}%
+ \protected@xdef\@author{{\href{http://orcid.org/#1}{#2\protect\IfFileExists{orcid-ID.png}{\hskip2pt\protect\includegraphics[width=9pt]{orcid-ID.png}}{}}{\protect\IfFileExists{CoFirstAuthor.png}{\hskip2pt\leavevmode\protect\includegraphics[width=9pt]{CoFirstAuthor}}{}%
 }}{}}}{%
 \expandafter\gdef\csname author@data@\romannumeral\the\allauthorcnt\endcsname{#2}%
  \protected@xdef\@author{{\href{http://orcid.org/#1}{#2%
-\protect\IfFileExists{Orcid-ID.png}{%
-\hskip2pt\protect\includegraphics[width=9pt]{Orcid-ID.png}}{}%
+\protect\IfFileExists{orcid-ID.png}{%
+\hskip2pt\protect\includegraphics[width=9pt]{orcid-ID.png}}{}%
 }}{}}}\fi%
 }%
 
@@ -12779,7 +12711,7 @@ Please fix, or don't use square bracket argument with
 ^^J^^J}%
 }
 
-%% Tests to see if author gave reasonable Orcid number;
+%% Tests to see if author gave reasonable orcid number;
 %% if not, stops processing and gives error message.
 \newif\ifbadOrcid
 \def\lookatOrcid #1-#2-#3-#4-{%
@@ -13297,7 +13229,8 @@ Please fix, or don't use square bracket argument with
 
 %%%
 \def\frontmatter@maketitle{%
-\onecolumngrid\ifnumlines\linenumbers\fi
+  \ifnumlines\linenumbers\fi
+  \onecolumngrid
 \@author@finish
 \ifthenelse{\equal{\@cofirstauthor}{yes}}{\cofirstauthor}{}%
 %
@@ -13792,7 +13725,7 @@ by-18pt\relax#1}}
 %% Will make line numbering work on math as it would without amsmath.
 \def\fixmathlinenumbering{
 \let\saveopensqbracket\[
-\def\[{\linenomath\saveopensqbracket}
+\def\[{\saveopensqbracket\linenomath}
 \let\saveequation\equation
 \let\saveendequation\endequation
 %%
@@ -13822,4 +13755,5 @@ by-18pt\relax#1}}
 
 \endinput
 
-%% End of aastex7.cls
+%% End of aastex701.cls
+
