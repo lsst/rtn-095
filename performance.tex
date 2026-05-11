@@ -516,7 +516,7 @@ These fields were selected in part to stress test the LSST Science Pipelines und
 While both exhibit high stellar densities, the nature and spatial extent of the crowding differ significantly.
 
 47\_Tuc presents extreme crowding across much of the field, encompassing its dense core and the eastern regions influenced by the Small Magellanic Cloud (SMC).
-This pervasive crowding leads to persistent challenges for deblending and reliable source detection, exposing field-wide limitations in the current pipeline performance \citep[][]{2025arXiv250701343C}.
+This pervasive crowding leads to persistent challenges for deblending and reliable source detection, exposing field-wide limitations in the current pipeline performance \citep[][]{Choi_2025}.
 In contrast, Fornax\,dSph shows significant crowding only in its central region, with outer areas remaining well resolved and easier to process.
 
 In both 47\_Tuc and Fornax dSph, extreme crowding led to the deblending step being skipped frequently when memory or run-time limits were exceeded, typically due to an excessive number of peaks, or large parent footprints.
@@ -526,7 +526,7 @@ This contrast highlights how the pipeline’s limitations depend on the spatial 
 
 \citep[][]{2025RNAAS...9..171W} explored the Rubin \gls{DP1} \texttt{DiaObject} catalog (\secref{ssec:catalogs}) in the 47\_Tuc field, which contains sources detected in difference images.
 Because forced photometry is performed at these positions across all single-epoch images, this dataset bypasses the coadd-based detection and deblending stages that often fail in crowded regions.
-By computing the median of the forced photometry for each  \texttt{DiaObject} across available visits, they recovered approximately 3 times more candidate cluster members than found in the standard \texttt{Object} table \citep[][]{2025arXiv250701343C}.
+By computing the median of the forced photometry for each  \texttt{DiaObject} across available visits, they recovered approximately 3 times more candidate cluster members than found in the standard \texttt{Object} table \citep[][]{Choi_2025}.
 This result underscores the value of difference-imaging–based catalogs for probing dense stellar regions inaccessible to standard coadd processing in \gls{DP1}.
 
 Although the \gls{DP1} pipeline was not optimized for crowded-field photometry, these early studies of 47\_Tuc and Fornax dSph provide critical benchmarks.
