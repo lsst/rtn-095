@@ -102,8 +102,8 @@ The Rubin Data Butler \citep[][]{2022SPIE12189E..11J, 2023arXiv230303313L},  is 
 This includes managing storage formats, physical locations, data staging, and database mappings.
 A \gls{Butler} repository contains two components.
 \begin{itemize}
-    \item The \emph{Data Store}: A physical storage system for datasets, e.g., a \gls{POSIX} file system or \gls{S3} object store.
-    \item The \emph{Registry}: An \gls{SQL}-compatible database that stores metadata about the datasets in the Data Store.
+    \item The \emph{Data Store}. A physical storage system for datasets, e.g., a \gls{POSIX} file system or \gls{S3} object store.
+    \item The \emph{Registry}. A \gls{SQL}-compatible database that stores metadata about the datasets in the Data Store.
 \end{itemize}
 For \gls{DP1}, the Butler repository is hosted in the Google Cloud, using an \gls{S3}-compatible store for datasets and AlloyDB, a PostgreSQL-compatible database, for the Registry.
 
